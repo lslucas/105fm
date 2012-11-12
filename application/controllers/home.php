@@ -32,7 +32,13 @@ class Home_Controller extends Base_Controller {
 
 	public function action_index()
 	{
-		return View::make('home.index');
+		if (Auth::guest())
+			return View::make('home.index');
+		else
+			return Redirect::to('usuario.dashboard');
 	}
+
+
+
 
 }

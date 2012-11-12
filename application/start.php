@@ -78,6 +78,13 @@ Autoloader::directories(array(
 	path('app').'libraries',
 ));
 
+/**
+ * Register autoloader namespaces
+ */
+Autoloader::namespaces(array(
+    'Helper' => path('libraries').'helper',
+));
+
 /*
 |--------------------------------------------------------------------------
 | Laravel View Loader

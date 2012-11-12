@@ -33,6 +33,11 @@ $environments = array(
 $paths['app'] = 'application';
 
 // --------------------------------------------------------------
+// The path to the libraries directory.
+// --------------------------------------------------------------
+$paths['libraries'] = $paths['app'].'/libraries';
+
+// --------------------------------------------------------------
 // The path to the Laravel directory.
 // --------------------------------------------------------------
 $paths['sys'] = 'laravel';
@@ -51,6 +56,21 @@ $paths['storage'] = 'storage';
 // The path to the public directory.
 // --------------------------------------------------------------
 $paths['public'] = 'public';
+
+// --------------------------------------------------------------
+// The path to the css directory.
+// --------------------------------------------------------------
+$paths['css'] = $paths['public'].'/css';
+
+// --------------------------------------------------------------
+// The path to the js directory.
+// --------------------------------------------------------------
+$paths['js'] = $paths['public'].'/js';
+
+// --------------------------------------------------------------
+// The path to the img directory.
+// --------------------------------------------------------------
+$paths['img'] = $paths['public'].'/img';
 
 // *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 // END OF USER CONFIGURATION. HERE BE DRAGONS!
@@ -87,11 +107,11 @@ foreach ($paths as $name => $path)
 
 /**
  * A global path helper function.
- * 
+ *
  * <code>
  *     $storage = path('storage');
  * </code>
- * 
+ *
  * @param  string  $path
  * @return string
  */
@@ -102,7 +122,7 @@ function path($path)
 
 /**
  * A global path setter function.
- * 
+ *
  * @param  string  $path
  * @param  string  $value
  * @return void

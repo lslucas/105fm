@@ -70,9 +70,9 @@ return array(
 		'mysql' => array(
 			'driver'   => 'mysql',
 			'host'     => 'localhost',
-			'database' => 'database',
+			'database' => 'agrosshop',
 			'username' => 'root',
-			'password' => '',
+			'password' => 'mvdbt9',
 			'charset'  => 'utf8',
 			'prefix'   => '',
 		),
@@ -85,7 +85,7 @@ return array(
 			'password' => '',
 			'charset'  => 'utf8',
 			'prefix'   => '',
-            'schema'   => 'public',
+	            'schema'   => 'public',
 		),
 
 		'sqlsrv' => array(

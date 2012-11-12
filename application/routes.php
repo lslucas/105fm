@@ -31,11 +31,13 @@
 |		});
 |
 */
-
+/*
 Route::get('/', function()
 {
 	return View::make('home.index');
 });
+*/
+Route::controller(Controller::detect());
 
 /*
 |--------------------------------------------------------------------------
@@ -109,3 +111,6 @@ Route::filter('auth', function()
 {
 	if (Auth::guest()) return Redirect::to('login');
 });
+
+// Route for About_Controller
+// Route::controller('about');
