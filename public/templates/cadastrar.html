@@ -1,0 +1,63 @@
+<!-- All "mailvar"- and "mailval"-elements in this document will be replaced -->
+<mail>
+    <!-- Subject and mail headers can be set here.
+        Variables can also be used to fill headers! -->
+    <mailfields>
+        <subject>Sua participação na promoção STi Todo Dia está confirmada</subject>
+        <to><mailvar key="email" /></to>
+        <cc><mailvar key="email" /></cc>
+    </mailfields>
+    <mailbody>
+        <!-- put html mail contents here -->
+        <html>
+        <head>
+        <title>Promoção STi Todo Dia | Semp Toshiba</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+        </head>
+        <body bgcolor="#CCC" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+            <table width="550" border="0" align="center" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td><a href="http://www.promosti.com.br" target="_blank"><img src="http://www1.semptoshiba.com.br/promo/image/content/email/topo.jpg" width="550" height="179" border="0"></a></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#FFFFFF">
+                    	<table border="0" cellpadding="0" cellspacing="0" align="center" width="467">
+                        	<tr>
+                            	<td>
+                                        <font face="Arial, Helvetica, sans-serif" color="#2e2e2e">
+                                            <font size="4"><strong><mailvar key="nome" />,</strong> fique na torcida! Você já está concorrendo aos prêmios
+            da promoção STi Todo Dia.</font>
+
+                                            <br /><br />
+
+                                            <font size="4"><strong><mailvar key="cupom" /></strong></font>
+
+                                            <br /><br />
+
+                                            <font size="2">Este é o seu número da sorte. Cada cupom fiscal que você cadastrar, gera um
+            número como esse. E é com ele que você concorre aos prêmios nos sorteios que acontecerão entre os dias 24/11/2012 e 29/12/2012.</font><br />
+
+                                            <br /><br /><br />
+
+                                            <font size="5"><strong>Boa sorte!</strong></font>
+
+                                            <br /><br />
+
+                                            <font size="2">Enquanto espera o sorteio acontecer, conheça tudo que a STi tem para você.
+                                            <br/>Acesse o site e explore nossa linha de produtos.
+                                            <br/><a href='http://www.semptoshiba.com.br'>www.semptoshiba.com.br</a></font>
+
+                                        </font>
+        		</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td><a href="http://www.promosti.com.br" target="_blank"><img src="http://www1.semptoshiba.com.br/promo/image/content/email/rodape.jpg" width="550" height="179" border="0"></a></td>
+                </tr>
+            </table>
+        </body>
+        </html>
+     </mailbody>
+</mail>

@@ -4,11 +4,13 @@
 
  //define fusohorario padrao
  date_default_timezone_set('America/Sao_Paulo');
+$host = $_SERVER['HTTP_HOST']=='localhost' || $_SERVER['HTTP_HOST']=='agrosshop' ? 'localhost' : $_SERVER['HTTP_HOST'];
 
 # EMAILS
 ########
 
 define('EMAIL','contato@agrosshop.com.br');
+define('EMAIL_CONTACT','contato@agrosshop.com.br');
 define('EMAIL_NAME','agrosshop');
 define('BBC1_EMAIL','lslucas@gmail.com');
 define('BBC2_EMAIL','');
@@ -21,7 +23,7 @@ define('BBC4_NOME','');
 define('ADM_EMAIL','');
 
 
-if ($_SERVER['HTTP_HOST']=='localhost') {
+if ($host=='localhost') {
 
 	/**
 	 * EMAIL SERVER
@@ -45,11 +47,11 @@ if ($_SERVER['HTTP_HOST']=='localhost') {
 	ini_set('display_errors','On');
 
 	//host
-	$host = 'http://localhost/';
+	$vhost = 'http://localhost/';
 
 
 	if (!isset($rph))
-		$rph = dirname($_SERVER['PHP_SELF']).'/';
+		$rph = dirname($_SERVER['PHP_SELF']);
 	define('STATIC_PATH', $rph.'images/');
 
 } else {
@@ -75,10 +77,10 @@ if ($_SERVER['HTTP_HOST']=='localhost') {
 	ini_set('display_errors','On');
 
 	//host
-	$host = 'http://'.$_SERVER['HTTP_HOST'].'/';
+	$vhost = 'http://'.$_SERVER['HTTP_HOST'].'/';
 
 	if (!isset($rph))
-		$rph = dirname($_SERVER['PHP_SELF']).'/';
+		$rph = dirname($_SERVER['PHP_SELF']);
 
 	define('STATIC_PATH', $rph.'images/');
 }
@@ -88,14 +90,14 @@ define('TABLE_PREFIX','agr');
 define('TP', TABLE_PREFIX);
 
 $path = 'admin';
-$base = $host.$path.'/';
+$base = $vhost.$path.'/';
 
 if (!isset($abspath))
 	$abspath = realpath(dirname('global.php')).'/';
 
 // include path para o zend
-if( strpos($host, 'localhost')!=false ) ini_set('include_path', ".:/Users/lucasserafim/Sites/Zend/library.:/opt/local/lib/php:.{$abspath}:.{$abspath}vendor");
-// else ini_set('include_path', '.:/');
+if(in_array($host, array('localhost', 'agrosshop'))) ini_set('include_path', ".:/usr/share/php/.:/opt/local/lib/php:.{$abspath}:.{$abspath}vendor");
+else ini_set('include_path', '.:/.:/usr/share/php/zend-framework/');
 
 
 
@@ -116,7 +118,7 @@ $rpadm = $rph.'admin/';
 define('SITE_NAME','AGROSSHOP');
 $BUSINESS = '';
 $BUSINESS = null;
-if ($_SERVER['HTTP_HOST']=='localhost') define('SITE_URL','http://localhost/agroshop');
+if ($host=='localhost') define('SITE_URL','http://localhost/agroshop');
 else define('SITE_URL','http://agrosshop.com.br/admin');
 define('PAINEL_URL', SITE_URL.'/admin');
 $SITE_URL = SITE_URL;

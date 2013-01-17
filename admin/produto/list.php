@@ -48,7 +48,6 @@
 <table class="table table-condensed table-striped">
    <thead>
       <tr>
-        <th width="120px">Dono</th>
         <th width="120px">Grupo Qui.</th>
         <th width="120px">Fabricante</th>
         <th>Título</th>
@@ -103,9 +102,6 @@ end;
 	</div>
 	<tr id="tr<?=$id?>">
 		<td>
-			<?=$nome?>
-		</td>
-		<td>
 			<?=$grupoquimico?>
 		</td>
 		<td>
@@ -118,7 +114,6 @@ end;
 				echo "<blockquote>";
 				if (!empty($valor)) echo 'Valor total R$ '.Moeda($valor).'<br/>';
 				if (!empty($valor_unidade)) echo 'Valor/Unidade R$ '.Moeda($valor_unidade).'<br/>';
-				if (!empty($qtd)) echo 'Total de unidades '.$qtd.'<br/>';
 				if (!empty($peso_unidade)) echo 'Peso por unidade '.$peso_unidade.' '.$unidade_medida.'<br/>';
 				echo "</blockquote>";
 			?>

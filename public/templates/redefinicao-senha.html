@@ -1,0 +1,63 @@
+<!-- All "mailvar"- and "mailval"-elements in this document will be replaced -->
+<mail>
+    <!-- Subject and mail headers can be set here.
+        Variables can also be used to fill headers! -->
+    <mailfields>
+        <subject>Olá <mailvar key="nome" />, sua nova senha para a Promoção STi</subject>
+        <to><mailvar key="email" /></to>
+        <cc><mailvar key="email" /></cc>
+    </mailfields>
+    <mailbody>
+        <!-- put html mail contents here -->
+        <html>
+            <head>
+            <title>Promoção STi Todo Dia | Semp Toshiba</title>
+            <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+            </head>
+            <body bgcolor="#CCC" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+                <table width="550" border="0" align="center" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td><a href="http://www.promosti.com.br" target="_blank"><img src="http://www1.semptoshiba.com.br/promo/image/content/email/topo.jpg" width="550" height="179" border="0"></a></td>
+                    </tr>
+                    <tr>
+                        <td bgcolor="#FFFFFF">
+                        	<table border="0" cellpadding="0" cellspacing="0" align="center" width="467">
+                            	<tr>
+                                	<td>
+
+                                            <font face="Arial, Helvetica, sans-serif" color="#2e2e2e">
+                                            <font size="4">Olá <strong><mailvar key="nome" />,</strong></font>
+
+                                            <br /><br />
+
+                                            <font size="2">
+                                            Você solicitou uma nova senha para o seu acesso no site da promoção STi Todo Dia.
+                                            <br/>Clique no link abaixo e redefina sua senha.
+                                            </font>
+
+                                            <br /><br />
+
+                                            <font size="2"><a href=<mailvar key="url" /><mailvar key="url" /></a></font>
+
+                                            <br /><br />
+
+                                            <font size="2">
+                                            Atenciosamente,
+                                            <br/><strong>Equipe STi</strong>.
+                                            </font>
+
+                                            </font>
+
+            		</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><a href="http://www.promosti.com.br" target="_blank"><img src="http://www1.semptoshiba.com.br/promo/image/content/email/rodape.jpg" width="550" height="179" border="0"></a></td>
+                    </tr>
+                </table>
+            </body>
+          </html>
+    </mailbody>
+</mail>

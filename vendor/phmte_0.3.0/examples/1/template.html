@@ -1,0 +1,63 @@
+<!-- All "mailvar"- and "mailval"-elements in this document will be replaced -->
+<mail>
+	<!-- Subject and mail headers can be set here.
+		Variables can also be used to fill headers! -->
+	<mailfields>
+		<subject>New Order: <mailvar key="OrderNumber" /></subject>
+		<to><mailvar key="Receiver" /></to>
+		<cc><mailvar key="Receiver" /></cc>
+	</mailfields>
+	<mailbody>
+		<!-- put html mail contents here -->
+		<html>
+			<head>
+				<style type="text/css">
+					body {
+						font-family: Verdana;
+						color: #0000AA;
+					}
+
+					div#clickme {
+						color: #FFFFFF;
+						background-color: #0000AA;
+					}
+				</style>
+
+				<!-- this works only if javascript is allowed in receiver's mail client -->
+				<script type="text/javascript">
+					function ShowHide () {
+						var element = document.getElementById('ShowHide');
+						if (element.style.display == 'none') {
+							element.style.display = 'block';
+						}
+						else {
+							element.style.display = 'none';
+						}
+					}
+				</script>
+			</head>
+			<body>
+				<!-- example for a simple string -->
+				<h1><mailvar key="Headline1" /></h1>
+				<p>This Mail belongs to Order <mailvar key="OrderNumber" /></p>
+				<div id="clickme" onclick="ShowHide();">
+					Click Me!
+				</div>
+				<div id="ShowHide">
+					This div will be hidden if mail client allows javascript
+				</div>
+
+				<p>
+					The following documents belong to this order:
+				</p>
+				<table>
+					<tr><th>Document number</th><th>Document title</th></tr>
+					<!-- example for a html table filled from an associative array -->
+					<mailvar key="Documents" type="array" >
+						<tr><td><mailval index="DocumentNumber" /></td><td><mailval index="DocumentTitle" /></td></tr>
+					</mailvar>
+				</table>
+			</body>
+		</html>
+	</mailbody>
+</mail>

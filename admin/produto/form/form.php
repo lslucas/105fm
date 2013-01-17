@@ -25,14 +25,11 @@
 	Antes de continuar corrija os campos abaixo:
 	<br/><br/>
 	<ol>
-		<li><label for="usr_id" class="error-validate">Selecione um <b>usuario</b></label></li>
 		<li><label for="tipo" class="error-validate">Selecione um <b>tipo</b></label></li>
 		<li><label for="fabricante" class="error-validate">Selecione uma <b>fabricante</b></label></li>
 		<li><label for="grupoquimico" class="error-validate">Selecione um <b>grupo químico</b></label></li>
 		<li><label for="titulo" class="error-validate">Entre com um <b>título</b></label></li>
-		<li><label for="qtd" class="error-validate">Entre com um <b>quantidade</b></label></li>
 		<li><label for="codigo" class="error-validate">Entre com o <b>código do produto</b></label></li>
-		<li><label for="data" class="error-validate">Entre com uma <b>data</b> para ordenação</label></li>
 		<li><label for="descricao" class="error-validate">Entre com a <b>descrição</b></label></li>
 	</ol>
 </div>
@@ -44,7 +41,6 @@
 <?php
 	if ($act=='update') {
 		echo "<input type='hidden' name='item' value='${_GET['item']}'>";
-		echo "<input type='hidden' name='code' value='${val['code']}'>";
 	}
 ?>
 
@@ -60,8 +56,7 @@
 			<label class="control-label" for="foto">Fotos<br/><span class='small'><a href='javascript:void(0);' class='addImagem' id='min'>adicionar +fotos</a></span></label>
 			<div class="controls">
 				<?php
-
-						$num=0;
+					$num=0;
 					if ($act=='update') {
 
 						$sql_gal = "SELECT rpg_id, rpg_imagem, rpg_legenda, rpg_pos FROM ".TABLE_PREFIX."_${var['table']}_galeria WHERE rpg_{$var['pre']}_id=? AND rpg_imagem IS NOT NULL ORDER BY rpg_pos ASC;";
@@ -106,6 +101,7 @@
 			</div>
 		</div>
 
+<?php /* ?>
 		<div class="control-group">
 			<label class="control-label" for="usr_id">* Usuário</label>
 			<div class="controls">
@@ -130,6 +126,8 @@
 			<p class='help-block'>Selecione o usuário dono desse produto</p>
 			</div>
 		</div>
+		 */
+?>
 
 		<div class="control-group">
 			<label class="control-label" for="tipo">* Tipo</label>
@@ -203,14 +201,6 @@
 			</div>
 		</div>
 
-		 <div class="control-group">
-			<label class="control-label" for="data">* Data</label>
-			<div class="controls">
-				<input type="text" class="input-small required data" placeholder='dd/mm/YYYY' name='data' id='data' value='<?=$act=='insert' ? date('d/m/Y') : date('d/m/Y', unixtimestamp($val['data'], 'YYYY/mm/dd'))?>'>
-				<p class='help-block'>Data para ordenação</p>
-			</div>
-		</div>
-
 		<div class="control-group">
 			<label class="control-label" for="codigo">* Código</label>
 			<div class="controls">
@@ -231,20 +221,6 @@
 			<label class="control-label" for="descricao">* Descrição</label>
 			<div class="controls">
 				<textarea class="tinymce_simple input-xxlarge required" placeholder='Descrição' name='descricao' id='descricao' cols=50 rows=12><?=$val['descricao']?></textarea>
-			</div>
-		</div>
-
-		 <div class="control-group">
-			<label class="control-label" for="qtd">* Quantidade</label>
-			<div class="controls">
-				<input type="text" class="input-small number required" placeholder='530' name='qtd' id='qtd' value='<?=$val['qtd']?>'>
-			</div>
-		</div>
-
-		 <div class="control-group">
-			<label class="control-label" for="qtd_min_venda">Quantidade Mínima para Venda</label>
-			<div class="controls">
-				<input type="text" class="input-small number" placeholder='530' name='qtd_min_venda' id='qtd_min_venda' value='<?=$val['qtd_min_venda']?>'>
 			</div>
 		</div>
 

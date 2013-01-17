@@ -1,0 +1,85 @@
+/****************************** FORM GERAL */
+
+.form-search input,.form-inline input,.form-horizontal input,.form-search textarea,.form-inline textarea,.form-horizontal textarea,.form-search select,.form-inline select,.form-horizontal select,.form-search .help-inline,.form-inline .help-inline,.form-horizontal .help-inline,.form-search .uneditable-input,.form-inline .uneditable-input,.form-horizontal .uneditable-input,.form-search .input-prepend,.form-inline .input-prepend,.form-horizontal .input-prepend,.form-search .input-append,.form-inline .input-append,.form-horizontal .input-append{display:inline-block;*display:inline;*zoom:1;margin-bottom:0;vertical-align:middle;}
+.form-search .hide,.form-inline .hide,.form-horizontal .hide{display:none;}
+.form-search label,.form-inline label,.form-search .btn-group,.form-inline .btn-group{display:inline-block;}
+.form-search .input-append,.form-inline .input-append,.form-search .input-prepend,.form-inline .input-prepend{margin-bottom:0;}
+.form-search .radio,.form-search .checkbox,.form-inline .radio,.form-inline .checkbox{padding-left:0;margin-bottom:0;vertical-align:middle;}
+.form-search .radio input[type="radio"],.form-search .checkbox input[type="checkbox"],.form-inline .radio input[type="radio"],.form-inline .checkbox input[type="checkbox"]{float:left;margin-right:3px;margin-left:0;}
+.control-group{margin-bottom:10px;}
+legend+.control-group{margin-top:20px;-webkit-margin-top-collapse:separate;}
+.form-horizontal .control-group{margin-bottom:20px;*zoom:1;}.form-horizontal .control-group:before,.form-horizontal .control-group:after{display:table;content:"";line-height:0;}
+.form-horizontal .control-group:after{clear:both;}
+.form-horizontal .control-label{float:left;width:160px;padding-top:5px;text-align:right;}
+.form-horizontal .controls{*display:inline-block;*padding-left:20px;margin-left:180px;*margin-left:0;}.form-horizontal .controls:first-child{*padding-left:180px;}
+.form-horizontal .help-block{margin-bottom:0;}
+.form-horizontal input+.help-block,.form-horizontal select+.help-block,.form-horizontal textarea+.help-block{margin-top:10px;}
+.form-horizontal .form-actions{padding-left:180px;}
+
+/****************************** NOVO PRODUTO */
+/*
+.novo-produto form{margin:0 0 20px;}
+.novo-produto fieldset{padding:0;margin:0;border:0;}
+.novo-produto legend{display:block;width:100%;padding:0;margin-bottom:20px;font-size:18px;line-height:40px;color:#333333;border:0;border-bottom:1px solid #e5e5e5;}
+legend small{font-size:15px;color:#999999;}
+.novo-produto label,.novo-produto input,.novo-produto button,.novo-produto select,.novo-produto textarea{font-size:12px;font-weight:normal;line-height:20px;}
+.novo-produto input,.novo-produto button,.novo-produto select,.novo-produto textarea{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;}
+.novo-produto label{display:block;margin-bottom:5px;}
+.novo-produto select,.novo-produto textarea,.novo-produto input[type="text"],.novo-produto input[type="password"],.novo-produto input[type="datetime"],.novo-produto input[type="datetime-local"],.novo-produto input[type="date"],.novo-produto input[type="month"],.novo-produto input[type="time"],.novo-produto input[type="week"],.novo-produto input[type="number"],.novo-produto input[type="email"],.novo-produto input[type="url"],.novo-produto input[type="search"],.novo-produto input[type="tel"],.novo-produto input[type="color"],.novo-produto .uneditable-input{display:inline-block;height:20px;padding:4px 6px;margin-bottom:10px;font-size:12px;line-height:20px;color:#555555;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;vertical-align:middle;}
+.novo-produto input,.novo-produto textarea,.novo-produto .uneditable-input{width:206px;}
+.novo-produto textarea{height:auto;}
+.novo-produto textarea,.novo-produto input[type="text"],.novo-produto input[type="password"],.novo-produto input[type="datetime"],.novo-produto input[type="datetime-local"],.novo-produto input[type="date"],.novo-produto input[type="month"],.novo-produto input[type="time"],.novo-produto input[type="week"],.novo-produto input[type="number"],.novo-produto input[type="email"],.novo-produto input[type="url"],.novo-produto input[type="search"],.novo-produto input[type="tel"],.novo-produto input[type="color"],.novo-produto .uneditable-input{background-color:#ffffff;border:1px solid #cccccc;-webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.075);-moz-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.075);box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.075);-webkit-transition:border linear .2s, box-shadow linear .2s;-moz-transition:border linear .2s, box-shadow linear .2s;-o-transition:border linear .2s, box-shadow linear .2s;transition:border linear .2s, box-shadow linear .2s;}
+.novo-produto textarea:focus,.novo-produto input[type="text"]:focus,.novo-produto input[type="password"]:focus,.novo-produto input[type="datetime"]:focus,input[type="datetime-local"]:focus,.novo-produto input[type="date"]:focus,.novo-produto input[type="month"]:focus,.novo-produto input[type="time"]:focus,.novo-produto input[type="week"]:focus,.novo-produto input[type="number"]:focus,.novo-produto input[type="email"]:focus,.novo-produto input[type="url"]:focus,.novo-produto input[type="search"]:focus,.novo-produto input[type="tel"]:focus,input[type="color"]:focus,.novo-produto .uneditable-input:focus{border-color:rgba(82, 168, 236, 0.8);outline:0;outline:thin dotted \9;-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);-moz-box-shadow:inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);box-shadow:inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);}
+.novo-produto input[type="radio"],.novo-produto input[type="checkbox"]{margin:4px 0 0;*margin-top:0;margin-top:1px \9;line-height:normal;cursor:pointer;}
+.novo-produto input[type="file"],.novo-produto input[type="image"],.novo-produto input[type="submit"],.novo-produto input[type="reset"],.novo-produto input[type="button"],.novo-produto input[type="radio"],.novo-produto input[type="checkbox"]{width:auto;}
+.novo-produto select,.novo-produto input[type="file"]{height:30px;*margin-top:4px;line-height:30px;}
+.novo-produto select{width:220px;border:1px solid #cccccc;background-color:#ffffff;}
+.novo-produto select[multiple],select[size]{height:auto;}
+.novo-produto select:focus,.novo-produto input[type="file"]:focus,.novo-produto input[type="radio"]:focus,.novo-produto input[type="checkbox"]:focus{outline:thin dotted #333;outline:5px auto -webkit-focus-ring-color;outline-offset:-2px;}
+.novo-produto .uneditable-input,.novo-produto .uneditable-textarea{color:#999999;background-color:#fcfcfc;border-color:#cccccc;-webkit-box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.025);-moz-box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.025);box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.025);cursor:not-allowed;}
+.novo-produto .uneditable-input{overflow:hidden;white-space:nowrap;}
+.novo-produto .uneditable-textarea{width:auto;height:auto;}
+.novo-produto input:-moz-placeholder,.novo-produto textarea:-moz-placeholder{color:#999999;}
+.novo-produto input:-ms-input-placeholder,.novo-produto textarea:-ms-input-placeholder{color:#999999;}
+.novo-produto input::-webkit-input-placeholder,.novo-produto textarea::-webkit-input-placeholder{color:#999999;}
+.novo-produto #datecontainer .ui-datepicker-trigger{ display: inline-block; cursor: pointer; margin: 0px 5px; }
+.novo-produto .cadastrar{ background: transparent url(../images/layout/bt-cadastrar.png) no-repeat top left; height: 44px; width: 202px; border: none; text-indent: 99999px; cursor: pointer; }
+.novo-produto h3{ font-size: 33px; margin-bottom: 5px; }
+ */
+.novo-produto .r{ color: #F00 !important; }
+
+/****************************** REGISTRO USUARIO */
+
+.registro-usuario form{margin:0 0 20px;}
+.registro-usuario fieldset{padding:0;margin:0;border:0;}
+.registro-usuario legend{display:block;width:100%;padding:0;margin-bottom:20px;font-size:18px;line-height:40px;color:#333333;border:0;border-bottom:1px solid #e5e5e5;}
+legend small{font-size:15px;color:#999999;}
+.registro-usuario label,.registro-usuario input,.registro-usuario button,.registro-usuario select,.registro-usuario textarea{font-size:12px;font-weight:normal;line-height:20px;}
+.registro-usuario input,.registro-usuario button,.registro-usuario select,.registro-usuario textarea{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;}
+.registro-usuario label{display:block;margin-bottom:5px;}
+.registro-usuario select,.registro-usuario textarea,.registro-usuario input[type="text"],.registro-usuario input[type="password"],.registro-usuario input[type="datetime"],.registro-usuario input[type="datetime-local"],.registro-usuario input[type="date"],.registro-usuario input[type="month"],.registro-usuario input[type="time"],.registro-usuario input[type="week"],.registro-usuario input[type="number"],.registro-usuario input[type="email"],.registro-usuario input[type="url"],.registro-usuario input[type="search"],.registro-usuario input[type="tel"],.registro-usuario input[type="color"],.registro-usuario .uneditable-input{display:inline-block;height:20px;padding:4px 6px;margin-bottom:10px;font-size:12px;line-height:20px;color:#555555;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;vertical-align:middle;}
+.registro-usuario input,.registro-usuario textarea,.registro-usuario .uneditable-input{width:206px;}
+.registro-usuario textarea{height:auto;}
+.registro-usuario textarea,.registro-usuario input[type="text"],.registro-usuario input[type="password"],.registro-usuario input[type="datetime"],.registro-usuario input[type="datetime-local"],.registro-usuario input[type="date"],.registro-usuario input[type="month"],.registro-usuario input[type="time"],.registro-usuario input[type="week"],.registro-usuario input[type="number"],.registro-usuario input[type="email"],.registro-usuario input[type="url"],.registro-usuario input[type="search"],.registro-usuario input[type="tel"],.registro-usuario input[type="color"],.registro-usuario .uneditable-input{background-color:#ffffff;border:1px solid #cccccc;-webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.075);-moz-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.075);box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.075);-webkit-transition:border linear .2s, box-shadow linear .2s;-moz-transition:border linear .2s, box-shadow linear .2s;-o-transition:border linear .2s, box-shadow linear .2s;transition:border linear .2s, box-shadow linear .2s;}
+.registro-usuario textarea:focus,.registro-usuario input[type="text"]:focus,.registro-usuario input[type="password"]:focus,.registro-usuario input[type="datetime"]:focus,input[type="datetime-local"]:focus,.registro-usuario input[type="date"]:focus,.registro-usuario input[type="month"]:focus,.registro-usuario input[type="time"]:focus,.registro-usuario input[type="week"]:focus,.registro-usuario input[type="number"]:focus,.registro-usuario input[type="email"]:focus,.registro-usuario input[type="url"]:focus,.registro-usuario input[type="search"]:focus,.registro-usuario input[type="tel"]:focus,input[type="color"]:focus,.registro-usuario .uneditable-input:focus{border-color:rgba(82, 168, 236, 0.8);outline:0;outline:thin dotted \9;-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);-moz-box-shadow:inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);box-shadow:inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6);}
+.registro-usuario input[type="radio"],.registro-usuario input[type="checkbox"]{margin:4px 0 0;*margin-top:0;margin-top:1px \9;line-height:normal;cursor:pointer;}
+.registro-usuario input[type="file"],.registro-usuario input[type="image"],.registro-usuario input[type="submit"],.registro-usuario input[type="reset"],.registro-usuario input[type="button"],.registro-usuario input[type="radio"],.registro-usuario input[type="checkbox"]{width:auto;}
+.registro-usuario select,.registro-usuario input[type="file"]{height:30px;*margin-top:4px;line-height:30px;}
+.registro-usuario select{width:220px;border:1px solid #cccccc;background-color:#ffffff;}
+.registro-usuario select[multiple],select[size]{height:auto;}
+.registro-usuario select:focus,.registro-usuario input[type="file"]:focus,.registro-usuario input[type="radio"]:focus,.registro-usuario input[type="checkbox"]:focus{outline:thin dotted #333;outline:5px auto -webkit-focus-ring-color;outline-offset:-2px;}
+.registro-usuario .uneditable-input,.registro-usuario .uneditable-textarea{color:#999999;background-color:#fcfcfc;border-color:#cccccc;-webkit-box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.025);-moz-box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.025);box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.025);cursor:not-allowed;}
+.registro-usuario .uneditable-input{overflow:hidden;white-space:nowrap;}
+.registro-usuario .uneditable-textarea{width:auto;height:auto;}
+.registro-usuario input:-moz-placeholder,.registro-usuario textarea:-moz-placeholder{color:#999999;}
+.registro-usuario input:-ms-input-placeholder,.registro-usuario textarea:-ms-input-placeholder{color:#999999;}
+.registro-usuario input::-webkit-input-placeholder,.registro-usuario textarea::-webkit-input-placeholder{color:#999999;}
+.registro-usuario #datecontainer .ui-datepicker-trigger{ display: inline-block; cursor: pointer; margin: 0px 5px; }
+.registro-usuario .cadastrar{ background: transparent url(../images/layout/bt-cadastrar.png) no-repeat top left; height: 44px; width: 202px; border: none; text-indent: 99999px; cursor: pointer; }
+.registro-usuario h3{ font-size: 33px; margin-bottom: 5px; }
+.registro-usuario .r{ color: #F00 !important; }
+.registro-usuario .span12{ text-align: center; margin: 0 0 30px 0 !important; display: inline-block; }
+.registro-usuario .span12 .span3{ float: left; margin: 0 0 0 65px; }
+.registro-usuario .span12 .img-polaroid{padding:4px;background-color:#fff;border:1px solid #ccc;border:1px solid rgba(0, 0, 0, 0.2);-webkit-box-shadow:0 1px 3px rgba(0, 0, 0, 0.1);-moz-box-shadow:0 1px 3px rgba(0, 0, 0, 0.1);box-shadow:0 1px 3px rgba(0, 0, 0, 0.1);}
+.registro-usuario .contrato{ width: 445px !important; height: 400px; }
+.registro-usuario input[type="checkbox"]{ margin-right: 10px; }

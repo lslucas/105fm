@@ -37,7 +37,7 @@ if (isset($_FILES)) {
 
 
 			$legenda = null;
-			$filename = linkfy($_FILES['galeria'.$i]['name']).'-'.$code;
+			$filename = linkfy($_FILES['galeria'.$i]['name']).'-'.time();
 			$handle = new Upload($_FILES['galeria'.$i]);
 
 			if ($handle->uploaded) {

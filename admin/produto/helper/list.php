@@ -71,17 +71,13 @@ $orderby = !isset($_GET['orderby'])?$var['pre'].'_titulo ASC':urldecode($_GET['o
 
 
 $sql = "SELECT pro.${var['pre']}_id,
-		pro.${var['pre']}_code,
 		fab.cat_titulo `fabricante`,
             gru.cat_titulo `grupoquimico`,
 		pro.${var['pre']}_codigo,
 		pro.${var['pre']}_titulo,
-		DATE_FORMAT(pro.${var['pre']}_data, '%m/%d/%y'),
 		pro.${var['pre']}_descricao,
-            (SELECT usr_nome FROM ".TP."_usuario WHERE usr_id=pro.${var['pre']}_usr_id) `nome`,
             pro.${var['pre']}_valor,
             pro.${var['pre']}_valor_unidade,
-            pro.${var['pre']}_qtd,
             pro.${var['pre']}_peso_unidade,
             pro.${var['pre']}_unidade_medida,
 		pro.${var['pre']}_status
@@ -105,7 +101,7 @@ $sql = "SELECT pro.${var['pre']}_id,
   } else {
 
     $qry->execute();
-    $qry->bind_result($id, $code, $fabricante, $grupoquimico, $codigo, $titulo, $date, $descricao, $nome, $valor, $valor_unidade, $qtd, $peso_unidade, $unidade_medida, $status);
+    $qry->bind_result($id, $fabricante, $grupoquimico, $codigo, $titulo, $descricao, $valor, $valor_unidade, $peso_unidade, $unidade_medida, $status);
 
 
     if($total_itens==0) $total = 'nenhum produto'.$countLetra;

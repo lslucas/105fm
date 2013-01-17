@@ -1,4 +1,330 @@
 <?php
+function estadoFromUF($uf) {
+	switch($uf) {
+		case 'AC': $estado = 'Acre';
+	break;
+		case 'AL': $estado = 'Alagoas';
+	break;
+		case 'AM': $estado = 'Amazonas';
+	break;
+		case 'AP': $estado = 'Amapá';
+	break;
+		case 'BA': $estado = 'Bahia';
+	break;
+		case 'CE': $estado = 'Ceará';
+	break;
+		case 'DF': $estado = 'Distrito Federal';
+	break;
+		case 'ES': $estado = 'Espirito Santo';
+	break;
+		case 'GO': $estado = 'Goiais';
+	break;
+		case 'MA': $estado = 'Maranhão';
+	break;
+		case 'MG': $estado = 'Minas Gerais';
+	break;
+		case 'MS': $estado = 'Mato Grosso do Sul';
+	break;
+		case 'MT': $estado = 'Mato Grosso';
+	break;
+		case 'PA': $estado = 'Pará';
+	break;
+		case 'PB': $estado = 'Paraíba';
+	break;
+		case 'PE': $estado = 'Pernambuco';
+	break;
+		case 'PI': $estado = 'Piauí';
+	break;
+		case 'PR': $estado = 'Paraná';
+	break;
+		case 'RJ': $estado = 'Rio de Janeiro';
+	break;
+		case 'RN': $estado = 'Rio Grande do Norte';
+	break;
+		case 'RO': $estado = 'Rondônia';
+	break;
+		case 'RR': $estado = 'Roraima';
+	break;
+		case 'RS': $estado = 'Rio Grande do Sul';
+	break;
+		case 'SC': $estado = 'Santa Catarina';
+	break;
+		case 'SE': $estado = 'Sergipe';
+	break;
+		case 'SP': $estado = 'São Paulo';
+	break;
+		case 'TO': $estado = 'Tocantins';
+	break;
+		default: $estado = 'Indefinido';
+	break;
+	}
+
+	return $estado;
+}
+
+function cotacao($moeda='USD')
+{
+	$cotacao = google_finance_convert($moeda, 'BRL', 1);
+	return number_format($cotacao, 4,',','.');
+}
+
+function google_finance_convert($from_Currency, $to_Currency, $amount) {
+	$amount = urlencode($amount);
+	$from_Currency = urlencode($from_Currency);
+	$to_Currency = urlencode($to_Currency);
+
+	$url = "http://www.google.com/ig/calculator?q=$amount$from_Currency=?$to_Currency";
+	$ch = curl_init();
+	$timeout = 0;
+	curl_setopt ($ch, CURLOPT_URL, $url);
+	curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
+	curl_setopt ($ch, CURLOPT_USERAGENT , "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1)");
+	curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+	$rawdata = curl_exec($ch);
+	curl_close($ch);
+
+	$data = explode('"', $rawdata);
+	$data = explode(' ', $data[3]);
+	$converted = $data[0];
+
+	return $converted;
+}
+
+function full_url()
+{
+    $s = empty($_SERVER["HTTPS"]) ? '' : ($_SERVER["HTTPS"] == "on") ? "s" : "";
+    $sp = strtolower($_SERVER["SERVER_PROTOCOL"]);
+    $protocol = substr($sp, 0, strpos($sp, "/")) . $s;
+    $port = ($_SERVER["SERVER_PORT"] == "80") ? "" : (":".$_SERVER["SERVER_PORT"]);
+    return $protocol . "://" . $_SERVER['SERVER_NAME'] . $port . $_SERVER['REQUEST_URI'];
+}
+
+function bannerLaterial($banners, $i) {
+	if (isset($banners['Lateral '.$i]) && is_array($banners['Lateral '.$i]) && count($banners['Lateral '.$i])>0) {
+		$numBanners = (count($banners['Lateral '.$i])-1);
+		$rand = rand(0, $numBanners);
+
+		$banner = $banners['Lateral '.$i][$rand];
+		plusBannerViews($banner['id']);
+
+		if ($banner['type']<>'swf') {
+
+			if (!empty($banner['link']))
+				echo "<a href='{$banner['link']}' title='{$banner['titulo']}' target='_blank'>";
+
+			echo "<img src='{$banner['imagem']}' border=0 alt='{$banner['titulo']}'/>";
+
+			if (!empty($banner['link']))
+				echo "</a>";
+
+		} else {
+			$incJS .= "
+					/*
+					 *Vars Globais
+					 */
+					var flashvarsGlob = {
+					'autostart':          'true'
+					};
+
+					var paramsGlob = {
+					'wmode':              'transparent',
+					'allowfullscreen':    'false',
+					'allowscriptaccess':  'always',
+					'bgcolor':            '#ffffff'
+					};
+
+					var attributesGlob = {
+					'id':       'BannerLateral{$i}',
+					'name': 'BannerLateral{$i}'
+					};
+
+					swfobject.embedSWF('{$banner['imagem']}', 'bannerLateral 1', '115', '290', '9', 'false', flashvarsGlob, paramsGlob, attributesGlob);
+			";
+			echo "\n\t\t<div id='bannerLateral {$i}'></div>";
+
+		}
+
+	}
+}
+
+/*
+ *retorna lista da coluna
+ */
+/*
+function produtosByUF($order='titulo')
+{
+	global $conn;
+	$lst = array();
+	$sql = "SELECT , cat_titulo FROM ".TP."_categoria WHERE cat_status=1 ORDER BY cat_{$order};";
+	if(!$qry = $conn->prepare($sql))
+		echo divAlert($conn->error, 'error');
+
+	else {
+
+		// $qry->bind_param('s', $area);
+		$qry->execute();
+		$qry->bind_result($id, $titulo);
+
+		while ($qry->fetch()) {
+			if ($min===true)
+				$titulo = linkfySmart($titulo);
+			$lst[$titulo] = $id;
+		}
+
+		$qry->close();
+	}
+	return $lst;
+
+}
+*/
+
+/*
+ *retorna lista da coluna
+ */
+function getCategoriaIdByTitulo($min=false, $order='titulo')
+{
+	global $conn;
+	/*
+	 *query da disciplina
+	 */
+	$lst = array();
+	$sql = "SELECT cat_id, cat_titulo FROM ".TP."_categoria WHERE cat_status=1 /*AND cat_area=?*/ ORDER BY cat_{$order};";
+	if(!$qry = $conn->prepare($sql))
+		echo divAlert($conn->error, 'error');
+
+	else {
+
+		// $qry->bind_param('s', $area);
+		$qry->execute();
+		$qry->bind_result($id, $titulo);
+
+		while ($qry->fetch()) {
+			if ($min===true)
+				$titulo = linkfySmart($titulo);
+			$lst[$titulo] = $id;
+		}
+
+		$qry->close();
+	}
+	return $lst;
+
+}
+
+/*
+ *retorna lista de produtos
+ */
+function getProdutosByOptions($option, $startwith=null, $order='titulo')
+{
+	global $conn;
+
+	$whr = null;
+	foreach ($option as $optkey=>$optval) {
+		if (!empty($optval))
+			$whr .= " AND pro_{$optkey}=\"{$optval}\"";
+	}
+
+	$sql = "SELECT pro_id, pro_titulo, pro_tipo, pro_valor
+				FROM ".TP."_produto
+				INNER JOIN ".TP."_usuario_produto
+					ON upr_pro_id=pro_id
+				INNER JOIN ".TP."_usuario
+					ON upr_usr_id=usr_id
+					AND usr_status=1
+				WHERE pro_status=1
+				{$whr}
+				GROUP BY pro_id
+				ORDER BY pro_{$order};";
+	$lst = array();
+	if(!$qry = $conn->prepare($sql))
+		echo divAlert($conn->error, 'error');
+
+	else {
+
+		$qry->execute();
+		$qry->bind_result($id, $titulo, $tipo, $valor);
+
+		if (!empty($startwith))
+			$lst[0] = array('id'=>0, 'titulo'=>$startwith);
+
+		$i=1;
+		while ($qry->fetch()) {
+			$lst[$i]['id'] = $id;
+			$lst[$i]['titulo'] = $titulo;
+			$lst[$i]['tipo'] = $tipo;
+			$lst[$i]['valor'] = 'R$ '.Moeda($valor);
+			$lst[$i]['valor_decimal'] = $valor;
+			$i++;
+		}
+
+		$qry->close();
+
+		return $lst;
+	}
+
+}
+
+/*
+ *retorna lista da coluna
+ */
+function getCategoriaListArea($area, $rel=null, $startwith=null, $limit=null,  $order='titulo')
+{
+	global $conn;
+
+	/*
+	 *query da disciplina
+	 */
+	$areaQry = !empty($area) ? ' AND cat_area=? ' : null;
+	$relQry = !empty($rel) ? ' AND cat_idrel=? ' : null;
+	$limitQry = !empty($limit) ? ' LIMIT 0, '.$limit : null;
+	$sql = "SELECT cat_id, cat_titulo FROM ".TP."_categoria WHERE cat_status=1 {$areaQry} {$relQry} ORDER BY cat_{$order} {$limitQry};";
+	$lst = array();
+	if(!$qry = $conn->prepare($sql))
+		echo divAlert($conn->error, 'error');
+
+	else {
+
+		if (empty($relQry) && !empty($area))
+			$qry->bind_param('s', $area);
+		elseif (isset($rel) && !empty($area))
+			$qry->bind_param('si', $area, $rel);
+		$qry->execute();
+		$qry->bind_result($id, $titulo);
+
+		if (!empty($startwith))
+			$lst[0] = array('id'=>0, 'titulo'=>$startwith);
+
+		$i=1;
+		while ($qry->fetch()) {
+			$lst[$i]['id'] = $id;
+			$lst[$i]['titulo'] = $titulo;
+			$i++;
+		}
+
+		$qry->close();
+
+		return $lst;
+	}
+
+}
+
+/*
+ *retorna lista da coluna
+ */
+function convertCatList2Option($var, $selected=null)
+{
+	$opt = null;
+	foreach ($var as $int=>$val) {
+		if (isset($val['id']) && isset($val['titulo'])) {
+			$opt .= "<option value='{$val['id']}'";
+			if(isset($selected) && $selected==$val['id'])
+				$opt .= ' selected';
+			$opt .=">{$val['titulo']}</option>";
+		}
+	}
+
+	return $opt;
+}
+
 function aesEncrypt($val)
 {
 	include_once "vendor/phpAES/AES.class.php";
@@ -453,32 +779,6 @@ function encrypt($_input, $_key='your salt', $_type='mcrypt')
 /*
  *retorna valor da coluna
  */
-function getUrlAuto($auto_id)
-{
-	global $conn;
-	/*
-	 *query da disciplina
-	 */
-	$sql = "SELECT (SELECT cat_titulo FROM ".TABLE_PREFIX."_categoria WHERE cat_id=auto_marca AND cat_area='Marca'), auto_nome ".TABLE_PREFIX."_auto WHERE auto_id=?";
-	if(!$qry = $conn->prepare($sql))
-		return false;
-
-	else {
-
-		$qry->bind_param('i', $auto_id);
-		$qry->bind_result($marca, $nome);
-		$qry->execute();
-		$qry->fetch();
-		$qry->close();
-
-		return ABSPATH."veiculo/{$id}/".linkfy($marca.' '.$nome);
-	}
-
-}
-
-/*
- *retorna valor da coluna
- */
 function plusViews($auto_id)
 {
 	global $conn;
@@ -499,68 +799,6 @@ function plusViews($auto_id)
 			$_SESSION[TP]['views'][$ip][$auto_id] = date('Y-m-d');
 			return true;
 		}
-	}
-
-}
-
-/*
- *retorna valor da coluna
- */
-function plusTelefone($auto_id)
-{
-	global $conn;
-
-	$ip = $_SERVER['REMOTE_ADDR'];
-	if (!isset($_SESSION[TP]['telefone'][$ip][$auto_id]) || $_SESSION[TP]['telefone'][$ip][$auto_id]!=date('Y-m-d')) {
-
-		/*
-		 *query
-		 */
-		$sql = "UPDATE ".TABLE_PREFIX."_auto SET auto_telefone=auto_telefone+1 WHERE auto_id=?";
-		if(!$qry = $conn->prepare($sql))
-			return false;
-
-		else {
-
-			$qry->bind_param('i', $auto_id);
-			$qry->execute();
-			$qry->close();
-
-			$_SESSION[TP]['telefone'][$ip][$auto_id] = date('Y-m-d');
-			return true;
-		}
-
-	}
-
-}
-
-/*
- *retorna valor da coluna
- */
-function plusContato($auto_id)
-{
-	global $conn;
-
-	$ip = $_SERVER['REMOTE_ADDR'];
-	if (!isset($_SESSION[TP]['contato'][$ip][$auto_id]) || $_SESSION[TP]['contato'][$ip][$auto_id]!=date('Y-m-d')) {
-
-		/*
-		 *query
-		 */
-		$sql = "UPDATE ".TABLE_PREFIX."_auto SET auto_contato=auto_contato+1 WHERE auto_id=?";
-		if(!$qry = $conn->prepare($sql))
-			return false;
-
-		else {
-
-			$qry->bind_param('i', $auto_id);
-			$qry->execute();
-			$qry->close();
-
-			$_SESSION[TP]['contato'][$ip][$auto_id] = date('Y-m-d');
-			return true;
-		}
-
 	}
 
 }
@@ -622,87 +860,29 @@ function plusBannerClicks($ban_id)
 /*
  *retorna valor da coluna
  */
-function getAgenciaNomeEmail($adm_id)
+function getProdutoCol($col, $ref, $rel)
 {
 	global $conn;
-
-	/*
-	 *query
-	 */
-	$sql = "SELECT adm_nome, adm_email, age_email_contato
-				FROM ".TABLE_PREFIX."_administrador
-				INNER JOIN ".TABLE_PREFIX."_agencia
-					ON age_adm_id=adm_id
-			WHERE adm_id=?";
-	if(!$qry = $conn->prepare($sql))
-		echo divAlert($conn->error, 'error');
-
-	else {
-
-		$qry->bind_param('i', $adm_id);
-		$qry->execute();
-		$qry->bind_result($nome, $email, $email_contato);
-		$qry->fetch();
-		$qry->close();
-
-		return array('nome'=>$nome, 'email'=>$email, 'email_contato'=>$email_contato);
-	}
-
-}
-
-/*
- *retorna valor da coluna
- */
-function getAgenciaId($id)
-{
-	global $conn;
-
-	/*
-	 *query
-	 */
-	$sql = "SELECT age_id FROM ".TABLE_PREFIX."_agencia WHERE age_adm_id=?";
-	if(!$qry = $conn->prepare($sql))
-		echo divAlert($conn->error, 'error');
-
-	else {
-
-		$qry->bind_param('i', $id);
-		$qry->execute();
-		$qry->bind_result($age_id);
-		$qry->fetch();
-		$qry->close();
-
-		return $age_id;
-	}
-
-
-}
-
-
-
-/*
- *retorna valor da coluna
- */
-function getAgenciaLogo($age_id)
-{
-	global $conn, $rp;
 	/*
 	 *query da disciplina
 	 */
-	$sql = "SELECT rag_imagem FROM ".TABLE_PREFIX."_r_age_galeria WHERE rag_age_id=?";
+	$sql = "SELECT pro_{$col} FROM ".TABLE_PREFIX."_produto WHERE pro_{$ref}=?";
 	if(!$qry = $conn->prepare($sql))
 		echo divAlert($conn->error, 'error');
 
 	else {
 
-		$qry->bind_param('i', $age_id);
+		if (!apenasNumeros($rel))
+			$qry->bind_param('s', $rel);
+		else
+			$qry->bind_param('i', $rel);
+
 		$qry->execute();
-		$qry->bind_result($logo);
+		$qry->bind_result($$col);
 		$qry->fetch();
 		$qry->close();
 
-		$logo = !empty($logo) && file_exists($rp.'../image/agencia/'.$logo) ? $rp.'../image/agencia/'.$logo : null;
-		return $logo;
+		return $$col;
 	}
 
 }
@@ -732,33 +912,6 @@ function getCategoriaCol($col, $ref, $rel)
 	}
 
 }
-
-/*
- *retorna valor da coluna
- */
-function getAgenciaCol($col, $age_id)
-{
-	global $conn;
-	/*
-	 *query da disciplina
-	 */
-	$sql = "SELECT age_{$col} FROM ".TABLE_PREFIX."_agencia WHERE age_id=?";
-	if(!$qry = $conn->prepare($sql))
-		echo divAlert($conn->error, 'error');
-
-	else {
-
-		$qry->bind_param('i', $age_id);
-		$qry->execute();
-		$qry->bind_result($$col);
-		$qry->fetch();
-		$qry->close();
-
-		return $$col;
-	}
-
-}
-
 
 /*
  *retorna mes por extenso
@@ -1088,7 +1241,7 @@ function validaCPF($cpf)
  */
 function validaData ($ano, $mes, $dia)
 {
-	return var_dump(checkdate($mes, $dia, $ano));
+	return checkdate($mes, $dia, $ano);
 }
 /*
  *valida data nascimento
@@ -1125,21 +1278,22 @@ function showModal($args)
 	if (!isset($args['button']['class']))
 		$args['button']['class'] = null;
 
-	$closeButton = 'Close';
+	$closeButton = 'Fechar';
 	//$closeButton = !empty($args['button']['value']) ? 'Cancelar' : 'Fechar';
-	$modalHeaderBody = $modalHeader = null;
 
+
+	$modalHeaderOutside = $modalHeaderInside = null;
 	if (isset($args['title']))
-		$modalHeader = "<div class='modal-header'> <a class='close' data-dismiss='modal'>×</a> <h3>{$args['title']}</h3> </div>";
+		$modalHeaderOutside = "<div class='modal-header'> <a class='close' data-dismiss='modal'>×</a> <h3>{$args['title']}</h3> </div>";
 	else
-		$modalHeaderBody = "<a class='close' data-dismiss='modal'>×</a>";
+		$modalHeaderInside = "<a class='close' data-dismiss='modal'>×</a>";
 
 
 	$js = null;
-	$js .= "\n\t\tvar template = \"<div class='modal fade hide' id='msg-modal'>\";
-		template += \"{$modalHeader}\";
+	$js .= "\n\t\tvar template = \"<div class='fixedVersion'><div class='modal fade hide' id='msg-modal'>\";
+		template += \"{$modalHeaderOutside}\";
 		template += \"<div class='modal-body'>\";
-		template += \"{$modalHeaderBody}\";
+		template += \"{$modalHeaderInside}\";
 		template += \"<p>{$args['content']}</p>\";
 		template += \"</div>\";
 		template += \"<div class='modal-footer'>\";";
@@ -1150,14 +1304,14 @@ function showModal($args)
 	if (!empty($args['button']['value']))
 		$js .= "\n\t\ttemplate += \"<a href='{$args['button']['link']}' id='{$args['button']['param']}' class='btn-rm btn {$args['button']['class']} btn-primary'>{$args['button']['value']}</a>\";";
 
-	$js .= "\n\n\t\ttemplate += \"</div></div>\";";
-	$js .= "\n\t\tif ($('#html-msg'))";
-	$js .= "\n\t\t\t$('#html-msg').html(template);";
-	$js .= "\n\t\telse";
+	$js .= "\n\n\t\ttemplate += \"</div></div></div>\";";
+	// $js .= "\n\t\tif ($('#html-msg'))";
+	// $js .= "\n\t\t\t$('#html-msg').html(template);";
+	// $js .= "\n\t\telse";
 	$js .= "\n\t\t\t$(template).appendTo('body');";
 	$js .= "\n\t\tif ($('#lightbox')) $('#lightbox').hide();";
 	$js .= "\n\t\tif ($('.hide')) $('.hide').hide();";
-	$js .= "\n\t\t$('#msg-modal').modal('show');\n\n";
+	$js .= "\n\t\t$('.fixedVersion .modal').modal().on('shown', function(){ $('.modal-backdrop').insertAfter($(this)); } );\n\n";
 	return $js;
 
 }

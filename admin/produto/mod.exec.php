@@ -29,8 +29,6 @@ include_once 'inc.exec.msg.php';
      include_once $rp.'inc.autoinsert.php';
 
      $sql= "UPDATE ".TP."_${var['table']} SET
-        ${var['pre']}_usr_id=?,
-        ${var['pre']}_data=?,
         ${var['pre']}_codigo=?,
         ${var['pre']}_fabricante=?,
         ${var['pre']}_grupoquimico=?,
@@ -39,8 +37,6 @@ include_once 'inc.exec.msg.php';
         ${var['pre']}_descricao=?,
         ${var['pre']}_valor=?,
         ${var['pre']}_valor_unidade=?,
-        ${var['pre']}_qtd=?,
-        ${var['pre']}_qtd_min_venda=?,
         ${var['pre']}_peso_unidade=?,
         ${var['pre']}_unidade_medida=?
         ";
@@ -51,12 +47,9 @@ include_once 'inc.exec.msg.php';
    else {
 
     // $res['titulo'] = mysql_real_escape_string($res['titulo']);
-    $res['data']  = date('Y-m-d', unixtimestamp($res['data'], 'mm/dd/YYYY'));
     $res['valor'] = !empty($res['valor']) ? Currency2Decimal($res['valor'], 1) : null;
     $res['valor_unidade'] = !empty($res['valor_unidade']) ? Currency2Decimal($res['valor_unidade'], 1) : null;
-    $qry->bind_param('issiiissddiidsi',
-      $res['usr_id'],
-      $res['data'],
+    $qry->bind_param('siiissdddii',
       $res['codigo'],
       $res['fabricante'],
       $res['grupoquimico'],
@@ -65,8 +58,6 @@ include_once 'inc.exec.msg.php';
       $res['descricao'],
       $res['valor'],
       $res['valor_unidade'],
-      $res['qtd'],
-      $res['qtd_min_venda'],
       $res['peso_unidade'],
       $res['unidade_medida'],
       $res['item']
@@ -74,13 +65,7 @@ include_once 'inc.exec.msg.php';
     $qry->execute();
     $qry->close();
 
-
-    if ($act=='update')
-      $code = $res['code'];
-    else
-      $code = saveTableCode($var, $res['item'], $res['codigo']);
     echo $msgSucesso;
-
     include_once 'helper/exec.galeria.php';//photos
     include_once 'helper/exec.taxonomy.php';//taxonomy
 
