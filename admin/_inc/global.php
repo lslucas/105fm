@@ -32,8 +32,8 @@ if ($host=='localhost') {
 	define('MAIL_SMTPAUTH', 'login');
 	define('MAIL_SMTPSECURE', 'tls');
 	define('MAIL_PORT', 587);
-	define('MAIL_USER', 'teste@lucasserafim.com.br');
-	define('MAIL_PASS', 'noreply#');
+	define('MAIL_USER', 'noreply@techtravel.com.br');
+	define('MAIL_PASS', 'mvdbt9TT');
 
 	/**
 	 * CONEXÃO COM O DB
@@ -59,12 +59,12 @@ if ($host=='localhost') {
 	/**
 	 * EMAIL SERVER
 	 */
-	define('MAIL_HOST', 'auth.smtp.1and1.co.ca');
+	define('MAIL_HOST', 'smtp.gmail.com');
 	define('MAIL_SMTPAUTH', 'login');
 	define('MAIL_SMTPSECURE', 'tls');
 	define('MAIL_PORT', 587);
-	define('MAIL_USER', 'info@agrosshop.com');
-	define('MAIL_PASS', 'vikipier');
+	define('MAIL_USER', 'noreply@techtravel.com.br');
+	define('MAIL_PASS', 'mvdbt9TT');
 
 	/**
 	 * CONEXAO COM O DB

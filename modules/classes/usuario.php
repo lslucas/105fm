@@ -679,6 +679,9 @@ class Usuario extends Mail {
 				$usr= $this->getBasicInfoById($cadId);
 				$usr['url'] = SITE_URL."/redefinicao-senha/{$time}";
 
+				$token = time();
+				$usr['novaSenha'] = $hashids->encrypt($token);
+				$this->mudarSenha($token, $usr['novaSenha']);
 				$mail = new Mail();
 				return $mail->zerarSenha($usr);
 			}

@@ -40,6 +40,14 @@
 	}
 
 	/**
+	 *  POST do esqueci a senha
+	 * */
+	if ($basename=='esqueci-senha') {
+		if(isset($val['from']) && $val['from']=='esqueci-senha')
+			include_once 'esqueci-senha/header.php';
+	}
+
+	/**
 	 * Meus dados //edicao de usuário
 	 */
 	if ($basename=='meus-dados') {

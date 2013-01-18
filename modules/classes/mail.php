@@ -26,6 +26,9 @@ class Mail {
 		$fromName = !isset($args['fromName']) ? utf8_decode(SITE_NAME) : htmlentities($args['fromName']);
 		$toEmail = !isset($args['email']) ? EMAIL_CONTACT : $args['email'];
 		$toName = !isset($args['nome']) ? utf8_decode(SITE_NAME) : htmlentities($args['nome']);
+		if (isset($this->sender))
+			$senderEmail = $this->sender;
+
 		$htmlMensage = $mailHtml;
 
 		require 'admin/inc.sendmail.header.php';
@@ -58,8 +61,9 @@ class Mail {
 
 	public function zerarSenha($args)
 	{
-		$this->template	= 'public/templates/zerarSenha.html';
+		$this->template	= 'public/templates/redefinicao-senha.html';
 		$this->subject = 'Sua senha foi redefinida';
+		$this->sender = 'noreply@agrosshop.com.br';
 
 		return $this->sendEmail($args);
 	}

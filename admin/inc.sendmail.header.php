@@ -34,19 +34,24 @@
 			$config['port'] = MAIL_PORT;
 
 		$transport = new Zend_Mail_Transport_Smtp(MAIL_HOST, $config);
-		$transport = new Zend_Mail_Transport_Sendmail('-finfo@pierrexpert.com');
 		Zend_Mail::setDefaultTransport($transport);
 
 
-		$mail = new Zend_Mail();
+		$mail = new Zend_Mail('utf-8');
 		$mail->setSubject($subject);
-		$mail->setFrom($fromEmail, $fromName);
 		$mail->addTo($toEmail, $toName);
+		// $mail->setFrom($fromEmail, $fromName);
+		if(isset($senderEmail) && !empty($senderEmail))
+			$mail->setFrom($senderEmail, $fromName);
+		else
+			$mail->setFrom(EMAIL_CONTACT, $fromName);
+
 
 
 		if(isset($bccEmail) && !empty($bccEmail)) $mail->addBcc($bccEmail, $bccName);
 		if(isset($bcc2Email) && !empty($bcc2Email)) $mail->addBcc($bcc2Email, $bcc2Name);
 		if(isset($bcc3Email) && !empty($bcc3Email)) $mail->addBcc($bcc3Email, $bcc3Name);
+
 		if(BBC1_EMAIL<>'') $mail->addBcc(BBC1_EMAIL, BBC1_NOME);
 		if(BBC2_EMAIL<>'') $mail->addBcc(BBC2_EMAIL, BBC2_NOME);
 		if(BBC3_EMAIL<>'') $mail->addBcc(BBC3_EMAIL, BBC3_NOME);

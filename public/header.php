@@ -7,6 +7,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
 		<meta name="author" content="Lucas Serafim - http://lucasserafim.com.br">
+		<meta name="google-site-verification" content="IjitGvBpvYlvTY8vOsV3jFdDyjbacRFLD9w5fEdpA6U" />
 
 		<link href="<?=STATIC_PATH?>favicon.png" rel="shortcut icon"/>
 
