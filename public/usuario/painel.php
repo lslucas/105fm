@@ -34,7 +34,7 @@
 
 				<table class="lista-produtos" id="alternatecolor" width="100%">
 						<tr>
-							<th width="60px">Código</th>
+							<th width="60px">UF</th>
 							<th align="left">Grupo Químico</th>
 							<th align="left">Fabricante</th>
 							<th align="left">Produto</th>
@@ -48,7 +48,7 @@
 							foreach ($myProducts as $id => $lista) {
 						?>
 							<tr>
-								<td align=center><?=$lista['codigo']?></td>
+								<td align=center><?=$lista['uf']?></td>
 								<td><?=$lista['grupoquimico']?></td>
 								<td><?=$lista['fabricante']?></td>
 								<td><a href='<?=$lista['link']?>'><?=$lista['titulo']?></a></td>

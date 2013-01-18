@@ -144,6 +144,23 @@ $(function() {
 	  });
 	}
 
+
+	/**
+	 * showOnClick
+	 */
+	 $('.showOnClick').click(function() {
+	 	var target = $(this).attr('data-target');
+	 	$(target).show().find('input').attr('disabled', false);
+	 });
+
+	 // update showonclick
+ 	if ($('#nomeProduto').val()!='') $('#outroProduto').show().find('input').attr('disabled', false);
+	 else $('#outroProduto').hide().find('input').attr('disabled', true);
+
+ 	if ($('#nomeFabricante').val()!='') $('#outroFabricante').show().find('input').attr('disabled', false);
+	 else $('#outroFabricante').hide().find('input').attr('disabled', true);
+
+
 	/**
 	 * Filtros
 	 * @return {[type]} [description]
@@ -167,15 +184,16 @@ $(function() {
 
 	$('.filtroFabricante').change(function(){
 		var fabricante = $(this).val();
-		var grupoquimico = $('select[name="filtroGrupoQuimico"]').val();
+		var grupoquimico = $('select.filtroGrupo').val();
 
-		if (val<0)
+		if (fabricante<0 || grupoquimico<0)
 			return false;
 
+	 	$('#outroFabricante').hide().find('input').val('').attr('disabled', true);
 		$.ajax({
 			type: "POST",
 			url: ABSPATH+'ajax.php',
-			data: 'from=filtro&fabricante='+val+'&grupoquimico='+grupoquimico,
+			data: 'from=filtro&fabricante='+fabricante+'&grupoquimico='+grupoquimico,
 			success: function(data) {
 				eval(data);
 			}
@@ -183,7 +201,12 @@ $(function() {
 
 	});
 
+	$('.filtroProduto').change(function(){
+		var produto = $(this).val();
 
+		if (produto>0)
+		 	$('#outroProduto').hide().find('input').val('').attr('disabled', true);
+	});
 
 	/**
 	 * VALIDAÇões

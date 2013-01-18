@@ -176,7 +176,8 @@
 	 */
 	if (isset($_POST['from']) && $_POST['from']=='filtro') {
 
-		if (isset($_POST['grupoquimico']) || isset($_POST['fabricante']) ) {
+		if (isset($_POST['grupoquimico']) && isset($_POST['fabricante']) ) {
+
 			$area = 'Produto';
 			$grupoquimico = isset($_POST['grupoquimico']) ? apenasNumeros($_POST['grupoquimico']) : null;
 			$fabricante = isset($_POST['fabricante']) ? apenasNumeros($_POST['fabricante']) : null;
@@ -189,21 +190,34 @@
 
 			$optList = convertCatList2Option($values);
 			echo "\n $('select.filtro{$area}').html(\"{$optList}\");";
-		}
 
-		if (isset($_POST['grupoquimico'])) {
+
+		} elseif (!isset($_POST['fabricante'])) {
+
 			$area = 'Fabricante';
-			$rel = apenasNumeros($_POST['grupoquimico']);
-			$values = array(0=> array('id'=>0, 'titulo'=>'Fabricante'));
-			$values = getCategoriaListArea($area, $rel, 'Fabricante');
+			$grupoquimico = apenasNumeros($_POST['grupoquimico']);
+			// $values = array(0=> array('id'=>0, 'titulo'=>'Fabricante'));
 
-			if (count($values)<=1) {
+			//fabricante
+			$fabricanteValues = getCategoriaListArea($area, $grupoquimico, 'Fabricante');
+			if (count($fabricanteValues)<=1) {
 				$valuesEmpty = array('id'=>-1, 'titulo'=>'Nenhum Fabricante com o Grupo Químico selecionado!');
-				array_push($values, $valuesEmpty);
+				array_push($fabricanteValues, $valuesEmpty);
 			}
 
-			$optList = convertCatList2Option($values);
-			echo "\n $('select.filtro{$area}').html(\"{$optList}\");";
+			$optListFabricante = convertCatList2Option($fabricanteValues);
+			echo "\n $('select.filtro{$area}').html(\"{$optListFabricante}\");";
+
+			//produto
+			$produtoValues = getProdutosByOptions(array('grupoquimico'=>$grupoquimico), 'Produto');
+			if (count($produtoValues)<=1) {
+				$valuesEmpty = array('id'=>-1, 'titulo'=>'Nenhum Produto com os filtros selecionados!');
+				array_push($produtoValues, $valuesEmpty);
+			}
+
+			$optListProduto = convertCatList2Option($produtoValues);
+			echo "\n $('select.filtroProduto').html(\"{$optListProduto}\");";
+
 		}
 
 	}

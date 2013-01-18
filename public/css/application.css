@@ -99,6 +99,9 @@ h1#logo { padding:0px; }
 	box-shadow: inset 0 0 5px 2px #E8B990, 0 1px 0 0 #E8B990;
 }
 small { font-size:85%; color:#666;}
+
+header nav.cat ul li{ margin: 10px 30px 0 0; }
+
 /*extra*/
 .nomargin { margin:0 !important; }
 .nopadding { padding:0; }

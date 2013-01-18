@@ -213,23 +213,70 @@ function getCategoriaIdByTitulo($min=false, $order='titulo')
 /*
  *retorna lista de produtos
  */
-function getProdutosByOptions($option, $startwith=null, $order='titulo')
+function getTodosProdutos($order='titulo ASC', $startwith=null)
+{
+	global $conn;
+
+	$order = !empty($order) ? $order : 'titulo ASC';
+	$whr = null;
+	$sql = "SELECT pro_id, pro_titulo, pro_tipo, pro_valor
+				FROM ".TP."_produto
+				WHERE pro_status=1
+				ORDER BY pro_{$order};";
+	$lst = array();
+	if(!$qry = $conn->prepare($sql))
+		echo divAlert($conn->error, 'error');
+
+	else {
+
+		$qry->execute();
+		$qry->bind_result($id, $titulo, $tipo, $valor);
+
+		if (!empty($startwith))
+			$lst[0] = array('id'=>0, 'titulo'=>$startwith);
+
+		$i=1;
+		while ($qry->fetch()) {
+			$lst[$i]['id'] = $id;
+			$lst[$i]['titulo'] = $titulo;
+			$lst[$i]['tipo'] = $tipo;
+			$lst[$i]['valor'] = 'R$ '.Moeda($valor);
+			$lst[$i]['valor_decimal'] = $valor;
+			$i++;
+		}
+
+		$qry->close();
+
+		return $lst;
+	}
+
+}
+
+/*
+ *retorna lista de produtos
+ */
+function getProdutosByOptions($option, $startwith=null, $order='titulo', $userProducts=false)
 {
 	global $conn;
 
 	$whr = null;
-	foreach ($option as $optkey=>$optval) {
-		if (!empty($optval))
-			$whr .= " AND pro_{$optkey}=\"{$optval}\"";
-	}
+	if (is_array($option))
+		foreach ($option as $optkey=>$optval) {
+			if (!empty($optval))
+				$whr .= " AND pro_{$optkey}=\"{$optval}\"";
+		}
 
-	$sql = "SELECT pro_id, pro_titulo, pro_tipo, pro_valor
-				FROM ".TP."_produto
-				INNER JOIN ".TP."_usuario_produto
+	$inner = null;
+	if ($userProducts===true)
+		$inner = "				INNER JOIN ".TP."_usuario_produto
 					ON upr_pro_id=pro_id
 				INNER JOIN ".TP."_usuario
 					ON upr_usr_id=usr_id
-					AND usr_status=1
+					AND usr_status=1";
+
+	$sql = "SELECT pro_id, pro_titulo, pro_tipo, pro_valor
+				FROM ".TP."_produto
+				{$inner}
 				WHERE pro_status=1
 				{$whr}
 				GROUP BY pro_id

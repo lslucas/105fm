@@ -50,7 +50,12 @@
 						<li><a href='<?=ABSPATH?>'>Home</a></li>
 						<li><a href='<?=ABSPATH?>como-funciona'>Como Funciona</a></li>
 						<li><a href='<?=ABSPATH?>lista'>Comercialização</a></li>
+						<?php if (!empty($usr['id'])) { ?>
+						<li><a href='<?=ABSPATH?>novo-produto'>Novo Produto</a></li>
+						<li><a href='<?=ABSPATH?>painel'>Painel</a></li>
+						<?php } else { ?>
 						<li><a href='<?=ABSPATH?>registrar'>Registrar</a></li>
+						<?php } ?>
 					</ul>
 				</nav>
 			</div>

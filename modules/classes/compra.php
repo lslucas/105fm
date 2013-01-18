@@ -27,8 +27,12 @@ class Compra {
 		if (!isset($args['usr_id']) || empty($args['usr_id']))
 			$return .= '<li>Sua sessão expirou! Faça <a href=\''.ABSPATH.'login\'>login</a> novamente</li>';
 		else {
-			if (empty($args['pro_id']))
-				$return .= '<li>Selecione um produto</li>';
+			if (empty($args['grupoquimico']))
+				$return .= '<li>Selecione um Grupo Químico</li>';
+			if (empty($args['fabricante']) && empty($args['nomeFabricante']))
+				$return .= '<li>Selecione um fabricante ou informe um novo clicando em outro</li>';
+			if (empty($args['pro_id']) && empty($args['nomeProduto']))
+				$return .= '<li>Selecione um produto ou informe um nome clicando em outro</li>';
 			// if (empty($args['valor']))
 				// $return .= '<li>Digite o valor do produto</li>';
 			if (empty($args['quantidade']))
@@ -184,7 +188,11 @@ class Compra {
 			$sqlins = "INSERT INTO `".TP."_usuario_produto`
 							(
 							 `upr_usr_id`,
+							 `upr_grupoquimico`,
+							 `upr_fabricante`,
 							 `upr_pro_id`,
+							 `upr_nomeFabricante`,
+							 `upr_nomeProduto`,
 							 `upr_valor`,
 							 `upr_valor_minimo`,
 							 `upr_quantidade`,
@@ -195,7 +203,7 @@ class Compra {
 							 `upr_datapagamento`,
 							 `upr_observacao`,
 							 `upr_ip`
-							 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+							 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			if (!$qryins = $conn->prepare($sqlins))
 				echo __FUNCTION__.$conn->error;
 				// return false;
@@ -206,9 +214,13 @@ class Compra {
 				$this->_args['datavalidade'] = datept2en('/',$this->_args['datavalidade']);
 				$this->_args['datapagamento'] = datept2en('/',$this->_args['datapagamento']);
 
-				$qryins->bind_param('iiddiidissss',
+				$qryins->bind_param('isiissddiidissss',
 				                    	$this->_args['usr_id'],
+				                    	$this->_args['grupoquimico'],
+				                    	$this->_args['fabricante'],
 				                    	$this->_args['pro_id'],
+				                    	$this->_args['nomeFabricante'],
+				                    	$this->_args['nomeProduto'],
 				                    	$this->_args['valor'],
 				                    	$this->_args['valor_minimo'],
 				                    	$this->_args['quantidade'],
@@ -241,7 +253,11 @@ class Compra {
 
 		$sqlupd = "UPDATE `".TP."_usuario_produto`
 						SET
+						 `upr_grupoquimico`=?,
+						 `upr_fabricante`=?,
 						 `upr_pro_id`=?,
+						 `upr_nomeFabricante`=?,
+						 `upr_nomeProduto`=?,
 						 `upr_valor`=?,
 						 `upr_valor_minimo`=?,
 						 `upr_quantidade`=?,
@@ -263,8 +279,12 @@ class Compra {
 			$this->_args['datavalidade'] = datept2en('/',$this->_args['datavalidade']);
 			$this->_args['datapagamento'] = datept2en('/',$this->_args['datapagamento']);
 
-			$qryupd->bind_param('iddiidisssisi',
+			$qryupd->bind_param('iiissddiidisssisi',
+			                    	$this->_args['grupoquimico'],
+			                    	$this->_args['fabricante'],
 			                    	$this->_args['pro_id'],
+			                    	$this->_args['nomeFabricante'],
+			                    	$this->_args['nomeProduto'],
 			                    	$this->_args['valor'],
 			                    	$this->_args['valor_minimo'],
 			                    	$this->_args['quantidade'],
@@ -304,10 +324,14 @@ class Compra {
 					upr_id,
 					upr_usr_id,
 					upr_pro_id,
+					upr_nomeFabricante,
+					upr_nomeProduto,
 					pro_titulo,
 					pro_codigo,
 					(SELECT cat_titulo FROM ".TP."_categoria WHERE cat_id=pro_tipo),
+					(SELECT cat_titulo FROM ".TP."_categoria WHERE cat_id=upr_fabricante),
 					(SELECT cat_titulo FROM ".TP."_categoria WHERE cat_id=pro_fabricante),
+					(SELECT cat_titulo FROM ".TP."_categoria WHERE cat_id=upr_grupoquimico),
 					(SELECT cat_titulo FROM ".TP."_categoria WHERE cat_id=pro_grupoquimico),
 					upr_valor,
 					upr_valor_minimo,
@@ -323,7 +347,7 @@ class Compra {
 					adb_uf,
 					DATE_FORMAT(upr_timestamp, '%d/%m/%Y')
 					FROM `".TP."_usuario_produto`
-					INNER JOIN `".TP."_produto`
+					LEFT JOIN `".TP."_produto`
 						ON pro_id=upr_pro_id
 					LEFT JOIN ".TP."_address_book
 						ON adb_usr_id=upr_usr_id
@@ -333,12 +357,17 @@ class Compra {
 		else {
 
 			$res->bind_param('i', $id);
-			$res->bind_result($upr_id, $usr_id, $pro_id, $produto, $codigoProduto, $tipoProduto, $fabricanteProduto, $grupoquimicoProduto, $valor, $valor_minimo, $quantidade, $quantidade_minima_venda, $datavalidade, $datavalidadePt, $datapagamento, $datapagamentoPt, $views, $vendas, $cidade, $uf, $timestamp);
+			$res->bind_result($upr_id, $usr_id, $pro_id, $nomeFabricante, $nomeProduto, $produto, $codigoProduto, $tipoProduto, $fabricanteProduto, $proFabricanteProduto, $grupoquimicoProduto, $proGrupoQuimicoProduto, $valor, $valor_minimo, $quantidade, $quantidade_minima_venda, $datavalidade, $datavalidadePt, $datapagamento, $datapagamentoPt, $views, $vendas, $cidade, $uf, $timestamp);
 			$res->execute();
 			$res->fetch();
 			$res->close();
 
 			if (!empty($upr_id)) {
+
+				$produto = empty($produto) ? $nomeProduto : $produto;
+				$fabricanteProduto = empty($fabricanteProduto) ? $nomeFabricante : $fabricanteProduto;
+				$fabricanteProduto = empty($fabricanteProduto) ? $proFabricanteProduto : $fabricanteProduto;
+				$grupoquimicoProduto = empty($grupoquimicoProduto) && !empty($proGrupoQuimicoProduto) ? $proGrupoQuimicoProduto : $grupoquimicoProduto;
 
 				$id_encrypted = $hashids->encrypt($upr_id);
 				$cpr = array(
@@ -360,7 +389,7 @@ class Compra {
 			             'datapagamento'=>$datapagamentoPt,
 			             'link'=>ABSPATH."ver/{$id_encrypted}/".linkfySmart($produto),
 			             'cidade'=>$cidade,
-			             'uf'=>$uf,
+			             'uf'=>(empty($uf) ? '--' : $uf),
 			             'estado'=>estadoFromUF($uf),
 			             'views'=>$views,
 			             'vendas'=>$vendas,

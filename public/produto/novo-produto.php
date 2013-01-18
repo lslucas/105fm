@@ -13,21 +13,7 @@
 					<label class="control-label" for="grupoquimico"><span class="color-red">*</span> Grupo</label>
 					<div class="controls">
 					<select name="grupoquimico" id="grupoquimico" class="filtroGrupo required">
-						<?php
-								$sql = "SELECT cat_id, cat_titulo FROM ".TP."_categoria WHERE cat_status=1 AND cat_area='Grupo Quimico' ORDER BY cat_titulo;";
-								if (!$qry = $conn->prepare($sql))
-									echo $conn->error;
-								else {
-									$qry->bind_result($id, $titulo);
-									$qry->execute();
-									while($qry->fetch()) {
-						 ?>
-							<option value='<?=$id?>' <?php if(isset($val['filtroGrupoQuimico']) && $val['filtroGrupoQuimico']==$id) echo ' selected';?>><?=$titulo?></option>
-						<?php
-								 }
-								$qry->close();
-							 }
-						?>
+						<?=convertCatList2Option(getCategoriaListArea('Grupo Quimico', null, 'Grupo Quimico'), $val['grupoquimico'])?>
 					</select>
 					</div>
 				</div>
@@ -36,23 +22,15 @@
 					<label class="control-label" for="fabricante">Fabricante</label>
 					<div class="controls">
 					<select name="fabricante" id="fabricante" class="filtroFabricante">
-						<option value="">Selecione</option>
-						<?php
-							$sql = "SELECT cat_id, cat_titulo FROM ".TP."_categoria WHERE cat_status=1 AND cat_area='Fabricante' ORDER BY cat_titulo;";
-							if (!$qry = $conn->prepare($sql))
-								echo $conn->error;
-							else {
-								$qry->bind_result($id, $titulo);
-								$qry->execute();
-								while($qry->fetch()) {
-						 ?>
-						<option value='<?=$id?>' <?php if(isset($val['filtroFabricante']) && $val['filtroFabricante']==$id) echo ' selected';?>><?=$titulo?></option>
-						<?php
-								 }
-								$qry->close();
-							 }
-						?>
-					</select>
+						<?=convertCatList2Option(getCategoriaListArea('Fabricante', null, 'Fabricante'), $val['fabricante'])?>
+					</select> <small><a href="javascript:void(0);" class='showOnClick' data-target='#outroFabricante'>outro?</a></small>
+					</div>
+
+					<div id='outroFabricante' class='hide'>
+						<br/><label class="control-label" for="nomeFabricante"><span class="color-red">*</span> Nome do Fabricante</label>
+						<div class="controls">
+							<input type="text" class="input-xlarge" placeholder='Nome do fabricante' name='nomeFabricante' id='nomeFabricante' disabled=disabled value="<?=isset($val['nomeFabricante']) ? $val['nomeProduto'] : null?>">
+						</div>
 					</div>
 				</div>
 
@@ -60,26 +38,18 @@
 					<label class="control-label" for="pro_id"><span class="color-red">*</span> Produto</label>
 					<div class="controls">
 					<select name="pro_id" id="pro_id" class="required filtroProduto">
-						<option value="">Selecione</option>
-						<?php
-								$sql = "SELECT pro_id, pro_tipo, pro_grupoquimico, pro_titulo FROM ".TP."_produto WHERE pro_status=1 ORDER BY pro_titulo ASC;";
-								if (!$qry = $conn->prepare($sql))
-									echo $conn->error;
-								else {
-									$qry->bind_result($id, $tipo, $grupoquimico, $titulo);
-									$qry->execute();
-									while($qry->fetch()) {
-						 ?>
-						<option value='<?=$id?>' <?php if(isset($val['pro_id']) && $val['pro_id']==$id) echo ' selected';?>><?=$titulo?></option>
-						<?php
-								 }
-								$qry->close();
-							 }
-						?>
-					</select>
-					<p class="help-block">Selecione um produto</p>
+						<?=convertCatList2Option(getTodosProdutos(null, 'Produto'), $val['pro_id'])?>
+					</select> <small><a href="javascript:void(0);" class='showOnClick' data-target='#outroProduto'>outro?</a></small>
+					</div>
+
+					<div id='outroProduto' class='hide'>
+						<br/><label class="control-label" for="nomeProduto"><span class="color-red">*</span> Nome do Produto</label>
+						<div class="controls">
+							<input type="text" class="input-xlarge" placeholder='Nome do produto' name='nomeProduto' id='nomeProduto' disabled=disabled value="<?=isset($val['nomeProduto']) ? $val['nomeProduto'] : null?>">
+						</div>
 					</div>
 				</div>
+
 
 				<div class="control-group">
 					<label class="control-label" for="valor">Valor</label>

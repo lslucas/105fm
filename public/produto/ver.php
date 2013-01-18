@@ -98,7 +98,7 @@
 				<?php } ?>
 			</div>
 		</div>
-
+<!--
 		<hr>
 		<h3>Perguntas ao vendedor</h3>
 		<form name='pergunta' method='post'>
@@ -140,5 +140,6 @@
 				});
 			";
 		 ?>
+-->
 	</div>
 </div>
