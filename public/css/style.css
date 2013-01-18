@@ -88,7 +88,8 @@ header .search form input[type="submit"]{ background: transparent url(../images/
 .lista table{ border: 1px solid #1a6179; margin: 10px; width: 667px; }
 .lista table tbody{  }
 .lista table tbody tr{  }
-.lista table tbody tr:hover{ background: #edf1e6; }
+.lista table tbody tr:hover{ background: #edf1e6; color: #6e982b !important; }
+.lista table tbody tr[data-href]:hover{ cursor:pointer; }
 .lista table tbody tr:hover a{ color: #6e982b !important; }
 .lista table tbody tr th{ background: transparent url(../images/layout/bg-h4.png) repeat-x center; height: 17px; padding: 5px; /*text-align: center;*/ border-right: 1px solid rgba(0,0,0,0.1); border-bottom: 1px solid #1a6179; color: #FFF; text-shadow: -1px -1px 1px #2a81a1; }
 .lista table tbody tr th:last-child{ border-right: 1px solid #1a6179; }

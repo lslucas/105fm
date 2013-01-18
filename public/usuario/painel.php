@@ -47,11 +47,11 @@
 								echo "<tr><td colspan=6>Você ainda não possui nenhum produto!</td></tr>";
 							foreach ($myProducts as $id => $lista) {
 						?>
-							<tr>
+							<tr data-href='<?=$lista['link']?>'>
 								<td align=center><?=$lista['uf']?></td>
 								<td><?=$lista['grupoquimico']?></td>
 								<td><?=$lista['fabricante']?></td>
-								<td><a href='<?=$lista['link']?>'><?=$lista['titulo']?></a></td>
+								<td><?=$lista['titulo']?></td>
 								<td align=center><?=$lista['valor']?></td>
 								<td align=center><?=$lista['views']?></td>
 							</tr>

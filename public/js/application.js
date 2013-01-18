@@ -144,6 +144,17 @@ $(function() {
 	  });
 	}
 
+	/**
+	 * bind table row click
+	 */
+	$("tr").bind("click", function(){
+		if ($(this).attr('data-href')) {
+			window.location = $(this).attr('data-href');
+		} else
+			return false;
+	});
+
+
 
 	/**
 	 * showOnClick
