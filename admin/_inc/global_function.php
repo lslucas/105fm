@@ -313,9 +313,13 @@ function getProdutosByOptions($option, $startwith=null, $order='titulo', $userPr
 /*
  *retorna lista da coluna
  */
-function getCategoriaListArea($area, $rel=null, $startwith=null, $limit=null,  $order='titulo')
+function getCategoriaListArea($area, $rel=null, $startwith=null, $limit=null,  $groupby=null,  $order='titulo')
 {
 	global $conn;
+
+	$_groupby = null;
+	if (!empty($groupby))
+		$_groupby = "GROUP BY ".$groupby;
 
 	/*
 	 *query da disciplina
@@ -323,7 +327,7 @@ function getCategoriaListArea($area, $rel=null, $startwith=null, $limit=null,  $
 	$areaQry = !empty($area) ? ' AND cat_area=? ' : null;
 	$relQry = !empty($rel) ? ' AND cat_idrel=? ' : null;
 	$limitQry = !empty($limit) ? ' LIMIT 0, '.$limit : null;
-	$sql = "SELECT cat_id, cat_titulo FROM ".TP."_categoria WHERE cat_status=1 {$areaQry} {$relQry} ORDER BY cat_{$order} {$limitQry};";
+	$sql = "SELECT cat_id, cat_titulo FROM ".TP."_categoria WHERE cat_status=1 {$areaQry} {$relQry} {$_groupby} ORDER BY cat_{$order} {$limitQry};";
 	$lst = array();
 	if(!$qry = $conn->prepare($sql))
 		echo divAlert($conn->error, 'error');

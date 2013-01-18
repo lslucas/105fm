@@ -35,7 +35,7 @@
 								<select name='filtroFabricante' id='filtroFabricante' class='filtroFabricante'>
 									<option value=''>Fabricante</option>
 									<?php if (!isset($val['filtroFabricante']))  $val['filtroFabricante'] = array(); ?>
-									<?=convertCatList2Option(getCategoriaListArea('Fabricante'), $val['filtroFabricante'])?>
+									<?=convertCatList2Option(getCategoriaListArea('Fabricante', null, null, null, 'cat_titulo'), $val['filtroFabricante'])?>
 								</select>
 
 								<select name='filtroProduto' id='filtroProduto' class='filtroProduto'>

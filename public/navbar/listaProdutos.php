@@ -3,20 +3,23 @@
 						<section>
 							<h4>Filtro</h4>
 
+							<?php if (count($filtro['localizacao'])>0) { ?>
 							<strong>Localização</strong>
 							<ul>
 								<?php foreach ($filtro['localizacao'] as $int=>$loc) { ?>
 								<li><?=$loc['link']?></li>
 								<?php } ?>
 							</ul>
+							<?php } ?>
 
+							<?php if (count($filtro['faixaPreco'])>0) { ?>
 							<strong>Faixa de preços</strong>
-
 							<ul>
 								<?php foreach ($filtro['faixaPreco'] as $int=>$fp) { ?>
 								<li><?=$fp['link']?></li>
 								<?php } ?>
 							</ul>
+							<?php } ?>
 
 							<!--
 							<strong>Ou filtrar por</strong>
@@ -30,9 +33,11 @@
 								<li><a href="#" title="">Termina hoje</a> (8)</li>
 							</ul>
 							-->
+							<?php if (count($filtro['localizacao'])>0 || count($filtro['faixaPreco'])>0) { ?>
 							<div class='pull-right'>
 								<small><a href='<?=ABSPATH?>lista'>Limpar Filtros</a></small>
 							</div>
+							<?php } else echo "<small>Nada para filtrar!</small>"; ?>
 							<br/>
 						</section>
 					</aside>
