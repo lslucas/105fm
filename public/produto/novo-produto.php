@@ -1,19 +1,24 @@
 	<div class="row novo-produto">
 		<div class="column grid_12">
-			<h1>Novo Produto</h1>
+			<h1><?=$basename=='novo-produto' ? 'Novo Produto' : 'Editar Produto '.$val['titulo']?></h1>
 			<p><em>Todos os campos com - <span class="color-red">*</span> - são obrigatórios.</em></p>
 			<p><br /></p>
 		</div>
+
 		<div class="column grid_12">
-			<form name="registrar" class="form-horizontal" method="post">
+			<form name="novo-produto" class="form-horizontal" method="post">
 				<input type="hidden" name="from" value="novo-produto">
 				<input type="hidden" name="usr_id" value="<?=$usr['id']?>">
+				<?php
+					if ($basename=='editar-produto')
+						echo "<input type='hidden' name='id' value='{$val['id']}'>\n";
+				?>
 
 				<div class="control-group">
 					<label class="control-label" for="grupoquimico"><span class="color-red">*</span> Grupo</label>
 					<div class="controls">
 					<select name="grupoquimico" id="grupoquimico" class="filtroGrupo required">
-						<?=convertCatList2Option(getCategoriaListArea('Grupo Quimico', null, 'Grupo Quimico'), $val['grupoquimico'])?>
+						<?=convertCatList2Option(getCategoriaListArea('Grupo Quimico', null, 'Grupo Quimico'), $val['grupoquimico_id'])?>
 					</select>
 					</div>
 				</div>
@@ -22,14 +27,14 @@
 					<label class="control-label" for="fabricante">Fabricante</label>
 					<div class="controls">
 					<select name="fabricante" id="fabricante" class="filtroFabricante">
-						<?=convertCatList2Option(getCategoriaListArea('Fabricante', null, 'Fabricante'), $val['fabricante'])?>
+						<?=convertCatList2Option(getCategoriaListArea('Fabricante', $val['grupoquimico_id'], 'Fabricante', null, 'cat_titulo'), $val['fabricante_id'])?>
 					</select> <small><a href="javascript:void(0);" class='showOnClick' data-target='#outroFabricante'>outro?</a></small>
 					</div>
 
 					<div id='outroFabricante' class='hide'>
 						<br/><label class="control-label" for="nomeFabricante"><span class="color-red">*</span> Nome do Fabricante</label>
 						<div class="controls">
-							<input type="text" class="input-xlarge" placeholder='Nome do fabricante' name='nomeFabricante' id='nomeFabricante' disabled=disabled value="<?=isset($val['nomeFabricante']) ? $val['nomeProduto'] : null?>">
+							<input type="text" class="input-xlarge" placeholder='Nome do fabricante' name='nomeFabricante' id='nomeFabricante' disabled=disabled value="<?=isset($val['nomeFabricante']) ? $val['nomeFabricante'] : null?>">
 						</div>
 					</div>
 				</div>

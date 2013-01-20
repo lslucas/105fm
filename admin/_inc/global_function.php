@@ -368,7 +368,7 @@ function convertCatList2Option($var, $selected=null)
 		if (isset($val['id']) && isset($val['titulo'])) {
 			$opt .= "<option value='{$val['id']}'";
 			if(isset($selected) && $selected==$val['id'])
-				$opt .= ' selected';
+				$opt .= ' selected=selected';
 			$opt .=">{$val['titulo']}</option>";
 		}
 	}

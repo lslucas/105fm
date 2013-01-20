@@ -324,6 +324,8 @@ class Compra {
 					upr_id,
 					upr_usr_id,
 					upr_pro_id,
+					upr_grupoquimico,
+					upr_fabricante,
 					upr_nomeFabricante,
 					upr_nomeProduto,
 					pro_titulo,
@@ -337,6 +339,8 @@ class Compra {
 					upr_valor_minimo,
 					upr_quantidade,
 					upr_quantidade_minima_venda,
+					upr_peso,
+					upr_peso_unidade_medida,
 					upr_datavalidade,
 					DATE_FORMAT(upr_datavalidade, '%d/%m/%Y'),
 					upr_datapagamento,
@@ -345,6 +349,7 @@ class Compra {
 					upr_vendas,
 					adb_cidade,
 					adb_uf,
+					upr_observacao,
 					DATE_FORMAT(upr_timestamp, '%d/%m/%Y')
 					FROM `".TP."_usuario_produto`
 					LEFT JOIN `".TP."_produto`
@@ -358,8 +363,9 @@ class Compra {
 		else {
 
 			$res->bind_param('i', $id);
-			$res->bind_result($upr_id, $usr_id, $pro_id, $nomeFabricante, $nomeProduto, $produto, $codigoProduto, $tipoProduto, $fabricanteProduto, $proFabricanteProduto, $grupoquimicoProduto, $proGrupoQuimicoProduto, $valor, $valor_minimo, $quantidade, $quantidade_minima_venda, $datavalidade, $datavalidadePt, $datapagamento, $datapagamentoPt, $views, $vendas, $cidade, $uf, $timestamp);
+			$res->bind_result($upr_id, $usr_id, $pro_id, $grupoquimico_id, $fabricante_id, $nomeFabricante, $nomeProduto, $produto, $codigoProduto, $tipoProduto, $fabricanteProduto, $proFabricanteProduto, $grupoquimicoProduto, $proGrupoQuimicoProduto, $valor, $valor_minimo, $quantidade, $quantidade_minima_venda, $peso, $peso_unidade_medida, $datavalidade, $datavalidadePt, $datapagamento, $datapagamentoPt, $views, $vendas, $cidade, $uf, $observacao, $timestamp);
 			$res->execute();
+			$res->store_result();
 			$res->fetch();
 			$res->close();
 
@@ -375,6 +381,10 @@ class Compra {
 			             'id'=>$id_encrypted,
 			             'usr_id'=>$hashids->encrypt($usr_id),
 			             'pro_id'=>$pro_id,
+			             'grupoquimico_id'=>$grupoquimico_id,
+			             'fabricante_id'=>$fabricante_id,
+			             'nomeProduto'=>$nomeProduto,
+			             'nomeFabricante'=>$nomeFabricante,
 			             'titulo'=>$produto,
 			             'codigo'=>$codigoProduto,
 			             'tipo'=>$tipoProduto,
@@ -384,6 +394,8 @@ class Compra {
 			             'valor_minimo'=>'R$ '.Currency2Decimal($valor_minimo),
 			             'quantidade'=>$quantidade,
 			             'quantidade_minima_venda'=>$quantidade_minima_venda,
+			             'peso'=>$peso,
+			             'peso_unidade_medida'=>$peso_unidade_medida,
 			             'datavalidadeEn'=>$datavalidade,
 			             'datavalidade'=>$datavalidadePt,
 			             'datapagamentoEn'=>$datapagamento,
@@ -391,6 +403,7 @@ class Compra {
 			             'link'=>ABSPATH."ver/{$id_encrypted}/".linkfySmart($produto),
 			             'cidade'=>$cidade,
 			             'uf'=>(empty($uf) ? '--' : $uf),
+			             'observacao'=>$observacao,
 			             'estado'=>estadoFromUF($uf),
 			             'views'=>$views,
 			             'vendas'=>$vendas,
