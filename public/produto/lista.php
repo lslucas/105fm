@@ -51,9 +51,9 @@
 						<table class="lista-produtos" id="alternatecolor" width="100%">
 							<tr>
 								<th width="60px">UF</th>
+								<th align="left">Produto</th>
 								<th align="left" width='106px'>Grupo Químico</th>
 								<th align="left">Fabricante</th>
-								<th align="left">Produto</th>
 								<th width="80px" class='pagination-centered'>R$</th>
 							</tr>
 							<tbody>
@@ -64,9 +64,9 @@
 							?>
 								<tr data-href='<?=$lista['link']?>'>
 									<td align=center><?=$lista['uf']?></td>
+									<td><?=$lista['titulo']?></td>
 									<td><?=$lista['grupoquimico']?></td>
 									<td><?=$lista['fabricante']?></td>
-									<td><?=$lista['titulo']?></td>
 									<td align=center><?=$lista['valor']?></td>
 								</tr>
 								<?php } ?>

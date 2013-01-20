@@ -11,7 +11,7 @@
 
 		<link href="<?=STATIC_PATH?>favicon.png" rel="shortcut icon"/>
 
-		<script type='text/javascript'>var ABSPATH = '<?=ABSPATH?>';</script>
+		<script type='text/javascript'>var ABSPATH = '<?=ABSPATH?>'; var LOADING = "<?=$LOADING?>";</script>
 		<link href="<?=ABSPATH?>bootstrap/css/bootstrap.min.css" rel="stylesheet">
 		<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" /> -->
 		<link rel="stylesheet" href="<?=ABSPATH?>css/style.css" type="text/css" media="screen" />

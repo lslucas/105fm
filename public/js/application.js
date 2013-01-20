@@ -144,17 +144,41 @@ $(function() {
 	  });
 	}
 
+
+	/* APAGA ITEM DO PAINEL DO USUARIO
+	************************************/
+	$(".btn-rm").click(function(event){
+		event.preventDefault();
+		var id_rm = $(this).attr('id');
+
+		$('.modal').modal('hide');
+		$.ajax({
+			type: "POST",
+			data: 'id='+id_rm+'&from=rm-item',
+			url: ABSPATH+'ajax.php',
+			success: function(data){
+				if (data==true) {
+					showModal('{"title": "Sucesso!", "content":"Item removido com êxito!"}');
+					$('#tr'+id_rm).hide();
+				} else
+					showModal('{"title": "Erro!", "content":"Houve um problema ao tentar remover o item selecionado, tente mais tarde!"}');
+			}
+		});
+
+	});
+	/* FIM: APAGA*/
+
 	/**
 	 * bind table row click
 	 */
 	$("tr").bind("click", function(){
-		if ($(this).attr('data-href')) {
+		if ($('a:hover').attr('href')!=undefined)
+			window.location = $('a:hover').attr('href');
+		else if ($(this).attr('data-href')) {
 			window.location = $(this).attr('data-href');
 		} else
 			return false;
 	});
-
-
 
 	/**
 	 * showOnClick
@@ -219,369 +243,119 @@ $(function() {
 		 	$('#outroProduto').hide().find('input').val('').attr('disabled', true);
 	});
 
-	/**
-	 * VALIDAÇões
+
+	/*
+	 *Modal Global de mensagens e alertas
 	 */
-	$('form[name="participar"] div#btn_cadastrar').click(function() {
-		var form = 'form[name="participar"]';
-
-		$(form+' input, '+form+' select'+form+' textarea').removeClass('erro_campo');
-		$(form+' .erro').addClass('invisible');
-
-		var datacompra = $(form+' input[name="compra_ano"]').val()+'-'+$(form+' input[name="compra_mes"]').val()+'-'+$(form+' input[name="compra_dia"]').val();
-		var datanascimento = $(form+' input[name="nasc_ano"]').val()+'-'+$(form+' input[name="nasc_mes"]').val()+'-'+$(form+' input[name="nasc_dia"]').val();
-		var ajaxErrors = '';
-
-		$.ajax({
-			type: "POST",
-			url: ABSPATH+'ajax.php',
-			data: $(form).serialize(),
-			success: function(data){
-				ajaxErrors = data;
-
-				if (ajaxErrors!='')
-					eval(ajaxErrors);
-
-				else if (!$(form+' input[name="coo"]').val()) {
-					$(form+' .errorCoo').removeClass('invisible');
-					$(form+' input[name="coo"]').addClass('erro_campo').focus();
-
-				} else if (!$(form+' input[name="cnpj"]').val()) {
-					$(form+' .errorCnpj').removeClass('invisible');
-					$(form+' input[name="cnpj"]').addClass('erro_campo').focus();
-
-				} else if (!$(form+' input[name="estabelecimento"]').val()) {
-					$(form+' .errorEstabelecimento').removeClass('invisible');
-					$(form+' input[name="estabelecimento"]').addClass('erro_campo').focus();
-
-				} else if (!$(form+' input[name="compra_dia"]').val() || !$(form+' input[name="compra_mes"]').val() || !$(form+' input[name="compra_ano"]').val()) {
-					$(form+' .errorDataCompra').removeClass('invisible');
-					$(form+' .dataCompra').addClass('erro_campo').focus();
-
-				} else if (!(datacompra!='--' && datacompra>='2012-11-21' && datacompra<='2012-12-23')) {
-					$(form+' .errorDataCompra').removeClass('invisible');
-					$(form+' .dataCompra').addClass('erro_campo').focus();
-
-				} else if ($(form+' #produto_cat').val()=='') {
-					$(form+' .errorProduto').removeClass('invisible');
-					$(form+' #produto_cat"]').addClass('erro_campo').focus();
-		/*
-				} else if (!$(form+' .produtosList"').val()) {
-					$(form+' .errorProduto').removeClass('invisible');
-					$(form+' .produtosList"').not('[disabled]').addClass('erro_campo').focus();
-		 */
-				} else if (!$(form+' input[name="nome"]').val()) {
-					$(form+' .errorNome').removeClass('invisible');
-					$(form+' input[name="nome"]').addClass('erro_campo').focus();
-
-				} else if (!$(form+' input[name="cpf"]').val()) {
-					$(form+' .errorCpf').removeClass('invisible');
-					$(form+' input[name="cpf"]').addClass('erro_campo').focus();
-
-				} else if (!$(form+' input[name="ddd1"]').val() || !$(form+' input[name="telefone1_1"]').val() || !$(form+' input[name="telefone1_2"]').val()) {
-					$(form+' .errorTelefone').removeClass('invisible');
-					$(form+' .telefone1').addClass('erro_campo');
-					$(form+' input[name="ddd1"]').focus();
-
-				} else if (!$(form+' input[name="nasc_dia"]').val() || !$(form+' input[name="nasc_mes"]').val() || !$(form+' input[name="nasc_ano"]').val()) {
-					$(form+' .errorNascimento').removeClass('invisible');
-					$(form+' .nascimento').addClass('erro_campo');
-					$(form+'  input[name="nasc_dia"]').focus();
-
-				} else if (!checkdate(datanascimento)) {
-					$(form+' .errorNascimento').text('Data no formato inválido!').removeClass('invisible');
-					$(form+' .nascimento').addClass('erro_campo');
-					$(form+'  input[name="nasc_dia"]').focus();
-
-				} else if (datanascimento!='--' && datanascimento>'1999-12-28') {
-					$(form+' .errorNascimento').text('Ops, você precisa ter mais de 13 anos para participar!').removeClass('invisible');
-					$(form+' .nascimento').addClass('erro_campo');
-					$(form+'  input[name="nasc_dia"]').focus();
-
-				} else if (!$(form+' input[name="cep1"]').val() || !$(form+' input[name="cep2"]').val()) {
-					// $(form+' .errorCep').removeClass('invisible');
-					$(form+' .cep').addClass('erro_campo');
-					$(form+' input[name="cep1"]').focus();
-
-				} else if (!$(form+' input[name="email"]').val()) {
-					$(form+' .errorEmail').removeClass('invisible');
-					$(form+' input[name="email"]').addClass('erro_campo').focus();
-
-				} else if ($(form+' input[name="email"]').val()!=$(form+' input[name="confirmaEmail"]').val()) {
-					$(form+' .errorConfirmaEmail').removeClass('invisible');
-					$(form+' input[name="confirmaEmail"]').addClass('erro_campo').focus();
-
-				} else if (!$(form+' input[name="endereco"]').val()) {
-					$(form+' .errorEndereco').removeClass('invisible');
-					$(form+' input[name="endereco"]').addClass('erro_campo').focus();
-
-				} else if (!$(form+' input[name="numero"]').val()) {
-					$(form+' .errorNumero').removeClass('invisible');
-					$(form+' input[name="numero"]').addClass('erro_campo').focus();
-
-				} else if (!$(form+' #estado').val()) {
-					$(form+' .errorEstado').removeClass('invisible');
-					$(form+' input[name="estado"]').addClass('erro_campo').focus();
-
-				} else if (!$(form+' input[name="cidade"]').val()) {
-					$(form+' .errorCidade').removeClass('invisible');
-					$(form+' input[name="cidade"]').addClass('erro_campo').focus();
-
-				} else if ($(form+' input[name="senha"]').val().length<6) {
-					console.log($(form+' input[name="senha"]').val().length);
-					$(form+' .errorSenha').removeClass('invisible');
-					$(form+' input[name="senha"]').addClass('erro_campo').focus();
-
-				} else if ($(form+' input[name="senha"]').val()!=$(form+' input[name="confirmaSenha"]').val()) {
-					$(form+' .errorConfirmaSenha').removeClass('invisible');
-					$(form+' input[name="confirmaSenha"]').addClass('erro_campo').focus();
-
-				} else
-					$(form).submit();
-			}
-		});
-	});
-
+	function showModal(args)
+	{
+		if (!args) {
+			if(typeof console.log == 'function') console.log('showModal: Argumento inválido!');
+			else alert('showModal: Argumento inválido!');
+
+			return false;
+		}
 
-	$('form[name="editar-dados"] div#btn_salvar').click(function() {
-		var form = 'form[name="editar-dados"]';
-		var datanascimento = $(form+' input[name="nasc_ano"]').val()+'-'+$(form+' input[name="nasc_mes"]').val()+'-'+$(form+' input[name="nasc_dia"]').val();
+		args = JSON.parse(args);
 
-		$(form+' input, '+form+' select'+form+' textarea').removeClass('erro_campo');
-		$(form+' .erro').addClass('invisible');
-
-		$.ajax({
-			type: "POST",
-			url: ABSPATH+'ajax.php',
-			data: $(form).serialize(),
-			success: function(data){
-				ajaxErrors = data;
-
-				if (!$(form+' input[name="nome"]').val()) {
-					$(form+' .errorNome').removeClass('invisible');
-					$(form+' input[name="nome"]').addClass('erro_campo').focus();
-
-				} else if (!$(form+' input[name="cpf"]').val()) {
-					$(form+' .errorCpf').removeClass('invisible');
-					$(form+' input[name="cpf"]').addClass('erro_campo').focus();
-
-				} else if (!$(form+' input[name="ddd1"]').val() || !$(form+' input[name="telefone1_1"]').val() || !$(form+' input[name="telefone1_2"]').val()) {
-					$(form+' .errorTelefone').removeClass('invisible');
-					$(form+' .telefone1').addClass('erro_campo');
-					$(form+' input[name="ddd1"]').focus();
-
-				} else if (!$(form+' input[name="nasc_dia"]').val() || !$(form+' input[name="nasc_mes"]').val() || !$(form+' input[name="nasc_ano"]').val()) {
-					$(form+' .errorNascimento').removeClass('invisible');
-					$(form+' .nascimento').addClass('erro_campo');
-					$(form+'  input[name="nasc_dia"]').focus();
-
-				} else if (!checkdate(datanascimento)) {
-					$(form+' .errorNascimento').text('Data no formato inválido!').removeClass('invisible');
-					$(form+' .nascimento').addClass('erro_campo');
-					$(form+'  input[name="nasc_dia"]').focus();
-
-				} else if (datanascimento!='--' && datanascimento>'1999-12-28') {
-					$(form+' .errorNascimento').text('Ops, você precisa ter mais de 13 anos para participar!').removeClass('invisible');
-					$(form+' .nascimento').addClass('erro_campo');
-					$(form+'  input[name="nasc_dia"]').focus();
-
-				} else if (!$(form+' input[name="cep1"]').val() || !$(form+' input[name="cep2"]').val()) {
-					// $(form+' .errorCep').removeClass('invisible');
-					$(form+' .cep').addClass('erro_campo');
-					$(form+' input[name="cep1"]').focus();
-
-				} else if ($(form+' input[name="email"]').val()!=$(form+' input[name="confirmaEmail"]').val()) {
-					$(form+' .errorConfirmaEmail').removeClass('invisible');
-					$(form+' input[name="confirmaEmail"]').addClass('erro_campo').focus();
-
-				} else if (!$(form+' input[name="endereco"]').val()) {
-					$(form+' .errorEndereco').removeClass('invisible');
-					$(form+' input[name="endereco"]').addClass('erro_campo').focus();
-
-				} else if (!$(form+' input[name="numero"]').val()) {
-					$(form+' .errorNumero').removeClass('invisible');
-					$(form+' input[name="numero"]').addClass('erro_campo').focus();
-
-				} else if (!$(form+' #estado').val()) {
-					$(form+' .errorEstado').removeClass('invisible');
-					$(form+' input[name="estado"]').addClass('erro_campo').focus();
-
-				} else if (!$(form+' input[name="cidade"]').val()) {
-					$(form+' .errorCidade').removeClass('invisible');
-					$(form+' input[name="cidade"]').addClass('erro_campo').focus();
-
-				} else if ($(form+' input[name="senha"]').val() && $(form+' input[name="senha"]').val().length<6) {
-					console.log($(form+' input[name="senha"]').val().length);
-					$(form+' .errorSenha').removeClass('invisible');
-					$(form+' input[name="senha"]').addClass('erro_campo').focus();
-
-				} else if ($(form+' input[name="senha"]').val()!=$(form+' input[name="confirmaSenha"]').val()) {
-					$(form+' .errorConfirmaSenha').removeClass('invisible');
-					$(form+' input[name="confirmaSenha"]').addClass('erro_campo').focus();
-
-				} else if (ajaxErrors!='')
-					eval(ajaxErrors);
-
-				else
-					$(form).submit();
-			}
-		});
-	});
-
-
-	$('form[name="editar-cupom"] div#btn_salvar, form[name="meus-numeros"] a#cadastrar').click(function() {
-
-		if ($('form[name="editar-cupom"]').length>0)
-			var formName = 'editar-cupom';
-		else if ($('form[name="meus-numeros"]').length>0)
-			var formName = 'meus-numeros';
-
-		var form = 'form[name="'+formName+'"]';
-		var ajaxErrors = false;
-
-		$(form+' input, '+form+' select'+form+' textarea').removeClass('erro_campo');
-		$(form+' .erro').addClass('invisible');
-
-		var datacompra = $(form+' input[name="compra_ano"]').val()+'-'+$(form+' input[name="compra_mes"]').val()+'-'+$(form+' input[name="compra_dia"]').val();
-
-		$.ajax({
-			type: "POST",
-			url: ABSPATH+'ajax.php',
-			data: $(form).serialize(),
-			success: function(data){
-				ajaxErrors = data;
-
-				if (!$(form+' input[name="coo"]').val()) {
-					$(form+' .errorCoo').removeClass('invisible');
-					$(form+' input[name="coo"]').addClass('erro_campo').focus();
-
-				} else if (!$(form+' input[name="cnpj"]').val()) {
-					$(form+' .errorCnpj').removeClass('invisible');
-					$(form+' input[name="cnpj"]').addClass('erro_campo').focus();
-
-				} else if (!$(form+' input[name="estabelecimento"]').val()) {
-					$(form+' .errorEstabelecimento').removeClass('invisible');
-					$(form+' input[name="estabelecimento"]').addClass('erro_campo').focus();
-
-				} else if (!$(form+' input[name="compra_dia"]').val() || !$(form+' input[name="compra_mes"]').val() || !$(form+' input[name="compra_ano"]').val()) {
-					$(form+' .errorDataCompra').removeClass('invisible');
-					$(form+' .dataCompra').addClass('erro_campo').focus();
+		//titulo do modal
+		var title = null;
+		if (args.title)
+			title = " <h3>"+args.title+"</h3>";
 
-				} else if (!(datacompra!='--' && datacompra>='2012-11-21' && datacompra<='2012-12-23')) {
-					$(form+' .errorDataCompra').removeClass('invisible');
-					$(form+' .dataCompra').addClass('erro_campo').focus();
+		// botão fechar/cancelar
+		if (args.buttonClose)
+			var closeButton = args.buttonClose;
+		else
+			closeButton = 'Fechar';
 
-				} else if ($(form+' #produto_cat').val()=='') {
-					$(form+' .errorProduto').removeClass('invisible');
-					$(form+' #produto_cat"]').addClass('erro_campo').focus();
-		/*
-				} else if (!$(form+' .produtosList"').val()) {
-					$(form+' .errorProduto').removeClass('invisible');
-					$(form+' .produtosList"').not('[disabled]').addClass('erro_campo').focus();
-		 */
-				} else if (ajaxErrors!='')
-					eval(ajaxErrors);
+		// botão de ação 1
+		var actionButton1 =  '';
+		if (args.button) {
 
-				else
-					$(form).submit();
-			}
-		});
-	});
+			var btn_color = 'btn-primary';
+			if (args.button.color!=undefined)
+				btn_color = args.button.color;
 
+			var btn_class = '';
+			if (args.button.class)
+				btn_class = args.button.class;
 
-	$('form[name="esqueci-senha"] div#btn_enviar').click(function() {
-		var form = 'form[name="esqueci-senha"]';
-		var ajaxErrors = '';
+			var btn_id = '';
+			if (args.button.id)
+				btn_id = args.button.id;
 
-		$(form+' input, '+form+' select, '+form+' textarea').removeClass('erro_campo');
-		$(form+' .erro').addClass('invisible');
+			var btn_name = '';
+			if (args.button.name)
+				btn_name = args.button.name;
 
-		$.ajax({
-			type: "POST",
-			url: ABSPATH+'ajax.php',
-			data: $(form).serialize(),
-			success: function(data){
-				ajaxErrors = data;
+			var btn_href = 'javascript:void(0);';
+			if (args.button.href)
+				btn_href = args.button.href;
 
-				if (!$(form+' input[name="email"]').val() || !validateEmail($(form+' input[name="email"]').val())) {
-					$(form+' .errorEmail').removeClass('invisible');
-					$(form+' input[name="email"]').addClass('erro_campo').focus();
+			var btn_target = ' ';
+			if (args.button.target)
+				btn_target = " target='"+args.button.target+"' ";
 
-				} else if (ajaxErrors!='')
-					eval(ajaxErrors);
-				else
-					$(form).submit();
-			}
+			if (args.button)
+				actionButton1 = "<a href='"+btn_href+"'"+btn_target+"id='"+btn_id+"' name='"+btn_name+"' class='btn-rm btn "+btn_class+" "+btn_color+"'>"+args.button.value+"</a>";
 
-		});
+		}
 
-	});
+		// botão de ação 2
+		var actionButton2 = '';
+		if (args.button2) {
 
-	$('form[name="redefinicao-senha"] div#btn_enviar').click(function() {
-		var form = 'form[name="redefinicao-senha"]';
+			var btn_color = 'btn-primary';
+			if (args.button2.color!=undefined)
+				btn_color = args.button2.color;
 
-		$(form+' input, '+form+' select, '+form+' textarea').removeClass('erro_campo');
-		$(form+' .erro').addClass('invisible');
+			var btn_class = '';
+			if (args.button2.class)
+				btn_class = args.button2.class;
 
-		if (!$(form+' input[name="senha"]').val() || ($(form+' input[name="senha"]').val() && $(form+' input[name="senha"]').val().length<6)) {
-			console.log($(form+' input[name="senha"]').val().length);
-			$(form+' .errorSenha').removeClass('invisible');
-			$(form+' input[name="senha"]').addClass('erro_campo').focus();
+			var btn_id = '';
+			if (args.button2.id)
+				btn_id = args.button2.id;
 
-		} else if ($(form+' input[name="senha"]').val()!=$(form+' input[name="confirmaSenha"]').val()) {
-			$(form+' .errorConfirmaSenha').removeClass('invisible');
-			$(form+' input[name="confirmaSenha"]').addClass('erro_campo').focus();
+			var btn_name = '';
+			if (args.button2.name)
+				btn_name = args.button2.name;
 
-		} else
-			$(form).submit();
-	});
+			var btn_href = 'javascript:void(0);';
+			if (args.button2.href)
+				btn_href = args.button2.href;
 
+			var btn_target = ' ';
+			if (args.button2.target)
+				btn_target = " target='"+args.button2.target+"' ";
 
-	$('form[name="fale-conosco"] a#enviar').click(function() {
-		var form = 'form[name="fale-conosco"]';
+			if (args.button2)
+				actionButton2 = "<a href='"+btn_href+"'"+btn_target+"id='"+btn_id+"' name='"+btn_name+"' class='btn-rm btn "+btn_class+" "+btn_color+"'>"+args.button2.value+"</a>";
 
-		$(form+' input, '+form+' select, '+form+' textarea').removeClass('erro_campo');
-		$(form+' .erro').addClass('invisible');
+		}
 
-		if (!$(form+' input[name="nome"]').val()) {
-			$(form+' .errorNome').removeClass('invisible');
-			$(form+' input[name="nome"]').addClass('erro_campo').focus();
+		// cria template do modal
+		var template = "<div class='modal fade hide' id='msg-modal'>";
+		template += "<div class='modal-header'> <a class='close' data-dismiss='modal'>×</a>"+title+"</div>";
+		template += "<div class='modal-body'>";
+		template += "<p>"+args.content+"</p>";
+		template += "</div>";
+		template += "<div class='modal-footer'>";
 
-		} else if (!$(form+' input[name="email"]').val() || !validateEmail($(form+' input[name="email"]').val())) {
-			$(form+' .errorEmail').removeClass('invisible');
-			$(form+' input[name="email"]').addClass('erro_campo').focus();
+		template += actionButton1;
+		template += actionButton2;
+		template += "	<a href='javascript:void(0);' class='btn' data-dismiss='modal'>"+closeButton+"</a>";
+		template += "</div></div>";
 
-		} else if (!$(form+' #assunto').val()) {
-			$(form+' .errorAssunto').removeClass('invisible');
-			$(form+' #assunto').addClass('erro_campo').focus();
 
-		} else if (!$(form+' textarea#mensagem2').val()) {
-			$(form+' .errorMensagem').removeClass('invisible');
-			$(form+' textarea#mensagem2').addClass('erro_campo').focus();
+		if ($('#html-msg'))
+			$('#html-msg').html(template);
+		else
+			$(template).appendTo('body');
 
-		} else
-			$(form).submit();
-	});
+		$('#msg-modal').modal('show');
 
-
-	$('form[name="login"] div#btn_acessar').click(function() {
-		var form = 'form[name="login"]';
-
-		$(form+' input, '+form+' select, '+form+' textarea').removeClass('erro_campo');
-		$(form+' .erro').addClass('hide');
-
-		if (!$(form+' input[name="email"]').val() || !validateEmail($(form+' input[name="email"]').val())) {
-			$(form+' .errorEmail').removeClass('hide');
-			$(form+' input[name="email"]').addClass('erro_campo').focus();
-
-		} else if (!$(form+' input[name="senha"]').val() || ($(form+' input[name="senha"]').val() && $(form+' input[name="senha"]').val().length<6)) {
-			console.log($(form+' input[name="senha"]').val().length);
-			$(form+' .errorSenha').removeClass('hide');
-			$(form+' input[name="senha"]').addClass('erro_campo').focus();
-
-		} else
-			$(form).submit();
-	});
-
+	}
 
 });

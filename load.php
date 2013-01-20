@@ -42,6 +42,7 @@
 	define('ABSPATH', '/');
 
 	$ABSPATH = ABSPATH;
+	$LOADING = "<img src='".ABSPATH."admin/images/loading.gif' border=0/>";
 
 
 	/*

@@ -1,4 +1,4 @@
-	<?php if (!in_array($basename, array('novo-produto', 'meus-dados', 'lista', 'fale-conosco', 'busca'))) { ?>
+	<?php if (!in_array($basename, array('novo-produto', 'editar-produto', 'meus-dados', 'lista', 'fale-conosco', 'busca'))) { ?>
 		<?php include_once 'navbar/banners.php' ?>
 	<?php } ?>
 	</div><!-- ROW -->
@@ -14,6 +14,8 @@
 			</div>
 		</div>
 	</footer>
+	<div id='html-msg'></div>
+	<div id='msg-modal'></div>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 	<!--<script src="//code.jquery.com/ui/1.9.2/jquery-ui.js"></script>-->
 	<script src="<?=ABSPATH?>bootstrap/js/bootstrap.min.js"></script>

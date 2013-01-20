@@ -60,9 +60,9 @@
 	}
 
 	/**
-	 * MEUS NÚMEROS // EDITAR CUPOM
+	 * REMOVER ITEM
 	 */
-	if (isset($_POST['from']) && in_array($_POST['from'], array('meus-numeros', 'editar-cupom'))) {
+	if (isset($_POST['from']) && $_POST['from']=='rm-item') {
 
 		include_once 'modules/classes/compra.php';
 
@@ -74,57 +74,7 @@
 			$val[$key] = trim($value);
 
 		$compra = new Compra();
-		$resCompra = $compra->validaCompraAjax($val);
-
-		if ($resCompra!==true) {
-			echo "\n\n";
-			echo "$(form+' .errorCoo').text('{$resCompra['alert']}').removeClass('invisible');";
-			echo "$(form+' input[name=\"coo\"]').addClass('erro_campo').focus();";
-		}
-
-	}
-
-	/**
-	 * PARTICIPAR
-	 */
-	if (isset($_POST['from']) && $_POST['from']=='participar') {
-
-		include_once 'modules/classes/cadastro.php';
-		include_once 'modules/classes/compra.php';
-		include_once 'modules/classes/cupons.php';
-
-		$msg = $msgTitle = $res = null;
-		$val = array();
-
-
-		foreach ($_POST as $key=>$value)
-			$val[$key] = trim($value);
-
-		$cadastro = new Cadastro();
-		$resCadastro = $cadastro->validaCadastroAjax($val);
-
-		if ($resCadastro!==true) {
-			echo "\n\n";
-			if (isset($resCadastro['cpf'])) {
-				echo "$(form+' .errorCpf').text('{$resCadastro['cpf']}').removeClass('invisible');";
-				echo "$(form+' input[name=\"cpf\"]').addClass('erro_campo').focus();";
-			}
-
-			if (isset($resCadastro['email'])) {
-				echo "$(form+' .errorEmail').text('{$resCadastro['email']}').removeClass('invisible');";
-				echo "$(form+' input[name=\"email\"]').addClass('erro_campo').focus();";
-			}
-		}
-
-		$compra = new Compra();
-		$resCompra = $compra->validaCompraAjax($val);
-
-		if ($resCompra!==true) {
-			echo "\n\n";
-			echo "$(form+' .errorCoo').text('{$resCompra['alert']}').removeClass('invisible');";
-			echo "$(form+' input[name=\"coo\"]').addClass('erro_campo').focus();";
-		}
-
+		echo $compra->removerCompra($val);
 	}
 
 	/**

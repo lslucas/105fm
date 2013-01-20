@@ -351,7 +351,8 @@ class Compra {
 						ON pro_id=upr_pro_id
 					LEFT JOIN ".TP."_address_book
 						ON adb_usr_id=upr_usr_id
-					WHERE `upr_id`=?;";
+					WHERE  `upr_status`=1
+							AND`upr_id`=?;";
 		if (!$res = $conn->prepare($sql))
 			echo __FUNCTION__.$conn->error;
 		else {
@@ -693,6 +694,35 @@ class Compra {
 
 		if (!empty($id)) return $id;
 		else return false;
+	}
+
+	/**
+	 * Remove compra do usuario
+	 * @return bool
+	 */
+	public function removerCompra($args)
+	{
+		global $conn, $hashids, $usr;
+
+		if (!isset($usr['id']) || empty($usr['id']))
+			return 'Usuário não logado!';
+
+		$upr_id = $hashids->decrypt($args['id']);
+		$upr_id = $upr_id[0];
+		$usr_id = $hashids->decrypt($usr['id']);
+		$usr_id = $usr_id[0];
+
+		$sql = "UPDATE `".TP."_usuario_produto` SET `upr_status`=0 WHERE `upr_id`=? AND `upr_usr_id`=?;";
+		if (!$res = $conn->prepare($sql))
+			return false;
+		else {
+			$res->bind_param('ii', $upr_id, $usr_id);
+			$res->execute();
+			$res->close();
+
+			return true;
+		}
+
 	}
 
 }
