@@ -1,6 +1,11 @@
 
 <?php include_once 'public/navbar/categoria.php' ?>
 <div class="column grid_7">
+	<?php
+		if (count($pro)==0)
+			echo "<center>Produto não existe ou já foi vendido!";
+		else {
+	?>
 	<h3><?=$pro['titulo']?></h3>
 	<br/>
 	<p>
@@ -144,4 +149,5 @@
 		 ?>
 -->
 	</div>
+	<?php } ?>
 </div>

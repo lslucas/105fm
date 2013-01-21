@@ -159,12 +159,15 @@ class Compra {
 	{
 		global $conn, $hashids;
 
-		if (!empty($id)) {
+		if (!empty($id) && !is_numeric($id)) {
 			$id = $hashids->decrypt($id);
-			$id = $id[0];
+			$id = isset($id[0]) ? $id[0] : null;
 		}
 
-		$sql = "SELECT SQL_CACHE NULL FROM `".TP."_usuario_produto` WHERE `upr_id`=?";
+		if (empty($id))
+			return 'ID inválido!';
+
+		$sql = "SELECT SQL_CACHE NULL FROM `".TP."_usuario_produto` WHERE upr_status=1 AND `upr_id`=?";
 		if (!$res = $conn->prepare($sql))
 			echo __FUNCTION__.$conn->error;
 		else {
