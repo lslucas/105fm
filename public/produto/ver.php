@@ -7,14 +7,13 @@
 		else {
 	?>
 	<h3><?=$pro['titulo']?></h3>
-	<br/>
+	<hr>
 	<p>
 		<?php
 			if (!empty($pro['galeria'][0]['img']))
 				echo "<img src='{$pro['galeria'][0]['imagem']}' border=0 width=280 class='img-polaroid produtoImagem'/>";
 		?>
 		<?=$pro['descricao']?>
-		<hr>
 		Quantidade: <?=$cpr['quantidade']?>
 		<br/>Validade produto: <?=$cpr['datavalidade']?>
 		<br/>Data para pagamento: <?=$cpr['datapagamento']?>
