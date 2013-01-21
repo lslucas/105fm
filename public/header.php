@@ -99,7 +99,7 @@
 	</header>
 
 
-	<?php if (!in_array($basename, array('novo-produto'))) { ?>
+	<?php //if (!in_array($basename, array('novo-produto'))) { ?>
 	<!-- CONTENT -->
 	<div class="row<?=isset($rowContentClass) ? ' '.$rowContentClass : null?>">
-	<?php } ?>
+	<?php //} ?>

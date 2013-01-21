@@ -1,11 +1,12 @@
-	<div class="row novo-produto">
-		<div class="column grid_12">
+	<!-- <div class="row novo-produto"> -->
+	<div class="column grid_10">
+		<div class="column">
 			<h1><?=$basename=='novo-produto' ? 'Novo Produto' : 'Editar Produto '.$val['titulo']?></h1>
 			<p><em>Todos os campos com - <span class="color-red">*</span> - são obrigatórios.</em></p>
 			<p><br /></p>
 		</div>
 
-		<div class="column grid_12">
+		<div class="column">
 			<form name="novo-produto" class="form-horizontal" method="post">
 				<input type="hidden" name="from" value="novo-produto">
 				<input type="hidden" name="usr_id" value="<?=$usr['id']?>">
@@ -130,7 +131,7 @@
 
 				<div class="control-group">
 					<div class="controls">
-					      <button type="submit" class="btn-agro">Cadastrar</button>
+					      <button type="submit" class="btn-agro"><?=$basename=='novo-produto' ? 'Cadastrar Produto' : 'Atualizar Produto '?></button>
 					</div>
 				</div>
 			</form>
