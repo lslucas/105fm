@@ -1,4 +1,6 @@
-<div class="column grid_10">
+
+<?php include_once 'public/navbar/categoria.php' ?>
+<div class="column grid_7">
 	<h3><?=$pro['titulo']?></h3>
 	<br/>
 	<p>
