@@ -171,6 +171,7 @@ $(function() {
 	/**
 	 * bind table row click
 	 */
+	 /*
 	$("tr").bind("click", function(){
 		if ($('a:hover').attr('href')!=undefined)
 			window.location = $('a:hover').attr('href');
@@ -179,6 +180,7 @@ $(function() {
 		} else
 			return false;
 	});
+	 */
 
 	/**
 	 * showOnClick

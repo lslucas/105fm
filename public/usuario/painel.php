@@ -61,13 +61,13 @@
 									<a href="javascript:void(0);" id='<?=$lista['id']?>' class="btn-rm btn btn-danger btn-primary">Remover</a>
 								</div>
 							</div>
-							<tr data-href='<?=$lista['link']?>' id='tr<?=$lista['id']?>'>
-								<td align=center><?=$lista['uf']?></td>
-								<td><?=$lista['titulo']?></td>
-								<td><?=$lista['grupoquimico']?></td>
-								<td><?=$lista['fabricante']?></td>
-								<td align=center><?=$lista['valor']?></td>
-								<td align=center><?=$lista['views']?></td>
+							<tr id='tr<?=$lista['id']?>'>
+								<td align=center><a href='<?=$lista['link']?>'><?=$lista['uf']?></a></td>
+								<td><a href='<?=$lista['link']?>'><?=$lista['titulo']?></a></td>
+								<td><a href='<?=$lista['link']?>'><?=$lista['grupoquimico']?></a></td>
+								<td><a href='<?=$lista['link']?>'><?=$lista['fabricante']?></a></td>
+								<td align=center><a href='<?=$lista['link']?>'><?=$lista['valor']?></a></td>
+								<td align=center><a href='<?=$lista['link']?>'><?=$lista['views']?></a></td>
 								<td align=center>
 									<a href='<?=ABSPATH?>editar-produto/<?=$lista['id']?>' title='Editar item'><i class='icon-edit '></i></a>
 									&nbsp; <a href='#rm-<?=linkfy($lista['titulo'])?>' role='button' data-toggle='modal'  title='Remover item'><i class='icon-remove '></i></a>

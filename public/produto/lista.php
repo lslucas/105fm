@@ -62,12 +62,12 @@
 									echo "<tr><td colspan=6>Nenhum produto disponivel!</td></tr>";
 								foreach ($listaGeral as $int=>$lista) {
 							?>
-								<tr data-href='<?=$lista['link']?>'>
-									<td align=center><?=$lista['uf']?></td>
-									<td><?=$lista['titulo']?></td>
-									<td><?=$lista['grupoquimico']?></td>
-									<td><?=$lista['fabricante']?></td>
-									<td align=center><?=$lista['valor']?></td>
+								<tr>
+									<td align=center><a href='<?=$lista['link']?>'><?=$lista['uf']?></td></td>
+									<td><a href='<?=$lista['link']?>'><?=$lista['titulo']?></a></td>
+									<td><a href='<?=$lista['link']?>'><?=$lista['grupoquimico']?></a></td>
+									<td><a href='<?=$lista['link']?>'><?=$lista['fabricante']?></a></td>
+									<td align=center><a href='<?=$lista['link']?>'><?=$lista['valor']?></a></td>
 								</tr>
 								<?php } ?>
 							</tbody>
