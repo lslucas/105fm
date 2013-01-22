@@ -29,8 +29,8 @@ class Compra {
 		else {
 			// if (empty($args['grupoquimico']))
 				// $return .= '<li>Selecione um Grupo Químico</li>';
-			if (empty($args['fabricante']) && empty($args['nomeFabricante']))
-				$return .= '<li>Selecione um fabricante ou informe um novo clicando em outro</li>';
+			// if (empty($args['fabricante']) && empty($args['nomeFabricante']))
+				// $return .= '<li>Selecione um fabricante ou informe um novo clicando em outro</li>';
 			if (empty($args['pro_id']) && empty($args['nomeProduto']))
 				$return .= '<li>Selecione um produto ou informe um nome clicando em outro</li>';
 			// if (empty($args['valor']))
@@ -382,6 +382,7 @@ class Compra {
 				$fabricanteProduto = empty($fabricanteProduto) ? $nomeFabricante : $fabricanteProduto;
 				$fabricanteProduto = empty($fabricanteProduto) ? $proFabricanteProduto : $fabricanteProduto;
 				$grupoquimicoProduto = empty($grupoquimicoProduto) && !empty($proGrupoQuimicoProduto) ? $proGrupoQuimicoProduto : $grupoquimicoProduto;
+				$valor = empty($valor) ? 'Consulte-nos' : 'R$ '.Currency2Decimal($valor);
 
 				$id_encrypted = $hashids->encrypt($upr_id);
 				$cpr = array(
@@ -398,7 +399,7 @@ class Compra {
 			             'tipo'=>$tipoProduto,
 			             'fabricante'=>$fabricanteProduto,
 			             'grupoquimico'=>$grupoquimicoProduto,
-			             'valor'=>'R$ '.Currency2Decimal($valor),
+			             'valor'=>$valor,
 			             'valor_minimo'=>'R$ '.Currency2Decimal($valor_minimo),
 			             'quantidade'=>$quantidade,
 			             'quantidade_minima_venda'=>$quantidade_minima_venda,
