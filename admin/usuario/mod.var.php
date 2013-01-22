@@ -72,3 +72,37 @@
 		$sufix_field = str_replace($var['pre'].'_','',$field[$i]);
 		$val[$sufix_field] = isset($row[$field[$i]])?$row[$field[$i]]:'';
 	}
+	$val['address'] = array();
+
+	if ($act=='update' || isset($_GET['item'])) {
+		$sql_adb= "SELECT
+					adb_id,
+					adb_tipo,
+					adb_endereco,
+					adb_complemento,
+					adb_cep,
+					adb_cidade,
+					adb_uf
+					FROM ".TP."_address_book
+					";
+		$sql_adb.=" WHERE adb_usr_id=? ORDER BY adb_id DESC LIMIT 1";
+		if (!$qry_adb=$conn->prepare($sql_adb))
+			 echo divAlert($conn->error);
+		else {
+			$qry_adb->bind_param('i', $_GET['item']);
+			$qry_adb->bind_result($adb_id, $adb_tipo, $adb_endereco, $adb_complemento, $adb_cep, $adb_cidade, $adb_uf);
+			$qry_adb->execute();
+			$qry_adb->store_result();
+			$qry_adb->fetch();
+			$qry_adb->close();
+
+			$val['address']['id'] = $adb_id;
+			$val['address']['tipo'] = $adb_tipo;
+			$val['address']['endereco'] = $adb_endereco;
+			$val['address']['complemento'] = $adb_complemento;
+			$val['address']['cep'] = $adb_cep;
+			$val['address']['cidade'] = $adb_cidade;
+			$val['address']['uf'] = $adb_uf;
+		}
+	}
+

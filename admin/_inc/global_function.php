@@ -1500,9 +1500,8 @@ function super_substr($texto, $limit) {
  *remove acentos
  */
 function file_extension($filename) {
-
- return end(explode(".", $filename));
-
+	$vars = explode(".", $filename);
+	return end($vars);
 }
 
 

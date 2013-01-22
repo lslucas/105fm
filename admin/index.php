@@ -6,18 +6,22 @@ $noGlobalFunction = isset($_GET['noGlobalFunction'])?1:0;
 $noHeader = isset($_GET['noHeader'])?1:0;
 $noVar = isset($_GET['noVar'])?1:0;
 $noVisual = isset($_GET['noVisual'])?1:0;
-#verifica se foi setado variavel noGlobal, caso sim nao inclue variaveis e constantes 
+#verifica se foi setado variavel noGlobal, caso sim nao inclue variaveis e constantes
  if ($noGlobal==0)
    include_once '_inc/global.php';
 #verifica se foi setado variavel noDB, caso sim nao faz conexao com banco
  if ($noDb==0)
    include_once '_inc/db.php';
-#verifica se foi setado variavel noFunctions, caso sim nao inclue funcoes 
+#verifica se foi setado variavel noFunctions, caso sim nao inclue funcoes
  if ($noGlobalFunction==0)
    include_once '_inc/global_function.php';
 #funcao autentica
   include_once 'inc.auth.php';
 
+include_once '../vendor/aes.php';
+include_once '../vendor/hashids.php';
+$aes = new AES('abcdefghijuklmnz0123456789012345', 'ECB');
+$hashids = new hashids(TP, 6);
 
   # caso seja efetuado o logout
   if(isset($_GET['logout']))
