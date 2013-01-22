@@ -1,7 +1,7 @@
 <?php
 $msg = $administrador_email_header;
   if ($act=='insert') {
-    $email_subject = SITE_NAME.": Your access";
+    $email_subject = SITE_NAME.": Seus dados de acesso";
     $msg .= "
 	     <!--<center><img src='".URL_ADMLOGO."'></center><p />-->
 	     Olá ".$res['nome'].", abaixo seus dados de acesso ao ".SITE_NAME.":
