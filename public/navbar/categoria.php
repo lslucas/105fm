@@ -4,7 +4,7 @@
 					<h4>Grupo Quimico</h4>
 					<ul>
 						<?php
-							$grupoQuimico = getCategoriaListArea('Grupo Quimico', null, null, 6, 'cat_titulo');
+							$grupoQuimico = getCategoriaListArea('Grupo Quimico', null, null);
 							foreach ($grupoQuimico as $int=>$gq) {
 								$link = linkfy(ABSPATH.'lista/grupoquimico-'.$gq['titulo']);
 						 ?>
@@ -17,7 +17,7 @@
 					<h4>Fabricantes</h4>
 					<ul>
 						<?php
-							$fabricantes = getCategoriaListArea('Fabricante', null, null, 8, 'cat_titulo');
+							$fabricantes = getCategoriaListArea('Fabricante', null, null, 9, 'cat_titulo');
 							foreach ($fabricantes as $int=>$fa) {
 								$link = linkfy(ABSPATH.'lista/fabricante-'.$fa['titulo']);
 						 ?>
