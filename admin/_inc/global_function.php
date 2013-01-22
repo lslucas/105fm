@@ -189,7 +189,7 @@ function getUsuarios($simple=true)
 	$list = array();
 	$sql = "SELECT usr_id, usr_nome, usr_nome_fantasia
 				FROM `".TP."_usuario`
-				INNER JOIN `".TP."_usuario_produto`
+				LEFT JOIN `".TP."_usuario_produto`
 					ON upr_usr_id=usr_id
 					AND upr_status=1
 				WHERE usr_status=1
@@ -230,10 +230,14 @@ function getUsuarioEmpresaById($id)
 	global $conn, $hashids;
 
 	$id = $hashids->decrypt($id);
-	$id = $id[0];
+	$id = isset($id[0]) ? $id[0] : null;
+
+	if (empty($id))
+		return 'ID inválido';
+
 	$sql = "SELECT usr_nome, usr_nome_fantasia
 				FROM `".TP."_usuario`
-				INNER JOIN `".TP."_usuario_produto`
+				LEFT JOIN `".TP."_usuario_produto`
 					ON upr_usr_id=usr_id
 					AND upr_status=1
 				WHERE usr_status=1
@@ -249,7 +253,7 @@ function getUsuarioEmpresaById($id)
 		$res->fetch();
 		$res->close();
 
-		return (empty($nomeEmpresa) ? $nome : $nomeEmpresa);
+		return (empty($nomeFantasia) ? $nome : $nomeFantasia);
 	}
 }
 

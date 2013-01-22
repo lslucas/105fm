@@ -643,7 +643,7 @@ class Compra {
 		$filtro = array();
 		$lstFiltros = array('fabricante'=>'Fabricante', 'grupoquimico'=>'GrupoQuimico', 'produto'=>'Produto', 'faixapreco'=>'FaixaPreco', 'tipo'=>'Tipo', 'uf'=>'UF', 'preco'=>'Preco', 'revenda'=>'Revenda');
 		foreach ($urlParams as $params) {
-			list($filtroName, $valParam) = explode('-', $params);
+			list($filtroName, $valParam) = explode('-', $params, 2);
 			if (in_array($filtroName, array('fabricante', 'grupoquimico', 'tipo')) && isset($catIdByTituloMin[$valParam]))
 				$filtro['filtro'.$lstFiltros[$filtroName]] = $catIdByTituloMin[$valParam];
 			else
@@ -668,13 +668,11 @@ class Compra {
 
 			} if (isset($filtro['filtroRevenda']) && !empty($filtro['filtroRevenda'])) {
 				$getUsuarios = getUsuarios(false);
-// var_dump($getUsuarios);
-// var_dump($filtro['filtroRevenda']);
+
 				if (isset($getUsuarios[$filtro['filtroRevenda']])) {
-					$filtro['Revenda'] = $getUsuarios[$filtro['filtroRevenda']]['id_numeric'];
+					$filtro['filtroRevenda'] = $getUsuarios[$filtro['filtroRevenda']]['id_numeric'];
 					$whrRevenda = " AND upr_usr_id=\"{$filtro['filtroRevenda']}\"";
 					$whr .= $whrRevenda;
-					echo $whrRevenda;
 					$whrFiltro['revenda'] = $whrRevenda;
 				}
 
