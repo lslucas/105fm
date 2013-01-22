@@ -131,7 +131,7 @@
 
 				<div class="control-group">
 					<div class="controls">
-					      <button type="submit" class="btn-agro"><?=$basename=='novo-produto' ? 'Cadastrar Produto' : 'Atualizar Produto '?></button>
+					      <button type="submit" class="btn-agro"><?=$basename=='novo-produto' ? 'Inserir Oferta' : 'Atualizar Oferta '?></button>
 					</div>
 				</div>
 			</form>
