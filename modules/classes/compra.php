@@ -37,8 +37,8 @@ class Compra {
 				// $return .= '<li>Digite o valor do produto</li>';
 			if (empty($args['quantidade']))
 				$return .= '<li>Informe a quantidade de produtos</li>';
-			if (empty($args['peso']))
-				$return .= '<li>Informe o peso do produto</li>';
+			// if (empty($args['peso']))
+				// $return .= '<li>Informe o peso do produto</li>';
 			if (empty($args['peso_unidade_medida']))
 				$return .= '<li>Informe a unidade de medida do peso do produto</li>';
 			// if (empty($args['datapagamento']))

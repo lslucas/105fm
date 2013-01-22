@@ -73,9 +73,9 @@
 				</div>
 
 				<div class="control-group">
-					<label class="control-label" for="peso"><span class="color-red">*</span> Peso</label>
+					<label class="control-label" for="peso">Peso</label>
 					<div class="controls">
-						<input type="text" class="input-small required" placeholder='Peso do Produto' name='peso' id='peso' value="<?=isset($val['peso']) ? $val['peso'] : null?>">
+						<input type="text" class="input-small" placeholder='Peso do Produto' name='peso' id='peso' value="<?=isset($val['peso']) ? $val['peso'] : null?>">
 					</div>
 				</div>
 
