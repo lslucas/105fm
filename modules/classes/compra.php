@@ -324,6 +324,8 @@ class Compra {
 		$cpr=array();
 
 		$sql = "SELECT
+					usr_nome,
+					usr_nome_fantasia,
 					upr_id,
 					upr_usr_id,
 					upr_pro_id,
@@ -355,6 +357,8 @@ class Compra {
 					upr_observacao,
 					DATE_FORMAT(upr_timestamp, '%d/%m/%Y')
 					FROM `".TP."_usuario_produto`
+					LEFT JOIN `".TP."_usuario`
+						ON usr_id=upr_usr_id
 					LEFT JOIN `".TP."_produto`
 						ON pro_id=upr_pro_id
 					LEFT JOIN ".TP."_address_book
@@ -366,7 +370,7 @@ class Compra {
 		else {
 
 			$res->bind_param('i', $id);
-			$res->bind_result($upr_id, $usr_id, $pro_id, $grupoquimico_id, $fabricante_id, $nomeFabricante, $nomeProduto, $produto, $codigoProduto, $tipoProduto, $fabricanteProduto, $proFabricanteProduto, $grupoquimicoProduto, $proGrupoQuimicoProduto, $valor, $valor_minimo, $quantidade, $quantidade_minima_venda, $peso, $peso_unidade_medida, $datavalidade, $datavalidadePt, $datapagamento, $datapagamentoPt, $views, $vendas, $cidade, $uf, $observacao, $timestamp);
+			$res->bind_result($nome, $nomeFantasia, $upr_id, $usr_id, $pro_id, $grupoquimico_id, $fabricante_id, $nomeFabricante, $nomeProduto, $produto, $codigoProduto, $tipoProduto, $fabricanteProduto, $proFabricanteProduto, $grupoquimicoProduto, $proGrupoQuimicoProduto, $valor, $valor_minimo, $quantidade, $quantidade_minima_venda, $peso, $peso_unidade_medida, $datavalidade, $datavalidadePt, $datapagamento, $datapagamentoPt, $views, $vendas, $cidade, $uf, $observacao, $timestamp);
 			$res->execute();
 			$res->store_result();
 			$res->fetch();
@@ -384,6 +388,7 @@ class Compra {
 			             'id'=>$id_encrypted,
 			             'usr_id'=>$hashids->encrypt($usr_id),
 			             'pro_id'=>$pro_id,
+			             'empresa'=>(empty($nomeFantasia) ? $nome : $nomeFantasia),
 			             'grupoquimico_id'=>$grupoquimico_id,
 			             'fabricante_id'=>$fabricante_id,
 			             'nomeProduto'=>$nomeProduto,
@@ -636,7 +641,7 @@ class Compra {
 		$whr = null;
 		$whrFiltro = array();
 		$filtro = array();
-		$lstFiltros = array('fabricante'=>'Fabricante', 'grupoquimico'=>'GrupoQuimico', 'produto'=>'Produto', 'faixapreco'=>'FaixaPreco', 'tipo'=>'Tipo', 'uf'=>'UF', 'preco'=>'Preco');
+		$lstFiltros = array('fabricante'=>'Fabricante', 'grupoquimico'=>'GrupoQuimico', 'produto'=>'Produto', 'faixapreco'=>'FaixaPreco', 'tipo'=>'Tipo', 'uf'=>'UF', 'preco'=>'Preco', 'revenda'=>'Revenda');
 		foreach ($urlParams as $params) {
 			list($filtroName, $valParam) = explode('-', $params);
 			if (in_array($filtroName, array('fabricante', 'grupoquimico', 'tipo')) && isset($catIdByTituloMin[$valParam]))
@@ -660,6 +665,18 @@ class Compra {
 				$whrProduto = " AND pro_id=\"{$filtro['filtroProduto']}\"";
 				$whr .= $whrProduto;
 				$whrFiltro['fabricante'] = $whrProduto;
+
+			} if (isset($filtro['filtroRevenda']) && !empty($filtro['filtroRevenda'])) {
+				$getUsuarios = getUsuarios(false);
+// var_dump($getUsuarios);
+// var_dump($filtro['filtroRevenda']);
+				if (isset($getUsuarios[$filtro['filtroRevenda']])) {
+					$filtro['Revenda'] = $getUsuarios[$filtro['filtroRevenda']]['id_numeric'];
+					$whrRevenda = " AND upr_usr_id=\"{$filtro['filtroRevenda']}\"";
+					$whr .= $whrRevenda;
+					echo $whrRevenda;
+					$whrFiltro['revenda'] = $whrRevenda;
+				}
 
 			} if (isset($filtro['filtroUF']) && !empty($filtro['filtroUF'])) {
 				$whrUF = " AND LOWER(adb_uf)=\"{$filtro['filtroUF']}\"";

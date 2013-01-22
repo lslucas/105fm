@@ -26,22 +26,21 @@
 								<input type="hidden" name="from" value="filtrar">
 
 
-								<select name='filtroGrupoQuimico' id='filtroGrupoQuimico' class='filtroGrupo input-medium'>
-									<option value=''>Grupo</option>
-									<?php if (!isset($val['filtroGrupoQuimico']))  $val['filtroGrupoQuimico'] = array(); ?>
-									<?=convertCatList2Option(getCategoriaListArea('Grupo Quimico'), $val['filtroGrupoQuimico'])?>
+								<select name='filtroLocalizacao' id='filtroLocalizacao' class='filtroLocalizacao input-medium'>
+									<option value=''>Localização</option>
+									<?php if (!isset($val['filtroLocalizacao']))  $val['filtroLocalizacao'] = array(); ?>
+									<?=convertCatList2Option(getLocalizacao(), $val['filtroLocalizacao'])?>
 								</select>
 
-								<select name='filtroFabricante' id='filtroFabricante' class='filtroFabricante'>
-									<option value=''>Fabricante</option>
-									<?php if (!isset($val['filtroFabricante']))  $val['filtroFabricante'] = array(); ?>
-									<?=convertCatList2Option(getCategoriaListArea('Fabricante', null, null, null, 'cat_titulo'), $val['filtroFabricante'])?>
+								<select name='filtroUsuario' id='filtroUsuario' class='filtroUsuario'>
+									<option value=''>Revendedor</option>
+									<?php if (!isset($val['filtroUsuario']))  $val['filtroUsuario'] = array(); ?>
+									<?=convertCatList2Option(getUsuarios(), $val['filtroUsuario'])?>
 								</select>
 
 								<select name='filtroProduto' id='filtroProduto' class='filtroProduto'>
-									<option value=''>Produto</option>
 									<?php if (!isset($val['filtroProduto']))  $val['filtroProduto'] = array(); ?>
-									<?=convertCatList2Option(getCategoriaListArea('Produto'), $val['filtroProduto'])?>
+									<?=convertCatList2Option(getTodosProdutos(null, 'Produto'), $val['filtroProduto'])?>
 								</select>
 
 								<button type="submit" class="btn">Filtrar</button>
@@ -52,7 +51,7 @@
 							<tr>
 								<th width="60px">UF</th>
 								<th align="left">Produto</th>
-								<th align="left" width='106px'>Grupo Químico</th>
+								<th align="left">Revenda</th>
 								<th align="left">Fabricante</th>
 								<th width="80px" class='pagination-centered'>R$</th>
 							</tr>
@@ -65,7 +64,7 @@
 								<tr>
 									<td align=center><a href='<?=$lista['link']?>'><?=$lista['uf']?></td></td>
 									<td><a href='<?=$lista['link']?>'><?=$lista['titulo']?></a></td>
-									<td><a href='<?=$lista['link']?>'><?=$lista['grupoquimico']?></a></td>
+									<td><a href='<?=$lista['link']?>'><?=$lista['empresa']?></td></td>
 									<td><a href='<?=$lista['link']?>'><?=$lista['fabricante']?></a></td>
 									<td align=center><a href='<?=$lista['link']?>'><?=$lista['valor']?></a></td>
 								</tr>

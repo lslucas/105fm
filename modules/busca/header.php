@@ -8,7 +8,12 @@
 		$listaUrl .= '/fabricante-'.linkfySmart(getCategoriaCol('titulo', 'id', $_POST['filtroFabricante']));
 	if (isset($_POST['filtroProduto']) && !empty($_POST['filtroProduto']))
 		$listaUrl .= '/produto-'.linkfySmart(getProdutoCol('titulo', 'id', $_POST['filtroProduto']));
-	if (isset($_POST['q']) && !empty($_POST['q']))
+	if (isset($_POST['filtroLocalizacao']) && !empty($_POST['filtroLocalizacao']))
+		$listaUrl .= '/uf-'.trim($_POST['filtroLocalizacao']);
+	if (isset($_POST['filtroUsuario']) && !empty($_POST['filtroUsuario'])) {
+		$usuario = linkfySmart(getUsuarioEmpresaById($_POST['filtroUsuario']));
+		$listaUrl .= '/revenda-'.$usuario;
+	} if (isset($_POST['q']) && !empty($_POST['q']))
 		$listaUrl .= '/q-'.linkfySmart(trim($_POST['q']));
 
 	header('Location: '.ABSPATH.'lista'.$listaUrl);

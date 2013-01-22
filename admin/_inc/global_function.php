@@ -179,6 +179,125 @@ function produtosByUF($order='titulo')
 */
 
 /*
+ *retorna lista de usuários
+ */
+function getUsuarios($simple=true)
+{
+	global $conn, $hashids;
+
+	$whrFiltro = null;
+	$list = array();
+	$sql = "SELECT usr_id, usr_nome, usr_nome_fantasia
+				FROM `".TP."_usuario`
+				INNER JOIN `".TP."_usuario_produto`
+					ON upr_usr_id=usr_id
+					AND upr_status=1
+				WHERE usr_status=1
+				{$whrFiltro}
+				GROUP BY usr_id
+				ORDER BY usr_nome_fantasia";
+	if (!$res = $conn->prepare($sql))
+		echo __FUNCTION__.$conn->error;
+	else {
+
+		$res->bind_result($id,  $nome, $nomeFantasia);
+		$res->execute();
+
+		$i=0;
+		while ($res->fetch()) {
+			$empresa = empty($nomeFantasia) ? $nome : $nomeFantasia;
+			if (!$simple)
+				$i = linkfySmart($empresa);
+
+			$list[$i]['id'] = $hashids->encrypt($id);
+			$list[$i]['id_numeric'] = $id;
+			$list[$i]['titulo'] = $empresa;
+
+			if ($simple)
+				$i++;
+		}
+
+		return $list;
+		$res->close();
+	}
+}
+
+/*
+ *retorna coluna do usuario
+ */
+function getUsuarioEmpresaById($id)
+{
+	global $conn, $hashids;
+
+	$id = $hashids->decrypt($id);
+	$id = $id[0];
+	$sql = "SELECT usr_nome, usr_nome_fantasia
+				FROM `".TP."_usuario`
+				INNER JOIN `".TP."_usuario_produto`
+					ON upr_usr_id=usr_id
+					AND upr_status=1
+				WHERE usr_status=1
+				AND usr_id=?
+				GROUP BY usr_id";
+	if (!$res = $conn->prepare($sql))
+		echo __FUNCTION__.$conn->error;
+	else {
+
+		$res->bind_param('i', $id);
+		$res->bind_result($nome, $nomeFantasia);
+		$res->execute();
+		$res->fetch();
+		$res->close();
+
+		return (empty($nomeEmpresa) ? $nome : $nomeEmpresa);
+	}
+}
+
+/*
+ *retorna lista da localidades
+ */
+function getLocalizacao()
+{
+	global $conn;
+
+	$whrFiltro = null;
+	$listUf = array();
+	$sqluf = "SELECT adb_uf, COUNT(upr_id) `num`
+				FROM `".TP."_usuario_produto`
+				LEFT JOIN ".TP."_address_book
+					ON adb_usr_id=upr_usr_id
+				INNER JOIN ".TP."_produto
+					ON pro_id=upr_pro_id
+				WHERE upr_status=1
+				{$whrFiltro}
+				GROUP BY adb_uf
+				ORDER BY upr_timestamp DESC";
+	if (!$resuf = $conn->prepare($sqluf))
+		echo __FUNCTION__.$conn->error;
+	else {
+
+		$resuf->bind_result($uf, $num);
+		$resuf->execute();
+
+		$i=0;
+		while ($resuf->fetch()) {
+			$ufmin = strtolower($uf);
+			$estado = estadoFromUF($uf);
+
+			$listUf[$i]['id'] = empty($ufmin) ? 'none': $ufmin;
+			$listUf[$i]['titulo'] = $estado.' ('.$num.')';
+			$listUf[$i]['num'] = $num;
+
+			$i++;
+		}
+
+		return $listUf;
+
+		$resuf->close();
+	}
+}
+
+/*
  *retorna lista da coluna
  */
 function getCategoriaIdByTitulo($min=false, $order='titulo')
