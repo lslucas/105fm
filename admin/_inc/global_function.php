@@ -336,7 +336,7 @@ function getCategoriaIdByTitulo($min=false, $order='titulo')
 /*
  *retorna lista de produtos
  */
-function getTodosProdutos($order='titulo ASC', $startwith=null)
+function getTodosProdutos($order='titulo ASC', $startwith=null, $simple=true)
 {
 	global $conn;
 
@@ -360,12 +360,17 @@ function getTodosProdutos($order='titulo ASC', $startwith=null)
 
 		$i=1;
 		while ($qry->fetch()) {
+			if (!$simple)
+				$i = linkfySmart($titulo);
+
 			$lst[$i]['id'] = $id;
 			$lst[$i]['titulo'] = $titulo;
 			$lst[$i]['tipo'] = $tipo;
 			$lst[$i]['valor'] = 'R$ '.Moeda($valor);
 			$lst[$i]['valor_decimal'] = $valor;
-			$i++;
+
+			if ($simple)
+				$i++;
 		}
 
 		$qry->close();

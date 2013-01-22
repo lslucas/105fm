@@ -665,9 +665,21 @@ class Compra {
 				$whrFiltro['fabricante'] = $whrFabricante;
 
 			} if (isset($filtro['filtroProduto']) && !empty($filtro['filtroProduto'])) {
-				$whrProduto = " AND pro_id=\"{$filtro['filtroProduto']}\"";
+				$filtroProduto = preg_replace('/-/', ' ', $filtro['filtroProduto']);
+				$whrProduto = " AND (pro_titulo LIKE \"%{$filtro['filtroProduto']}%\"";
+				$whrProduto .= " OR pro_titulo LIKE \"%{$filtroProduto}%\") ";
 				$whr .= $whrProduto;
-				$whrFiltro['fabricante'] = $whrProduto;
+				$whrFiltro['produto'] = $whrProduto;
+				/*
+				$getTodosProdutos = getTodosProdutos(null, null, false);
+
+				if (isset($getTodosProdutos[$filtro['filtroProduto']])) {
+					$filtro['filtroProduto'] = $getTodosProdutos[$filtro['filtroProduto']]['id'];
+					$whrProduto = " AND pro_id=\"{$filtro['filtroProduto']}\"";
+					$whr .= $whrProduto;
+					$whrFiltro['produto'] = $whrProduto;
+				}
+				 */
 
 			} if (isset($filtro['filtroRevenda']) && !empty($filtro['filtroRevenda'])) {
 				$getUsuarios = getUsuarios(false);
