@@ -6,7 +6,7 @@ if ($act=='insert') {
 	     Olá ".$res['nome'].", abaixo seus dados de acesso ao ".SITE_NAME.":
 	     <p><b>Login:</b> ".$res['email']."
 	     <br><b>Senha:</b> <code>".$res['senha']."</code>
-	     <br><b>Painel:</b> <a href='".SITE_URL."login' target='_blank'>".SITE_URL."login</a>
+	     <br><b>Painel:</b> <a href='".SITE_URL."/login' target='_blank'>".SITE_URL."/login</a>
 
 	     <p>Você pode alterar sua senha a qualquer hora!</p>";
 
@@ -16,7 +16,7 @@ if ($act=='insert') {
 	     Olá ".$res['nome'].", abaixo seus dados de acesso ao ".SITE_NAME.":
 	     <p><b>Login:</b> ".$res['email']."
 	     <br><b>Senha:</b> ".(empty($res['senha']) ? 'continua a mesma!' : '<code>'.$res['senha'].'</code>')."
-	     <br><b>Painel:</b> <a href='".SITE_URL."login' target='_blank'>".SITE_URL."login</a>
+	     <br><b>Painel:</b> <a href='".SITE_URL."/login' target='_blank'>".SITE_URL."/login</a>
 
 	     <p>Você pode alterar sua senha a qualquer hora!</p>";
 

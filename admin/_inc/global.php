@@ -119,7 +119,7 @@ define('SITE_NAME','AGROSSHOP');
 $BUSINESS = '';
 $BUSINESS = null;
 if ($host=='localhost') define('SITE_URL','http://localhost/agroshop');
-else define('SITE_URL','http://agrosshop.com.br/admin');
+else define('SITE_URL','http://agrosshop.com.br');
 define('PAINEL_URL', SITE_URL.'/admin');
 $SITE_URL = SITE_URL;
 define('RODAPE','<a href="'.SITE_URL.'">'.SITE_NAME.'</a>');
