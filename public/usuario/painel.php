@@ -21,7 +21,7 @@
 		<div class='span3'>
 			<ul class='configlist'>
 				<li><a href="<?=ABSPATH?>interesse">Quero Comprar</a></li>
-				<li><a href="<?=ABSPATH?>novo-produto">Novo Produto</a></li>
+				<li><a href="<?=ABSPATH?>novo-produto">Inserir Oferta</a></li>
 			</ul>
 		</div>
 	</div>
