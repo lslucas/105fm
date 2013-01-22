@@ -128,6 +128,7 @@
 
 		if (isset($_POST['grupoquimico']) && isset($_POST['fabricante']) ) {
 
+			/*
 			$area = 'Produto';
 			$grupoquimico = isset($_POST['grupoquimico']) ? apenasNumeros($_POST['grupoquimico']) : null;
 			$fabricante = isset($_POST['fabricante']) ? apenasNumeros($_POST['fabricante']) : null;
@@ -140,6 +141,7 @@
 
 			$optList = convertCatList2Option($values);
 			echo "\n $('select.filtro{$area}').html(\"{$optList}\");";
+			 */
 
 
 		} elseif (!isset($_POST['fabricante'])) {
@@ -159,6 +161,7 @@
 			echo "\n $('select.filtro{$area}').html(\"{$optListFabricante}\");";
 
 			//produto
+			/*
 			$produtoValues = getProdutosByOptions(array('grupoquimico'=>$grupoquimico), 'Produto');
 			if (count($produtoValues)<=1) {
 				$valuesEmpty = array('id'=>-1, 'titulo'=>'Nenhum Produto com os filtros selecionados!');
@@ -167,6 +170,7 @@
 
 			$optListProduto = convertCatList2Option($produtoValues);
 			echo "\n $('select.filtroProduto').html(\"{$optListProduto}\");";
+			 */
 
 		}
 
