@@ -40,7 +40,7 @@
 
 								<select name='filtroProduto' id='filtroProduto' class='filtroProduto'>
 									<?php if (!isset($val['filtroProduto']))  $val['filtroProduto'] = array(); ?>
-									<?=convertCatList2Option(getTodosProdutos(null, 'Produto'), $val['filtroProduto'])?>
+									<?=convertCatList2Option(getProdutosByOptions(null, 'Produto', 'titulo', true), $val['filtroProduto'])?>
 								</select>
 
 								<button type="submit" class="btn">Filtrar</button>
