@@ -105,10 +105,10 @@
 				</div>
 
 				<div class="control-group">
-					<label class="control-label" for="datavalidade"><span class="color-red">*</span> Data Validade</label>
+					<label class="control-label" for="datavalidade">Data Validade</label>
 					<div class="controls">
 						<div id="datecontainer">
-							<input type="text" class="input-small required data pull-left" placeholder='Data de Validade do Produto' name='datavalidade' id='datavalidade' value="<?=isset($val['datavalidade']) ? $val['datavalidade'] : null?>">
+							<input type="text" class="input-small data pull-left" placeholder='Data de Validade do Produto' name='datavalidade' id='datavalidade' value="<?=isset($val['datavalidade']) ? $val['datavalidade'] : null?>">
 						</div>
 					</div>
 				</div>

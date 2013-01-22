@@ -43,9 +43,11 @@ class Compra {
 				$return .= '<li>Informe a unidade de medida do peso do produto</li>';
 			// if (empty($args['datapagamento']))
 				// $return .= '<li>Informe a data de pagamento</li>';
+			/*
 			if (empty($args['datavalidade']))
 				$return .= '<li>Informe a data de validade do produto</li>';
-			elseif (!validaData($this->_args['validade_ano'], $this->_args['validade_mes'], $this->_args['validade_dia']))
+			else */
+			if (!empty($args['datavalidade']) && !validaData($this->_args['validade_ano'], $this->_args['validade_mes'], $this->_args['validade_dia']))
 				$return .= '<li>Entre com uma data de compra válida!</li>';
 
 			$this->_args['quantidade_minima_venda'] = isset($this->_args['quantidade_minima_venda']) ? $this->_args['quantidade_minima_venda'] : null;
