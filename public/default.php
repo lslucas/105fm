@@ -16,7 +16,6 @@
 			</section>
 
 			<div class="row produtos">
-				<?php /* ?><br/><?=cotacao()?>*/ ?>
 				<div style='float:left; width:265px; height:325px; background-image: url("<?=STATIC_PATH?>layout/soybeanplant.jpg"); text-align:center; display:table; position:relative'>
 					<div style='display:table-cell; vertical-align:middle; '>
 						<a href='<?=ABSPATH?>lista' class='btn-agro'>Comprar</a>

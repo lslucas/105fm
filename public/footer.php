@@ -11,6 +11,7 @@
 
 			<div class="column grid_5">
 				<p class="fr"><a href="#" title="">Topo</a></p>
+				<div class='span2 pull-right'><small>Cotação U$<?=cotacao()?></small></div>
 			</div>
 		</div>
 	</footer>
