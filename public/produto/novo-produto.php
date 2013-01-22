@@ -16,9 +16,9 @@
 				?>
 
 				<div class="control-group">
-					<label class="control-label" for="grupoquimico"><span class="color-red">*</span> Grupo</label>
+					<label class="control-label" for="grupoquimico"> Grupo</label>
 					<div class="controls">
-					<select name="grupoquimico" id="grupoquimico" class="filtroGrupo required">
+					<select name="grupoquimico" id="grupoquimico" class="filtroGrupo">
 						<?=convertCatList2Option(getCategoriaListArea('Grupo Quimico', null, 'Grupo Quimico'), $val['grupoquimico_id'])?>
 					</select>
 					</div>

@@ -84,7 +84,7 @@
 		elseif (empty($basename))
 			include_once 'public/default.php';
 		else
-			include_once 'public/erro-404.php';
+			include_once 'public/erros/erro-404.php';
 
 	} else {
 

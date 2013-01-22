@@ -27,8 +27,8 @@ class Compra {
 		if (!isset($args['usr_id']) || empty($args['usr_id']))
 			$return .= '<li>Sua sessão expirou! Faça <a href=\''.ABSPATH.'login\'>login</a> novamente</li>';
 		else {
-			if (empty($args['grupoquimico']))
-				$return .= '<li>Selecione um Grupo Químico</li>';
+			// if (empty($args['grupoquimico']))
+				// $return .= '<li>Selecione um Grupo Químico</li>';
 			if (empty($args['fabricante']) && empty($args['nomeFabricante']))
 				$return .= '<li>Selecione um fabricante ou informe um novo clicando em outro</li>';
 			if (empty($args['pro_id']) && empty($args['nomeProduto']))
