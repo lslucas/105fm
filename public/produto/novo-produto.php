@@ -1,7 +1,7 @@
 	<!-- <div class="row novo-produto"> -->
 	<div class="column grid_10">
 		<div class="column">
-			<h1><?=$basename=='novo-produto' ? 'Novo Produto' : 'Editar Produto '.$val['titulo']?></h1>
+			<h1><?=$basename=='novo-produto' ? 'Inserir Oferta' : 'Editar Oferta '.$val['titulo']?></h1>
 			<p><em>Todos os campos com - <span class="color-red">*</span> - são obrigatórios.</em></p>
 			<p><br /></p>
 		</div>
