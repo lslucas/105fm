@@ -446,7 +446,13 @@ class Compra {
 		$cpr=array();
 		$listMyPro = array();
 
-		$sql = "SELECT upr_id FROM `".TP."_usuario_produto` WHERE upr_status=1 AND upr_usr_id=? ORDER BY upr_timestamp DESC";
+		$sql = "SELECT upr_id
+					FROM `".TP."_usuario_produto`
+					INNER JOIN `".TP."_produto`
+						ON `pro_id`=`upr_pro_id`
+					WHERE upr_status=1
+						AND upr_usr_id=?
+						ORDER BY pro_titulo";
 		if (!$res = $conn->prepare($sql))
 			echo __FUNCTION__.$conn->error;
 		else {
