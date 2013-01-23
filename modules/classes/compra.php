@@ -39,7 +39,7 @@ class Compra {
 				$return .= '<li>Informe a quantidade de produtos</li>';
 			// if (empty($args['peso']))
 				// $return .= '<li>Informe o peso do produto</li>';
-			if (empty($args['peso_unidade_medida']))
+			if (empty($args['peso_unidade_medida']) && empty($args['nomeEmbalagem']))
 				$return .= '<li>Informe a unidade de medida do peso do produto</li>';
 			// if (empty($args['datapagamento']))
 				// $return .= '<li>Informe a data de pagamento</li>';
@@ -204,11 +204,12 @@ class Compra {
 							 `upr_quantidade_minima_venda`,
 							 `upr_peso`,
 							 `upr_peso_unidade_medida`,
+							 `upr_nomeEmbalagem`,
 							 `upr_datavalidade`,
 							 `upr_datapagamento`,
 							 `upr_observacao`,
 							 `upr_ip`
-							 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+							 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			if (!$qryins = $conn->prepare($sqlins))
 				echo __FUNCTION__.$conn->error;
 				// return false;
@@ -219,7 +220,7 @@ class Compra {
 				$this->_args['datavalidade'] = datept2en('/',$this->_args['datavalidade']);
 				$this->_args['datapagamento'] = datept2en('/',$this->_args['datapagamento']);
 
-				$qryins->bind_param('isiissddiidissss',
+				$qryins->bind_param('isiissddiidisssss',
 				                    	$this->_args['usr_id'],
 				                    	$this->_args['grupoquimico'],
 				                    	$this->_args['fabricante'],
@@ -232,6 +233,7 @@ class Compra {
 				                    	$this->_args['quantidade_minima_venda'],
 				                    	$this->_args['peso'],
 				                    	$this->_args['peso_unidade_medida'],
+				                    	$this->_args['nomeEmbalagem'],
 				                    	$this->_args['datavalidade'],
 				                    	$this->_args['datapagamento'],
 				                    	$this->_args['observacao'],
@@ -269,6 +271,7 @@ class Compra {
 						 `upr_quantidade_minima_venda`=?,
 						 `upr_peso`=?,
 						 `upr_peso_unidade_medida`=?,
+						 `upr_nomeEmbalagem`=?,
 						 `upr_datavalidade`=?,
 						 `upr_datapagamento`=?,
 						 `upr_observacao`=?,
@@ -284,7 +287,7 @@ class Compra {
 			$this->_args['datavalidade'] = datept2en('/',$this->_args['datavalidade']);
 			$this->_args['datapagamento'] = datept2en('/',$this->_args['datapagamento']);
 
-			$qryupd->bind_param('iiissddiidisssisi',
+			$qryupd->bind_param('iiissddiidisssssii',
 			                    	$this->_args['grupoquimico'],
 			                    	$this->_args['fabricante'],
 			                    	$this->_args['pro_id'],
@@ -296,6 +299,7 @@ class Compra {
 			                    	$this->_args['quantidade_minima_venda'],
 			                    	$this->_args['peso'],
 			                    	$this->_args['peso_unidade_medida'],
+			                    	$this->_args['nomeEmbalagem'],
 			                    	$this->_args['datavalidade'],
 			                    	$this->_args['datapagamento'],
 			                    	$this->_args['observacao'],
@@ -347,7 +351,7 @@ class Compra {
 					upr_quantidade,
 					upr_quantidade_minima_venda,
 					upr_peso,
-					upr_peso_unidade_medida,
+					COALESCE(NULLIF(upr_peso_unidade_medida,''), upr_nomeEmbalagem) `embalagem`,
 					upr_datavalidade,
 					DATE_FORMAT(upr_datavalidade, '%d/%m/%Y'),
 					upr_datapagamento,
@@ -373,7 +377,7 @@ class Compra {
 		else {
 
 			$res->bind_param('i', $id);
-			$res->bind_result($nome, $nomeFantasia, $upr_id, $usr_id, $pro_id, $grupoquimico_id, $fabricante_id, $nomeFabricante, $nomeProduto, $produto, $codigoProduto, $tipoProduto, $fabricanteProduto, $proFabricanteProduto, $grupoquimicoProduto, $proGrupoQuimicoProduto, $valor, $valor_minimo, $quantidade, $quantidade_minima_venda, $peso, $peso_unidade_medida, $datavalidade, $datavalidadePt, $datapagamento, $datapagamentoPt, $views, $status, $vendas, $cidade, $uf, $observacao, $timestamp);
+			$res->bind_result($nome, $nomeFantasia, $upr_id, $usr_id, $pro_id, $grupoquimico_id, $fabricante_id, $nomeFabricante, $nomeProduto, $produto, $codigoProduto, $tipoProduto, $fabricanteProduto, $proFabricanteProduto, $grupoquimicoProduto, $proGrupoQuimicoProduto, $valor, $valor_minimo, $quantidade, $quantidade_minima_venda, $peso, $embalagem, $datavalidade, $datavalidadePt, $datapagamento, $datapagamentoPt, $views, $status, $vendas, $cidade, $uf, $observacao, $timestamp);
 			$res->execute();
 			$res->store_result();
 			$res->fetch();
@@ -385,6 +389,7 @@ class Compra {
 				$fabricanteProduto = empty($fabricanteProduto) ? $nomeFabricante : $fabricanteProduto;
 				$fabricanteProduto = empty($fabricanteProduto) ? $proFabricanteProduto : $fabricanteProduto;
 				$grupoquimicoProduto = empty($grupoquimicoProduto) && !empty($proGrupoQuimicoProduto) ? $proGrupoQuimicoProduto : $grupoquimicoProduto;
+				$embalagem = is_numeric($embalagem) ? getCategoriaCol('titulo', 'id', $embalagem) : $embalagem;
 				$valor = empty($valor) || $valor=='0.00' ? 'Sob consulta' : 'R$ '.Currency2Decimal($valor);
 
 				$id_encrypted = $hashids->encrypt($upr_id);
@@ -407,7 +412,7 @@ class Compra {
 			             'quantidade'=>$quantidade,
 			             'quantidade_minima_venda'=>$quantidade_minima_venda,
 			             'peso'=>$peso,
-			             'peso_unidade_medida'=>getCategoriaCol('titulo', 'id', $peso_unidade_medida),
+			             'peso_unidade_medida'=>$embalagem,
 			             'datavalidadeEn'=>$datavalidade,
 			             'datavalidade'=>$datavalidadePt,
 			             'datapagamentoEn'=>$datapagamento,

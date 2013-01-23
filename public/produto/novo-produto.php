@@ -82,7 +82,7 @@
 				<div class="control-group">
 					<label class="control-label" for="peso_unidade_medida"><span class="color-red">*</span> Embalagem</label>
 					<div class="controls">
-					<select name="peso_unidade_medida" id="peso_unidade_medida" class="required">
+					<select name="peso_unidade_medida" id="peso_unidade_medida">
 						<option value="">Selecione</option>
 						<?php
 								$sql = "SELECT cat_id, cat_titulo FROM ".TP."_categoria WHERE cat_status=1 AND cat_area='Unidade de Medida' ORDER BY cat_titulo;";
@@ -99,8 +99,15 @@
 								$qry->close();
 							 }
 						?>
-					</select>
+					</select> <small><a href="javascript:void(0);" class='showOnClick' data-target='#outraEmbalagem'>outro?</a></small>
 					<p class="help-block">Selecione a unidade de medida do peso desse ítem</p>
+					</div>
+
+					<div id='outraEmbalagem' class='hide'>
+						<br/><label class="control-label" for="nomeEmbalagem"><span class="color-red">*</span> Nome da Embalagem</label>
+						<div class="controls">
+							<input type="text" class="input-xlarge" placeholder='Nome da Embalagem' name='nomeEmbalagem' id='nomeEmbalagem' disabled=disabled value="<?=isset($val['nomeEmbalagem']) ? $val['nomeEmbalagem'] : null?>">
+						</div>
 					</div>
 				</div>
 

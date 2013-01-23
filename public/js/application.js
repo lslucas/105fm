@@ -197,6 +197,8 @@ $(function() {
  	if ($('#nomeFabricante').val()!='') $('#outroFabricante').show().find('input').attr('disabled', false);
 	 else $('#outroFabricante').hide().find('input').attr('disabled', true);
 
+ 	if ($('#nomeEmbalagem').val()!='') $('#outraEmbalagem').show().find('input').attr('disabled', false);
+	 else $('#outraEmbalagem').hide().find('input').attr('disabled', true);
 
 	/**
 	 * Filtros
