@@ -398,6 +398,7 @@ function getProdutosByOptions($option, $startwith=null, $order='titulo', $userPr
 	if ($userProducts===true)
 		$inner = "				INNER JOIN ".TP."_usuario_produto
 					ON upr_pro_id=pro_id
+					AND upr_status=1
 				INNER JOIN ".TP."_usuario
 					ON upr_usr_id=usr_id
 					AND usr_status=1";
@@ -773,66 +774,6 @@ function newCode($var=null, $maxchar=6)
 	return $code;
 }
 
-/*
- *retorna valor da coluna
- */
-function getListUsers($args=null)
-{
-	global $conn;
-
-	$whr = null;
-	if (isset($args['where']))
-		$whr = ' AND '.$args['where'];
-
-	$orderby = null;
-	if (isset($args['orderby']))
-		$orderby = ' ORDER BY '.$args['orderby'];
-
-	if (!isset($args['cols'])) {
-
-		/*
-		 *get all columns
-		 */
-		$sql_col = "SHOW fields FROM ".TABLE_PREFIX."_user";
-		$qry_col = $conn->query($sql_col);
-
-		$arr = array();
-		while ($a = $qry_col->fetch_assoc())
-			array_push($arr, $a['Field']);
-
-		$qry_col->close();
-
-		$field = array_values($arr);
-		$cols = implode(',', $field);
-		$vfield = implode(',$', $field);
-		$vfield = '$'.$vfield;
-		$vfield = explode(',', $vfield);
-
-	} else
-		$cols = $args['cols'];
-
-	/*
-	 *query da disciplina
-	 */
-	$sql = "SELECT {$cols} FROM ".TABLE_PREFIX."_user WHERE 1 {$whr} {$orderby}";
-	if(!$qry = $conn->query($sql))
-		return false;
-
-	else {
-
-		$val = array();
-		$i=0;
-
-		while ($row = $qry->fetch_assoc()) {
-			$val[$i] = $row;
-			$i++;
-		}
-		$qry->close();
-
-		return $val;
-	}
-
-}
 
 /*
  *gera um hash unico, unique
@@ -952,33 +893,6 @@ function encrypt($_input, $_key='your salt', $_type='mcrypt')
 	// return generated password
 	// enjoy
 	return utf8_encode($encryptedData);
-
-}
-
-/*
- *retorna valor da coluna
- */
-function plusViews($auto_id)
-{
-	global $conn;
-
-	$ip = $_SERVER['REMOTE_ADDR'];
-	if (!isset($_SESSION[TP]['views'][$ip][$auto_id]) || $_SESSION[TP]['views'][$ip][$auto_id]!=date('Y-m-d')) {
-
-		$sql = "UPDATE ".TABLE_PREFIX."_auto SET auto_views=auto_views+1 WHERE auto_id=?";
-		if(!$qry = $conn->prepare($sql))
-			return false;
-
-		else {
-
-			$qry->bind_param('i', $auto_id);
-			$qry->execute();
-			$qry->close();
-
-			$_SESSION[TP]['views'][$ip][$auto_id] = date('Y-m-d');
-			return true;
-		}
-	}
 
 }
 
