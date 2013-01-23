@@ -390,6 +390,7 @@ class Compra {
 				$fabricanteProduto = empty($fabricanteProduto) ? $proFabricanteProduto : $fabricanteProduto;
 				$grupoquimicoProduto = empty($grupoquimicoProduto) && !empty($proGrupoQuimicoProduto) ? $proGrupoQuimicoProduto : $grupoquimicoProduto;
 				$embalagem = is_numeric($embalagem) ? getCategoriaCol('titulo', 'id', $embalagem) : $embalagem;
+				$empresa = empty($nomeFantasia) ? $nome : $nomeFantasia;
 				$valor = empty($valor) || $valor=='0.00' ? 'Sob consulta' : 'R$ '.Currency2Decimal($valor);
 
 				$id_encrypted = $hashids->encrypt($upr_id);
@@ -397,7 +398,7 @@ class Compra {
 			             'id'=>$id_encrypted,
 			             'usr_id'=>$hashids->encrypt($usr_id),
 			             'pro_id'=>$pro_id,
-			             'empresa'=>(empty($nomeFantasia) ? $nome : $nomeFantasia),
+			             'empresa'=>mb_strtoupper($empresa, 'utf8'),
 			             'grupoquimico_id'=>$grupoquimico_id,
 			             'fabricante_id'=>$fabricante_id,
 			             'nomeProduto'=>mb_strtoupper($nomeProduto, 'utf8'),
