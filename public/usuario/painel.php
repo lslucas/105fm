@@ -38,7 +38,7 @@
 							<th width="60px">UF</th>
 							<th align="left">Produto</th>
 							<th align="left">Embalagem</th>
-							<th align="left">Quantidade</th>
+							<th width="30px" align="left">Qtd.</th>
 							<th width="80px" class='pagination-centered'>R$</th>
 							<th width="60px" class='pagination-centered'>Visto</th>
 							<th width="60px">--</th>

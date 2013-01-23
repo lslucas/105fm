@@ -353,6 +353,7 @@ class Compra {
 					upr_datapagamento,
 					DATE_FORMAT(upr_datapagamento, '%d/%m/%Y'),
 					upr_views,
+					upr_status,
 					upr_vendas,
 					adb_cidade,
 					adb_uf,
@@ -372,7 +373,7 @@ class Compra {
 		else {
 
 			$res->bind_param('i', $id);
-			$res->bind_result($nome, $nomeFantasia, $upr_id, $usr_id, $pro_id, $grupoquimico_id, $fabricante_id, $nomeFabricante, $nomeProduto, $produto, $codigoProduto, $tipoProduto, $fabricanteProduto, $proFabricanteProduto, $grupoquimicoProduto, $proGrupoQuimicoProduto, $valor, $valor_minimo, $quantidade, $quantidade_minima_venda, $peso, $peso_unidade_medida, $datavalidade, $datavalidadePt, $datapagamento, $datapagamentoPt, $views, $vendas, $cidade, $uf, $observacao, $timestamp);
+			$res->bind_result($nome, $nomeFantasia, $upr_id, $usr_id, $pro_id, $grupoquimico_id, $fabricante_id, $nomeFabricante, $nomeProduto, $produto, $codigoProduto, $tipoProduto, $fabricanteProduto, $proFabricanteProduto, $grupoquimicoProduto, $proGrupoQuimicoProduto, $valor, $valor_minimo, $quantidade, $quantidade_minima_venda, $peso, $peso_unidade_medida, $datavalidade, $datavalidadePt, $datapagamento, $datapagamentoPt, $views, $status, $vendas, $cidade, $uf, $observacao, $timestamp);
 			$res->execute();
 			$res->store_result();
 			$res->fetch();
@@ -417,6 +418,7 @@ class Compra {
 			             'observacao'=>$observacao,
 			             'estado'=>estadoFromUF($uf),
 			             'views'=>$views,
+			             'status'=>$status,
 			             'vendas'=>$vendas,
 			             'timestamp'=>$timestamp
 		             );
