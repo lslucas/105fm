@@ -384,7 +384,7 @@ class Compra {
 				$fabricanteProduto = empty($fabricanteProduto) ? $nomeFabricante : $fabricanteProduto;
 				$fabricanteProduto = empty($fabricanteProduto) ? $proFabricanteProduto : $fabricanteProduto;
 				$grupoquimicoProduto = empty($grupoquimicoProduto) && !empty($proGrupoQuimicoProduto) ? $proGrupoQuimicoProduto : $grupoquimicoProduto;
-				$valor = empty($valor) ? 'Consulte-nos' : 'R$ '.Currency2Decimal($valor);
+				$valor = empty($valor) || $valor=='0.00' ? 'Sob consulta' : 'R$ '.Currency2Decimal($valor);
 
 				$id_encrypted = $hashids->encrypt($upr_id);
 				$cpr = array(
