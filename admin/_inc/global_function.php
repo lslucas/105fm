@@ -342,9 +342,15 @@ function getTodosProdutos($order='titulo ASC', $startwith=null, $simple=true)
 
 	$order = !empty($order) ? $order : 'titulo ASC';
 	$whr = null;
-	$sql = "SELECT pro_id, pro_titulo, pro_tipo, pro_valor
+	$sql = "SELECT
+				pro_id,
+				COALESCE(NULLIF(pro_titulo,''), upr_nomeProduto) `produto`,
+				pro_tipo,
+				pro_valor
 				FROM ".TP."_produto
-				WHERE pro_status=1
+				LEFT JOIN ".TP."_upr_produto
+					ON upr_pro_id=pro_id
+				WHERE pro_status=1 AND upr_status=1
 				ORDER BY pro_{$order};";
 	$lst = array();
 	if(!$qry = $conn->prepare($sql))
@@ -364,7 +370,7 @@ function getTodosProdutos($order='titulo ASC', $startwith=null, $simple=true)
 				$i = linkfySmart($titulo);
 
 			$lst[$i]['id'] = $id;
-			$lst[$i]['titulo'] = $titulo;
+			$lst[$i]['titulo'] = mb_strtoupper($titulo, 'utf8');
 			$lst[$i]['tipo'] = $tipo;
 			$lst[$i]['valor'] = 'R$ '.Moeda($valor);
 			$lst[$i]['valor_decimal'] = $valor;
@@ -394,22 +400,37 @@ function getProdutosByOptions($option, $startwith=null, $order='titulo', $userPr
 				$whr .= " AND pro_{$optkey}=\"{$optval}\"";
 		}
 
-	$inner = null;
 	if ($userProducts===true)
-		$inner = "				INNER JOIN ".TP."_usuario_produto
-					ON upr_pro_id=pro_id
-					AND upr_status=1
-				INNER JOIN ".TP."_usuario
-					ON upr_usr_id=usr_id
-					AND usr_status=1";
+		$sql = "SELECT * FROM (
+					SELECT
+						upr_id,
+						COALESCE(NULLIF(pro_titulo,''), upr_nomeProduto) `produto`,
+						upr_valor
+						FROM ".TP."_usuario_produto
+						INNER JOIN ".TP."_usuario
+							ON upr_usr_id=usr_id
+							AND usr_status=1
+						LEFT JOIN ".TP."_produto
+							ON pro_id=upr_pro_id
+							AND pro_status=1
+						WHERE upr_status=1
+						{$whr}
+						GROUP BY upr_pro_id
+					) as `tmp`
+				ORDER BY `produto`;";
+	else
+		$sql = "SELECT * FROM (
+					SELECT
+						pro_id,
+						COALESCE(NULLIF(pro_titulo,''), upr_nomeProduto) `produto`,
+						pro_valor
+						FROM ".TP."_produto
+						WHERE pro_status=1
+						{$whr}
+						GROUP BY pro_id
+				) as `tmp`
+				ORDER BY `produto`;";
 
-	$sql = "SELECT pro_id, pro_titulo, pro_tipo, pro_valor
-				FROM ".TP."_produto
-				{$inner}
-				WHERE pro_status=1
-				{$whr}
-				GROUP BY pro_id
-				ORDER BY pro_{$order};";
 	$lst = array();
 	if(!$qry = $conn->prepare($sql))
 		echo divAlert($conn->error, 'error');
@@ -417,15 +438,15 @@ function getProdutosByOptions($option, $startwith=null, $order='titulo', $userPr
 	else {
 
 		$qry->execute();
-		$qry->bind_result($id, $titulo, $tipo, $valor);
+		$qry->bind_result($id, $titulo, $valor);
 
 		if (!empty($startwith))
 			$lst[0] = array('id'=>0, 'titulo'=>$startwith);
 
 		$i=1;
 		while ($qry->fetch()) {
-			$lst[$i]['id'] = $id;
-			$lst[$i]['titulo'] = $titulo;
+			$lst[$i]['id'] = empty($id)  ? linkfySmart($titulo) : $id;
+			$lst[$i]['titulo'] = mb_strtoupper($titulo, 'utf8');
 			$lst[$i]['tipo'] = $tipo;
 			$lst[$i]['valor'] = 'R$ '.Moeda($valor);
 			$lst[$i]['valor_decimal'] = $valor;

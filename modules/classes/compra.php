@@ -400,9 +400,9 @@ class Compra {
 			             'empresa'=>(empty($nomeFantasia) ? $nome : $nomeFantasia),
 			             'grupoquimico_id'=>$grupoquimico_id,
 			             'fabricante_id'=>$fabricante_id,
-			             'nomeProduto'=>$nomeProduto,
+			             'nomeProduto'=>mb_strtoupper($nomeProduto, 'utf8'),
 			             'nomeFabricante'=>$nomeFabricante,
-			             'titulo'=>$produto,
+			             'titulo'=>mb_strtoupper($produto, 'utf8'),
 			             'codigo'=>$codigoProduto,
 			             'tipo'=>$tipoProduto,
 			             'fabricante'=>$fabricanteProduto,
@@ -412,7 +412,7 @@ class Compra {
 			             'quantidade'=>$quantidade,
 			             'quantidade_minima_venda'=>$quantidade_minima_venda,
 			             'peso'=>$peso,
-			             'peso_unidade_medida'=>$embalagem,
+			             'peso_unidade_medida'=>mb_strtoupper($embalagem, 'utf8'),
 			             'datavalidadeEn'=>$datavalidade,
 			             'datavalidade'=>$datavalidadePt,
 			             'datapagamentoEn'=>$datapagamento,
@@ -457,6 +457,9 @@ class Compra {
 						upr_id,
 						COALESCE(NULLIF(pro_titulo,''), upr_nomeProduto) `produto`
 					FROM `".TP."_usuario_produto`
+					INNER JOIN ".TP."_usuario
+						ON upr_usr_id=usr_id
+						AND usr_status=1
 					LEFT JOIN `".TP."_produto`
 						ON `pro_id`=`upr_pro_id`
 					WHERE upr_status=1
@@ -500,6 +503,9 @@ class Compra {
 						upr_id,
 						COALESCE(NULLIF(pro_titulo,''), upr_nomeProduto) `produto`
 					FROM `".TP."_usuario_produto`
+					INNER JOIN ".TP."_usuario
+						ON upr_usr_id=usr_id
+						AND usr_status=1
 					LEFT JOIN ".TP."_address_book
 						ON adb_usr_id=upr_usr_id
 					LEFT JOIN `".TP."_produto`
