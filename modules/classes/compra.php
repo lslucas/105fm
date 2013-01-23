@@ -485,7 +485,7 @@ class Compra {
 						ON pro_id=upr_pro_id
 					WHERE upr_status=1
 					{$whr}
-					ORDER BY upr_timestamp DESC";
+					ORDER BY pro_titulo";
 		if (!$res = $conn->prepare($sql))
 			echo __FUNCTION__.$conn->error;
 		else {
