@@ -406,7 +406,7 @@ class Compra {
 			             'quantidade'=>$quantidade,
 			             'quantidade_minima_venda'=>$quantidade_minima_venda,
 			             'peso'=>$peso,
-			             'peso_unidade_medida'=>$peso_unidade_medida,
+			             'peso_unidade_medida'=>getCategoriaCol('titulo', 'id', $peso_unidade_medida),
 			             'datavalidadeEn'=>$datavalidade,
 			             'datavalidade'=>$datavalidadePt,
 			             'datapagamentoEn'=>$datapagamento,

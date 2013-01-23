@@ -44,6 +44,9 @@ class Categoria {
 	{
 		global $conn, $hashids;
 
+		if (empty($id))
+			return false;
+
 		if (!is_numeric($id)) {
 			$id = $hashids->decrypt($id);
 			$id = $id[0];

@@ -52,8 +52,8 @@ include_once $rp.'_inc/Excel/reader.php';
 	 */
 	$cat['Grupo Quimico'] = $grupo;
 	$cat['Fabricante'] = $fabricante;
-	echo "<h3>Categorias</h3>";
-	include 'categoria.php';
+	// echo "<h3>Categorias</h3>";
+	// include 'categoria.php';
 
 	echo "<h3>Produtos</h3>";
 	include 'produto.php';

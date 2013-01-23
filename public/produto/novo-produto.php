@@ -80,7 +80,7 @@
 				</div>
 
 				<div class="control-group">
-					<label class="control-label" for="peso_unidade_medida"><span class="color-red">*</span> Unidade de Medida</label>
+					<label class="control-label" for="peso_unidade_medida"><span class="color-red">*</span> Embalagem</label>
 					<div class="controls">
 					<select name="peso_unidade_medida" id="peso_unidade_medida" class="required">
 						<option value="">Selecione</option>

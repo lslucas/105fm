@@ -52,7 +52,7 @@
 								<th width="60px">UF</th>
 								<th align="left">Produto</th>
 								<th align="left">Revenda</th>
-								<th align="left">Fabricante</th>
+								<th width='30px' align="left" title='Quantidade'>Qtd.</th>
 								<th width="80px" class='pagination-centered'>R$</th>
 							</tr>
 							<tbody>
@@ -65,7 +65,7 @@
 									<td align=center><a href='<?=$lista['link']?>'><?=$lista['uf']?></td></td>
 									<td><a href='<?=$lista['link']?>'><?=$lista['titulo']?></a></td>
 									<td><a href='<?=$lista['link']?>'><?=$lista['empresa']?></td></td>
-									<td><a href='<?=$lista['link']?>'><?=$lista['fabricante']?></a></td>
+									<td><a href='<?=$lista['link']?>'><?=$lista['quantidade']?></a></td>
 									<td align=center><a href='<?=$lista['link']?>'><?=$lista['valor']?></a></td>
 								</tr>
 								<?php } ?>

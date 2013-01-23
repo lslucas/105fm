@@ -37,8 +37,8 @@
 						<tr>
 							<th width="60px">UF</th>
 							<th align="left">Produto</th>
-							<th align="left">Grupo Químico</th>
-							<th align="left">Fabricante</th>
+							<th align="left">Embalagem</th>
+							<th align="left">Quantidade</th>
 							<th width="80px" class='pagination-centered'>R$</th>
 							<th width="60px" class='pagination-centered'>Visto</th>
 							<th width="60px">--</th>
@@ -65,8 +65,8 @@
 							<tr id='tr<?=$lista['id']?>'>
 								<td align=center><a href='<?=$lista['link']?>'><?=$lista['uf']?></a></td>
 								<td><a href='<?=$lista['link']?>'><?=$lista['titulo']?></a></td>
-								<td><a href='<?=$lista['link']?>'><?=$lista['grupoquimico']?></a></td>
-								<td><a href='<?=$lista['link']?>'><?=$lista['fabricante']?></a></td>
+								<td><a href='<?=$lista['link']?>'><?=$lista['peso_unidade_medida']?></a></td>
+								<td><a href='<?=$lista['link']?>'><?=$lista['quantidade']?></a></td>
 								<td align=center><a href='<?=$lista['link']?>'><?=$lista['valor']?></a></td>
 								<td align=center><a href='<?=$lista['link']?>'><?=$lista['views']?></a></td>
 								<td align=center>

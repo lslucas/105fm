@@ -12,6 +12,8 @@
 							</ul>
 							<?php } ?>
 
+							<?php
+							/*
 							<?php if (count($filtro['faixaPreco'])>0) { ?>
 							<strong>Faixa de preços</strong>
 							<ul>
@@ -20,6 +22,7 @@
 								<?php } ?>
 							</ul>
 							<?php } ?>
+							 */?>
 
 							<!--
 							<strong>Ou filtrar por</strong>

@@ -1,4 +1,5 @@
 <?php
+	/*
 	foreach ($list as $int=>$lst) {
 
 		$grupo = isset($lstCatIdByTitulo[$lst['grupo']]) ? $lstCatIdByTitulo[$lst['grupo']] : null;
@@ -8,10 +9,7 @@
 		if (empty($grupo) || empty($fabricanteNome))
 			continue;
 
-		/**
-		 * Fabricante
-		 * @var string
-		 */
+		#Fabricante
 		unset($cat_id);
 		$area = 'Fabricante';
 		$sqlfab = "SELECT cat_id FROM ".TP."_categoria WHERE LOWER(cat_titulo)=? AND cat_idrel=? AND cat_area=?";
@@ -44,30 +42,34 @@
 			}
 		}
 	}
+	*/
 
 
 	foreach ($list as $int=>$lst) {
 
-		$grupo = isset($lstCatIdByTitulo[$lst['grupo']]) ? $lstCatIdByTitulo[$lst['grupo']] : null;
-		$fabricanteNome = trim($lst['fabricante']);
-		$fabricante = isset($lstCatIdByTitulo[$fabricanteNome]) ? $lstCatIdByTitulo[$fabricanteNome] : null;
+		// $grupo = isset($lstCatIdByTitulo[$lst['grupo']]) ? $lstCatIdByTitulo[$lst['grupo']] : null;
+		// $fabricanteNome = trim($lst['fabricante']);
+		// $fabricante = isset($lstCatIdByTitulo[$fabricanteNome]) ? $lstCatIdByTitulo[$fabricanteNome] : null;
 		$titulo = trim($lst['produto']);
 		$titulo_min = mb_strtolower($titulo, 'utf8');
+		unset($pro_id);
 
-		if (empty($grupo) || empty($fabricante) || empty($titulo))
-			continue;
+		// if (empty($grupo) || empty($fabricante) || empty($titulo))
+			// continue;
 		/**
 		 * Produto
 		 * @var string
 		 */
-		$sql = "SELECT pro_id FROM ".TP."_produto WHERE LOWER(pro_titulo)=? AND pro_fabricante=? AND pro_grupoquimico=?";
+		$sql = "SELECT pro_id FROM ".TP."_produto WHERE LOWER(pro_titulo)=?";
 		if (!$qry = $conn->prepare($sql))
 			echo $conn->error();
 
 		else {
-			$qry->bind_param('sii', $titulo_min, $fabricante, $grupo);
+			$qry->bind_param('s', $titulo_min);
+			// $qry->bind_param('sii', $titulo_min, $fabricante, $grupo);
 			$qry->bind_result($pro_id);
 			$qry->execute();
+			$qry->store_result();
 			$qry->fetch();
 			$qry->close();
 
@@ -81,6 +83,7 @@
 					echo $conn->error();
 				else {
 					$tipo = 1;
+					$fabricante = $grupo = null;
 					$qry_ins->bind_param('siii', $titulo, $tipo, $fabricante, $grupo);
 					$qry_ins->execute();
 					$qry_ins->close();
