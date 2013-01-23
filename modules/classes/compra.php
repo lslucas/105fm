@@ -446,18 +446,23 @@ class Compra {
 		$cpr=array();
 		$listMyPro = array();
 
-		$sql = "SELECT upr_id
+		$sql = "
+				SELECT * FROM (
+					SELECT
+						upr_id,
+						COALESCE(NULLIF(pro_titulo,''), upr_nomeProduto) `produto`
 					FROM `".TP."_usuario_produto`
 					LEFT JOIN `".TP."_produto`
 						ON `pro_id`=`upr_pro_id`
 					WHERE upr_status=1
 						AND upr_usr_id=?
-						ORDER BY pro_titulo";
+					) as `tmp`
+				ORDER BY produto";
 		if (!$res = $conn->prepare($sql))
 			echo __FUNCTION__.$conn->error;
 		else {
 			$res->bind_param('i', $usr_id);
-			$res->bind_result($upr_id);
+			$res->bind_result($upr_id, $produto);
 			$res->execute();
 
 			while ($res->fetch()) {
@@ -485,19 +490,23 @@ class Compra {
 		$filtro = $getFiltros['filtro'];
 		$whr = $getFiltros['whr'];
 
-		$sql = "SELECT upr_id
+		$sql = "SELECT * FROM (
+					SELECT
+						upr_id,
+						COALESCE(NULLIF(pro_titulo,''), upr_nomeProduto) `produto`
 					FROM `".TP."_usuario_produto`
 					LEFT JOIN ".TP."_address_book
 						ON adb_usr_id=upr_usr_id
-					LEFT JOIN ".TP."_produto
-						ON pro_id=upr_pro_id
+					LEFT JOIN `".TP."_produto`
+						ON `pro_id`=`upr_pro_id`
 					WHERE upr_status=1
-					{$whr}
-					ORDER BY pro_titulo";
+						{$whr}
+					) as `tmp`
+				ORDER BY produto";
 		if (!$res = $conn->prepare($sql))
 			echo __FUNCTION__.$conn->error;
 		else {
-			$res->bind_result($upr_id);
+			$res->bind_result($upr_id, $produto);
 			$res->execute();
 
 			while ($res->fetch())
