@@ -501,6 +501,11 @@ class Compra {
 		$sql = "SELECT * FROM (
 					SELECT
 						upr_id,
+						pro_grupoquimico,
+						pro_fabricante,
+						upr_usr_id,
+						adb_uf,
+						upr_valor,
 						COALESCE(NULLIF(pro_titulo,''), upr_nomeProduto) `produto`
 					FROM `".TP."_usuario_produto`
 					INNER JOIN ".TP."_usuario
@@ -511,13 +516,14 @@ class Compra {
 					LEFT JOIN `".TP."_produto`
 						ON `pro_id`=`upr_pro_id`
 					WHERE upr_status=1
-						{$whr}
-					) as `tmp`
+				) as `tmp`
+				WHERE 1
+					{$whr}
 				ORDER BY produto";
 		if (!$res = $conn->prepare($sql))
 			echo __FUNCTION__.$conn->error;
 		else {
-			$res->bind_result($upr_id, $produto);
+			$res->bind_result($upr_id, $grupoquimico, $fabricante, $usr_id, $uf, $valor, $produto);
 			$res->execute();
 
 			while ($res->fetch())
@@ -554,21 +560,31 @@ class Compra {
 		 * Query do Filtro de Localidade
 		 * @var string
 		 */
-		$sqluf = "SELECT adb_uf, COUNT(upr_id) `num`
+		$sqluf = "SELECT * FROM (
+					SELECT
+						pro_grupoquimico,
+						pro_fabricante,
+						upr_usr_id,
+						adb_uf,
+						upr_valor,
+						COALESCE(NULLIF(pro_titulo,''), upr_nomeProduto) `produto`,
+						COUNT(upr_id) `num`
 					FROM `".TP."_usuario_produto`
 					LEFT JOIN ".TP."_address_book
 						ON adb_usr_id=upr_usr_id
 					INNER JOIN ".TP."_produto
 						ON pro_id=upr_pro_id
 					WHERE upr_status=1
+					) as `tmp`
+					WHERE 1
 					{$whrFiltro}
 					GROUP BY adb_uf
-					ORDER BY upr_timestamp DESC";
+					ORDER BY adb_uf";
 		if (!$resuf = $conn->prepare($sqluf))
 			echo __FUNCTION__.$conn->error;
 		else {
 
-			$resuf->bind_result($uf, $num);
+			$resuf->bind_result($grupoquimico, $fabricante, $usr_id, $uf, $valor, $produto, $num);
 			$resuf->execute();
 
 			$i=0;
@@ -596,6 +612,7 @@ class Compra {
 		 * Query do Filtro de FaixaPreco
 		 * @var string
 		 */
+		/*
 		$sqlval = "SELECT upr_valor, COUNT(upr_id) `num`
 					FROM `".TP."_usuario_produto`
 					LEFT JOIN ".TP."_address_book
@@ -606,11 +623,31 @@ class Compra {
 					{$whrFiltro}
 					GROUP BY upr_valor
 					ORDER BY upr_timestamp DESC";
+					*/
+		$sqlval = "SELECT * FROM (
+					SELECT
+						pro_grupoquimico,
+						pro_fabricante,
+						upr_usr_id,
+						adb_uf,
+						upr_valor,
+						COALESCE(NULLIF(pro_titulo,''), upr_nomeProduto) `produto`,
+						COUNT(upr_id) `num`
+					FROM `".TP."_usuario_produto`
+					LEFT JOIN ".TP."_address_book
+						ON adb_usr_id=upr_usr_id
+					INNER JOIN ".TP."_produto
+						ON pro_id=upr_pro_id
+					WHERE upr_status=1
+					) as `tmp`
+					WHERE 1
+					{$whrFiltro}
+					GROUP BY upr_valor";
 		if (!$resval = $conn->prepare($sqlval))
 			echo __FUNCTION__.$conn->error;
 		else {
 
-			$resval->bind_result($decimal, $num);
+			$resval->bind_result($grupoquimico, $fabricante, $usr_id, $uf, $decimal, $produto, $num);
 			$resval->execute();
 
 			$i=0;
@@ -688,14 +725,15 @@ class Compra {
 				$whrFiltro['grupoquimico'] = $whrGrupoQuimico;
 
 			} if (isset($filtro['filtroFabricante']) && !empty($filtro['filtroFabricante'])) {
+				$filtro['filtroFabricante'] = urldecode($filtro['filtroFabricante']);
 				$whrFabricante = " AND pro_fabricante=\"{$filtro['filtroFabricante']}\"";
 				$whr .= $whrFabricante;
 				$whrFiltro['fabricante'] = $whrFabricante;
 
 			} if (isset($filtro['filtroProduto']) && !empty($filtro['filtroProduto'])) {
-				$filtroProduto = preg_replace('/-/', ' ', $filtro['filtroProduto']);
-				$whrProduto = " AND (pro_titulo LIKE \"%{$filtro['filtroProduto']}%\"";
-				$whrProduto .= " OR pro_titulo LIKE \"%{$filtroProduto}%\") ";
+				$filtroProduto = urldecode($filtro['filtroProduto']);
+				$whrProduto = " AND (produto LIKE \"%{$filtro['filtroProduto']}%\"";
+				$whrProduto .= " OR produto LIKE \"%{$filtroProduto}%\") ";
 				$whr .= $whrProduto;
 				$whrFiltro['produto'] = $whrProduto;
 				/*

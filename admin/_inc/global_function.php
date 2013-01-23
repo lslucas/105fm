@@ -391,7 +391,7 @@ function getTodosProdutos($order='titulo ASC', $startwith=null, $simple=true)
  */
 function getProdutosByOptions($option, $startwith=null, $order='titulo', $userProducts=false)
 {
-	global $conn;
+	global $conn, $hashids;
 
 	$whr = null;
 	if (is_array($option))
@@ -415,8 +415,8 @@ function getProdutosByOptions($option, $startwith=null, $order='titulo', $userPr
 							AND pro_status=1
 						WHERE upr_status=1
 						{$whr}
-						GROUP BY upr_pro_id
 					) as `tmp`
+				GROUP BY `produto`
 				ORDER BY `produto`;";
 	else
 		$sql = "SELECT * FROM (
@@ -445,9 +445,9 @@ function getProdutosByOptions($option, $startwith=null, $order='titulo', $userPr
 
 		$i=1;
 		while ($qry->fetch()) {
-			$lst[$i]['id'] = empty($id)  ? linkfySmart($titulo) : $id;
+			// $lst[$i]['id'] = $id;
+			$lst[$i]['id'] = mb_strtolower(urlencode($titulo), 'utf8');
 			$lst[$i]['titulo'] = mb_strtoupper($titulo, 'utf8');
-			$lst[$i]['tipo'] = $tipo;
 			$lst[$i]['valor'] = 'R$ '.Moeda($valor);
 			$lst[$i]['valor_decimal'] = $valor;
 			$i++;
