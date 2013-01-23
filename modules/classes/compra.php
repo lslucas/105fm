@@ -448,7 +448,7 @@ class Compra {
 
 		$sql = "SELECT upr_id
 					FROM `".TP."_usuario_produto`
-					INNER JOIN `".TP."_produto`
+					LEFT JOIN `".TP."_produto`
 						ON `pro_id`=`upr_pro_id`
 					WHERE upr_status=1
 						AND upr_usr_id=?
@@ -489,7 +489,7 @@ class Compra {
 					FROM `".TP."_usuario_produto`
 					LEFT JOIN ".TP."_address_book
 						ON adb_usr_id=upr_usr_id
-					INNER JOIN ".TP."_produto
+					LEFT JOIN ".TP."_produto
 						ON pro_id=upr_pro_id
 					WHERE upr_status=1
 					{$whr}
