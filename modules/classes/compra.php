@@ -838,4 +838,35 @@ class Compra {
 
 	}
 
+	/**
+	 * Adiciona +1 view
+	 * @return bool
+	 */
+	public function plusView($upr_id)
+	{
+		global $conn, $hashids;
+
+		if (!isset($upr_id) || empty($upr_id))
+			return 'ID inválido!';
+
+		if (!is_numeric($upr_id)) {
+			$upr_id = $hashids->decrypt($upr_id);
+			$upr_id = isset($upr_id[0]) ? $upr_id[0] : null;
+		}
+
+		if (empty($upr_id))
+			return 'ID inválido';
+
+		$sql = "UPDATE `".TP."_usuario_produto` SET `upr_views`=`upr_views`+1 WHERE `upr_id`=?;";
+		if (!$res = $conn->prepare($sql))
+			return false;
+		else {
+			$res->bind_param('i', $upr_id);
+			$res->execute();
+			$res->close();
+
+			return true;
+		}
+
+	}
 }

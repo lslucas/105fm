@@ -9,6 +9,7 @@
 		$usuario = new Usuario();
 
 		$cpr = $compra->getInfoById($querystring);
+		$compra->plusView($cpr['id']);
 		$pro = $produto->getInfoById($cpr['pro_id']);
 		$vend = $usuario->getBasicInfoById($cpr['usr_id']);
 
