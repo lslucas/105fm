@@ -15,6 +15,7 @@
 						echo "<input type='hidden' name='id' value='{$val['id']}'>\n";
 				?>
 
+				<?php /* ?>
 				<div class="control-group">
 					<label class="control-label" for="grupoquimico"> Grupo</label>
 					<div class="controls">
@@ -39,6 +40,7 @@
 						</div>
 					</div>
 				</div>
+				*/ ?>
 
 				<div class="control-group">
 					<label class="control-label" for="pro_id"><span class="color-red">*</span> Produto</label>

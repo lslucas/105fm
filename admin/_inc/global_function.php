@@ -348,7 +348,7 @@ function getTodosProdutos($order='titulo ASC', $startwith=null, $simple=true)
 				pro_tipo,
 				pro_valor
 				FROM ".TP."_produto
-				LEFT JOIN ".TP."_upr_produto
+				LEFT JOIN ".TP."_usuario_produto
 					ON upr_pro_id=pro_id
 				WHERE pro_status=1 AND upr_status=1
 				ORDER BY pro_{$order};";
