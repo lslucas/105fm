@@ -540,6 +540,46 @@ class Compra {
 		}
 	}
 
+	private function howManyProductsInUF($whrFiltro)
+	{
+		global $conn;
+
+		/**
+		 * Query do Filtro de Localidade
+		 * @var string
+		 */
+		$sql = "SELECT adb_uf, COUNT(upr_id) `num`
+					FROM `".TP."_usuario_produto`
+					INNER JOIN ".TP."_usuario
+						ON upr_usr_id=usr_id
+						AND usr_status=1
+					LEFT JOIN ".TP."_address_book
+						ON adb_usr_id=upr_usr_id
+					LEFT JOIN ".TP."_produto
+						ON pro_id=upr_pro_id
+						AND pro_status=1
+					WHERE upr_status=1
+					{$whrFiltro}
+					GROUP BY adb_uf
+					";
+		if (!$res= $conn->prepare($sql))
+			return false;
+		else {
+
+			$res->bind_result($uf, $num);
+			$res->execute();
+
+			$lst = array();
+			while ($res->fetch()) {
+				$uf = !empty($uf) ? $uf : 'vazio';
+				$lst[$uf] = $num;
+			}
+			$res->close();
+
+			return $lst;
+		}
+	}
+
 	public function filtroCategorias($filtro)
 	{
 		global $conn, $hashids;
@@ -555,7 +595,7 @@ class Compra {
 		unset($whrFiltro['uf']);
 		unset($whrFiltro['faixapreco']);
 		$whrFiltro = join(' ', $whrFiltro);
-
+		$num = $this->howManyProductsInUF($whrFiltro);
 
 		/**
 		 * Query do Filtro de Localidade
@@ -568,13 +608,16 @@ class Compra {
 						upr_usr_id,
 						adb_uf,
 						upr_valor,
-						COALESCE(NULLIF(pro_titulo,''), upr_nomeProduto) `produto`,
-						COUNT(upr_id) `num`
+						COALESCE(NULLIF(pro_titulo,''), upr_nomeProduto) `produto`
 					FROM `".TP."_usuario_produto`
+					INNER JOIN ".TP."_usuario
+						ON upr_usr_id=usr_id
+						AND usr_status=1
 					LEFT JOIN ".TP."_address_book
 						ON adb_usr_id=upr_usr_id
 					INNER JOIN ".TP."_produto
 						ON pro_id=upr_pro_id
+						AND pro_status=1
 					WHERE upr_status=1
 					) as `tmp`
 					WHERE 1
@@ -585,22 +628,23 @@ class Compra {
 			echo __FUNCTION__.$conn->error;
 		else {
 
-			$resuf->bind_result($grupoquimico, $fabricante, $usr_id, $uf, $valor, $produto, $num);
+			$resuf->bind_result($grupoquimico, $fabricante, $usr_id, $uf, $valor, $produto);
 			$resuf->execute();
 
 			$i=0;
 			while ($resuf->fetch()) {
 				$ufmin = strtolower($uf);
 				$estado = estadoFromUF($uf);
+				$ufIndex = empty($uf) ? 'vazio' : $uf;
 
 				$listUf[$i]['uf'] = $uf;
 				$listUf[$i]['estado'] = $estado;
-				$listUf[$i]['num'] = $num;
+				$listUf[$i]['num'] = $num[$ufIndex];
 
 				if (isset($filtro['filtroUF']) && $filtro['filtroUF']==$ufmin)
-					$listUf[$i]['link'] = "{$estado} ({$num})";
+					$listUf[$i]['link'] = "{$estado} ({$num[$ufIndex]})";
 				else
-					$listUf[$i]['link'] = "<a href='".ABSPATH."lista/uf-{$ufmin}'>{$estado}</a> ({$num})";
+					$listUf[$i]['link'] = "<a href='".ABSPATH."lista/uf-{$ufmin}'>{$estado}</a> ({$num[$ufIndex]})";
 
 				$i++;
 			}
@@ -614,17 +658,6 @@ class Compra {
 		 * @var string
 		 */
 		/*
-		$sqlval = "SELECT upr_valor, COUNT(upr_id) `num`
-					FROM `".TP."_usuario_produto`
-					LEFT JOIN ".TP."_address_book
-						ON adb_usr_id=upr_usr_id
-					INNER JOIN ".TP."_produto
-						ON pro_id=upr_pro_id
-					WHERE upr_status=1
-					{$whrFiltro}
-					GROUP BY upr_valor
-					ORDER BY upr_timestamp DESC";
-					*/
 		$sqlval = "SELECT * FROM (
 					SELECT
 						pro_grupoquimico,
@@ -697,8 +730,10 @@ class Compra {
 
 			$resval->close();
 		}
-
 		$list = array('localizacao'=>$listUf, 'faixaPreco'=>$listFaixaPreco);
+		 */
+
+		$list = array('localizacao'=>$listUf);
 		return $list;
 
 	}
@@ -758,7 +793,7 @@ class Compra {
 					$whrFiltro['revenda'] = $whrRevenda;
 				}
 
-			} if (isset($filtro['filtroUF']) && !empty($filtro['filtroUF'])) {
+			} if (isset($filtro['filtroUF'])) {
 				$whrUF = " AND LOWER(adb_uf)=\"{$filtro['filtroUF']}\"";
 				$whr .= $whrUF;
 				$whrFiltro['uf'] = $whrUF;
