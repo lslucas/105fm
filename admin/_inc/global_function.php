@@ -344,13 +344,11 @@ function getTodosProdutos($order='titulo ASC', $startwith=null, $simple=true)
 	$whr = null;
 	$sql = "SELECT
 				pro_id,
-				COALESCE(NULLIF(pro_titulo,''), upr_nomeProduto) `produto`,
+				pro_titulo,
 				pro_tipo,
 				pro_valor
 				FROM ".TP."_produto
-				LEFT JOIN ".TP."_usuario_produto
-					ON upr_pro_id=pro_id
-				WHERE pro_status=1 AND upr_status=1
+				WHERE pro_status=1
 				ORDER BY pro_{$order};";
 	$lst = array();
 	if(!$qry = $conn->prepare($sql))
