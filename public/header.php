@@ -78,6 +78,7 @@
 
 		<div class="row search">
 			<div class="column grid_10">
+				<?php /* ?>
 				<form method="post" action="<?=ABSPATH?>busca">
 					<div id='buscaBox' class='pull-left'>
 						Busca por
@@ -90,6 +91,8 @@
 					</div>
 					<input type="submit" name="send" value="" class='searchButton pull-left' />
 				</form>
+				<?php */ ?>
+				&nbsp;
 			</div>
 
 			<div class="column grid_2">
