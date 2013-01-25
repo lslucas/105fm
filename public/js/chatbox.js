@@ -44,7 +44,8 @@
                 console.log(localStorage);
                 // if(value.name != localStorage.getItem('nickname'))
                     // $('#users').append('<div><a class="user" href="#!" rel="'+value.id+'">' + value.name + '</a></div>');
-                    $('.chat').find('#'+value.name).addClass('user').attr('rel', value.id);
+                    $('.chat').find('#'+value.name).text('abrir chat');
+                    $('#'+value.name).addClass('user').attr('rel', value.id);
 
             });
         });
