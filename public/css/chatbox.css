@@ -124,6 +124,7 @@ body{
 
 .chatbox .chat_message textarea {
     border: 1px solid #888;
+    font-size: 12px;
     width: 225px;
     height: 53px;
     float: left;
