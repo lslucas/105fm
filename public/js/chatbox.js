@@ -37,8 +37,9 @@
 
         // listener, whenever the server emits 'updateusers', this updates the username list
         socket.on('updateusers', function(data) {
-            $('#users').empty();
+            // $('#users').empty();
             $.each(data, function(key, value) {
+                console.log(value, key);
                 if(value.name != localStorage.getItem('nickname')) {
                     // $('#users').append('<div><a class="user" href="#!" rel="'+value.id+'">' + value.name + '</a></div>');
                     $('.chat').find('#'+value.name).addClass('user').attr('rel', value.id);
@@ -67,6 +68,7 @@
 
             $('.close_chatbox').live('click', function(){
                 $(this).parent().parent().remove();
+                $(this).find('.chatbox').remove();
             })
 
             $('.s-user-message').live('keypress', function(e) {
