@@ -37,7 +37,7 @@ body{
 .chatbox .header{
     height: 25px;
     line-height: 25px;
-    background-color: #1A6179;
+    background-color: #36A3CB;
     color: #fff;
     font-weight: bold;
     width: 100%;
@@ -52,6 +52,7 @@ body{
     outline: 0;
     float: left;
     padding-left: 8px;
+    padding-top:3px;
     vertical-align: baseline;
 }
 .chatbox .header a{
