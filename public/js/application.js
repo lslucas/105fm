@@ -166,6 +166,28 @@ $(function() {
 		});
 
 	});
+
+	/* APAGA INTERESSE DO PAINEL DO USUARIO
+	************************************/
+	$(".btnInteresse-rm").click(function(event){
+		event.preventDefault();
+		var id_rm = $(this).attr('id');
+
+		$('.modal').modal('hide');
+		$.ajax({
+			type: "POST",
+			data: 'id='+id_rm+'&from=rm-interesse',
+			url: ABSPATH+'ajax.php',
+			success: function(data){
+				if (data==true) {
+					showModal('{"title": "Sucesso!", "content":"Item removido com êxito!"}');
+					$('#tr'+id_rm).hide();
+				} else
+					showModal('{"title": "Erro!", "content":"Houve um problema ao tentar remover o item selecionado, tente mais tarde!"}');
+			}
+		});
+
+	});
 	/* FIM: APAGA*/
 
 	/**

@@ -78,6 +78,25 @@
 	}
 
 	/**
+	 * REMOVER INTERESSE
+	 */
+	if (isset($_POST['from']) && $_POST['from']=='rm-interesse') {
+
+		include_once 'modules/classes/interesse.php';
+
+		$msg = $msgTitle = $res = null;
+		$val = array();
+
+
+		foreach ($_POST as $key=>$value)
+			$val[$key] = trim($value);
+
+		$interesse = new Interesse();
+		echo $interesse->removerInteresse($val);
+	}
+
+
+	/**
 	 * COMPARTILHE
 	 */
 	if (isset($_POST['form_name']) && $_POST['form_name']=='compartilhe') {

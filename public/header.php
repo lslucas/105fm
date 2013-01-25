@@ -22,7 +22,7 @@
 			?>
 		</script>
 		<link href="<?=ABSPATH?>bootstrap/css/bootstrap.min.css" rel="stylesheet">
-		<?php if (!empty($usr['id'])) { ?>
+		<?php if ($host!='localhost' && !empty($usr['id'])) { ?>
 		<link href="<?=ABSPATH?>css/chatbox.css" rel="stylesheet">
 		<?php } ?>
 		<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" /> -->

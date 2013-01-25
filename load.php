@@ -95,7 +95,7 @@
 		 'novo-produto'=>array('basename'=>'produto', 'path'=>'public/produto/novo-produto.php'),
 		 'editar-produto'=>array('basename'=>'produto', 'path'=>'public/produto/editar-produto.php'),
 		 'remover-produto'=>array('basename'=>'produto', 'path'=>'public/produto/remover-produto.php'),
-		 'interesse'=>array('basename'=>'produto', 'path'=>'public/produto/interesse.php'),
+		 'interesse'=>array('basename'=>'interesse', 'path'=>'public/produto/interesse.php'),
 		 'ver'=>array('basename'=>'produto', 'path'=>'public/produto/ver.php'),
 		 'lista'=>array('basename'=>'produto', 'path'=>'public/produto/lista.php'),
 		 'login'=>array('basename'=>'usuario', 'path'=>'public/usuario/login.php'),
