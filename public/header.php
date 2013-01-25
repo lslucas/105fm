@@ -15,8 +15,10 @@
 			var ABSPATH = '<?=ABSPATH?>';
 			var LOADING = "<?=$LOADING?>";
 			<?php
-				if (!empty($usr['id']))
-					echo "var USR_NAME = '{$usr['id']}';";
+				if (!empty($usr['id'])) {
+					echo "var USR_NAME = '{$usr['nome']}';";
+					echo "var USR_ID = '{$usr['id']}';";
+				}
 			?>
 		</script>
 		<link href="<?=ABSPATH?>bootstrap/css/bootstrap.min.css" rel="stylesheet">
