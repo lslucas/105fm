@@ -3,15 +3,12 @@
         // on connection to server, ask for user's name with an anonymous callback
         socket.on('connect', function(){
             // call the server-side function 'adduser' and send one parameter (value of prompt)
-            var userid = USR_ID;
-            var nickname = USR_NAME;
-            localStorage.setItem('nickname', nickname);
-            localStorage.setItem('userid', userid);
-            socket.emit('adduser', userid);
-            socket.emit('addusername', nickname);
+            var user = { user_id: USR_ID, username: USR_NAME }
+            localStorage.setItem('user', JSON.stringify(user));
+            socket.emit('adduser', JSON.stringify(user));
         });
 
-        socket.on('receivefromuser', function (username, id, data) {
+        socket.on('receivefromuser', function (userid, username, id, data) {
 
             if($('body').find($('#chat_' + id)).html()){
                 $('#chat_' + id).find($('.chat_area')).append('<p>' + '<b>'+username + ':</b> ' + data + '<p>');
@@ -90,6 +87,7 @@
 
             $('.user').live('click', function() {
                 $('#datasend').attr('rel', $(this).attr('rel'));
+                var name = $(this).attr('name').substr(2, 22);
 
                 if($('body').find($('#chat_' + $(this).attr('rel'))).html()){
                     $('#chat_' + $(this).attr('rel')).find($('.chat_message')).find($('textarea')).focus();
@@ -97,8 +95,8 @@
                     $('#chat_' + $(this).attr('rel')).find($('.chat_area')).scrollTop($('#chat_' + $(this).attr('rel')).find($('.chat_area')).scrollHeight);
                 } else {
                      $('body').append('<div class="box-container"><div class="chatbox" id="chat_'+$(this).attr('rel')+'" title="Demo Bot">'+
-                        '<div class="header" title="Chat com '+ $(this).attr('name') +'">'+
-                            '<p>'+ $(this).attr('name') +'</p>'+
+                        '<div class="header" title="Chat com '+ name +'">'+
+                            '<p>'+ name +'</p>'+
                             '<a href="#" class="close_chatbox" title="close chat window">X</a>'+
                             '<a href="#" class="minimize_chatbox" title="minimize chat window">_</a>'+
                             '<a href="#" class="maximize_chatbox" title="maximize chat window">&#8254;</a>'+
