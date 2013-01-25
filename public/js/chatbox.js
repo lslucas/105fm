@@ -42,7 +42,7 @@
                 // if(value.name != localStorage.getItem('nickname'))
                     // $('#users').append('<div><a class="user" href="#!" rel="'+value.id+'">' + value.name + '</a></div>');
                     $('.chatwith-'+value.name).addClass('user').attr('rel', value.id);
-                    $('.chatwith-'+value.name).text('abrir chat').after('&nbsp;');
+                    $('.chatwith-'+value.name).html('<img src="'+ABSPATH+'images/chat.gif" border="0" height="12"/>').after('&nbsp;');
             });
         });
 
@@ -90,8 +90,8 @@
                     $('#chat_' + $(this).attr('rel')).find($('.chat_area')).scrollTop($('#chat_' + $(this).attr('rel')).find($('.chat_area')).scrollHeight);
                 } else {
                      $('body').append('<div class="box-container"><div class="chatbox" id="chat_'+$(this).attr('rel')+'" title="Demo Bot">'+
-                        '<div class="header" title="Chat com '+ $(this).html() +'">'+
-                            '<p>'+ $(this).html() +'</p>'+
+                        '<div class="header" title="Chat com '+ $(this).attr('name') +'">'+
+                            '<p>'+ $(this).attr('name') +'</p>'+
                             '<a href="#" class="close_chatbox" title="close chat window">X</a>'+
                             '<a href="#" class="minimize_chatbox" title="minimize chat window">_</a>'+
                             '<a href="#" class="maximize_chatbox" title="maximize chat window">&#8254;</a>'+
@@ -99,7 +99,7 @@
                         '<div class="chat_area" title="Demo Bot">'+
                         '</div>'+
                         '<div class="chat_info"><p></p></div>'+
-                        '<div class="chat_message" title="Type your message here">'+
+                        '<div class="chat_message" title="Escreva sua mensagem">'+
                             '<textarea class="s-user-message" id="'+ $(this).attr('rel') +'"></textarea>'+
                         '</div>'+
                     '</div></div>');

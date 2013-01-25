@@ -11,14 +11,16 @@ body{
 }
 
 .box-container{
-    width: 240px;
+    /*width: 240px;*/
+    min-width: 1px;
     min-height: 1px;
-    height: 100%;
-    position: absolute;
+    /*height: 100%;*/
+    position: fixed;
     float: right;
-    bottom:0px;
     right: 10px;
+    bottom:0px;
     padding-left: 10px;
+    border:1px solid red;
 }
 
 .chatbox{
