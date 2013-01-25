@@ -42,10 +42,9 @@
                 console.log(value);
                 console.log(localStorage.getItem('nickname'));
                 console.log(localStorage);
-                if(value.name != localStorage.getItem('nickname')) {
+                // if(value.name != localStorage.getItem('nickname'))
                     // $('#users').append('<div><a class="user" href="#!" rel="'+value.id+'">' + value.name + '</a></div>');
                     $('.chat').find('#'+value.name).addClass('user').attr('rel', value.id);
-                }
 
             });
         });
