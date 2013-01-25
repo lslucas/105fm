@@ -20,15 +20,15 @@ body{
     padding-left: 10px;
 }
 
-.chatbox{   
-    text-align: left;   
-    position: absolute;   
+.chatbox{
+    text-align: left;
+    position: absolute;
     bottom: 0px;
     width: 240px;
     right: 10px;
     height: 300px;
     font-family: 'Open Sans', sans-serif;
-    background-color: #fff; 
+    background-color: #fff;
     border: 1px solid #ccc;
     font-size: 12px;
 }
@@ -37,7 +37,7 @@ body{
 .chatbox .header{
     height: 25px;
     line-height: 25px;
-    background-color: #ff9009;
+    background-color: #1A6179;
     color: #fff;
     font-weight: bold;
     width: 100%;
@@ -55,7 +55,7 @@ body{
     vertical-align: baseline;
 }
 .chatbox .header a{
-    float: right;   
+    float: right;
     text-decoration: none;
     color: #fff;
     display: block;
@@ -72,11 +72,11 @@ body{
     float: left;
     clear: left;
     width: 100%;
-    height: 180px;  
-    margin-top: 5px;    
+    height: 180px;
+    margin-top: 5px;
     margin-bottom: 5px;
-    overflow: auto; 
-    
+    overflow: auto;
+
 }
 
 .chatbox .chat_info{
@@ -92,16 +92,16 @@ body{
     padding: 0;
     border: 0;
     outline: 0;
-    padding-left: 8px;  
+    padding-left: 8px;
     float: left;
-    color: #aaa;    
+    color: #aaa;
     font-style: italic;
     vertical-align: baseline;
 }
 
 .chatbox .chat_area p{
-    padding-left: 8px;  
-    padding-right: 8px; 
+    padding-left: 8px;
+    padding-right: 8px;
     font-size: 12px;
     line-height: 22px;
     float: left;
@@ -114,18 +114,18 @@ body{
 
 
 /* CHAT MESSAGE BOX */
-.chatbox .chat_message{ 
+.chatbox .chat_message{
     width: 100%;
-    height: 55px;   
+    height: 55px;
     float: left;
-    clear: left;    
+    clear: left;
 }
 
 .chatbox .chat_message textarea {
     border: 1px solid #ddd;
     width: 225px;
     height: 53px;
-    float: left;    
+    float: left;
     margin-left: 5px;
     padding-top: 2px;
     padding-left: 2px;
@@ -148,11 +148,11 @@ body{
 
 .chatbox .chat_area .me{
     color: #ff9009;
-    font-style: italic; 
+    font-style: italic;
 }
 
 .chatbox .chat_area .system{
     color: #aaa;
-    font-style: italic; 
+    font-style: italic;
     font-size: 11px;
 }
