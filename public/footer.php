@@ -28,6 +28,7 @@
 	<script src="<?=ABSPATH?>js/jquery.price_format.js"></script>
 	<script src="<?=ABSPATH?>js/jquery-ui-1.8.18.custom.min.js"></script>
 	<script src="<?=ABSPATH?>js/application.js"></script>
+	<script src="<?=ABSPATH?>js/chatbox.js"></script>
 	<?php
 		/**
 		 *  Exibe mensagens de erro
@@ -36,7 +37,6 @@
 			$toScript = showModal(array('title'=>(isset($res['error']['title']) ? $res['error']['title'] : null), 'content'=>$res['error']['text']));
 	 ?>
 	<script type='text/javascript'>
-		var socket = io.connect('http://54.232.122.95:6789');
 
 		<?=isset($toJS) ? $toJS : null?>
 		<?=isset($incJS) ? $incJS : null?>
@@ -48,7 +48,6 @@
 			<?=isset($toScript) ? $toScript : null?>
 		});
 	</script>
-	<script src="<?=ABSPATH?>js/chatbox.js"></script>
 	<?php /*
 <script type="text/javascript">
 	var _gaq = _gaq || [];

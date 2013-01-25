@@ -1,3 +1,7 @@
+        var socket = io.connect('http://54.232.122.95:6789');
+
+
+
         socket.on('receivefromuser', function (username, id, data) {
 
             if($('body').find($('#chat_' + id)).html()){
