@@ -16,7 +16,7 @@
 			var LOADING = "<?=$LOADING?>";
 			<?php
 				if (!empty($usr['id'])) {
-					echo "var USR_NAME = '{$usr['nome']}';";
+					echo "var USR_NAME = '".substr($usr['nome'], 0, 22)."';";
 					echo "var USR_ID = '{$usr['id']}';";
 				}
 			?>
