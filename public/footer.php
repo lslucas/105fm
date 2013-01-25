@@ -17,6 +17,7 @@
 	</footer>
 	<div id='html-msg'></div>
 	<div id='msg-modal'></div>
+	<script src="http://54.232.122.95:6789/socket.io/socket.io.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 	<!--<script src="//code.jquery.com/ui/1.9.2/jquery-ui.js"></script>-->
 	<script src="<?=ABSPATH?>bootstrap/js/bootstrap.min.js"></script>
@@ -35,6 +36,11 @@
 			$toScript = showModal(array('title'=>(isset($res['error']['title']) ? $res['error']['title'] : null), 'content'=>$res['error']['text']));
 	 ?>
 	<script type='text/javascript'>
+		var socket = io.connect('http://54.232.122.95:6789');
+
+		<?=isset($toJS) ? $toJS : null?>
+		<?=isset($incJS) ? $incJS : null?>
+
 		$(function() {
 			$('#myCarousel').carousel();
 			$(':input').autotab_magic();
@@ -42,6 +48,7 @@
 			<?=isset($toScript) ? $toScript : null?>
 		});
 	</script>
+	<script src="<?=ABSPATH?>js/chatbox.js"></script>
 	<?php /*
 <script type="text/javascript">
 	var _gaq = _gaq || [];
