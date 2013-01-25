@@ -17,7 +17,9 @@
 	</footer>
 	<div id='html-msg'></div>
 	<div id='msg-modal'></div>
+	<?php if (!empty($usr['id'])) { ?>
 	<script src="http://54.232.122.95:6789/socket.io/socket.io.js"></script>
+	<?php } ?>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 	<!--<script src="//code.jquery.com/ui/1.9.2/jquery-ui.js"></script>-->
 	<script src="<?=ABSPATH?>bootstrap/js/bootstrap.min.js"></script>
@@ -28,7 +30,9 @@
 	<script src="<?=ABSPATH?>js/jquery.price_format.js"></script>
 	<script src="<?=ABSPATH?>js/jquery-ui-1.8.18.custom.min.js"></script>
 	<script src="<?=ABSPATH?>js/application.js"></script>
+	<?php if (!empty($usr['id'])) { ?>
 	<script src="<?=ABSPATH?>js/chatbox.js"></script>
+	<?php } ?>
 	<?php
 		/**
 		 *  Exibe mensagens de erro

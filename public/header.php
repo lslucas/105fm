@@ -11,9 +11,18 @@
 
 		<link href="<?=STATIC_PATH?>favicon.png" rel="shortcut icon"/>
 
-		<script type='text/javascript'>var ABSPATH = '<?=ABSPATH?>'; var LOADING = "<?=$LOADING?>";</script>
+		<script type='text/javascript'>
+			var ABSPATH = '<?=ABSPATH?>';
+			var LOADING = "<?=$LOADING?>";
+			<?php
+				if (!empty($usr['id']))
+					echo "var USR_NAME = '{$usr['nome']}';";
+			?>
+		</script>
 		<link href="<?=ABSPATH?>bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<?php if (!empty($usr['id'])) { ?>
 		<link href="<?=ABSPATH?>css/chatbox.css" rel="stylesheet">
+		<?php } ?>
 		<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" /> -->
 		<link rel="stylesheet" href="<?=ABSPATH?>css/style.css" type="text/css" media="screen" />
 		<link rel="stylesheet" href="<?=ABSPATH?>css/application.css" type="text/css">

@@ -1,6 +1,12 @@
         var socket = io.connect('http://54.232.122.95:6789');
 
-
+        // on connection to server, ask for user's name with an anonymous callback
+        socket.on('connect', function(){
+            // call the server-side function 'adduser' and send one parameter (value of prompt)
+            var nickname = USR_NAME;
+            localStorage.setItem('nickname', nickname);
+            socket.emit('adduser', nickname);
+        });
 
         socket.on('receivefromuser', function (username, id, data) {
 
