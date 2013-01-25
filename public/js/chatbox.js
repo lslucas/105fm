@@ -39,14 +39,10 @@
         socket.on('updateusers', function(data) {
             // $('#users').empty();
             $.each(data, function(key, value) {
-                console.log(value);
-                console.log(localStorage.getItem('nickname'));
-                console.log(localStorage);
                 // if(value.name != localStorage.getItem('nickname'))
                     // $('#users').append('<div><a class="user" href="#!" rel="'+value.id+'">' + value.name + '</a></div>');
                     $('.chatwith-'+value.name).addClass('user').attr('rel', value.id);
-                    $('.chatwith-'+value.name).text('abrir chat');
-
+                    $('.chatwith-'+value.name).text('abrir chat').insertAfter('&nbsp;');
             });
         });
 

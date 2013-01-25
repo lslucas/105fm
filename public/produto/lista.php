@@ -65,7 +65,7 @@
 								<tr>
 									<td align=center><a href='<?=$lista['link']?>'><?=$lista['uf']?></td></td>
 									<td><a href='<?=$lista['link']?>'><?=$lista['titulo']?></a></td>
-									<td><a href="javascript:void(0);" class='chatwith-<?=$lista['usr_id']?>'>chat</a> <a href='<?=$lista['link']?>'><?=$lista['empresa']?></td></td>
+									<td><a href="javascript:void(0);" class='chatwith-<?=$lista['usr_id']?>'></a><a href='<?=$lista['link']?>'><?=$lista['empresa']?></td></td>
 									<td><a href='<?=$lista['link']?>'><?=$lista['peso_unidade_medida']?></a></td>
 									<td><a href='<?=$lista['link']?>'><?=$lista['quantidade']?></a></td>
 									<td align=center><a href='<?=$lista['link']?>'><?=$lista['valor']?></a></td>
