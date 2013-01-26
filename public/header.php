@@ -56,7 +56,7 @@
 				</div>
 			</a>
 
-			<div class="column grid_8">
+			<div class="column grid_<?=!empty($usr['id']) ? 8 : 7?>">
 				<nav class="cat">
 					<ul>
 						<li><a href='<?=ABSPATH?>'>Home</a></li>
@@ -73,7 +73,7 @@
 				</nav>
 			</div>
 
-			<div class="column grid_2">
+			<div class="column grid_<?=!empty($usr['id']) ? 2 : 3?>">
 				<nav class="usr">
 					<ul>
 						<?php if (!empty($usr['id'])) { ?>
