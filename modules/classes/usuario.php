@@ -558,15 +558,20 @@ class Usuario extends Mail {
 					 `usr_telefone2`,
 					 `usr_nascimento`,
 					 DATE_FORMAT(`usr_nascimento`, '%d/%m/%Y'),
+					 `adb_cidade`,
+					 `adb_uf`,
+					 `adb_cep`,
 					 `usr_newsletter`
 					FROM `".TP."_usuario`
+					LEFT JOIN `".TP."_address_book`
+						ON adb_usr_id=usr_id
 					WHERE `usr_id`=?;";
 		if (!$res = $conn->prepare($sql))
 			echo __FUNCTION__.$conn->error;
 		else {
 
 			$res->bind_param('i', $id);
-			$res->bind_result($usr_id, $plan_id, $nome, $email, $senha, $rg, $cpf,  $cnpj, $nome_fantasia, $inscricao_estadual, $contato, $telefone1, $telefone2, $nascimento, $nascimento_pt, $newsletter);
+			$res->bind_result($usr_id, $plan_id, $nome, $email, $senha, $rg, $cpf,  $cnpj, $nome_fantasia, $inscricao_estadual, $contato, $telefone1, $telefone2, $nascimento, $nascimento_pt, $cidade, $uf, $cep, $newsletter);
 			$res->execute();
 			$res->fetch();
 			$res->close();
@@ -601,6 +606,9 @@ class Usuario extends Mail {
 			             'nasc_dia'=>$nasc_dia,
 			             'nasc_mes'=>$nasc_mes,
 			             'nasc_ano'=>$nasc_ano,
+			             'cidade'=>$cidade,
+			             'uf'=>$uf,
+			             'cep'=>$cep,
 		             );
 
 				return $usr;

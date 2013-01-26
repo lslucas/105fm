@@ -6,6 +6,11 @@
  date_default_timezone_set('America/Sao_Paulo');
 $host = $_SERVER['HTTP_HOST']=='localhost' || $_SERVER['HTTP_HOST']=='agrosshop' ? 'localhost' : $_SERVER['HTTP_HOST'];
 
+//APIS
+define('OAUTH_CONSUMER_KEY', 'dj0yJmk9dHkxSktldHA3OFF3JmQ9WVdrOVNEWnZaRVZLTXpBbWNHbzlNVFEyT0RjMU9USTJNZy0tJnM9Y29uc3VtZXJzZWNyZXQmeD1hNQ--');
+define('OAUTH_CONSUMER_SECRET', '87ab3be4e530f779822efa54532f0ed4696eb214');
+define('OAUTH_APP_ID', 'H6odEJ30');
+
 # EMAILS
 ########
 

@@ -10,6 +10,16 @@
 	include_once $rp.'_inc/global_function.php';
 	include_once 'vendor/hashids.php';
 	include_once 'vendor/aes.php';
+	include_once "vendor/yos-social-php/lib/Yahoo.inc";
+
+	// The YahooApplication class is used for two-legged authorization,
+	// which doesn't need permission from the end user.
+	$yql = new YahooApplication(OAUTH_CONSUMER_KEY,OAUTH_CONSUMER_SECRET);
+	if ($yql == NULL) {
+	   print ("Error: Cannot get yql (YahooApplication object).");
+	   exit;
+	}
+
 
 	$aes = new AES('abcdefghijuklmnz0123456789012345', 'ECB');
 	$hashids = new hashids(TP, 6);

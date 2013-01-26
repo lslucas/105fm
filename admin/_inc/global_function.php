@@ -1,4 +1,18 @@
 <?php
+
+/* format the result */
+function format_result($input)
+{
+	return str_replace(array(' ', '(', ')'), array('-', '-', ''), $input);
+}
+
+/* helper:  does regex */
+function get_match($regex,$content)
+{
+	preg_match($regex,$content,$matches);
+	return (isset($matches[1]) ? $matches[1] : false);
+}
+
 function estadoFromUF($uf) {
 	switch($uf) {
 		case 'AC': $estado = 'Acre';
