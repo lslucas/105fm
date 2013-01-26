@@ -70,8 +70,8 @@
 				$breadcrumb[$filtroName] = getCategoriaCol('titulo', 'id', $catIdByTituloMin[$valParam]);
 		}
 
-		$filtro = $interesse->filtroCategorias($filtroPost);
 		$listaGeral = $interesse->listaGeralByInteresse($filtroPost);
+		$filtro = $interesse->filtroCategorias($filtroPost, array_keys($listaGeral));
 	}
 
 	/**

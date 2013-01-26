@@ -184,9 +184,12 @@ class Interesse {
 
 		if (!is_numeric($usr['id'])) {
 			$usr_id = $hashids->decrypt($usr['id']);
-			$usr_id = $usr_id[0];
+			$usr_id = isset($usr_id[0]) ? $usr_id[0] : null;
 		} else
 			$usr_id = $usr['id'];
+
+		if (empty($usr_id))
+			return false;
 
 		$sql = "SELECT * FROM (
 					SELECT
@@ -228,6 +231,7 @@ class Interesse {
 			foreach ($list as $upr_id)
 				$cpr[$upr_id]  = $this->getInfoById($upr_id);
 
+			// $this->listaGeralByInteresse = $cpr;
 			return $cpr;
 
 		}
@@ -529,13 +533,21 @@ class Interesse {
 
 	public function filtroCategorias($filtro)
 	{
-		global $conn, $hashids;
+		global $conn, $hashids, $usr;
 
 		$listUf = $listPreco = array();
 		$getFiltros = $this->getFiltros($filtro);
 		$filtro = $getFiltros['filtro'];
 		$whr = $getFiltros['whr'];
 
+		if (!is_numeric($usr['id'])) {
+			$usr_id = $hashids->decrypt($usr['id']);
+			$usr_id = isset($usr_id[0]) ? $usr_id[0] : null;
+		} else
+			$usr_id = $usr['id'];
+
+		if (empty($usr_id))
+			return false;
 
 		// filtra query apenas com as infos que nao pertencem ao filtro
 		$whrFiltro = $getFiltros['whrFiltro'];
@@ -550,20 +562,26 @@ class Interesse {
 		 */
 		$sqluf = "SELECT * FROM (
 					SELECT
-						uin_usr_id,
+						pro_grupoquimico,
+						pro_fabricante,
+						upr_usr_id,
 						adb_uf,
-						pro_valor,
-						COALESCE(NULLIF(pro_titulo,''), uin_nomeProduto) `produto`
-					FROM `".TP."_usuario_interesse`
+						upr_valor,
+						COALESCE(NULLIF(pro_titulo,''), upr_nomeProduto) `produto`
+					FROM `".TP."_usuario_produto`
+					INNER JOIN ".TP."_usuario_interesse
+						ON upr_usr_id<>uin_usr_id
 					INNER JOIN ".TP."_usuario
-						ON uin_usr_id=usr_id
+						ON upr_usr_id=usr_id
 						AND usr_status=1
 					LEFT JOIN ".TP."_address_book
-						ON adb_usr_id=uin_usr_id
-					LEFT JOIN ".TP."_produto
-						ON pro_id=uin_pro_id
+						ON adb_usr_id=upr_usr_id
+					INNER JOIN ".TP."_produto
+						ON pro_id=upr_pro_id
 						AND pro_status=1
-					WHERE uin_status=1
+					WHERE upr_status=1
+						AND uin_usr_id=\"{$usr_id}\"
+						AND (uin_pro_id=pro_id OR upr_nomeProduto LIKE CONCAT('%', uin_nomeProduto, '%'))
 					) as `tmp`
 					WHERE 1
 					{$whrFiltro}
@@ -573,7 +591,7 @@ class Interesse {
 			echo __FUNCTION__.$conn->error;
 		else {
 
-			$resuf->bind_result($usr_id, $uf, $valor, $produto);
+			$resuf->bind_result($grupoquimico, $fabricante, $usr_id, $uf, $valor, $produto);
 			$resuf->execute();
 
 			$i=0;
@@ -589,7 +607,7 @@ class Interesse {
 				if (isset($filtro['filtroUF']) && $filtro['filtroUF']==$ufmin)
 					$listUf[$i]['link'] = "{$estado} ({$num[$ufIndex]})";
 				else
-					$listUf[$i]['link'] = "<a href='".ABSPATH."lista/uf-{$ufmin}'>{$estado}</a> ({$num[$ufIndex]})";
+					$listUf[$i]['link'] = "<a href='".ABSPATH."lista-por-interesse/uf-{$ufmin}'>{$estado}</a> ({$num[$ufIndex]})";
 
 				$i++;
 			}
@@ -664,23 +682,36 @@ class Interesse {
 
 	private function howManyProductsInUF($whrFiltro)
 	{
-		global $conn;
+		global $conn, $hashids, $usr;
+
+		if (!is_numeric($usr['id'])) {
+			$usr_id = $hashids->decrypt($usr['id']);
+			$usr_id = isset($usr_id[0]) ? $usr_id[0] : null;
+		} else
+			$usr_id = $usr['id'];
+
+		if (empty($usr_id))
+			return false;
 
 		/**
 		 * Query do Filtro de Localidade
 		 * @var string
 		 */
-		$sql = "SELECT adb_uf, COUNT(uin_id) `num`
-					FROM `".TP."_usuario_interesse`
+		$sql = "SELECT adb_uf, COUNT(upr_id) `num`
+					FROM `".TP."_usuario_produto`
+					INNER JOIN ".TP."_usuario_interesse
+						ON upr_usr_id<>uin_usr_id
 					INNER JOIN ".TP."_usuario
-						ON uin_usr_id=usr_id
+						ON upr_usr_id=usr_id
 						AND usr_status=1
 					LEFT JOIN ".TP."_address_book
-						ON adb_usr_id=uin_usr_id
+						ON adb_usr_id=upr_usr_id
 					LEFT JOIN ".TP."_produto
-						ON pro_id=uin_pro_id
+						ON pro_id=upr_pro_id
 						AND pro_status=1
-					WHERE uin_status=1
+					WHERE upr_status=1
+						AND uin_usr_id=\"{$usr_id}\"
+						AND (uin_pro_id=pro_id OR upr_nomeProduto LIKE CONCAT('%', uin_nomeProduto, '%'))
 					{$whrFiltro}
 					GROUP BY adb_uf
 					";

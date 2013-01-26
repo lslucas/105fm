@@ -21,33 +21,7 @@
 				<div class="pull-left grid_9 content">
 					<div class="row lista">
 
-						<div class='column filtro'>
-							<form name="filtrar" class="form-inline" action='<?=ABSPATH?>busca' method="post">
-								<input type="hidden" name="from" value="filtrar">
-
-
-								<select name='filtroLocalizacao' id='filtroLocalizacao' class='filtroLocalizacao input-medium'>
-									<option value=''>Localização</option>
-									<?php if (!isset($val['filtroLocalizacao']))  $val['filtroLocalizacao'] = array(); ?>
-									<?=convertCatList2Option(getLocalizacao(), $val['filtroLocalizacao'])?>
-								</select>
-
-								<select name='filtroUsuario' id='filtroUsuario' class='filtroUsuario'>
-									<option value=''>Revendedor</option>
-									<?php if (!isset($val['filtroUsuario']))  $val['filtroUsuario'] = array(); ?>
-									<?=convertCatList2Option(getUsuarios(), $val['filtroUsuario'])?>
-								</select>
-
-								<select name='filtroProduto' id='filtroProduto' class='filtroProduto'>
-									<?php if (!isset($val['filtroProduto']))  $val['filtroProduto'] = array(); ?>
-									<?=convertCatList2Option(getProdutosByOptions(null, 'Produto', 'titulo', true), $val['filtroProduto'])?>
-								</select>
-
-								<button type="submit" class="btn">Filtrar</button>
-							</form>
-						</div>
-
-						<table class="lista-produtos" id="alternatecolor" width="100%">
+						<table class="lista-produtos" id="alternatecolor" width="100%" style='margin-top:0px'>
 							<tr>
 								<th width="60px">UF</th>
 								<th align="left">Produto</th>

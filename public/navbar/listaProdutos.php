@@ -38,7 +38,7 @@
 							-->
 							<?php if (count($filtro['localizacao'])>0 || count($filtro['faixaPreco'])>0) { ?>
 							<div class='pull-right'>
-								<small><a href='<?=ABSPATH?>lista'>Limpar Filtros</a></small>
+								<small><a href='<?=ABSPATH.$basename?>'>Limpar Filtros</a></small>
 							</div>
 							<?php } else echo "<small>Nada para filtrar!</small>"; ?>
 							<br/>
