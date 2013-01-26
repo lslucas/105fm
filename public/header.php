@@ -56,13 +56,14 @@
 				</div>
 			</a>
 
-			<div class="column grid_7">
+			<div class="column grid_8">
 				<nav class="cat">
 					<ul>
 						<li><a href='<?=ABSPATH?>'>Home</a></li>
 						<li><a href='<?=ABSPATH?>como-funciona'>Como Funciona</a></li>
 						<?php if (!empty($usr['id'])) { ?>
 						<li><a href='<?=ABSPATH?>lista'>Ofertas</a></li>
+						<li><a href='<?=ABSPATH?>lista-por-interesse'>Ofertas em Interesse</a></li>
 						<li><a href='<?=ABSPATH?>novo-produto'>Inserir Oferta</a></li>
 						<li><a href='<?=ABSPATH?>painel'>Minhas Ofertas</a></li>
 						<?php } else { ?>
@@ -72,11 +73,10 @@
 				</nav>
 			</div>
 
-			<div class="column grid_3">
+			<div class="column grid_2">
 				<nav class="usr">
 					<ul>
 						<?php if (!empty($usr['id'])) { ?>
-						<li><a href='<?=ABSPATH?>painel'><?=$usr['primeiroNome']?></a></li>
 						<li><a href='<?=ABSPATH?>sair'>Sair</a></li>
 						<?php } else { ?>
 						<li><a href='<?=ABSPATH?>login'>Entrar</a></li>
@@ -90,6 +90,9 @@
 
 		<div class="row search">
 			<div class="column grid_10">
+				<?php if (!empty($usr['id'])) { ?>
+				Bem-vindo <b><a href='<?=ABSPATH?>painel' title='Ir para o Painel'><?=$usr['nome']?></a></b>!
+				<?php } ?>
 				<?php /* ?>
 				<form method="post" action="<?=ABSPATH?>busca">
 					<div id='buscaBox' class='pull-left'>

@@ -171,12 +171,73 @@ class Interesse {
 		} else return false;
 	}
 
+	public function listaGeralByInteresse($filtro)
+	{
+		global $conn, $hashids, $urlParams, $catIdByTituloMin, $usr;
+
+		$cpr=array();
+		$list= array();
+
+		$getFiltros = $this->getFiltros($filtro);
+		$filtro = $getFiltros['filtro'];
+		$whr = $getFiltros['whr'];
+
+		if (!is_numeric($usr['id'])) {
+			$usr_id = $hashids->decrypt($usr['id']);
+			$usr_id = $usr_id[0];
+		} else
+			$usr_id = $usr['id'];
+
+		$sql = "SELECT * FROM (
+					SELECT
+						upr_id,
+						pro_grupoquimico,
+						pro_fabricante,
+						upr_usr_id,
+						adb_uf,
+						upr_valor,
+						COALESCE(NULLIF(pro_titulo,''), upr_nomeProduto) `produto`
+					FROM `".TP."_usuario_produto`
+					INNER JOIN ".TP."_usuario_interesse
+						ON upr_usr_id<>uin_usr_id
+					INNER JOIN ".TP."_usuario
+						ON upr_usr_id=usr_id
+						AND usr_status=1
+					LEFT JOIN ".TP."_address_book
+						ON adb_usr_id=upr_usr_id
+					LEFT JOIN `".TP."_produto`
+						ON `pro_id`=`upr_pro_id`
+					WHERE upr_status=1
+						AND uin_usr_id=\"{$usr_id}\"
+						AND (uin_pro_id=pro_id OR upr_nomeProduto LIKE CONCAT('%', uin_nomeProduto, '%'))
+				) as `tmp`
+				WHERE 1
+					{$whr}
+				ORDER BY produto";
+		if (!$res = $conn->prepare($sql))
+			echo __FUNCTION__.$conn->error;
+		else {
+			$res->bind_result($upr_id, $grupoquimico, $fabricante, $usr_id, $uf, $valor, $produto);
+			$res->execute();
+
+			while ($res->fetch())
+				array_push($list, $upr_id);
+
+			$res->close();
+
+			foreach ($list as $upr_id)
+				$cpr[$upr_id]  = $this->getInfoById($upr_id);
+
+			return $cpr;
+
+		}
+	}
 
 	/**
 	 * Dados
 	 * @return bool
 	 */
-	public function getInfoById($id)
+	public function getSimpleInfoById($id)
 	{
 		global $conn, $hashids;
 
@@ -236,6 +297,128 @@ class Interesse {
 
 	}
 
+	/**
+	 * Dados
+	 * @return bool
+	 */
+	public function getInfoById($id)
+	{
+		global $conn, $hashids;
+
+		if (!is_numeric($id)) {
+			$id = $hashids->decrypt($id);
+			$id = $id[0];
+		}
+		$cpr=array();
+
+		$sql = "SELECT
+					usr_nome,
+					usr_nome_fantasia,
+					upr_id,
+					upr_usr_id,
+					upr_pro_id,
+					upr_grupoquimico,
+					upr_fabricante,
+					upr_nomeFabricante,
+					upr_nomeProduto,
+					pro_titulo,
+					pro_codigo,
+					(SELECT cat_titulo FROM ".TP."_categoria WHERE cat_id=pro_tipo),
+					(SELECT cat_titulo FROM ".TP."_categoria WHERE cat_id=upr_fabricante),
+					(SELECT cat_titulo FROM ".TP."_categoria WHERE cat_id=pro_fabricante),
+					(SELECT cat_titulo FROM ".TP."_categoria WHERE cat_id=upr_grupoquimico),
+					(SELECT cat_titulo FROM ".TP."_categoria WHERE cat_id=pro_grupoquimico),
+					upr_valor,
+					upr_valor_minimo,
+					upr_quantidade,
+					upr_quantidade_minima_venda,
+					upr_peso,
+					COALESCE(NULLIF(upr_peso_unidade_medida,''), upr_nomeEmbalagem) `embalagem`,
+					upr_datavalidade,
+					DATE_FORMAT(upr_datavalidade, '%d/%m/%Y'),
+					upr_datapagamento,
+					DATE_FORMAT(upr_datapagamento, '%d/%m/%Y'),
+					upr_views,
+					upr_status,
+					upr_vendas,
+					adb_cidade,
+					adb_uf,
+					upr_observacao,
+					DATE_FORMAT(upr_timestamp, '%d/%m/%Y')
+					FROM `".TP."_usuario_produto`
+					LEFT JOIN `".TP."_usuario`
+						ON usr_id=upr_usr_id
+					LEFT JOIN `".TP."_produto`
+						ON pro_id=upr_pro_id
+					LEFT JOIN ".TP."_address_book
+						ON adb_usr_id=upr_usr_id
+					WHERE  `upr_status`=1
+							AND`upr_id`=?;";
+		if (!$res = $conn->prepare($sql))
+			echo __FUNCTION__.$conn->error;
+		else {
+
+			$res->bind_param('i', $id);
+			$res->bind_result($nome, $nomeFantasia, $upr_id, $usr_id, $pro_id, $grupoquimico_id, $fabricante_id, $nomeFabricante, $nomeProduto, $produto, $codigoProduto, $tipoProduto, $fabricanteProduto, $proFabricanteProduto, $grupoquimicoProduto, $proGrupoQuimicoProduto, $valor, $valor_minimo, $quantidade, $quantidade_minima_venda, $peso, $embalagem, $datavalidade, $datavalidadePt, $datapagamento, $datapagamentoPt, $views, $status, $vendas, $cidade, $uf, $observacao, $timestamp);
+			$res->execute();
+			$res->store_result();
+			$res->fetch();
+			$res->close();
+
+			if (!empty($upr_id)) {
+
+				$produto = empty($produto) ? $nomeProduto : $produto;
+				$fabricanteProduto = empty($fabricanteProduto) ? $nomeFabricante : $fabricanteProduto;
+				$fabricanteProduto = empty($fabricanteProduto) ? $proFabricanteProduto : $fabricanteProduto;
+				$grupoquimicoProduto = empty($grupoquimicoProduto) && !empty($proGrupoQuimicoProduto) ? $proGrupoQuimicoProduto : $grupoquimicoProduto;
+				$embalagem = is_numeric($embalagem) ? getCategoriaCol('titulo', 'id', $embalagem) : $embalagem;
+				$empresa = empty($nomeFantasia) ? $nome : $nomeFantasia;
+				$valor = empty($valor) || $valor=='0.00' ? 'Sob consulta' : 'R$ '.Currency2Decimal($valor);
+
+				$id_encrypted = $hashids->encrypt($upr_id);
+				$cpr = array(
+			             'id'=>$id_encrypted,
+			             'usr_id'=>$hashids->encrypt($usr_id),
+			             'pro_id'=>$pro_id,
+			             'empresa'=>mb_strtoupper($empresa, 'utf8'),
+			             'grupoquimico_id'=>$grupoquimico_id,
+			             'fabricante_id'=>$fabricante_id,
+			             'nomeProduto'=>mb_strtoupper($nomeProduto, 'utf8'),
+			             'nomeFabricante'=>$nomeFabricante,
+			             'titulo'=>mb_strtoupper($produto, 'utf8'),
+			             'codigo'=>$codigoProduto,
+			             'tipo'=>$tipoProduto,
+			             'fabricante'=>$fabricanteProduto,
+			             'grupoquimico'=>$grupoquimicoProduto,
+			             'valor'=>$valor,
+			             'valor_minimo'=>'R$ '.Currency2Decimal($valor_minimo),
+			             'quantidade'=>$quantidade,
+			             'quantidade_minima_venda'=>$quantidade_minima_venda,
+			             'peso'=>$peso,
+			             'peso_unidade_medida'=>mb_strtoupper($embalagem, 'utf8'),
+			             'datavalidadeEn'=>$datavalidade,
+			             'datavalidade'=>$datavalidadePt,
+			             'datapagamentoEn'=>$datapagamento,
+			             'datapagamento'=>$datapagamentoPt,
+			             'link'=>ABSPATH."ver/{$id_encrypted}/".linkfySmart($produto),
+			             'cidade'=>$cidade,
+			             'uf'=>(empty($uf) ? '--' : $uf),
+			             'observacao'=>$observacao,
+			             'estado'=>estadoFromUF($uf),
+			             'views'=>$views,
+			             'status'=>$status,
+			             'vendas'=>$vendas,
+			             'timestamp'=>$timestamp
+		             );
+
+				return $cpr;
+
+			} else
+				return false;
+		}
+
+	}
+
 	public function getMyInsterests($usr_id)
 	{
 		global $conn, $hashids;
@@ -280,7 +463,7 @@ class Interesse {
 			$res->close();
 
 			foreach ($listMyPro as $uin_id)
-				$cpr[$uin_id]  = $this->getInfoById($uin_id);
+				$cpr[$uin_id]  = $this->getSimpleInfoById($uin_id);
 
 			return $cpr;
 
@@ -344,4 +527,178 @@ class Interesse {
 
 	}
 
+	public function filtroCategorias($filtro)
+	{
+		global $conn, $hashids;
+
+		$listUf = $listPreco = array();
+		$getFiltros = $this->getFiltros($filtro);
+		$filtro = $getFiltros['filtro'];
+		$whr = $getFiltros['whr'];
+
+
+		// filtra query apenas com as infos que nao pertencem ao filtro
+		$whrFiltro = $getFiltros['whrFiltro'];
+		unset($whrFiltro['uf']);
+		unset($whrFiltro['faixapreco']);
+		$whrFiltro = join(' ', $whrFiltro);
+		$num = $this->howManyProductsInUF($whrFiltro);
+
+		/**
+		 * Query do Filtro de Localidade
+		 * @var string
+		 */
+		$sqluf = "SELECT * FROM (
+					SELECT
+						uin_usr_id,
+						adb_uf,
+						pro_valor,
+						COALESCE(NULLIF(pro_titulo,''), uin_nomeProduto) `produto`
+					FROM `".TP."_usuario_interesse`
+					INNER JOIN ".TP."_usuario
+						ON uin_usr_id=usr_id
+						AND usr_status=1
+					LEFT JOIN ".TP."_address_book
+						ON adb_usr_id=uin_usr_id
+					LEFT JOIN ".TP."_produto
+						ON pro_id=uin_pro_id
+						AND pro_status=1
+					WHERE uin_status=1
+					) as `tmp`
+					WHERE 1
+					{$whrFiltro}
+					GROUP BY adb_uf
+					ORDER BY adb_uf";
+		if (!$resuf = $conn->prepare($sqluf))
+			echo __FUNCTION__.$conn->error;
+		else {
+
+			$resuf->bind_result($usr_id, $uf, $valor, $produto);
+			$resuf->execute();
+
+			$i=0;
+			while ($resuf->fetch()) {
+				$ufmin = strtolower($uf);
+				$estado = estadoFromUF($uf);
+				$ufIndex = empty($uf) ? 'vazio' : $uf;
+
+				$listUf[$i]['uf'] = $uf;
+				$listUf[$i]['estado'] = $estado;
+				$listUf[$i]['num'] = $num[$ufIndex];
+
+				if (isset($filtro['filtroUF']) && $filtro['filtroUF']==$ufmin)
+					$listUf[$i]['link'] = "{$estado} ({$num[$ufIndex]})";
+				else
+					$listUf[$i]['link'] = "<a href='".ABSPATH."lista/uf-{$ufmin}'>{$estado}</a> ({$num[$ufIndex]})";
+
+				$i++;
+			}
+
+			$resuf->close();
+		}
+
+
+		$list = array('localizacao'=>$listUf);
+		return $list;
+
+	}
+
+	private function getFiltros($filtro)
+	{
+		global $urlParams, $catIdByTituloMin;
+
+		$whr = null;
+		$whrFiltro = array();
+		$filtro = array();
+		$lstFiltros = array('fabricante'=>'Fabricante', 'grupoquimico'=>'GrupoQuimico', 'produto'=>'Produto', 'faixapreco'=>'FaixaPreco', 'tipo'=>'Tipo', 'uf'=>'UF', 'preco'=>'Preco', 'revenda'=>'Revenda');
+		foreach ($urlParams as $params) {
+			list($filtroName, $valParam) = explode('-', $params, 2);
+			if (in_array($filtroName, array('fabricante', 'grupoquimico', 'tipo')) && isset($catIdByTituloMin[$valParam]))
+				$filtro['filtro'.$lstFiltros[$filtroName]] = $catIdByTituloMin[$valParam];
+			else
+				$filtro['filtro'.$lstFiltros[$filtroName]] = trim($valParam);
+		}
+
+		if (is_array($filtro) && count($filtro)>0) {
+
+			if (isset($filtro['filtroProduto']) && !empty($filtro['filtroProduto'])) {
+				$filtroProduto = urldecode($filtro['filtroProduto']);
+				$whrProduto = " AND (produto LIKE \"%{$filtro['filtroProduto']}%\"";
+				$whrProduto .= " OR produto LIKE \"%{$filtroProduto}%\") ";
+				$whr .= $whrProduto;
+				$whrFiltro['produto'] = $whrProduto;
+
+			} if (isset($filtro['filtroRevenda']) && !empty($filtro['filtroRevenda'])) {
+				$getUsuarios = getUsuarios(false);
+
+				if (isset($getUsuarios[$filtro['filtroRevenda']])) {
+					$filtro['filtroRevenda'] = $getUsuarios[$filtro['filtroRevenda']]['id_numeric'];
+					$whrRevenda = " AND uin_usr_id=\"{$filtro['filtroRevenda']}\"";
+					$whr .= $whrRevenda;
+					$whrFiltro['revenda'] = $whrRevenda;
+				}
+
+			} if (isset($filtro['filtroUF'])) {
+				$whrUF = " AND LOWER(adb_uf)=\"{$filtro['filtroUF']}\"";
+				$whr .= $whrUF;
+				$whrFiltro['uf'] = $whrUF;
+
+			} if (isset($filtro['filtroFaixaPreco']) && !empty($filtro['filtroFaixaPreco'])) {
+				$faixaPreco = $filtro['filtroFaixaPreco'];
+
+				if ($faixaPreco=='750')
+					$whrFaixaPreco = " AND (uin_valor IS NULL OR uin_valor<=750) ";
+				elseif ($faixaPreco=='750a2000')
+					$whrFaixaPreco = " AND uin_valor BETWEEN 750.01 AND 2000";
+				elseif ($faixaPreco=='mais2000')
+					$whrFaixaPreco = " AND uin_valor>2000.01";
+
+				$whr .= $whrFaixaPreco;
+				$whrFiltro['faixapreco'] = $whrFaixaPreco;
+
+			}
+		}
+
+		return array('filtro'=>$filtro, 'whrFiltro'=>$whrFiltro, 'whr'=>$whr);
+	}
+
+	private function howManyProductsInUF($whrFiltro)
+	{
+		global $conn;
+
+		/**
+		 * Query do Filtro de Localidade
+		 * @var string
+		 */
+		$sql = "SELECT adb_uf, COUNT(uin_id) `num`
+					FROM `".TP."_usuario_interesse`
+					INNER JOIN ".TP."_usuario
+						ON uin_usr_id=usr_id
+						AND usr_status=1
+					LEFT JOIN ".TP."_address_book
+						ON adb_usr_id=uin_usr_id
+					LEFT JOIN ".TP."_produto
+						ON pro_id=uin_pro_id
+						AND pro_status=1
+					WHERE uin_status=1
+					{$whrFiltro}
+					GROUP BY adb_uf
+					";
+		if (!$res= $conn->prepare($sql))
+			return false;
+		else {
+
+			$res->bind_result($uf, $num);
+			$res->execute();
+
+			$lst = array();
+			while ($res->fetch()) {
+				$uf = !empty($uf) ? $uf : 'vazio';
+				$lst[$uf] = $num;
+			}
+			$res->close();
+
+			return $lst;
+		}
+	}
 }
