@@ -43,7 +43,7 @@
                 // if(value.name != localStorage.getItem('nickname'))
                     // $('#users').append('<div><a class="user" href="#!" rel="'+value.id+'">' + value.name + '</a></div>');
                     $('.chatwith-'+value.name).addClass('user').attr('rel', value.id);
-                    $('.chatwith-'+value.name).html('<img src="'+ABSPATH+'images/chat.gif" border="0" height="12"/>').after('&nbsp;');
+                    $('.chatwith-'+value.name).html('<img src="'+ABSPATH+'images/chat.gif" id="'+value.id+'" border="0" height="12"/>').after('&nbsp;');
             });
         });
 
