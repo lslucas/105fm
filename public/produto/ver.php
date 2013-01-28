@@ -1,5 +1,5 @@
 
-<?php include_once 'public/navbar/categoria.php' ?>
+<?php include_once 'public/navbar/home.php' ?>
 <div class="column grid_7">
 	<?php
 		if (count($pro)==0)
