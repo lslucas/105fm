@@ -171,6 +171,52 @@ class Interesse {
 		} else return false;
 	}
 
+	public function exitemProdutosEmInteresse()
+	{
+		global $conn, $hashids, $usr;
+
+		$cpr=array();
+		$list= array();
+
+		if (!is_numeric($usr['id'])) {
+			$usr_id = $hashids->decrypt($usr['id']);
+			$usr_id = isset($usr_id[0]) ? $usr_id[0] : null;
+		} else
+			$usr_id = $usr['id'];
+
+		if (empty($usr_id))
+			return false;
+
+		$sql = "SELECT * FROM (
+					SELECT
+						COUNT(upr_id)
+					FROM `".TP."_usuario_produto`
+					INNER JOIN ".TP."_usuario_interesse
+						ON upr_usr_id<>uin_usr_id
+					INNER JOIN ".TP."_usuario
+						ON upr_usr_id=usr_id
+						AND usr_status=1
+					LEFT JOIN ".TP."_address_book
+						ON adb_usr_id=upr_usr_id
+					LEFT JOIN `".TP."_produto`
+						ON `pro_id`=`upr_pro_id`
+					WHERE upr_status=1
+						AND uin_usr_id=\"{$usr_id}\"
+						AND (uin_pro_id=pro_id OR upr_nomeProduto LIKE CONCAT('%', uin_nomeProduto, '%'))
+				) as `tmp`";
+		if (!$res = $conn->prepare($sql))
+			echo __FUNCTION__.$conn->error;
+		else {
+
+			$res->bind_result($num);
+			$res->execute();
+			$res->fetch();
+			$res->close();
+
+			return $num;
+		}
+	}
+
 	public function listaGeralByInteresse($filtro)
 	{
 		global $conn, $hashids, $urlParams, $catIdByTituloMin, $usr;

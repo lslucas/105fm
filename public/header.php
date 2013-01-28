@@ -91,7 +91,7 @@
 		<div class="row search">
 			<div class="column grid_10">
 				<?php if (!empty($usr['id'])) { ?>
-				Bem-vindo <b><a href='<?=ABSPATH?>painel' title='Ir para o Painel'><?=$usr['nome']?></a></b>!
+				Bem-vindo <b><a href='<?=ABSPATH?>painel' title='Ir para o Painel'><?=$usr['nome']?></a></b>! <?=$textoProdutosEmInteresse?>
 				<?php } ?>
 				<?php /* ?>
 				<form method="post" action="<?=ABSPATH?>busca">

@@ -1,5 +1,22 @@
 <?php
+	/**
+	 * Quantos produtos em interesse existem
+	 */
+	include_once 'modules/classes/interesse.php';
+	$interesse = new Interesse;
+	$produtosEmInteresse = $interesse->exitemProdutosEmInteresse();
 
+	$textoProdutosEmInteresse = null;
+	if ($produtosEmInteresse==1)
+		$textoProdutosEmInteresse = "Existe <b>um produto</b> em interesse, <a href='".ABSPATH."lista-por-interesse'>confira</a>";
+	elseif ($produtosEmInteresse>1)
+		$textoProdutosEmInteresse = "Existe <b>{$produtosEmInteresse} produtos</b> em interesse, <a href='".ABSPATH."lista-por-interesse'>confira</a>";
+
+
+
+	/**
+	 * Retorna clima
+	 */
 	include_once 'modules/classes/utils.php';
 	$utils = new Utils;
 
@@ -14,11 +31,11 @@
 		$argsClima = array('cidade'=>'São Paulo', 'uf'=>'SP');
 
 	$clima = $utils->climaByCityState($argsClima);
-	// var_dump($clima);
+
 
 
 	/*
-	 *Lista noticias de acordo com configuração
+	 *Lista noticias
 	 */
 	$listNoticias = array();
 	$sqlnot =  "SELECT
