@@ -1,7 +1,7 @@
 	<!-- <div class="row novo-produto"> -->
 	<div class="column grid_10">
 		<div class="column">
-			<h1>Lista de Interesse</h1>
+			<h1>Meus Interesses</h1>
 			<p><em>Todos os campos com - <span class="color-red">*</span> - são obrigatórios.</em></p>
 			<p><br /></p>
 		</div>

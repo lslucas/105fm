@@ -12,6 +12,24 @@
 				</section>
 
 				<section>
+					<h4>Cotações</h4>
+					<ul>
+						<li style='height:50px'>
+							<img src='<?=STATIC_PATH?>assets/dolar.png' class='pull-left' border=0/>
+							<?=cotacao()?>
+						</li>
+						<li style='height:50px'>
+							<img src='<?=STATIC_PATH?>assets/euro.png' class='pull-left' border=0/>
+							<?=cotacao('EUR')?>
+						</li>
+						<li style='height:50px'>
+							<img src='<?=STATIC_PATH?>assets/libra.png' class='pull-left' border=0/>
+							<?=cotacao('GBP')?>
+						</li>
+					</ul>
+				</section>
+
+				<section>
 					<h4>Clima</h4>
 					<ul>
 						<li>
@@ -19,17 +37,6 @@
 								em <?=$clima['cidade']?>
 								<br/><?=$clima['imagem']?>
 							</p>
-						</li>
-					</ul>
-				</section>
-
-				<section>
-					<h4>Cotações</h4>
-					<ul>
-						<li>
-							U$<?=cotacao()?>
-							<br/>EUR<?=cotacao('EUR')?>
-							<br/>GBP<?=cotacao('GBP')?>
 						</li>
 					</ul>
 				</section>

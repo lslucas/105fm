@@ -16,7 +16,7 @@
 		<br clear='all'/>
 		<br/>
 		<div class='span2'>
-			<h3>Produtos</h3>
+			<h3>Meus Produtos</h3>
 		</div>
 		<div class='span3'>
 			<ul class='configlist'>

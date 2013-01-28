@@ -33,6 +33,9 @@
 				</a>
 			</div>
 
+			<h3>Classificados</h3>
+			<hr>
+
 			<div style='width:190px;' class='pull-left'>
 			<?=bannerHome($banners, 1)?>
 			</div>
