@@ -2,15 +2,17 @@
 	/**
 	 * Quantos produtos em interesse existem
 	 */
-	include_once 'modules/classes/interesse.php';
-	$interesse = new Interesse;
-	$produtosEmInteresse = $interesse->exitemProdutosEmInteresse();
+	if (!empty($usr['id'])) {
+		include_once 'modules/classes/interesse.php';
+		$interesse = new Interesse;
+		$produtosEmInteresse = $interesse->exitemProdutosEmInteresse();
 
-	$textoProdutosEmInteresse = null;
-	if ($produtosEmInteresse==1)
-		$textoProdutosEmInteresse = "Existe <b>um produto</b> em interesse, <a href='".ABSPATH."lista-por-interesse'>confira</a>";
-	elseif ($produtosEmInteresse>1)
-		$textoProdutosEmInteresse = "Existe <b>{$produtosEmInteresse} produtos</b> em interesse, <a href='".ABSPATH."lista-por-interesse'>confira</a>";
+		$textoProdutosEmInteresse = null;
+		if ($produtosEmInteresse==1)
+			$textoProdutosEmInteresse = "Existe <b>um produto</b> em interesse, <a href='".ABSPATH."lista-por-interesse'>confira</a>";
+		elseif ($produtosEmInteresse>1)
+			$textoProdutosEmInteresse = "Existe <b>{$produtosEmInteresse} produtos</b> em interesse, <a href='".ABSPATH."lista-por-interesse'>confira</a>";
+	}
 
 
 

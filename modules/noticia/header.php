@@ -30,5 +30,5 @@
 		$total = $qrypos->num_rows;
 		$qrypos->close();
 
-		$imagem = ABSPATH.'images/noticia/'.$imagem;
+		$imagem = !empty($imagem) ? ABSPATH.'images/noticia/'.$imagem : null;
 	}
