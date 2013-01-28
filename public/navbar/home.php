@@ -29,6 +29,7 @@
 						<li>
 							U$<?=cotacao()?>
 							<br/>EUR<?=cotacao('EUR')?>
+							<br/>GBP<?=cotacao('GBP')?>
 						</li>
 					</ul>
 				</section>
