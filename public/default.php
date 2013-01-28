@@ -16,24 +16,31 @@
 			</section>
 
 			<div class="row produtos">
-				<div style='float:left; width:265px; height:325px; background-image: url("<?=STATIC_PATH?>layout/soybeanplant.jpg"); text-align:center; display:table; position:relative'>
-					<div style='display:table-cell; vertical-align:middle; '>
-						<?php if (isset($usr['id']) && !empty($usr['id'])) { ?>
-						<a href='<?=ABSPATH?>lista' class='btn-agro'>Comprar</a>
-						<?php } else { ?>
-						<a href='<?=ABSPATH?>login' class='btn-agro'>Comprar</a>
-						<?php } ?>
-					</div>
-				</div>
-				<div style='float:left; width:265px; height:325px; background-image: url("<?=STATIC_PATH?>layout/coffeebean.jpg"); margin-left:6px; text-align:center; display:table; position:relative'>
-					<div style='display:table-cell; vertical-align:middle; '>
-						<?php if (isset($usr['id']) && !empty($usr['id'])) { ?>
-						<a href='<?=ABSPATH?>novo-produto' class='btn-agro'>Vender</a>
-						<?php } else { ?>
-						<a href='<?=ABSPATH?>login' class='btn-agro'>Vender</a>
-						<?php } ?>
-					</div>
-				</div>
+				<?php if (isset($usr['id']) && !empty($usr['id'])) { ?>
+				<a href='<?=ABSPATH?>lista' class='btn-agro'>
+				<?php } else { ?>
+				<a href='<?=ABSPATH?>login' class='btn-agro'>
+				<?php } ?>
+					<div style='float:left; width:244px; height:146px; background-image: url("<?=STATIC_PATH?>assets/bt_comprar.png");'>&nbsp;</div>
+				</a>
+				<div style='float:left; width:9px; height:146px; background-image: url("<?=STATIC_PATH?>assets/bt_ou.png");'>&nbsp;</div>
+				<?php if (isset($usr['id']) && !empty($usr['id'])) { ?>
+				<a href='<?=ABSPATH?>novo-produto' class='btn-agro'>
+				<?php } else { ?>
+				<a href='<?=ABSPATH?>login' class='btn-agro'>
+				<?php } ?>
+					<div style='float:left; width:264px; height:146px; background-image: url("<?=STATIC_PATH?>assets/bt_vender.png");'>&nbsp;</div>
+				</a>
+			</div>
+
+			<div style='width:170px;'>
+			<?=bannerHome($banners, 1)?>
+			</div>
+			<div style='width:170px;'>
+			<?=bannerHome($banners, 1)?>
+			</div>
+			<div style='width:170px;'>
+			<?=bannerHome($banners, 1)?>
 			</div>
 
 		</div>
