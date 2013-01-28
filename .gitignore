@@ -1,4 +1,5 @@
 # Numerous always-ignore extensions
+public/js/chatbox.js
 *.diff
 *.err
 *.orig
