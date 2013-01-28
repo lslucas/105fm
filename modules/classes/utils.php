@@ -12,6 +12,7 @@ class Utils {
 
 		$cidade = !empty($args['cidade']) ? trim($args['cidade']).', ' : null;
 		$uf = trim($args['uf']);
+		$cidade_final = !empty($cidade) ? $cidade.$uf : $uf;
 
 		$query = "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text=\"{$cidade}{$uf}\") and u='c'";
 		$matche = $yql->query($query);
@@ -24,10 +25,10 @@ class Utils {
 		$clima = $this->translateWeather2Clima($weather);
 		$code = $matche->item->condition->code;
 		$temp = $matche->item->condition->temp;
-		$imagem = "<img src='http://l.yimg.com/a/i/us/we/52/{$matche->item->condition->code}.gif'/>";
+		$imagem = "<img src='http://l.yimg.com/a/i/us/we/52/{$matche->item->condition->code}.gif' title='{$weather}'/>";
 
 		// $weather_class = format_result($matche);
-		return array('clima'=>$clima, 'weather'=>$weather, 'code'=>$code, 'temperatura'=>$temp, 'imagem'=>$imagem);
+		return array('clima'=>$clima, 'weather'=>$weather, 'code'=>$code, 'temperatura'=>$temp, 'imagem'=>$imagem, 'cidade'=>$cidade_final);
 	}
 
 	public function translateWeather2Clima($weather)

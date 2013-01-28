@@ -61,3 +61,40 @@
 		$qrys->close();
 
 	 }
+
+
+	/*
+	 *Lista noticias de acordo com configuração
+	 */
+	$listNoticias = array();
+	$sqlnot =  "SELECT
+					not_id,
+					not_titulo,
+					DATE_FORMAT(not_data, '%d/%m/%Y') `data`
+				FROM ".TP."_noticia
+				WHERE not_status=1
+				AND not_data<=DATE(NOW())
+				ORDER BY not_data DESC
+				LIMIT 8
+			";
+	 if (!$qrynot=$conn->prepare($sqlnot))
+		 echo "<div class='alert alert-error'>".$conn->error."</div>";
+
+	 else {
+
+		$qrynot->bind_result($id, $titulo, $data);
+		$qrynot->execute();
+		$total = $qrynot->num_rows;
+
+		$i=0;
+		while ($qrynot->fetch()) {
+			$hash = $hashids->encrypt($id);
+			$listNoticias[$i]['titulo'] = $data.' - '.$titulo;
+			$listNoticias[$i]['data'] = $data;
+			$listNoticias[$i]['link']  = ABSPATH.'noticia/'.$hash.'/'.linkfySmart($titulo);
+			$i++;
+		}
+
+		$qrynot->close();
+
+	}

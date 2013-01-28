@@ -1,5 +1,5 @@
 
-		<?php include_once 'navbar/categoria.php' ?>
+		<?php include_once 'navbar/home.php' ?>
 		<div class="column grid_7 content">
 			<section class="slide">
 				<div id="feature">
