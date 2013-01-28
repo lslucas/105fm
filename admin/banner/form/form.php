@@ -35,6 +35,9 @@
 			<option value=''>Selecione</option>
 			<option value='Lateral 1'<?php echo $act=='update' && $val['area']=='Lateral 1' ? ' selected' : null?>>Lateral 1</option>
 			<option value='Lateral 2'<?php echo $act=='update' && $val['area']=='Lateral 2' ? ' selected' : null?>>Lateral 2</option>
+			<option value='Home Final 1'<?php echo $act=='update' && $val['area']=='Home Final 1' ? ' selected' : null?>>Home Final 1</option>
+			<option value='Home Final 2'<?php echo $act=='update' && $val['area']=='Home Final 2' ? ' selected' : null?>>Home Final 2</option>
+			<option value='Home Final 3'<?php echo $act=='update' && $val['area']=='Home Final 3' ? ' selected' : null?>>Home Final 3</option>
 		</select>
 	  </div>
 	</div>

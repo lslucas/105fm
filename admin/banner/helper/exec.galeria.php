@@ -42,11 +42,13 @@
 					if ($res['area']=='Topo') {
 						$handle->image_x             = $var['topoWidth'];
 						$handle->image_y             = $var['topoHeight'];
-					} else {
+					} elseif (in_array($res['area'], array('Lateral 1', 'Lateral 2'))) {
 						$handle->image_x             = $var['lateralWidth'];
 						$handle->image_y             = $var['lateralHeight'];
+					} else {
+						$handle->image_x             = $var['homeWidth'];
+						$handle->image_y             = $var['homeHeight'];
 					}
-
 					$handle->process($var['path_imagem']);
 					if (!$handle->processed) echo 'error : ' . $handle->error;
 

@@ -22,6 +22,8 @@
 
 	$var['lateralWidth'] = 140;
 	$var['lateralHeight'] = 280;
+	$var['homeWidth'] = 160;
+	$var['homeHeight'] = 160;
 	$var['topoWidth'] = 600;
 	$var['topoHeight'] = 120;
 
@@ -31,6 +33,8 @@
 	// $var['imagemHeight_texto'] = ' '.$var['topoHeight'].'px (altura)';
 	$var['imagemWidth_texto'] .= ' Lateral '.$var['lateralWidth'].'px (largura)';
 	$var['imagemHeight_texto'] .= ' '.$var['lateralHeight'].'px (altura)';
+	$var['imagemWidth_texto'] .= ' <br/>Home '.$var['homeWidth'].'px (largura)';
+	$var['imagemHeight_texto'] .= ' '.$var['homeHeight'].'px (altura)';
 
 	$var['path_imagem']   = PATH_IMG.'/'.$var['path'];
 	$var['path_original'] = PATH_IMG.'/'.$var['path'].'/original';
