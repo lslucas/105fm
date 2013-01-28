@@ -43,7 +43,7 @@
                 // if(value.name != localStorage.getItem('nickname'))
                     // $('#users').append('<div><a class="user" href="#!" rel="'+value.id+'">' + value.name + '</a></div>');
                     $('.chatwith-'+value.name).addClass('user').attr('rel', value.id);
-                    $('.chatwith-'+value.name).html('<img src="'+ABSPATH+'images/chat.gif" id="'+value.id+'" border="0" height="12"/>').after('&nbsp;');
+                    $('.chatwith-'+value.name).html('<img src="'+ABSPATH+'images/chat.gif" border="0" height="12"/>').after('&nbsp;');
             });
         });
 
@@ -88,6 +88,8 @@
             $('.user').live('click', function() {
                 $('#datasend').attr('rel', $(this).attr('rel'));
                 var name = $(this).attr('name').substr(2, 22);
+                var user_id = $(this).attr('id');
+                console.log(user_id);
 
                 if($('body').find($('#chat_' + $(this).attr('rel'))).html()){
                     $('#chat_' + $(this).attr('rel')).find($('.chat_message')).find($('textarea')).focus();
