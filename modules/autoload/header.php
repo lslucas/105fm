@@ -33,7 +33,7 @@
 		$argsClima = array('cidade'=>'São Paulo', 'uf'=>'SP');
 
 	$clima = $utils->climaByCityState($argsClima);
-var_dump($clima);
+
 
 
 	/*
