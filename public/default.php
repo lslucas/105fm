@@ -33,13 +33,13 @@
 				</a>
 			</div>
 
-			<div style='width:170px;'>
+			<div style='width:190px;' class='pull-left'>
 			<?=bannerHome($banners, 1)?>
 			</div>
-			<div style='width:170px;'>
+			<div style='width:190px;' class='pull-left'>
 			<?=bannerHome($banners, 1)?>
 			</div>
-			<div style='width:170px;'>
+			<div style='width:160px;' class='pull-left'>
 			<?=bannerHome($banners, 1)?>
 			</div>
 
