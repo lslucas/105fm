@@ -8,27 +8,30 @@ class Utils {
 		// if (!isset($args['cidade']) || empty($args['cidade']))
 			// return 'Cidade inválido!';
 		if (!isset($args['uf']) || empty($args['uf']))
-			return 'UF inválido!';
+			return false;
 
-		$cidade = !empty($args['cidade']) ? trim($args['cidade']).', ' : null;
-		$uf = trim($args['uf']);
-		$cidade_final = !empty($cidade) ? $cidade.$uf : $uf;
+		else {
 
-		$query = "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text=\"{$cidade}{$uf}\") and u='c'";
-		$matche = $yql->query($query);
-		$matche = isset($matche->query->results->channel) ? $matche->query->results->channel : false;
+			$cidade = !empty($args['cidade']) ? trim($args['cidade']).', ' : null;
+			$uf = trim($args['uf']);
+			$cidade_final = !empty($cidade) ? $cidade.$uf : $uf;
 
-		if (!$matche)
-			return 'Cidade ou UF nao encontrado!';
+			$query = "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text=\"{$cidade}{$uf}\") and u='c'";
+			$matche = $yql->query($query);
+			$matche = isset($matche->query->results->channel) ? $matche->query->results->channel : false;
 
-		$weather = $matche->item->condition->text;
-		$clima = $this->translateWeather2Clima($weather);
-		$code = $matche->item->condition->code;
-		$temp = $matche->item->condition->temp;
-		$imagem = "<img src='http://l.yimg.com/a/i/us/we/52/{$matche->item->condition->code}.gif' title='{$weather}'/>";
+			if (!$matche)
+				return 'Cidade ou UF nao encontrado!';
 
-		// $weather_class = format_result($matche);
-		return array('clima'=>$clima, 'weather'=>$weather, 'code'=>$code, 'temperatura'=>$temp, 'imagem'=>$imagem, 'cidade'=>$cidade_final);
+			$weather = $matche->item->condition->text;
+			$clima = $this->translateWeather2Clima($weather);
+			$code = $matche->item->condition->code;
+			$temp = $matche->item->condition->temp;
+			$imagem = "<img src='http://l.yimg.com/a/i/us/we/52/{$matche->item->condition->code}.gif' title='{$weather}'/>";
+
+			// $weather_class = format_result($matche);
+			return array('clima'=>$clima, 'weather'=>$weather, 'code'=>$code, 'temperatura'=>$temp, 'imagem'=>$imagem, 'cidade'=>$cidade_final);
+		}
 	}
 
 	public function translateWeather2Clima($weather)
