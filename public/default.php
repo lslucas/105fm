@@ -16,20 +16,21 @@
 			</section>
 
 			<div class="row produtos">
+				<div style='width:20px;' class='pull-left'>&nbsp;</div>
 				<?php if (isset($usr['id']) && !empty($usr['id'])) { ?>
 				<a href='<?=ABSPATH?>lista' class='btn-agro'>
 				<?php } else { ?>
 				<a href='<?=ABSPATH?>login' class='btn-agro'>
 				<?php } ?>
-					<div style='float:left; width:244px; height:146px; background-image: url("<?=STATIC_PATH?>assets/bt_comprar.png");'>&nbsp;</div>
+					<div class='pull-left' style='width:244px; height:146px; background-image: url("<?=STATIC_PATH?>assets/bt_comprar.png");'>&nbsp;</div>
 				</a>
-				<div style='float:left; width:9px; height:146px; background-image: url("<?=STATIC_PATH?>assets/bt_ou.png");'>&nbsp;</div>
+				<div class='pull-left' style='width:9px; height:146px; background-image: url("<?=STATIC_PATH?>assets/bt_ou.png");'>&nbsp;</div>
 				<?php if (isset($usr['id']) && !empty($usr['id'])) { ?>
 				<a href='<?=ABSPATH?>novo-produto' class='btn-agro'>
 				<?php } else { ?>
 				<a href='<?=ABSPATH?>login' class='btn-agro'>
 				<?php } ?>
-					<div style='float:left; width:264px; height:146px; background-image: url("<?=STATIC_PATH?>assets/bt_vender.png");'>&nbsp;</div>
+					<div class='pull-left' style='width:264px; height:146px; background-image: url("<?=STATIC_PATH?>assets/bt_vender.png");'>&nbsp;</div>
 				</a>
 			</div>
 
