@@ -36,7 +36,7 @@
 				</section>
 
 				<section>
-					<h4>Previsões do Tempo</h4>
+					<h4>Previsão do Tempo</h4>
 					<ul class='previsao-tempo'>
 						<li style='width:100%; height:50px; display:table; position:relative;'>
 							<img src='<?=$clima['imagem_url']?>' class='pull-left' title='<?=$clima['clima']?>' border=0/>
