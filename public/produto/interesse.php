@@ -55,7 +55,7 @@
 								echo "<tr><td colspan=6>Você ainda não possui nenhum produto na sua lista de interesses!</td></tr>";
 							foreach ($listaInteresses as $id => $lista) {
 						?>
-							<div class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" id="rm-<?=$lista['id']?>">
+							<div class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myIntModalLabel" aria-hidden="true" id="rmint-<?=$lista['id']?>">
 								<div class="modal-header">
 									<a class="close" data-dismiss="modal">×</a>
 									<h3>Remover</h3>
@@ -65,13 +65,13 @@
 								</div>
 								<div class="modal-footer">
 									<a class="btn" data-dismiss='modal'>Cancelar</a>
-									<a id='<?=$lista['id']?>' class="btn-rmInteresse btn btn-danger btn-primary">Remover</a>
+									<a id='<?=$lista['id']?>' class="btn-rmint btn btn-danger btn-primary">Remover</a>
 								</div>
 							</div>
 							<tr id='tr<?=$lista['id']?>'>
 								<td><?=$lista['produto']?><blockquote><?=$lista['observacao']?></blockquote></td>
 								<td align=center>
-									<a href='#rm-<?=$lista['id']?>' role='button' data-toggle='modal'  title='Remover item'><i class='icon-remove '></i></a>
+									<a href='#rmint-<?=$lista['id']?>' role='button' data-toggle='modal'  title='Remover item'><i class='icon-remove '></i></a>
 								</td>
 							</tr>
 							<?php } ?>

@@ -20,7 +20,7 @@
 	<?php if ($host!='localhost' && !empty($usr['id'])) { ?>
 	<script src="http://54.232.122.95:6789/socket.io/socket.io.js"></script>
 	<?php } ?>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 	<!--<script src="//code.jquery.com/ui/1.9.2/jquery-ui.js"></script>-->
 	<script src="<?=ABSPATH?>bootstrap/js/bootstrap.min.js"></script>
 	<script src="<?=ABSPATH?>js/slider.js"></script>

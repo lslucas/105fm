@@ -89,12 +89,12 @@ function placeHolder() {
 
 $(function() {
 
-	if (!jQuery.browser.mobile) {
-	    jQuery('body').on('click', 'a[href^="tel:"]', function() {
-	            jQuery(this).attr('href',
-	                jQuery(this).attr('href').replace(/^tel:/, 'callto:'));
+	// if (!$.browser.mobile) {
+	    $('body').on('click', 'a[href^="tel:"]', function() {
+	            $(this).attr('href',
+	                $(this).attr('href').replace(/^tel:/, 'callto:'));
 	    });
-	}
+	// }
 
 	$('.cpf, #cpf').mask('999.999.999-99');
 	$('.uf').mask('aa');
@@ -169,7 +169,7 @@ $(function() {
 
 	/* APAGA INTERESSE DO PAINEL DO USUARIO
 	************************************/
-	$(".btnInteresse-rm").click(function(event){
+	$(".btnint-rm").click(function(event){
 		event.preventDefault();
 		var id_rm = $(this).attr('id');
 
