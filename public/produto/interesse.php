@@ -65,7 +65,7 @@
 								</div>
 								<div class="modal-footer">
 									<a class="btn" data-dismiss='modal'>Cancelar</a>
-									<a id='<?=$lista['id']?>' class="btn-rmint btn btn-danger btn-primary">Remover</a>
+									<a id='<?=$lista['id']?>' class="btnint-rm btn btn-danger btn-primary">Remover</a>
 								</div>
 							</div>
 							<tr id='tr<?=$lista['id']?>'>
