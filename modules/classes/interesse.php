@@ -643,7 +643,7 @@ class Interesse {
 
 	}
 
-	public function filtroCategorias($filtro)
+	public function filtroCategorias($filtro, $tipo=null)
 	{
 		global $conn, $hashids, $usr;
 
@@ -692,7 +692,7 @@ class Interesse {
 						ON pro_id=upr_pro_id
 						AND pro_status=1
 					WHERE upr_status=1
-						AND uin_usr_id=\"{$usr_id}\"
+						".(!empty($tipo) ? "AND uin_usr_id<>\"{$usr_id}\"" : "AND uin_usr_id=\"{$usr_id}\"")."
 						AND (uin_pro_id=pro_id OR upr_nomeProduto LIKE CONCAT('%', uin_nomeProduto, '%'))
 					) as `tmp`
 					WHERE 1
@@ -792,7 +792,7 @@ class Interesse {
 		return array('filtro'=>$filtro, 'whrFiltro'=>$whrFiltro, 'whr'=>$whr);
 	}
 
-	private function howManyProductsInUF($whrFiltro)
+	private function howManyProductsInUF($whrFiltro, $tipo=null)
 	{
 		global $conn, $hashids, $usr;
 
@@ -822,7 +822,7 @@ class Interesse {
 						ON pro_id=upr_pro_id
 						AND pro_status=1
 					WHERE upr_status=1
-						AND uin_usr_id=\"{$usr_id}\"
+						".(!empty($tipo) ? "AND uin_usr_id<>\"{$usr_id}\"" : "AND uin_usr_id=\"{$usr_id}\"")."
 						AND (uin_pro_id=pro_id OR upr_nomeProduto LIKE CONCAT('%', uin_nomeProduto, '%'))
 					{$whrFiltro}
 					GROUP BY adb_uf

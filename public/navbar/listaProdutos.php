@@ -36,7 +36,7 @@
 								<li><a href="#" title="">Termina hoje</a> (8)</li>
 							</ul>
 							-->
-							<?php if (count($filtro['localizacao'])>0 || count($filtro['faixaPreco'])>0) { ?>
+							<?php if (count($filtro['localizacao'])>0) { ?>
 							<div class='pull-right'>
 								<small><a href='<?=ABSPATH.$basename?>'>Limpar Filtros</a></small>
 							</div>

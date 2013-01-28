@@ -71,7 +71,7 @@
 		}
 
 		$listaGeral = $interesse->listaPessoalByInteresse($filtroPost);
-		$filtro = $interesse->filtroCategorias($filtroPost, array_keys($listaGeral));
+		$filtro = $interesse->filtroCategorias($filtroPost);
 	}
 
 
@@ -93,7 +93,7 @@
 		}
 
 		$listaGeral = $interesse->listaGeralByInteresse($filtroPost);
-		$filtro = $interesse->filtroCategorias($filtroPost, array_keys($listaGeral));
+		$filtro = $interesse->filtroCategorias($filtroPost, 'geral');
 	}
 
 	/**
