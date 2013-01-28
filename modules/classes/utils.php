@@ -27,11 +27,16 @@ class Utils {
 			$clima = $this->translateWeather2Clima($weather);
 			$code = $matche->item->condition->code;
 			$temp = $matche->item->condition->temp.'ºC';
+			$forecast = json_encode($matche->item->forecast);
+			$forecast = json_decode($forecast, true);
+
+			$minima = $forecast[0]['low'].'ºC';
+			$maxima = $forecast[0]['high'].'ºC';
 			$imagem_url = "http://l.yimg.com/a/i/us/we/52/{$matche->item->condition->code}.gif";
 			$imagem = "<img src='{$imagem_url}' title='{$weather}'/>";
 
 			// $weather_class = format_result($matche);
-			return array('clima'=>$clima, 'weather'=>$weather, 'code'=>$code, 'temperatura'=>$temp, 'imagem'=>$imagem, 'imagem_url'=>$imagem_url, 'cidade'=>$cidade_final);
+			return array('clima'=>$clima, 'weather'=>$weather, 'code'=>$code, 'temperatura'=>$temp, 'minima'=>$minima, 'maxima'=>$maxima, 'imagem'=>$imagem, 'imagem_url'=>$imagem_url, 'cidade'=>$cidade_final);
 		}
 	}
 
@@ -79,6 +84,7 @@ class Utils {
 			break;
 			case 'foggy' : $clima = 'nebuloso';
 			break;
+			case 'fog' :
 			case 'haze' : $clima = 'neblina';
 			break;
 			case 'smoky' : $clima = 'enfumaçado';

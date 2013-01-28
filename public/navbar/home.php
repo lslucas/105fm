@@ -40,9 +40,9 @@
 					<ul class='previsao-tempo'>
 						<li style='width:100%; height:50px; display:table; position:relative;'>
 							<img src='<?=$clima['imagem_url']?>' class='pull-left' title='<?=$clima['clima']?>' border=0/>
-							<div style='display: table-cell; vertical-align:middle; padding-left:20px; width:100%;  '>
+							<div style='display: table-cell; vertical-align:middle; padding-left:10px; width:100%;  '>
 								<h5><?=$clima['cidade']?></h5>
-								<b><?=$clima['temperatura']?></b>
+								<b><?=$clima['temperatura']?></b> <small class='orange'>Alta <?=$clima['maxima']?></small> <small>Baixa <?=$clima['minima']?></small>
 							</div>
 						</li>
 					</ul>
