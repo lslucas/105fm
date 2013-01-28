@@ -70,6 +70,28 @@
 				$breadcrumb[$filtroName] = getCategoriaCol('titulo', 'id', $catIdByTituloMin[$valParam]);
 		}
 
+		$listaGeral = $interesse->listaPessoalByInteresse($filtroPost);
+		$filtro = $interesse->filtroCategorias($filtroPost, array_keys($listaGeral));
+	}
+
+
+	/**
+	 * Lista geral de interesses
+	 */
+	if ($basename=='lista-geral-de-interesses') {
+		include_once 'modules/classes/interesse.php';
+		$interesse = new Interesse();
+		$filtroPost = array();
+
+		if (isset($_POST['from']) && $_POST['from']=='filtrar')
+			$filtroPost = $_POST;
+
+		foreach ($urlParams as $params) {
+			list($filtroName, $valParam) = explode('-', $params);
+			if (isset($catIdByTituloMin[$valParam]))
+				$breadcrumb[$filtroName] = getCategoriaCol('titulo', 'id', $catIdByTituloMin[$valParam]);
+		}
+
 		$listaGeral = $interesse->listaGeralByInteresse($filtroPost);
 		$filtro = $interesse->filtroCategorias($filtroPost, array_keys($listaGeral));
 	}

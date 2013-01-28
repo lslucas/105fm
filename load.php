@@ -109,6 +109,7 @@
 		 'ver'=>array('basename'=>'produto', 'path'=>'public/produto/ver.php'),
 		 'lista'=>array('basename'=>'produto', 'path'=>'public/produto/lista.php'),
 		 'lista-por-interesse'=>array('basename'=>'produto', 'path'=>'public/produto/lista-por-interesse.php'),
+		 'lista-geral-de-interesses'=>array('basename'=>'produto', 'path'=>'public/produto/lista-geral-de-interesses.php'),
 		 'login'=>array('basename'=>'usuario', 'path'=>'public/usuario/login.php'),
 		 'logout'=>array('basename'=>'usuario', 'path'=>'public/usuario/logout.php'),
 		 'esqueci-senha'=>array('basename'=>'usuario', 'path'=>'public/usuario/esqueci-senha.php'),

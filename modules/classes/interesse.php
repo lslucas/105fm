@@ -217,7 +217,7 @@ class Interesse {
 		}
 	}
 
-	public function listaGeralByInteresse($filtro)
+	public function listaPessoalByInteresse($filtro)
 	{
 		global $conn, $hashids, $urlParams, $catIdByTituloMin, $usr;
 
@@ -258,6 +258,72 @@ class Interesse {
 						ON `pro_id`=`upr_pro_id`
 					WHERE upr_status=1
 						AND uin_usr_id=\"{$usr_id}\"
+						AND (uin_pro_id=pro_id OR upr_nomeProduto LIKE CONCAT('%', uin_nomeProduto, '%'))
+				) as `tmp`
+				WHERE 1
+					{$whr}
+				ORDER BY produto";
+		if (!$res = $conn->prepare($sql))
+			echo __FUNCTION__.$conn->error;
+		else {
+			$res->bind_result($upr_id, $grupoquimico, $fabricante, $usr_id, $uf, $valor, $produto);
+			$res->execute();
+
+			while ($res->fetch())
+				array_push($list, $upr_id);
+
+			$res->close();
+
+			foreach ($list as $upr_id)
+				$cpr[$upr_id]  = $this->getInfoById($upr_id);
+
+			// $this->listaGeralByInteresse = $cpr;
+			return $cpr;
+
+		}
+	}
+
+	public function listaGeralByInteresse($filtro)
+	{
+		global $conn, $hashids, $urlParams, $catIdByTituloMin, $usr;
+
+		$cpr=array();
+		$list= array();
+
+		$getFiltros = $this->getFiltros($filtro);
+		$filtro = $getFiltros['filtro'];
+		$whr = $getFiltros['whr'];
+
+		if (!is_numeric($usr['id'])) {
+			$usr_id = $hashids->decrypt($usr['id']);
+			$usr_id = isset($usr_id[0]) ? $usr_id[0] : null;
+		} else
+			$usr_id = $usr['id'];
+
+		if (empty($usr_id))
+			return false;
+
+		$sql = "SELECT * FROM (
+					SELECT
+						upr_id,
+						pro_grupoquimico,
+						pro_fabricante,
+						upr_usr_id,
+						adb_uf,
+						upr_valor,
+						COALESCE(NULLIF(pro_titulo,''), upr_nomeProduto) `produto`
+					FROM `".TP."_usuario_produto`
+					INNER JOIN ".TP."_usuario_interesse
+						ON upr_usr_id<>uin_usr_id
+					INNER JOIN ".TP."_usuario
+						ON upr_usr_id=usr_id
+						AND usr_status=1
+					LEFT JOIN ".TP."_address_book
+						ON adb_usr_id=upr_usr_id
+					LEFT JOIN `".TP."_produto`
+						ON `pro_id`=`upr_pro_id`
+					WHERE upr_status=1
+						AND uin_usr_id<>\"{$usr_id}\"
 						AND (uin_pro_id=pro_id OR upr_nomeProduto LIKE CONCAT('%', uin_nomeProduto, '%'))
 				) as `tmp`
 				WHERE 1
