@@ -20,7 +20,7 @@ class Utils {
 			$matche = $yql->query($query);
 			$matche = isset($matche->query->results->channel) ? $matche->query->results->channel : false;
 
-			if (!$matche)
+			if (!$matche || !isset($matche->item->condition->text))
 				return 'Cidade ou UF nao encontrado!';
 
 			$weather = $matche->item->condition->text;
