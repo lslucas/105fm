@@ -48,7 +48,7 @@
 				WHERE not_status=1
 				AND not_data<=DATE(NOW())
 				ORDER BY not_data DESC
-				LIMIT 8
+				LIMIT 5
 			";
 	 if (!$qrynot=$conn->prepare($sqlnot))
 		 echo "<div class='alert alert-error'>".$conn->error."</div>";
