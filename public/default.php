@@ -37,14 +37,27 @@
 			<h3>Classificados</h3>
 			<hr>
 
-			<div style='width:190px;' class='pull-left'>
-			<?=bannerHome($banners, 1)?>
-			</div>
-			<div style='width:190px;' class='pull-left'>
-			<?=bannerHome($banners, 1)?>
-			</div>
-			<div style='width:160px;' class='pull-left'>
-			<?=bannerHome($banners, 1)?>
+			<div class="row produtos">
+				<section class="item">
+					<img src="<?=STATIC_PATH?>prod-teste1.jpg" class="thumb" />
+					<p><strong>Caminhão</strong></p>
+					<p>R$ 70.000</p>
+					<a href="javascript:alert('Em Breve!');"><img src="<?=STATIC_PATH?>em-breve_cinza.png" class="info" /></a>
+				</section>
+
+				<section class="item">
+					<img src="<?=STATIC_PATH?>prod-teste2.jpg" class="thumb" />
+					<p><strong>Colheitadeira</strong></p>
+					<p>R$ 240.000</p>
+					<a href="javascript:alert('Em Breve!');"><img src="<?=STATIC_PATH?>em-breve_cinza.png" class="info" /></a>
+				</section>
+
+				<section class="item">
+					<img src="<?=STATIC_PATH?>prod-teste3.jpg" class="thumb" />
+					<p><strong>Pesticida Aéreo</strong></p>
+					<p>R$ 150.000</p>
+					<a href="javascript:alert('Em Breve!');"><img src="<?=STATIC_PATH?>em-breve_cinza.png" class="info" /></a>
+				</section>
 			</div>
 
 		</div>
