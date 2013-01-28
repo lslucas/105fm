@@ -26,11 +26,12 @@ class Utils {
 			$weather = $matche->item->condition->text;
 			$clima = $this->translateWeather2Clima($weather);
 			$code = $matche->item->condition->code;
-			$temp = $matche->item->condition->temp;
-			$imagem = "<img src='http://l.yimg.com/a/i/us/we/52/{$matche->item->condition->code}.gif' title='{$weather}'/>";
+			$temp = $matche->item->condition->temp.'ºC';
+			$imagem_url = "http://l.yimg.com/a/i/us/we/52/{$matche->item->condition->code}.gif";
+			$imagem = "<img src='{$imagem_url}' title='{$weather}'/>";
 
 			// $weather_class = format_result($matche);
-			return array('clima'=>$clima, 'weather'=>$weather, 'code'=>$code, 'temperatura'=>$temp, 'imagem'=>$imagem, 'cidade'=>$cidade_final);
+			return array('clima'=>$clima, 'weather'=>$weather, 'code'=>$code, 'temperatura'=>$temp, 'imagem'=>$imagem, 'imagem_url'=>$imagem_url, 'cidade'=>$cidade_final);
 		}
 	}
 

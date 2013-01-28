@@ -36,13 +36,14 @@
 				</section>
 
 				<section>
-					<h4>Clima</h4>
-					<ul>
-						<li>
-							<p align='center'>
-								em <?=$clima['cidade']?>
-								<br/><?=$clima['imagem']?>
-							</p>
+					<h4>Previsões do Tempo</h4>
+					<ul class='previsao-tempo'>
+						<li style='width:100%; height:50px; display:table; position:relative;'>
+							<img src='<?=$clima['imagem_url']?>' class='pull-left' title='<?=$clima['clima']?>' border=0/>
+							<div style='display: table-cell; vertical-align:middle; padding-left:20px; width:100%;  '>
+								<h5><?=$clima['cidade']?></h5>
+								<b><?=$clima['temperatura']?></b>
+							</div>
 						</li>
 					</ul>
 				</section>

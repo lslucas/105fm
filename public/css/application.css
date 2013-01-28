@@ -105,6 +105,16 @@ hr { border:0; border-bottom: 1px solid #9ECADA;}
 .breadcrumb-agro h5 { border-color: #9ECADA; }
 .search .column { padding-top:2px; color:#fff; font-size:0.9em; }
 
+ul.previsao-tempo li h5 {
+	font-size:11pt;
+	padding:0;
+	color: #003672;
+}
+ul.previsao-tempo li b {
+	color:black;
+	font-size:10pt;
+}
+
 /*extra*/
 .nomargin { margin:0 !important; }
 .nopadding { padding:0; }
