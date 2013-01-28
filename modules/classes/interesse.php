@@ -712,6 +712,9 @@ class Interesse {
 				$estado = estadoFromUF($uf);
 				$ufIndex = empty($uf) ? 'vazio' : $uf;
 
+				if (!isset($num[$ufIndex]))
+					continue;
+
 				$listUf[$i]['uf'] = $uf;
 				$listUf[$i]['estado'] = $estado;
 				$listUf[$i]['num'] = $num[$ufIndex];
