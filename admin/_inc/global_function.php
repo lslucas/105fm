@@ -161,6 +161,54 @@ function bannerLaterial($banners, $i) {
 	}
 }
 
+function bannerHome($banners, $i) {
+	if (isset($banners['Home Final '.$i]) && is_array($banners['Home Final '.$i]) && count($banners['Home Final '.$i])>0) {
+		$numBanners = (count($banners['Home Final '.$i])-1);
+		$rand = rand(0, $numBanners);
+
+		$banner = $banners['Home Final '.$i][$rand];
+		plusBannerViews($banner['id']);
+
+		if ($banner['type']<>'swf') {
+
+			if (!empty($banner['link']))
+				echo "<a href='{$banner['link']}' title='{$banner['titulo']}' target='_blank'>";
+
+			echo "<img src='{$banner['imagem']}' border=0 alt='{$banner['titulo']}'/>";
+
+			if (!empty($banner['link']))
+				echo "</a>";
+
+		} else {
+			$incJS .= "
+					/*
+					 *Vars Globais
+					 */
+					var flashvarsGlob = {
+					'autostart':          'true'
+					};
+
+					var paramsGlob = {
+					'wmode':              'transparent',
+					'allowfullscreen':    'false',
+					'allowscriptaccess':  'always',
+					'bgcolor':            '#ffffff'
+					};
+
+					var attributesGlob = {
+					'id':       'BannerHomeFinal{$i}',
+					'name': 'BannerHomeFinal{$i}'
+					};
+
+					swfobject.embedSWF('{$banner['imagem']}', 'bannerHomeFinal {$i}', '115', '290', '9', 'false', flashvarsGlob, paramsGlob, attributesGlob);
+			";
+			echo "\n\t\t<div id='bannerHomeFinal {$i}'></div>";
+
+		}
+
+	}
+}
+
 /*
  *retorna lista da coluna
  */
