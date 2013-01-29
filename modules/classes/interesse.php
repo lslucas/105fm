@@ -336,8 +336,8 @@ class Interesse {
 			while ($res->fetch()) {
 				$list[$i]['usr_id'] = $usr_id;
 				$list[$i]['uf'] = $uf;
-				$list[$i]['telefone1'] = $telefone1;
-				$list[$i]['telefone2'] = $telefone2;
+				$list[$i]['telefone1'] = !empty($telefone1) ? $telefone1 : '--';
+				$list[$i]['telefone2'] = !empty($telefone2) ? $telefone2 : '--';
 				$list[$i]['empresa'] = $nomeFantasia;
 				$list[$i]['produto'] = $produto;
 				$list[$i]['observacao'] = $observacao;

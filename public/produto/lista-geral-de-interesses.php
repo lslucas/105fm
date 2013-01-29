@@ -38,7 +38,7 @@
 								<tr>
 									<td align='center'><?=$lista['uf']?></td>
 									<td><a href="javascript:void(0);" class='chatwith-<?=$lista['usr_id']?>' name='<?=$lista['empresa']?>'></a><?=$lista['empresa']?></td>
-									<td><?=$lista['telefone']?></td>
+									<td><?=$lista['telefone1']?></td>
 									<td><?=$lista['produto']?></td>
 									<td><?=$lista['observacao']?></td>
 								</tr>
