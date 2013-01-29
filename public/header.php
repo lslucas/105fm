@@ -62,7 +62,7 @@
 						<li><a href='<?=ABSPATH?>como-funciona'>Como Funciona</a></li>
 						<?php if (!empty($usr['id'])) { ?>
 						<li><a href='<?=ABSPATH?>lista'>Ofertas</a></li>
-						<li><a href='<?=ABSPATH?>lista-geral-de-interesses'>Ofertas em Interesse</a></li>
+						<li><a href='<?=ABSPATH?>lista-geral-de-interesses'>Interesses de Compras</a></li>
 						<li><a href='<?=ABSPATH?>novo-produto'>Inserir Oferta</a></li>
 						<li><a href='<?=ABSPATH?>painel'>Minhas Ofertas</a></li>
 						<?php } else { ?>
