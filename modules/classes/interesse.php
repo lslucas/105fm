@@ -305,26 +305,21 @@ class Interesse {
 
 		$sql = "SELECT * FROM (
 					SELECT
-						upr_id,
-						pro_grupoquimico,
-						pro_fabricante,
-						upr_usr_id,
+						usr_id,
+						usr_nome_fantasia,
 						adb_uf,
-						upr_valor,
-						COALESCE(NULLIF(pro_titulo,''), upr_nomeProduto) `produto`
-					FROM `".TP."_usuario_produto`
-					INNER JOIN ".TP."_usuario_interesse
-						ON upr_usr_id<>uin_usr_id
+						uin_observacao,
+						COALESCE(NULLIF(pro_titulo,''), uin_nomeProduto) `produto`
+					FROM ".TP."_usuario_interesse
 					INNER JOIN ".TP."_usuario
-						ON upr_usr_id=usr_id
+						ON uin_usr_id=usr_id
 						AND usr_status=1
 					LEFT JOIN ".TP."_address_book
-						ON adb_usr_id=upr_usr_id
+						ON adb_usr_id=uin_usr_id
 					LEFT JOIN `".TP."_produto`
-						ON `pro_id`=`upr_pro_id`
-					WHERE upr_status=1
+						ON `pro_id`=`uin_pro_id`
+					WHERE uin_status=1
 						AND uin_usr_id<>\"{$usr_id}\"
-						AND (uin_pro_id=pro_id OR upr_nomeProduto LIKE CONCAT('%', uin_nomeProduto, '%'))
 				) as `tmp`
 				WHERE 1
 					{$whr}
@@ -332,19 +327,22 @@ class Interesse {
 		if (!$res = $conn->prepare($sql))
 			echo __FUNCTION__.$conn->error;
 		else {
-			$res->bind_result($upr_id, $grupoquimico, $fabricante, $usr_id, $uf, $valor, $produto);
+			$res->bind_result($usr_id, $nomeFantasia, $uf, $observacao, $produto);
 			$res->execute();
 
-			while ($res->fetch())
-				array_push($list, $upr_id);
+			$i=0;
+			while ($res->fetch()) {
+				$list[$i]['usr_id'] = $usr_id;
+				$list[$i]['uf'] = $uf;
+				$list[$i]['empresa'] = $nomeFantasia;
+				$list[$i]['produto'] = $produto;
+				$list[$i]['observacao'] = $observacao;
+				$i++;
+			}
 
 			$res->close();
 
-			foreach ($list as $upr_id)
-				$cpr[$upr_id]  = $this->getInfoById($upr_id);
-
-			// $this->listaGeralByInteresse = $cpr;
-			return $cpr;
+			return $list;
 
 		}
 	}
@@ -643,7 +641,94 @@ class Interesse {
 
 	}
 
-	public function filtroCategorias($filtro, $tipo=null)
+	public function filtroGeralCategorias($filtro)
+	{
+		global $conn, $hashids, $usr;
+
+		$listUf = $listPreco = array();
+		$getFiltros = $this->getFiltros($filtro);
+		$filtro = $getFiltros['filtro'];
+		$whr = $getFiltros['whr'];
+
+		if (!is_numeric($usr['id'])) {
+			$usr_id = $hashids->decrypt($usr['id']);
+			$usr_id = isset($usr_id[0]) ? $usr_id[0] : null;
+		} else
+			$usr_id = $usr['id'];
+
+		if (empty($usr_id))
+			return false;
+
+		// filtra query apenas com as infos que nao pertencem ao filtro
+		$whrFiltro = $getFiltros['whrFiltro'];
+		unset($whrFiltro['uf']);
+		unset($whrFiltro['faixapreco']);
+		$whrFiltro = join(' ', $whrFiltro);
+		$num = $this->howManyInteressesInUF($whrFiltro);
+
+		/**
+		 * Query do Filtro de Localidade
+		 * @var string
+		 */
+		$sqluf = "SELECT * FROM (
+					SELECT
+						usr_id,
+						usr_nome_fantasia,
+						adb_uf,
+						COALESCE(NULLIF(pro_titulo,''), uin_nomeProduto) `produto`
+					FROM ".TP."_usuario_interesse
+					INNER JOIN ".TP."_usuario
+						ON uin_usr_id=usr_id
+						AND usr_status=1
+					LEFT JOIN ".TP."_address_book
+						ON adb_usr_id=uin_usr_id
+					LEFT JOIN `".TP."_produto`
+						ON `pro_id`=`uin_pro_id`
+					WHERE uin_status=1
+						AND uin_usr_id<>\"{$usr_id}\"
+					GROUP BY adb_uf
+				) as `tmp`
+				WHERE 1
+					{$whr}
+				ORDER BY produto";
+		if (!$resuf = $conn->prepare($sqluf))
+			echo __FUNCTION__.$conn->error;
+		else {
+
+			$resuf->bind_result($usr_id, $empresa, $uf, $produto);
+			$resuf->execute();
+
+			$i=0;
+			while ($resuf->fetch()) {
+				$ufmin = strtolower($uf);
+				$estado = estadoFromUF($uf);
+				$ufIndex = empty($uf) ? 'vazio' : $uf;
+
+				if (!isset($num[$ufIndex]))
+					continue;
+
+				$listUf[$i]['uf'] = $uf;
+				$listUf[$i]['estado'] = $estado;
+				$listUf[$i]['num'] = $num[$ufIndex];
+
+				if (isset($filtro['filtroUF']) && $filtro['filtroUF']==$ufmin)
+					$listUf[$i]['link'] = "{$estado} ({$num[$ufIndex]})";
+				else
+					$listUf[$i]['link'] = "<a href='".ABSPATH."lista-por-interesse/uf-{$ufmin}'>{$estado}</a> ({$num[$ufIndex]})";
+
+				$i++;
+			}
+
+			$resuf->close();
+		}
+
+
+		$list = array('localizacao'=>$listUf);
+		return $list;
+
+	}
+
+	public function filtroCategorias($filtro)
 	{
 		global $conn, $hashids, $usr;
 
@@ -793,6 +878,58 @@ class Interesse {
 		}
 
 		return array('filtro'=>$filtro, 'whrFiltro'=>$whrFiltro, 'whr'=>$whr);
+	}
+
+	private function howManyInteressesInUF($whrFiltro, $tipo=null)
+	{
+		global $conn, $hashids, $usr;
+
+		if (!is_numeric($usr['id'])) {
+			$usr_id = $hashids->decrypt($usr['id']);
+			$usr_id = isset($usr_id[0]) ? $usr_id[0] : null;
+		} else
+			$usr_id = $usr['id'];
+
+		if (empty($usr_id))
+			return false;
+
+		/**
+		 * Query do Filtro de Localidade
+		 * @var string
+		 */
+		$sql = "SELECT * FROM (
+					SELECT
+						adb_uf, COUNT(uin_id) `num`
+					FROM ".TP."_usuario_interesse
+					INNER JOIN ".TP."_usuario
+						ON uin_usr_id=usr_id
+						AND usr_status=1
+					LEFT JOIN ".TP."_address_book
+						ON adb_usr_id=uin_usr_id
+					LEFT JOIN `".TP."_produto`
+						ON `pro_id`=`uin_pro_id`
+					WHERE uin_status=1
+						AND uin_usr_id<>\"{$usr_id}\"
+					GROUP BY adb_uf
+				) as `tmp`
+				WHERE 1
+				";
+		if (!$res= $conn->prepare($sql))
+			return false;
+		else {
+
+			$res->bind_result($uf, $num);
+			$res->execute();
+
+			$lst = array();
+			while ($res->fetch()) {
+				$uf = !empty($uf) ? $uf : 'vazio';
+				$lst[$uf] = $num;
+			}
+			$res->close();
+
+			return $lst;
+		}
 	}
 
 	private function howManyProductsInUF($whrFiltro, $tipo=null)
