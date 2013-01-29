@@ -301,63 +301,63 @@ $(function() {
 		if (args.button.length>0) {
 
 			var btn_color = 'btn-primary';
-			if (args.button.color.length>0)
+			if (args.button.color)
 				btn_color = args.button.color;
 
 			var btn_class = '';
-			if (args.button.class.length>0)
-				btn_class = args.button.class;
+			if (args.button.classe)
+				btn_class = args.button.classe;
 
 			var btn_id = '';
-			if (args.button.id.length>0)
+			if (args.button.id)
 				btn_id = args.button.id;
 
 			var btn_name = '';
-			if (args.button.name.length>0)
+			if (args.button.name)
 				btn_name = args.button.name;
 
 			var btn_href = 'javascript:void(0);';
-			if (args.button.href.length>0)
+			if (args.button.href)
 				btn_href = args.button.href;
 
 			var btn_target = ' ';
-			if (args.button.target.length>0)
+			if (args.button.target)
 				btn_target = " target='"+args.button.target+"' ";
 
-			if (args.button.length>0)
+			if (args.button)
 				actionButton1 = "<a href='"+btn_href+"'"+btn_target+"id='"+btn_id+"' name='"+btn_name+"' class='btn-rm btn "+btn_class+" "+btn_color+"'>"+args.button.value+"</a>";
 
 		}
 
 		// botão de ação 2
 		var actionButton2 = '';
-		if (args.button2.length>0) {
+		if (args.button2) {
 
 			var btn_color = 'btn-primary';
-			if (args.button2.color.length>0)
+			if (args.button2.color)
 				btn_color = args.button2.color;
 
 			var btn_class = '';
-			if (args.button2.class.length>0)
-				btn_class = args.button2.class;
+			if (args.button2.classe)
+				btn_class = args.button2.classe;
 
 			var btn_id = '';
-			if (args.button2.id.length>0)
+			if (args.button2.id)
 				btn_id = args.button2.id;
 
 			var btn_name = '';
-			if (args.button2.name.length>0)
+			if (args.button2.name)
 				btn_name = args.button2.name;
 
 			var btn_href = 'javascript:void(0);';
-			if (args.button2.href.length>0)
+			if (args.button2.href)
 				btn_href = args.button2.href;
 
 			var btn_target = ' ';
-			if (args.button2.target.length>0)
+			if (args.button2.target)
 				btn_target = " target='"+args.button2.target+"' ";
 
-			if (args.button2.length>0)
+			if (args.button2)
 				actionButton2 = "<a href='"+btn_href+"'"+btn_target+"id='"+btn_id+"' name='"+btn_name+"' class='btn-rm btn "+btn_class+" "+btn_color+"'>"+args.button2.value+"</a>";
 
 		}
