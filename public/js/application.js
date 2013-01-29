@@ -297,7 +297,7 @@ $(function() {
 
 		// botão de ação 1
 		var actionButton1 =  '';
-		if (args.button) {
+		if (args.button!=undefined) {
 
 			var btn_color = 'btn-primary';
 			if (args.button.color!=undefined)
@@ -330,7 +330,7 @@ $(function() {
 
 		// botão de ação 2
 		var actionButton2 = '';
-		if (args.button2) {
+		if (args.button2!=undefined) {
 
 			var btn_color = 'btn-primary';
 			if (args.button2.color!=undefined)
