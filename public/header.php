@@ -74,7 +74,7 @@
 				</nav>
 			</div>
 
-			<div class="column" style='width:<?=!empty($usr['id']) ? 150 : 220?>px;'>
+			<div class="column" style='width:<?=!empty($usr['id']) ? 160 : 220?>px;'>
 				<nav class="usr">
 					<ul>
 						<?php if (!empty($usr['id'])) { ?>
