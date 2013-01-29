@@ -1,4 +1,21 @@
 <?php
+
+	if(isset($_POST)) {
+		foreach ($_POST as $key=>$value)
+			$val[$key] = trim($value);
+	}
+
+	/**
+	 * Faz login
+	 */
+	if (isset($val['from']) && $val['from']=='login') {
+		include_once 'modules/classes/usuario.php';
+		$msg = $msgTitle = $res = null;
+		$usuario = new Usuario();
+
+		include_once 'modules/usuario/login/header.php';
+	}
+
 	/**
 	 * Quantos produtos em interesse existem
 	 */
