@@ -55,7 +55,7 @@
 				</div>
 			</a>
 
-			<div class="column" style='width:<?=!empty($usr['id']) ? 605 : 420?>px;'>
+			<div class="column" style='width:<?=!empty($usr['id']) ? 600 : 420?>px;'>
 				<nav class="cat">
 					<ul>
 						<?php if (empty($usr['id'])) { ?>
