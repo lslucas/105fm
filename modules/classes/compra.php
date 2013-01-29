@@ -550,7 +550,8 @@ class Compra {
 		 * Query do Filtro de Localidade
 		 * @var string
 		 */
-		$sql = "SELECT adb_uf, COUNT(upr_id) `num`
+		$sql = "SELECT * FROM (
+					SELECT adb_uf, COUNT(upr_id) `num`, COALESCE(NULLIF(pro_titulo,''), upr_nomeProduto) `produto`
 					FROM `".TP."_usuario_produto`
 					INNER JOIN ".TP."_usuario
 						ON upr_usr_id=usr_id
@@ -561,14 +562,18 @@ class Compra {
 						ON pro_id=upr_pro_id
 						AND pro_status=1
 					WHERE upr_status=1
+					) as `tmp`
+					WHERE 1
 					{$whrFiltro}
 					GROUP BY adb_uf
 					";
+					// echo $sql;
+					// var_dump($whrFiltro);
 		if (!$res= $conn->prepare($sql))
 			return false;
 		else {
 
-			$res->bind_result($uf, $num);
+			$res->bind_result($uf, $num, $produto);
 			$res->execute();
 
 			$lst = array();
@@ -617,7 +622,7 @@ class Compra {
 						AND usr_status=1
 					LEFT JOIN ".TP."_address_book
 						ON adb_usr_id=upr_usr_id
-					INNER JOIN ".TP."_produto
+					LEFT JOIN ".TP."_produto
 						ON pro_id=upr_pro_id
 						AND pro_status=1
 					WHERE upr_status=1
@@ -638,15 +643,16 @@ class Compra {
 				$ufmin = strtolower($uf);
 				$estado = estadoFromUF($uf);
 				$ufIndex = empty($uf) ? 'vazio' : $uf;
+				$numUF = isset($num[$ufIndex]) ? $num[$ufIndex] : '-';
 
 				$listUf[$i]['uf'] = $uf;
 				$listUf[$i]['estado'] = $estado;
-				$listUf[$i]['num'] = $num[$ufIndex];
+				$listUf[$i]['num'] = $numUF;
 
 				if (isset($filtro['filtroUF']) && $filtro['filtroUF']==$ufmin)
-					$listUf[$i]['link'] = "{$estado} ({$num[$ufIndex]})";
+					$listUf[$i]['link'] = "{$estado} ({$numUF})";
 				else
-					$listUf[$i]['link'] = "<a href='".ABSPATH."lista/uf-{$ufmin}'>{$estado}</a> ({$num[$ufIndex]})";
+					$listUf[$i]['link'] = "<a href='".ABSPATH."lista/uf-{$ufmin}'>{$estado}</a> ({$numUF})";
 
 				$i++;
 			}
