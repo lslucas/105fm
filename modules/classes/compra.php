@@ -547,11 +547,11 @@ class Compra {
 		global $conn;
 
 		/**
-		 * Query do Filtro de Localidade
+		 * Conta o numero de produtos por estado
 		 * @var string
 		 */
 		$sql = "SELECT * FROM (
-					SELECT adb_uf, COUNT(upr_id) `num`, COALESCE(NULLIF(pro_titulo,''), upr_nomeProduto) `produto`
+					SELECT adb_uf, COUNT(upr_id) `num`
 					FROM `".TP."_usuario_produto`
 					INNER JOIN ".TP."_usuario
 						ON upr_usr_id=usr_id
@@ -562,18 +562,18 @@ class Compra {
 						ON pro_id=upr_pro_id
 						AND pro_status=1
 					WHERE upr_status=1
+					GROUP BY adb_uf
 					) as `tmp`
 					WHERE 1
-					{$whrFiltro}
-					GROUP BY adb_uf
+					/*{$whrFiltro}*/
 					";
-					// echo $sql;
+					echo $sql;
 					// var_dump($whrFiltro);
 		if (!$res= $conn->prepare($sql))
 			return false;
 		else {
 
-			$res->bind_result($uf, $num, $produto);
+			$res->bind_result($uf, $num);
 			$res->execute();
 
 			$lst = array();
