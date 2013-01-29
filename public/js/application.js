@@ -297,30 +297,31 @@ $(function() {
 
 		// botão de ação 1
 		var actionButton1 =  '';
-		if (args.button!=undefined) {
+
+		if (args.button) {
 
 			var btn_color = 'btn-primary';
-			if (args.button.color!=undefined)
+			if (args.button.color)
 				btn_color = args.button.color;
 
 			var btn_class = '';
-			if (args.button.class!=undefined)
+			if (args.button.class)
 				btn_class = args.button.class;
 
 			var btn_id = '';
-			if (args.button.id!=undefined)
+			if (args.button.id)
 				btn_id = args.button.id;
 
 			var btn_name = '';
-			if (args.button.name!=undefined)
+			if (args.button.name)
 				btn_name = args.button.name;
 
 			var btn_href = 'javascript:void(0);';
-			if (args.button.href!=undefined)
+			if (args.button.href)
 				btn_href = args.button.href;
 
 			var btn_target = ' ';
-			if (args.button.target!=undefined)
+			if (args.button.target)
 				btn_target = " target='"+args.button.target+"' ";
 
 			if (args.button)
@@ -330,33 +331,33 @@ $(function() {
 
 		// botão de ação 2
 		var actionButton2 = '';
-		if (args.button2!=undefined) {
+		if (args.button2) {
 
 			var btn_color = 'btn-primary';
-			if (args.button2.color!=undefined)
+			if (args.button2.color)
 				btn_color = args.button2.color;
 
 			var btn_class = '';
-			if (args.button2.class!=undefined)
+			if (args.button2.class)
 				btn_class = args.button2.class;
 
 			var btn_id = '';
-			if (args.button2.id!=undefined)
+			if (args.button2.id)
 				btn_id = args.button2.id;
 
 			var btn_name = '';
-			if (args.button2.name!=undefined)
+			if (args.button2.name)
 				btn_name = args.button2.name;
 
 			var btn_href = 'javascript:void(0);';
-			if (args.button2.href!=undefined)
+			if (args.button2.href)
 				btn_href = args.button2.href;
 
 			var btn_target = ' ';
-			if (args.button2.target!=undefined)
+			if (args.button2.target)
 				btn_target = " target='"+args.button2.target+"' ";
 
-			if (args.button2!=undefined)
+			if (args.button2)
 				actionButton2 = "<a href='"+btn_href+"'"+btn_target+"id='"+btn_id+"' name='"+btn_name+"' class='btn-rm btn "+btn_class+" "+btn_color+"'>"+args.button2.value+"</a>";
 
 		}
