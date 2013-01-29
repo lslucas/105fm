@@ -308,6 +308,8 @@ class Interesse {
 						usr_id,
 						usr_nome_fantasia,
 						adb_uf,
+						adb_telefone1,
+						adb_telefone2,
 						uin_observacao,
 						COALESCE(NULLIF(pro_titulo,''), uin_nomeProduto) `produto`
 					FROM ".TP."_usuario_interesse
@@ -327,13 +329,15 @@ class Interesse {
 		if (!$res = $conn->prepare($sql))
 			echo __FUNCTION__.$conn->error;
 		else {
-			$res->bind_result($usr_id, $nomeFantasia, $uf, $observacao, $produto);
+			$res->bind_result($usr_id, $nomeFantasia, $uf, $telefone1, $telefone2, $observacao, $produto);
 			$res->execute();
 
 			$i=0;
 			while ($res->fetch()) {
 				$list[$i]['usr_id'] = $usr_id;
 				$list[$i]['uf'] = $uf;
+				$list[$i]['telefone1'] = $telefone1;
+				$list[$i]['telefone2'] = $telefone2;
 				$list[$i]['empresa'] = $nomeFantasia;
 				$list[$i]['produto'] = $produto;
 				$list[$i]['observacao'] = $observacao;
