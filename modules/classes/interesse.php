@@ -686,11 +686,11 @@ class Interesse {
 						ON `pro_id`=`uin_pro_id`
 					WHERE uin_status=1
 						AND uin_usr_id<>\"{$usr_id}\"
+						{$whrFiltro}
 					GROUP BY adb_uf
 				) as `tmp`
 				WHERE 1
-					{$whr}
-				ORDER BY produto";
+				ORDER BY adb_uf";
 		if (!$resuf = $conn->prepare($sqluf))
 			echo __FUNCTION__.$conn->error;
 		else {
@@ -714,7 +714,7 @@ class Interesse {
 				if (isset($filtro['filtroUF']) && $filtro['filtroUF']==$ufmin)
 					$listUf[$i]['link'] = "{$estado} ({$num[$ufIndex]})";
 				else
-					$listUf[$i]['link'] = "<a href='".ABSPATH."lista-por-interesse/uf-{$ufmin}'>{$estado}</a> ({$num[$ufIndex]})";
+					$listUf[$i]['link'] = "<a href='".ABSPATH."lista-geral-de-interesses/uf-{$ufmin}'>{$estado}</a> ({$num[$ufIndex]})";
 
 				$i++;
 			}
@@ -910,6 +910,7 @@ class Interesse {
 						ON `pro_id`=`uin_pro_id`
 					WHERE uin_status=1
 						AND uin_usr_id<>\"{$usr_id}\"
+						{$whrFiltro}
 					GROUP BY adb_uf
 				) as `tmp`
 				WHERE 1
