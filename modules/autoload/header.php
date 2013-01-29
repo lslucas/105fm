@@ -9,9 +9,9 @@
 
 		$textoProdutosEmInteresse = null;
 		if ($produtosEmInteresse==1)
-			$textoProdutosEmInteresse = "Existe <b>um produto</b> em interesse, <a href='".ABSPATH."lista-por-interesse'>confira</a>";
+			$textoProdutosEmInteresse = "Existe <b>um produto</b> em interesse, <a href='".ABSPATH."lista-por-interesse' style='text-decoration:underline'>confira</a>";
 		elseif ($produtosEmInteresse>1)
-			$textoProdutosEmInteresse = "Existem <b>{$produtosEmInteresse} produtos</b> em interesse, <a href='".ABSPATH."lista-por-interesse'>confira</a>";
+			$textoProdutosEmInteresse = "Existem <b>{$produtosEmInteresse} produtos</b> em interesse, <a href='".ABSPATH."lista-por-interesse' style='text-decoration:underline'>confira</a>";
 	}
 
 
