@@ -14,24 +14,39 @@
 				echo "<img src='{$pro['galeria'][0]['imagem']}' border=0 width=280 class='img-polaroid produtoImagem'/>";
 		?>
 		<?=$pro['descricao']?>
-		Quantidade: <?=$cpr['quantidade']?>
-		<br/>Validade produto: <?=$cpr['datavalidade']?>
-		<br/>Data para pagamento: <?=$cpr['datapagamento']?>
-		<h4><?=$cpr['valor']?></h4>
+		<?php if (!empty($cpr['quantidade'])) { ?>
+			<br/>Quantidade: <?=$cpr['quantidade']?>
+		<?php } ?>
+		<?php if (!empty($cpr['quantidade_minima_venda'])) { ?>
+			<br/>Quantidade Mínima de Venda: <?=$cpr['quantidade_minima_venda']?>
+		<?php } ?>
+		<?php if (!empty($cpr['datapagamento'])) { ?>
+			<br/>Data para pagamento: <?=$cpr['datapagamento']?>
+		<?php } ?>
+		<?php if (!empty($cpr['datavalidade'])) { ?>
+			<br/>Validade produto: <?=$cpr['datavalidade']?>
+		<?php } ?>
+		<?php if (!empty($cpr['embalagem'])) { ?>
+			<br/>Embalagem : <?=$cpr['embalagem']?>
+		<?php } ?>
+		<?php if (!empty($cpr['observacao'])) { ?>
+			<br/>Observação: <?=$cpr['observacao']?>
+		<?php } ?>
+		<?php if (!$cpr['valor']) { ?>
+			<h4><?=$cpr['valor']?></h4>
+		<?php } ?>
 	</p>
 
 	<br clear='all'/>
 	<div id='detalhes'>
 		<ul class="nav nav-tabs" id="myTab">
-			<li class="active"><a href="#dadostecnicos">Dados Técnicos</a></li>
+			<!-- <li class="active"><a href="#dadostecnicos">Dados Técnicos</a></li> -->
 			<li><a href="#infovendedor">Informações do vendedor</a></li>
 			<li><a href="#contato">Entrar em Contato</a></li>
 		</ul>
 		<div class="tab-content">
-			<div class="tab-pane active" id="dadostecnicos">
-				Fabricante: <?=$pro['fabricante']?>
-				<br/>Grupo Químico: <?=$pro['grupoquimico']?>
-			</div>
+<!-- 			<div class="tab-pane active" id="dadostecnicos">
+			</div> -->
 			<div class="tab-pane" id="infovendedor">
 				<?php
 					if (!isset($usr) || empty($usr['id']))

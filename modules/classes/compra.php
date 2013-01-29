@@ -414,6 +414,7 @@ class Compra {
 			             'quantidade_minima_venda'=>$quantidade_minima_venda,
 			             'peso'=>$peso,
 			             'peso_unidade_medida'=>mb_strtoupper($embalagem, 'utf8'),
+			             'embalagem'=>mb_strtoupper($embalagem, 'utf8'),
 			             'datavalidadeEn'=>$datavalidade,
 			             'datavalidade'=>$datavalidadePt,
 			             'datapagamentoEn'=>$datapagamento,
