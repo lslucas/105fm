@@ -32,12 +32,34 @@ class Utils {
 
 			$minima = $forecast[0]['low'].'ºC';
 			$maxima = $forecast[0]['high'].'ºC';
-			$imagem_url = "http://l.yimg.com/a/i/us/we/52/{$matche->item->condition->code}.gif";
+
+			if (!$imagem_url = $this->getNewImage($weather))
+				$imagem_url = "http://l.yimg.com/a/i/us/we/52/{$matche->item->condition->code}.gif";
 			$imagem = "<img src='{$imagem_url}' title='{$weather}'/>";
 
 			// $weather_class = format_result($matche);
 			return array('clima'=>$clima, 'weather'=>$weather, 'code'=>$code, 'temperatura'=>$temp, 'minima'=>$minima, 'maxima'=>$maxima, 'imagem'=>$imagem, 'imagem_url'=>$imagem_url, 'cidade'=>$cidade_final);
 		}
+	}
+
+	private function getNewImage($weather) {
+
+		if ($weather=='Haze' || $weather=='Fog' || $weather=='Foggy')
+			return STATIC_PATH.'clima/neblina.png';
+		elseif (in_array($weather, array('Clear (Day)', 'Sunny', 'Fair (Day)', 'Hot')))
+			return STATIC_PATH.'clima/dia-limpo.png';
+		elseif (in_array($weather, array('Clear (Night)', 'Fair (Night)')))
+			return STATIC_PATH.'clima/noite-limpa.png';
+		elseif (in_array($weather, array('Cloudy', 'Mostly Cloudy (Day)', 'Partly Cloudy (Day)', 'Partly Cloudy', 'Mostly Cloudy')))
+			return STATIC_PATH.'clima/nuvens-dia.png';
+		elseif (in_array($weather, array('Mostly Cloudy (Night)', 'Partly Cloudy (Night)')))
+			return STATIC_PATH.'clima/nuvens.png';
+		elseif (in_array($weather, array('Drizzle', 'Freezing Rain', 'Scattered Showers', 'Light Snow Showers', 'Rain', 'Scattered Showers')))
+			return STATIC_PATH.'clima/chuva-leve.png';
+		elseif (in_array($weather, array('Tropical Storm', 'Severe Thunderstorms', 'Thunderstorms', 'Mixed Rain and Sleet', 'Showers', 'Isolated Thunderstorm', 'Scattered Thunderstorms', 'Isolated Thundershowers')))
+			return STATIC_PATH.'clima/chuva-pesada.png';
+		else
+			return false;
 	}
 
 	public function translateWeather2Clima($weather)
@@ -133,7 +155,7 @@ class Utils {
 			break;
 			case 'isolated thundershowers' : $clima = 'trovoadas isoladas';
 			break;
-			default: $clima = 'não disponível';
+			default: $clima =$weather;
 		}
 		return $clima;
 	}
