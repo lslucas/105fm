@@ -17,19 +17,19 @@
 						<li style='width:100%; height:50px; display:table; position:relative;'>
 							<img src='<?=STATIC_PATH?>assets/dolar.png' class='pull-left' title='Dolar' border=0/>
 							<div style='display: table-cell; vertical-align:middle; padding-left:20px; width:100%;  '>
-								R$ <?=cotacao()?>
+								Dolar R$ <?=cotacao()?>
 							</div>
 						</li>
 						<li style='width:100%; height:50px; display:table; position:relative;'>
 							<img src='<?=STATIC_PATH?>assets/euro.png' class='pull-left' title='Euro' border=0/>
 							<div style='display: table-cell; vertical-align:middle; padding-left:20px; width:100%;  '>
-								R$ <?=cotacao('EUR')?>
+								Euro R$ <?=cotacao('EUR')?>
 							</div>
 						</li>
 						<li style='width:100%; height:50px; display:table; position:relative;'>
 							<img src='<?=STATIC_PATH?>assets/libra.png' class='pull-left' title='Libra' border=0/>
 							<div style='display: table-cell; vertical-align:middle; padding-left:20px; width:100%;  '>
-								R$ <?=cotacao('GBP')?>
+								Libra R$ <?=cotacao('GBP')?>
 							</div>
 						</li>
 					</ul>
