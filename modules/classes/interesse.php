@@ -308,8 +308,8 @@ class Interesse {
 						usr_id,
 						usr_nome_fantasia,
 						adb_uf,
-						adb_telefone1,
-						adb_telefone2,
+						usr_telefone1,
+						usr_telefone2,
 						uin_observacao,
 						COALESCE(NULLIF(pro_titulo,''), uin_nomeProduto) `produto`
 					FROM ".TP."_usuario_interesse
