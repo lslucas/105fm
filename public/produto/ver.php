@@ -47,7 +47,7 @@
 		<div class="tab-content">
 <!-- 			<div class="tab-pane active" id="dadostecnicos">
 			</div> -->
-			<div class="tab-pane" id="infovendedor">
+			<div class="tab-pane active" id="infovendedor">
 				<?php
 					if (!isset($usr) || empty($usr['id']))
 						echo "<div class='alert alert-warning'>Você precisa ser registrado para ver as informações do vendedor!<br/>Faça o <a href='".ABSPATH."login'>login</a> ou <a href='".ABSPATH."registrar'>registre-se aqui</a></div>";
