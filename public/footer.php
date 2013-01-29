@@ -23,6 +23,7 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 	<!--<script src="//code.jquery.com/ui/1.9.2/jquery-ui.js"></script>-->
 	<script src="<?=ABSPATH?>bootstrap/js/bootstrap.min.js"></script>
+	<script src="<?=ABSPATH?>js/jquery.doesExist.js"></script>
 	<script src="<?=ABSPATH?>js/slider.js"></script>
 	<script src="<?=ABSPATH?>js/script.js"></script>
 	<script src="<?=ABSPATH?>js/jquery.autotab-1.1b.js"></script>

@@ -65,13 +65,13 @@
             };
 
 
-            if ($('.close_chatbox'))
+            if ($('.close_chatbox').doesExist())
                 $('.close_chatbox').live('click', function(){
                     $(this).parent().parent().remove();
                     $(this).find('.chatbox').remove();
                 })
 
-            if ($('.s-user-message'))
+            if ($('.s-user-message').doesExist())
                 $('.s-user-message').live('keypress', function(e) {
                     if(e.which == 13) {
                         e.preventDefault();
@@ -86,7 +86,7 @@
                 });
 
 
-            if ($('.user'))
+            if ($('.user').doesExist())
                 $('.user').live('click', function() {
                     $('#datasend').attr('rel', $(this).attr('rel'));
                     var name = $(this).attr('name').substr(2, 22);
@@ -120,7 +120,7 @@
 
 
             //minimizar / maximizar
-            if ($('.opt-button-box'))
+            if ($('.opt-button-box').doesExist())
                 $('.opt-button-box').live('click', function(){
 
                         var box1 = $(this).parent().next();
