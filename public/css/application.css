@@ -59,6 +59,7 @@ h1#logo { padding:0px; }
 .btn-cadastrar{ background: transparent url(../images/layout/bt-cadastrar.png) no-repeat top left; height: 44px; width: 202px; border: none; text-indent: 99999px; cursor: pointer; }
 .btn-agro {
 	color: #ffffff;
+	background-color:#D6772A;
 	font-weight: normal;
 	text-align: center;
 	text-shadow: -1px -1px 0px #aa5e1b;
