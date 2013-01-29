@@ -44,7 +44,7 @@ function placeHolder() {
 		if ($(this).val()=='')
 		  $(this).val(p);
 
-		$(this).css('color', '#257396');
+		$(this).css('color', '#888');
 		// On selecting the field, if value is the same as placeholder, it should become blank
 		$(this).focus(function() {
 		  if (p === $(this).val()) {
