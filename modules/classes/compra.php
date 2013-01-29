@@ -385,7 +385,8 @@ class Compra {
 
 			if (!empty($upr_id)) {
 
-				$produto = empty($produto) ? $nomeProduto : $produto;
+				$produto = !empty($nomeProduto) ? $nomeProduto : $produto;
+				$produto = mb_strtoupper($produto, 'utf8');
 				$fabricanteProduto = empty($fabricanteProduto) ? $nomeFabricante : $fabricanteProduto;
 				$fabricanteProduto = empty($fabricanteProduto) ? $proFabricanteProduto : $fabricanteProduto;
 				$grupoquimicoProduto = empty($grupoquimicoProduto) && !empty($proGrupoQuimicoProduto) ? $proGrupoQuimicoProduto : $grupoquimicoProduto;
@@ -403,7 +404,7 @@ class Compra {
 			             'fabricante_id'=>$fabricante_id,
 			             'nomeProduto'=>mb_strtoupper($nomeProduto, 'utf8'),
 			             'nomeFabricante'=>$nomeFabricante,
-			             'titulo'=>mb_strtoupper($produto, 'utf8'),
+			             'titulo'=>$produto,
 			             'codigo'=>$codigoProduto,
 			             'tipo'=>$tipoProduto,
 			             'fabricante'=>$fabricanteProduto,

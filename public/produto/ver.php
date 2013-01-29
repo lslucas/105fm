@@ -1,12 +1,12 @@
 
-<?php include_once 'public/navbar/home.php' ?>
+<?php include_once 'public/navbar/home.php'; ?>
 <div class="column grid_7">
 	<?php
-		if (count($pro)==0)
+		if (count($cpr)==0)
 			echo "<center>Produto não existe ou já foi vendido!";
 		else {
 	?>
-	<h3><?=$pro['titulo']?></h3>
+	<h3><?=$cpr['titulo']?></h3>
 	<hr>
 	<p>
 		<?php
@@ -92,7 +92,7 @@
 			?>
 				<form class="form-horizontal" name='contato-vendedor' method='post'>
 				<input type='hidden' name='form' value='contato-vendedor'>
-				<input type='hidden' name='produto' value='<?=$pro['titulo']?>'>
+				<input type='hidden' name='produto' value='<?=$cpr['titulo']?>'>
 				<input type='hidden' name='contatoVendedor' value='<?=$vend['contato']?>'>
 				<input type='hidden' name='emailVendedor' value='<?=$vend['email']?>'>
 				  <div class="control-group">
