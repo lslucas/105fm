@@ -41,7 +41,7 @@
 	<div id='detalhes'>
 		<ul class="nav nav-tabs" id="myTab">
 			<!-- <li class="active"><a href="#dadostecnicos">Dados Técnicos</a></li> -->
-			<li><a href="#infovendedor">Informações do vendedor</a></li>
+			<li class='active'><a href="#infovendedor">Informações do vendedor</a></li>
 			<li><a href="#contato">Entrar em Contato</a></li>
 		</ul>
 		<div class="tab-content">
