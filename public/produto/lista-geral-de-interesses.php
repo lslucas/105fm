@@ -3,7 +3,7 @@
 			<div class='breadcrumb-agro'>
 				<h5>
 					<a href="<?=ABSPATH?>" title="<?=SITE_NAME?>">Início</a>
-					 > <a href="<?=ABSPATH?>lista-por-interesse" title="Comercialização">Ofertas em Interesse</a>
+					 > <a href="<?=ABSPATH?>lista-geral-de-interesses" title="Comercialização">Lista Geral de Interesses</a>
 					<?php
 						if (isset($breadcrumb['grupoquimico']))
 							echo " > <a href='".ABSPATH."lista/grupoquimico-".linkfySmart($breadcrumb['grupoquimico'])."'>Grupo Quimico ".$breadcrumb['grupoquimico']."</a>";
