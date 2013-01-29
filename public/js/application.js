@@ -304,23 +304,23 @@ $(function() {
 				btn_color = args.button.color;
 
 			var btn_class = '';
-			if (args.button.class)
+			if (args.button.class!=undefined)
 				btn_class = args.button.class;
 
 			var btn_id = '';
-			if (args.button.id)
+			if (args.button.id!=undefined)
 				btn_id = args.button.id;
 
 			var btn_name = '';
-			if (args.button.name)
+			if (args.button.name!=undefined)
 				btn_name = args.button.name;
 
 			var btn_href = 'javascript:void(0);';
-			if (args.button.href)
+			if (args.button.href!=undefined)
 				btn_href = args.button.href;
 
 			var btn_target = ' ';
-			if (args.button.target)
+			if (args.button.target!=undefined)
 				btn_target = " target='"+args.button.target+"' ";
 
 			if (args.button)
@@ -337,26 +337,26 @@ $(function() {
 				btn_color = args.button2.color;
 
 			var btn_class = '';
-			if (args.button2.class)
+			if (args.button2.class!=undefined)
 				btn_class = args.button2.class;
 
 			var btn_id = '';
-			if (args.button2.id)
+			if (args.button2.id!=undefined)
 				btn_id = args.button2.id;
 
 			var btn_name = '';
-			if (args.button2.name)
+			if (args.button2.name!=undefined)
 				btn_name = args.button2.name;
 
 			var btn_href = 'javascript:void(0);';
-			if (args.button2.href)
+			if (args.button2.href!=undefined)
 				btn_href = args.button2.href;
 
 			var btn_target = ' ';
-			if (args.button2.target)
+			if (args.button2.target!=undefined)
 				btn_target = " target='"+args.button2.target+"' ";
 
-			if (args.button2)
+			if (args.button2!=undefined)
 				actionButton2 = "<a href='"+btn_href+"'"+btn_target+"id='"+btn_id+"' name='"+btn_name+"' class='btn-rm btn "+btn_class+" "+btn_color+"'>"+args.button2.value+"</a>";
 
 		}
