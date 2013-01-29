@@ -567,7 +567,6 @@ class Compra {
 					WHERE 1
 					/*{$whrFiltro}*/
 					";
-					echo $sql;
 					// var_dump($whrFiltro);
 		if (!$res= $conn->prepare($sql))
 			return false;
