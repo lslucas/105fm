@@ -14,8 +14,8 @@ define('OAUTH_APP_ID', 'H6odEJ30');
 # EMAILS
 ########
 
-define('EMAIL','neto@agrosshop.com.br');
-define('EMAIL_CONTACT','neto@agrosshop.com.br');
+define('EMAIL','neto@techtravel.com.br');
+define('EMAIL_CONTACT','neto@techtravel.com.br');
 define('EMAIL_NAME','agrosshop');
 define('BBC1_EMAIL','lslucas@gmail.com');
 define('BBC2_EMAIL','');
