@@ -40,7 +40,7 @@
 			<div class="row produtos">
 				<section class="item">
 					<img src="<?=STATIC_PATH?>prod-teste1.jpg" class="thumb" />
-					<p><strong>Caminhão</strong></p>
+					<p><strong>Trator</strong></p>
 					<p>R$ 70.000</p>
 					<a href="javascript:alert('Em Breve!');"><img src="<?=STATIC_PATH?>em-breve_cinza.png" class="info" /></a>
 				</section>
