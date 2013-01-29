@@ -273,7 +273,6 @@ $(function() {
 	/*
 	 *Modal Global de mensagens e alertas
 	 */
-	 /*
 	function showModal(args)
 	{
 		if (!args) {
@@ -384,6 +383,5 @@ $(function() {
 		$('#msg-modal').modal('show');
 
 	}
-	 */
 
 });
