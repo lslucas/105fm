@@ -25,9 +25,9 @@
 							<tr>
 								<th width="60px">UF</th>
 								<th align="left">Revenda</th>
-								<th align="left">Telefone</th>
 								<th align="left">Produto</th>
 								<th align="left">Observação</th>
+								<th align="left">Telefone</th>
 							</tr>
 							<tbody>
 							<?php
@@ -38,9 +38,9 @@
 								<tr>
 									<td align='center'><?=$lista['uf']?></td>
 									<td><a href="javascript:void(0);" class='chatwith-<?=$lista['usr_id']?>' name='<?=$lista['empresa']?>'></a><?=$lista['empresa']?></td>
-									<td><?=$lista['telefone1']?></td>
 									<td><?=$lista['produto']?></td>
 									<td><?=$lista['observacao']?></td>
+									<td><?=$lista['telefone1']?></td>
 								</tr>
 								<?php } ?>
 							</tbody>
