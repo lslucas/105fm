@@ -79,7 +79,7 @@ if ($host=='localhost') {
 	define('DB_PASS','mvdbt9AGRO');
 	define('DB_DATABASE','agrosshop');
 
-	ini_set('display_errors','On');
+	ini_set('display_errors','Off');
 
 	//host
 	$vhost = 'http://'.$_SERVER['HTTP_HOST'].'/';
