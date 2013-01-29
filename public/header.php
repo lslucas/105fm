@@ -59,6 +59,7 @@
 				<nav class="cat">
 					<ul>
 						<?php if (empty($usr['id'])) { ?>
+						<li><a href='<?=ABSPATH?>'>Home</a></li>
 						<li><a href='<?=ABSPATH?>como-funciona'>Como Funciona</a></li>
 						<?php } if (!empty($usr['id'])) { ?>
 						<li><a href='<?=ABSPATH?>lista'>Ofertas</a></li>
