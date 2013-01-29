@@ -6,12 +6,11 @@
 	<footer>
 		<div class="row">
 			<div class="column grid_7">
-				<p>© AGROSSHOP 2012 · <a href="<?=ABSPATH?>politica-privacidade" title="">Política de Privacidade</a> · <a href="<?=ABSPATH?>termos-uso" title="">Termos de Uso</a></p>
+				<p>© AGROSSHOP 2012 · <a href="<?=ABSPATH?>politica-privacidade" title="">Política de Privacidade</a> · <a href="<?=ABSPATH?>termos-uso" title="">Termos de Uso</a> · <a href='<?=ABSPATH?>como-funciona'>Como Funciona</a></p>
 			</div>
 
 			<div class="column grid_5">
 				<p class="fr"><a href="#" title="">Topo</a></p>
-				<div class='span2 pull-right'><small>Cotação U$<?=cotacao()?></small></div>
 			</div>
 		</div>
 	</footer>
