@@ -102,6 +102,7 @@ h1#logo { padding:0px; }
 small { font-size:85%; color:#666;}
 
 header nav.cat ul li{ margin: 10px 15px 0 0; }
+header nav.cat ul li a { font-weight: bold; }
 hr { border:0; border-bottom: 1px solid #9ECADA;}
 .breadcrumb-agro h5 { border-color: #9ECADA; }
 .search .column { padding-top:2px; color:#fff; font-size:0.9em; }
