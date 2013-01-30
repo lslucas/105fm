@@ -128,6 +128,7 @@
 			<option value='Categoria' <?php if($val['area']=='Categoria') echo ' selected';?>>Categoria</option>
 			<option value='Marca' <?php if($val['area']=='Marca') echo ' selected';?>>Marca</option>
 			<option value='Tipo' <?php if($val['area']=='Tipo') echo ' selected';?>>Tipo</option>
+			<option value='Tipo Classificado' <?php if($val['area']=='Tipo Classificado') echo ' selected';?>>Tipo Classificado</option>
 			<option value='Fabricante' <?php if($val['area']=='Fabricante') echo ' selected';?>>Fabricante</option>
 			<option value='Grupo Quimico' <?php if($val['area']=='Grupo Quimico') echo ' selected';?>>Grupo Quimico</option>
 		  </select>
