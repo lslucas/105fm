@@ -550,6 +550,7 @@ class Compra {
 		 * Conta o numero de produtos por estado
 		 * @var string
 		 */
+		/*
 		$sql = "SELECT * FROM (
 					SELECT adb_uf, COUNT(upr_id) `num`
 					FROM `".TP."_usuario_produto`
@@ -565,24 +566,51 @@ class Compra {
 					GROUP BY adb_uf
 					) as `tmp`
 					WHERE 1
-					/*{$whrFiltro}*/
-					";
-					// var_dump($whrFiltro);
+					{$whrFiltro}
+					";*/
+		$sql = "SELECT * FROM (
+					SELECT
+						pro_grupoquimico,
+						pro_fabricante,
+						upr_usr_id,
+						adb_uf,
+						upr_valor,
+						upr_id,
+						COALESCE(NULLIF(pro_titulo,''), upr_nomeProduto) `produto`
+					FROM `".TP."_usuario_produto`
+					INNER JOIN ".TP."_usuario
+						ON upr_usr_id=usr_id
+						AND usr_status=1
+					LEFT JOIN ".TP."_address_book
+						ON adb_usr_id=upr_usr_id
+					LEFT JOIN ".TP."_produto
+						ON pro_id=upr_pro_id
+						AND pro_status=1
+					WHERE upr_status=1
+					) as `tmp`
+					WHERE 1
+					{$whrFiltro}
+					ORDER BY adb_uf";
 		if (!$res= $conn->prepare($sql))
 			return false;
 		else {
 
-			$res->bind_result($uf, $num);
+			$res->bind_result($grupoquimico, $fabricante, $usr_id, $uf, $valor, $upr_id, $produto);
 			$res->execute();
 
 			$lst = array();
 			while ($res->fetch()) {
 				$uf = !empty($uf) ? $uf : 'vazio';
-				$lst[$uf] = $num;
+				$lst[$uf][$upr_id] = $produto;
 			}
 			$res->close();
 
-			return $lst;
+			//conta qts itens tem em cada estado
+			$listaUF = array();
+			foreach ($lst as $key=>$lista)
+				$listaUF[$key] = count($lista);
+
+			return $listaUF;
 		}
 	}
 
