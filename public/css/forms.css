@@ -19,8 +19,8 @@ legend+.control-group{margin-top:20px;-webkit-margin-top-collapse:separate;}
 /****************************** FORM LOGIN */
 
 aside.cat section form input[type="submit"]{ background: url(../images/bt-login.png) no-repeat center; width: 44px; height: 25px; border: none; margin: 0; padding: 0; text-indent: 99999px; cursor: pointer; }
-aside.cat section form input[type="text"]{ width: 185px;}
-aside.cat section form input[type="password"]{ width: 135px;}
+aside.cat section form input[type="text"]{ width: 105px;}
+aside.cat section form input[type="password"]{ width: 55px;}
 aside.cat section form input[type="text"], aside.cat section form input[type="password"]{
 border: 1px solid #d5d4d3; -webkit-box-shadow: inset 0 2px 5px  rgba(0,0,0,0.15), 0 1px 0px #FFFFFF; -moz-box-shadow: inset 0 2px 5px  rgba(0,0,0,0.15), 0 1px 0px #FFFFFF; box-shadow: inset 0 2px 5px  rgba(0,0,0,0.15), 0 1px 0px #FFFFFF; padding: 5px; margin: 0 0 10px 0; }
 
