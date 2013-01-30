@@ -1,5 +1,5 @@
 		<div class="column grid_3">
-			<?php /*if (empty($usr['id'])) { ?>
+			<?php if (empty($usr['id'])) { ?>
 			<aside class="cat">
 				<section>
 					<h4>Login</h4>
@@ -14,7 +14,7 @@
 				</section>
 			</aside>
 
-			<?php }*/ ?>
+			<?php } ?>
 			<aside class="cat">
 				<section>
 					<h4>Notícias</h4>
