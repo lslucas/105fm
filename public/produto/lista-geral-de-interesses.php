@@ -21,6 +21,10 @@
 				<div class="pull-left grid_9 content">
 					<div class="row lista">
 
+						<div class='column'>
+							<p>Essa listagem mostra os produtos que os outros revendedores tem interesse em comprar.</p>
+							<br/>
+						</div>
 						<table class="lista-produtos" id="alternatecolor" width="100%" style='margin-top:0px'>
 							<tr>
 								<th width="60px">UF</th>
