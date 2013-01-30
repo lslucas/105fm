@@ -22,7 +22,7 @@
 					<div class="row lista">
 
 						<div class='column'>
-							<p>VENDA SEU PRODUTO!!! VEJA NA LISTAGEM A BAIXO O QUE ESTÁ SENDO PROCURADO!</p>
+							<p>Venda seu produto! Veja na listagem abaixo o que está sendo procurado.</p>
 							<br/>
 						</div>
 						<table class="lista-produtos" id="alternatecolor" width="100%" style='margin-top:0px'>
