@@ -1,5 +1,4 @@
 # Numerous always-ignore extensions
-public/js/chatbox.js
 *.diff
 *.err
 *.orig
@@ -36,3 +35,6 @@ dwsync.xml
 intermediate
 publish
 .idea
+public/images/destaque
+public/images/banner
+public/images/classificado
