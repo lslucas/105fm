@@ -22,7 +22,7 @@
 					<div class="row lista">
 
 						<div class='column'>
-							<p>Essa listagem mostra os produtos que os outros revendedores tem interesse em comprar.</p>
+							<p>VENDA SEU PRODUTO!!! VEJA NA LISTAGEM A BAIXO O QUE ESTÁ SENDO PROCURADO!</p>
 							<br/>
 						</div>
 						<table class="lista-produtos" id="alternatecolor" width="100%" style='margin-top:0px'>
