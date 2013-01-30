@@ -31,9 +31,9 @@
 
 		$textoProdutosEmInteresse = null;
 		if ($produtosEmInteresse==1)
-			$textoProdutosEmInteresse = "Existe <b>um produto</b> em interesse, <a href='".ABSPATH."lista-por-interesse' style='text-decoration:underline'>confira</a>";
+			$textoProdutosEmInteresse = "Existe <b>uma oferta</b> de seu <a href='".ABSPATH."lista-por-interesse' style='text-decoration:underline'>interesse</a>";
 		elseif ($produtosEmInteresse>1)
-			$textoProdutosEmInteresse = "Existem <b>{$produtosEmInteresse} produtos</b> em interesse, <a href='".ABSPATH."lista-por-interesse' style='text-decoration:underline'>confira</a>";
+			$textoProdutosEmInteresse = "Existem <b>{$produtosEmInteresse} ofertas</b> de seu <a href='".ABSPATH."lista-por-interesse' style='text-decoration:underline'>interesse</a>";
 	}
 
 
