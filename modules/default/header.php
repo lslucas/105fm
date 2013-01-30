@@ -1,6 +1,8 @@
 <?php
 	if (isset($_GET['sessao-expirada']))
 		$toScript = showModal(array('title'=>'Ops', 'content'=>"Sua sessão expirou! Faça login novamente."));
+	if (isset($_GET['acesso-restrito']))
+		$toScript = showModal(array('title'=>'Acesso Restrito', 'content'=>"Para acessar essa area você precisa estar registrado e logado! <br/>Faça o <a href='".ABSPATH."login'>login</a> ou <a href='".ABSPATH."registrar'>registre-se</a>.<br/><br/>Dúvidas? Entre em contato com <a href='mailto:".EMAIL_CONTACT."'>".EMAIL_CONTACT."</a>"));
 
 	/*
 	 *QUERY DESTAQUE

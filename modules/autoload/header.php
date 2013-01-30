@@ -5,6 +5,11 @@
 			$val[$key] = trim($value);
 	}
 
+	$areasRestrita = array('lista', 'lista-por-interesse', 'lista-geral-de-interesses', 'painel', 'ver', 'interesse', 'remover-produto', 'editar-produto', 'novo-produto', 'meus-dados');
+	if (empty($usr['id']) && isset($basename) && in_array($basename, $areasRestrita))
+		header('Location: '.ABSPATH.'?acesso-restrito');
+
+
 	/**
 	 * Faz login
 	 */
