@@ -130,6 +130,11 @@ aside.src section ul li a{ color: #3194b8; }
 aside.src section ul li a:hover{ color: #3194b8; text-decoration: underline; }
 aside.src section ul li:last-child{ border-bottom: none; }
 
+/****************************** RECURSOS */
+.checklist{ background: transparent url(../images/layout/box-text.png) no-repeat center top; margin: 20px 0 0 0; width: 940px; height: 315px; }
+.checklist ul{ float: left; margin: 20px 0 0 40px; width: 410px; }
+.checklist ul li{ background: transparent url((../images/layout/v.png) no-repeat left center; height: 20px; padding: 15px 0 15px 50px; font-size: 20px; }
+.recursos{ margin: -60px 0 20px 0; }
 /****************************** FOOTER */
 
 footer{ background: #EFEFEF; border-top: 1px solid #3bb1dc; margin: 20px 0 0 0; padding: 20px; }

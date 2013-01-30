@@ -1,4 +1,4 @@
-	<?php if (!in_array($basename, array('meus-dados', 'lista', 'lista-por-interesse', 'lista-geral-de-interesses',  'fale-conosco', 'busca'))) { ?>
+	<?php if (!in_array($basename, array('meus-dados', 'lista', 'lista-por-interesse', 'lista-geral-de-interesses',  'fale-conosco', 'busca', 'recursos'))) { ?>
 		<?php include_once 'navbar/banners.php' ?>
 	<?php } ?>
 	</div><!-- ROW -->
@@ -16,6 +16,9 @@
 	</footer>
 	<div id='html-msg'></div>
 	<div id='msg-modal'></div>
+	<?php if ($basename=='classificado') { ?>
+	<script src="<?=ABSPATH?>js/load-image.min.js"></script>
+	<?php } ?>
 	<?php if ($host!='localhost' && !empty($usr['id'])) { ?>
 	<script src="http://54.232.122.95:6789/socket.io/socket.io.js"></script>
 	<?php } ?>
