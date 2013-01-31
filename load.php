@@ -105,7 +105,7 @@
 		 'novo-produto'=>array('basename'=>'produto', 'path'=>'public/produto/novo-produto.php'),
 		 'editar-produto'=>array('basename'=>'produto', 'path'=>'public/produto/editar-produto.php'),
 		 'remover-produto'=>array('basename'=>'produto', 'path'=>'public/produto/remover-produto.php'),
-		 'classificado'=>array('basename'=>'classificado', 'path'=>'public/classificado/form.php'),
+		 'anuncio'=>array('basename'=>'anuncio', 'path'=>'public/anuncio/form.php'),
 		 'interesse'=>array('basename'=>'interesse', 'path'=>'public/produto/interesse.php'),
 		 'ver'=>array('basename'=>'produto', 'path'=>'public/produto/ver.php'),
 		 'lista'=>array('basename'=>'produto', 'path'=>'public/produto/lista.php'),

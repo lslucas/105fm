@@ -78,6 +78,25 @@
 	}
 
 	/**
+	 * REMOVER ANUNCIO
+	 */
+	if (isset($_POST['from']) && $_POST['from']=='rm-anuncio') {
+
+		include_once 'modules/classes/classificado.php';
+
+		$msg = $msgTitle = $res = null;
+		$val = array();
+
+
+		foreach ($_POST as $key=>$value)
+			$val[$key] = trim($value);
+
+		$classificado = new Classificado();
+		echo $classificado->remover($val);
+	}
+
+
+	/**
 	 * REMOVER INTERESSE
 	 */
 	if (isset($_POST['from']) && $_POST['from']=='rm-interesse') {

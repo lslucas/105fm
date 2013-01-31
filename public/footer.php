@@ -52,8 +52,10 @@
 		$(function() {
 			$('#myCarousel').carousel();
 			$(':input').autotab_magic();
+
 			<?=isset($incjQuery) ? $incjQuery : null?>
 			<?=isset($toScript) ? $toScript : null?>
+
 		});
 	</script>
 	<?php /*

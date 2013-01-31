@@ -169,6 +169,28 @@ $(function() {
 
 	/* APAGA INTERESSE DO PAINEL DO USUARIO
 	************************************/
+	$(".btn-rm-anuncio").click(function(event){
+		event.preventDefault();
+		var id_rm = $(this).attr('id');
+
+		$('.modal').modal('hide');
+		$.ajax({
+			type: "POST",
+			data: 'id='+id_rm+'&from=rm-anuncio',
+			url: ABSPATH+'ajax.php',
+			success: function(data){
+				if (data==true) {
+					showModal('{"title": "Sucesso!", "content":"Item removido com êxito!"}');
+					$('#tr'+id_rm).hide();
+				} else
+					showModal('{"title": "Erro!", "content":"Houve um problema ao tentar remover o item selecionado, tente mais tarde!"}');
+			}
+		});
+
+	});
+
+	/* APAGA INTERESSE DO PAINEL DO USUARIO
+	************************************/
 	$(".btnint-rm").click(function(event){
 		event.preventDefault();
 		var id_rm = $(this).attr('id');
@@ -298,7 +320,7 @@ $(function() {
 		// botão de ação 1
 		var actionButton1 =  '';
 
-		if (args.button.length>0) {
+		if (args.button) {
 
 			var btn_color = 'btn-primary';
 			if (args.button.color)
