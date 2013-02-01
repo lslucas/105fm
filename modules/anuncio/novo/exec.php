@@ -33,38 +33,31 @@ $incjQuery .= "
 
 	/* APAGA IMAGEM/ARQUIVO
 	************************************/
-	$('.trash-galeria').click(function(event){
+	$('.drop-image').click(function(event){
 
 		event.preventDefault();
 		var id_trash = $(this).attr('id');
-		var href_trash = $(this).attr('href');
 		var args = '';
 
-
 		if (!$(this).attr('alt'))
-			args = \"{'title': 'Remove Image', 'content': 'Realmente quer apagar essa imagem?', 'buttonClose': 'Cancelar', 'button': {'id': 'trash-galeria-sim', 'value': 'Remover', 'color': 'btn-danger'}}\";
+			args = \"{'title': 'Remover Imagem', 'content': 'Realmente quer apagar essa imagem?', 'buttonClose': 'Cancelar', 'button': {'id': 'yes-drop-image', 'value': 'Remover', 'color': 'btn-danger'}}\";
 		else
 			args = $(this).attr('alt');
-
 		showModal(args);
 
-
 		// ACAO AO CLICAR EM SIM
-		$('#trash-galeria-sim').click(function(){
+		$('#yes-drop-image').click(function(){
 
 			// {$LOADING}
 			$.ajax({
 				type: 'POST',
-				url: href_trash,
+				url: ABSPATH+'ajax/anuncio/drop-imagem/'+id_trash,
 				success: function(data){
-
-					$.unblockUI();
-					$.growlUI(data);
 					$('#'+id_trash).hide();
 					$('#msg-modal').modal('hide');
 
-					if ($(this).attr('data-reload'))
-						setTimeout(window.location.reload(), 3000);
+					args = \"{'title': 'Remover Imagem', 'content': 'Imagem removida com êxito!'}\";
+					showModal(args);
 				}
 			});
 		});

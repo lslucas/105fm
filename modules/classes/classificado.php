@@ -5,6 +5,19 @@ class Classificado {
 	public function __construct()
 	{
 		$this->_args = null;
+
+		$this->path_original = './public/'.substr(STATIC_PATH.'classificado/original/', 1);
+		$this->path_thumb = './public/'.substr(STATIC_PATH.'classificado/thumb/', 1);
+		$this->path_home = './public/'.substr(STATIC_PATH.'classificado/home/', 1);
+		$this->path_imagem = './public/'.substr(STATIC_PATH.'classificado/', 1);
+
+		$this->imagemWidth = 540;
+		$this->imagemHeight = 413;
+		$this->thumbWidth = 200;
+		$this->thumbHeight = 165;
+		$this->homeWidth = 162;
+		$this->homeHeight = 134;
+
 		$args = array();
 	}
 
@@ -202,6 +215,8 @@ class Classificado {
 				$qryins->execute();
 				$qryins->close();
 
+				$this->item = $this->getLastId();
+				$this->addPhoto();
 				return true;
 			}
 
@@ -251,6 +266,8 @@ class Classificado {
 			$qryupd->execute();
 			$qryupd->close();
 
+			$this->item = $this->getLastId();
+			$this->addPhoto();
 			return true;
 		}
 
@@ -702,4 +719,126 @@ class Classificado {
 		}
 
 	}
+
+	private function addPhoto()
+	{
+		global $conn, $_FILES;
+
+		$numPhotos = $this->numPhotosByItem();
+
+		if ($numPhotos>=5)
+			return true;
+
+		$pos = $this->photoPos(); //pega posição da ultima foto
+		$files = getNormalizedFILES($_FILES);
+
+		$sql= "INSERT INTO ".TP."_r_classificado_galeria
+					(rcg_ucl_id, rcg_imagem, rcg_legenda, rcg_pos)
+					VALUES (?, ?, ?, ?)";
+		if (!$qry=$conn->prepare($sql))
+			echo $conn->error;
+		else {
+			$qry->store_result();
+
+			$tipo = !empty($this->_args['tipo']) ? $this->_args['tipo'] : $this->_args['nomeTipo'];
+			$filename = linkfySmart($tipo.'-'.$this->_args['titulo']);
+			foreach ($files[$this->_args['imageName']] as $int=>$file) {
+				$legenda = isset($_POST['legenda'][$int]) ? trim($_POST['legenda'][$int]) : null;
+				if ($imagem = $this->uploadPhoto($file, $filename.'-'.$int))
+					$qry->bind_param('issi', $this->item, $imagem, $legenda, $pos);
+			}
+
+			$qry->execute();
+		}
+
+	}
+
+	private function uploadPhoto($file, $filename=null)
+	{
+		include_once "vendor/class.upload_0.32/class.upload.php";
+
+		$filename = !empty($filename) ? $filename : linkfySmart($file['name']).'_'.time();
+		$handle = new Upload($file);
+
+		if ($handle->uploaded) {
+			$handle->file_new_name_body  = $filename;
+			$handle->Process($this->path_original);
+			#$handle->jpeg_quality        = 90;
+			if (!$handle->processed) echo 'error : ' . $handle->error;
+
+			$handle->file_new_name_body  = $filename;
+			$handle->image_resize        = true;
+			#$handle->image_ratio_x        = true;
+			$handle->image_ratio_crop    = true;
+			$handle->image_x             = $this->imagemWidth;
+			$handle->image_y             = $this->imagemHeight;
+			$handle->jpeg_quality        = 90;
+			$handle->process($this->path_imagem);
+			if (!$handle->processed) echo 'error : ' . $handle->error;
+
+			$handle->file_new_name_body  = $filename;
+			$handle->image_resize        = true;
+			#$handle->image_ratio_x        = true;
+			$handle->image_ratio_crop    = true;
+			$handle->image_x             = $this->thumbWidth;
+			$handle->image_y             = $this->thumbHeight;
+			$handle->jpeg_quality        = 90;
+			$handle->process($this->path_thumb);
+			if (!$handle->processed) echo 'error : ' . $handle->error;
+
+			$handle->file_new_name_body  = $filename;
+			$handle->image_resize        = true;
+			#$handle->image_ratio_x        = true;
+			$handle->image_ratio_crop    = true;
+			$handle->image_x             = $this->homeWidth;
+			$handle->image_y             = $this->homeHeight;
+			$handle->jpeg_quality        = 90;
+			$handle->process($this->path_home);
+			if (!$handle->processed)
+				return false;
+
+		return $handle->file_dst_name;
+		}
+	}
+
+	private function photoPos()
+	{
+		global $conn;
+
+		$pos = 0;
+		$sql_smod = "SELECT rcg_pos FROM ".TP."_r_classificado_galeria WHERE rcg_ucl_id=? ORDER BY rcg_pos DESC LIMIT 1";
+		if (!$qry_smod = $conn->prepare($sql_smod))
+			return $conn->error;
+		else {
+			$qry_smod->bind_param('i',$ths->item);
+			$qry_smod->execute();
+			$qry_smod->bind_result($pos);
+			$qry_smod->fetch();
+			$qry_smod->close();
+
+			$pos++;
+		}
+
+		return $pos;
+	}
+
+	private function numPhotosByItem()
+	{
+		global $conn;
+
+		$numItens = 0;
+		$sql_num = "SELECT NULL FROM ".TP."_r_classificado_galeria WHERE rcg_ucl_id=?";
+		if (!$qry_num = $conn->prepare($sql_num))
+			return $conn->error;
+		else {
+			$qry_num->bind_param('i', $ths->item);
+			$qry_num->execute();
+			$qry_num->store_result();
+			$numItens = $qry_num->num_rows;
+			$qry_num->close();
+		}
+
+		return $numItens;
+	}
+
 }

@@ -2,7 +2,8 @@
 
 	if(isset($_POST)) {
 		foreach ($_POST as $key=>$value)
-			$val[$key] = trim($value);
+			if (!is_array($value))
+				$val[$key] = trim($value);
 	}
 
 	$areasRestrita = array('lista', 'lista-por-interesse', 'lista-geral-de-interesses', 'painel', 'ver', 'interesse', 'remover-produto', 'editar-produto', 'novo-produto', 'meus-dados');
@@ -98,12 +99,6 @@
 	include_once 'modules/classes/usuario.php';
 
 	$val = array();
-	if (isset($_POST)) {
-		foreach ($_POST as $key=>$value)
-			$val[$key] = trim($value);
-	}
-
-
 	if (isset($_POST['form']) && $_POST['form']=='login')
 		include_once '../usuario/login/header.php';
 

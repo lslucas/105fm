@@ -1,5 +1,25 @@
 <?php
 
+function httpStatusCode($url) {
+	$handle = curl_init($url);
+	curl_setopt($handle,  CURLOPT_RETURNTRANSFER, TRUE);
+	$response = curl_exec($handle);
+	$httpCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
+	curl_close($handle);
+
+	return $httpCode;
+}
+
+function getNormalizedFILES()
+{
+    $newfiles = array();
+    foreach($_FILES as $fieldname => $fieldvalue)
+        foreach($fieldvalue as $paramname => $paramvalue)
+            foreach((array)$paramvalue as $index => $value)
+                $newfiles[$fieldname][$index][$paramname] = $value;
+    return $newfiles;
+}
+
 /* format the result */
 function format_result($input)
 {

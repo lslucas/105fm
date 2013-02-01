@@ -9,7 +9,8 @@
 
 	if(isset($_POST['from'])) {
 		foreach ($_POST as $key=>$value)
-			$val[$key] = trim($value);
+			if (!is_array($value))
+				$val[$key] = trim($value);
 	}
 
 	/**

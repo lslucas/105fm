@@ -1,3 +1,7 @@
+<?php
+	$item = $hashids->decrypt($val['id']);
+	$item = $item[0];
+ ?>
 	<!-- <div class="row produto"> -->
 	<div class="column grid_10">
 		<div class="column">
@@ -6,9 +10,10 @@
 			<p><br /></p>
 		</div>
 
-		<div class="column">
-			<form name="anuncio" class="form-horizontal" method="post">
+		<div class="column grid_10">
+			<form name="anuncio" class="form-horizontal" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="from" value="anuncio">
+				<input type="hidden" name="imageName" value="foto">
 				<input type="hidden" name="usr_id" value="<?=$usr['id']?>">
 				<?php
 					if (!empty($querystring))
@@ -29,14 +34,14 @@
 			    	  <?php
 
 			            $num=0;
-			    	    if ($act=='update') {
+			    	    if (!empty($querystring)) {
 
-			    		    $sql_gal = "SELECT rcg_id, rcg_imagem, rcg_pos FROM ".TP."_r_anuncio_galeria WHERE rcg_ucl_id=? AND rcg_imagem IS NOT NULL ORDER BY rcg_pos ASC;";
+			    		    $sql_gal = "SELECT rcg_id, rcg_imagem, rcg_pos FROM ".TP."_r_classificado_galeria WHERE rcg_ucl_id=? AND rcg_imagem IS NOT NULL ORDER BY rcg_pos ASC;";
 			    		    if (!$qr_gal = $conn->prepare($sql_gal))
 			    		    	echo $conn->error;
 
 			    		    else {
-				    		    $qr_gal->bind_param('s',$_GET['item']);
+				    		    $qr_gal->bind_param('i',$item);
 				    		    $qr_gal->execute();
 				    		    $qr_gal->store_result();
 				    		    $num = $qr_gal->num_rows;
@@ -45,39 +50,28 @@
 
 				                if ($num>0) {
 
-				    		      echo '<table id="posGaleria" cellspacing="0" cellpadding="2">';
+							$imagePath = STATIC_PATH."classificado/thumb/";
 				    		      while ($qr_gal->fetch()) {
 
-								$arquivo = $var['path_thumb']."/".$g_imagem;
+								$arquivo = $imagePath.$g_imagem;
 				    	  ?>
-				    		<tr id="<?=$g_id?>">
-				    		  <td width='20px' title='Clique e arraste para mudar a posição da foto' class='tip'></td>
-				    		  <td>
-								<small>
-				    		    [<a href='?p=<?=$p?>&delete_galeria&item=<?=$g_id?>&prefix=r_<?=$var['table']?>_galeria&pre=rcg&col=imagem&folder=<?=$var['imagem_folderlist']?>&noVisual' title="Clique para remover o ítem selecionado" class='tip trash-galeria' style="cursor:pointer;" id="<?=$g_id?>">remover</a>]
-								</small>
-				    		  </td>
-				    		  <td>
-				    		    <a href='$imagThumb<?=$i?>?width=100%' id='imag<?=$i?>' class='betterTip' target='_blank'>
-				    			<img src='images/lupa.gif' border='0' style='background-color:none;padding-left:10px;cursor:pointer'></a>
-				    			 <div id='imagThumb<?=$i?>' style='float:left;display:none;'>
-				    			 <?php
-				    			    if (file_exists(substr($var['path_thumb'],0)."/".$g_imagem))
-				    			     echo "<img src='".substr($var['path_thumb'],0)."/".$g_imagem."'>";
-
-				    			       else echo "<center>imagem não existe.</center>";
+				    	  <div class='pull-left span2' align=center>
+			    			 <?php
+				    			    if (file_exists('./public/'.$imagePath.$g_imagem))
+					    			     echo "<img src='".substr($imagePath, 0)."/".$g_imagem."' width=100>";
 				    			  ?>
-				    			 </div>
-				    		  </td>
-				    		</tr>
+							<br/><small>
+				    		    [<a href='javascript:void(0);' title="Clique para remover o ítem selecionado" class='tip drop-image' id="<?=$g_id?>">remover</a>]
+							</small>
+						</div>
 				          <?php
 				    		      $i++;
 
 					    			}
-			    		   echo '</table><br>';
+			    		   echo '<br>';
 					   ?>
 			    		 <div class='divImagem hide'>
-			    		   <input class="galeria" type='file' name='galeria0' id='galeria' alt='0'>
+			    		   <input class="galeria" type='file' name='foto[]' id='galeria' alt='0'>
 				        <p class="help-block">- JPEG, PNG ou GIF; Limite de 5 fotos</p>
 			    		 </div>
 					   <?php
@@ -86,8 +80,9 @@
 					    	     }
 				    	     }
 			           ?>
+			           <br clear='all'/>
 			    		 <div class='divImagem'>
-			    		   <input class="galeria" type='file' name='galeria0' id='galeria' alt='0'>
+			    		   <input class="galeria" type='file' name='foto[]' id='galeria' alt='0'>
 			    		 </div>
 			        <p class="help-block">- JPEG, PNG ou GIF; Limite de 5 fotos</p>
 			      </div>

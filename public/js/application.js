@@ -291,7 +291,6 @@ $(function() {
 		 	$('#outroProduto').hide().find('input').val('').attr('disabled', true);
 	});
 
-
 	/*
 	 *Modal Global de mensagens e alertas
 	 */
