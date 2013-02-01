@@ -11,6 +11,8 @@ class Classificado {
 		$this->path_home = './public/'.substr(STATIC_PATH.'classificado/home/', 1);
 		$this->path_imagem = './public/'.substr(STATIC_PATH.'classificado/', 1);
 
+		$this->pathList = $this->path_original.','.$this->path_thumb.','.$this->path_home.','.$this->path_imagem;
+
 		$this->imagemWidth = 540;
 		$this->imagemHeight = 413;
 		$this->thumbWidth = 200;
@@ -194,7 +196,7 @@ class Classificado {
 							 `ucl_descricao`,
 							 `ucl_observacao`,
 							 `ucl_ip`
-							 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+							 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			if (!$qryins = $conn->prepare($sqlins))
 				echo __FUNCTION__.$conn->error;
 				// return false;
@@ -725,8 +727,8 @@ class Classificado {
 		global $conn, $_FILES;
 
 		$numPhotos = $this->numPhotosByItem();
-
-		if ($numPhotos>=5)
+		$numPhotos++;
+		if ($numPhotos>4)
 			return true;
 
 		$pos = $this->photoPos(); //pega posição da ultima foto
@@ -738,26 +740,36 @@ class Classificado {
 		if (!$qry=$conn->prepare($sql))
 			echo $conn->error;
 		else {
-			$qry->store_result();
+		       $qry->store_result();
 
 			$tipo = !empty($this->_args['tipo']) ? $this->_args['tipo'] : $this->_args['nomeTipo'];
 			$filename = linkfySmart($tipo.'-'.$this->_args['titulo']);
+
 			foreach ($files[$this->_args['imageName']] as $int=>$file) {
+
+				if (empty($file['name']))
+					continue;
+
 				$legenda = isset($_POST['legenda'][$int]) ? trim($_POST['legenda'][$int]) : null;
-				if ($imagem = $this->uploadPhoto($file, $filename.'-'.$int))
+				if ($imagem = $this->uploadPhoto($file, $filename.'-'.$int)) {
 					$qry->bind_param('issi', $this->item, $imagem, $legenda, $pos);
+					$qry->execute();
+				}
+				$pos++;
+
 			}
 
-			$qry->execute();
+			$qry->close();
 		}
-
 	}
 
 	private function uploadPhoto($file, $filename=null)
 	{
+		global $hashids;
 		include_once "vendor/class.upload_0.32/class.upload.php";
 
-		$filename = !empty($filename) ? $filename : linkfySmart($file['name']).'_'.time();
+		$encname = $hashids->encrypt($file['name']);
+		$filename = !empty($filename) ? $filename.'-'.$encname : linkfySmart($file['name']).'_'.time();
 		$handle = new Upload($file);
 
 		if ($handle->uploaded) {
@@ -794,32 +806,20 @@ class Classificado {
 			$handle->image_y             = $this->homeHeight;
 			$handle->jpeg_quality        = 90;
 			$handle->process($this->path_home);
-			if (!$handle->processed)
-				return false;
+			if (!$handle->processed) echo 'error : ' . $handle->error;
+			// if (!$handle->processed)
+				// return false;
 
-		return $handle->file_dst_name;
+			return $handle->file_dst_name;
 		}
 	}
 
 	private function photoPos()
 	{
-		global $conn;
+		$position = $this->numPhotosByItem();
+		$position++;
 
-		$pos = 0;
-		$sql_smod = "SELECT rcg_pos FROM ".TP."_r_classificado_galeria WHERE rcg_ucl_id=? ORDER BY rcg_pos DESC LIMIT 1";
-		if (!$qry_smod = $conn->prepare($sql_smod))
-			return $conn->error;
-		else {
-			$qry_smod->bind_param('i',$ths->item);
-			$qry_smod->execute();
-			$qry_smod->bind_result($pos);
-			$qry_smod->fetch();
-			$qry_smod->close();
-
-			$pos++;
-		}
-
-		return $pos;
+		return $position;
 	}
 
 	private function numPhotosByItem()
@@ -827,18 +827,53 @@ class Classificado {
 		global $conn;
 
 		$numItens = 0;
-		$sql_num = "SELECT NULL FROM ".TP."_r_classificado_galeria WHERE rcg_ucl_id=?";
-		if (!$qry_num = $conn->prepare($sql_num))
+		$sql_smod = "SELECT COUNT(rcg_id) num FROM ".TP."_r_classificado_galeria WHERE rcg_ucl_id=".$this->item;
+		if (!$qry_smod = $conn->query($sql_smod))
 			return $conn->error;
 		else {
-			$qry_num->bind_param('i', $ths->item);
-			$qry_num->execute();
-			$qry_num->store_result();
-			$numItens = $qry_num->num_rows;
-			$qry_num->close();
+			$row = $qry_smod->fetch_array();
+			$qry_smod->close();
+
+			$numItens = $row['num'];
 		}
 
 		return $numItens;
+	}
+
+	public function dropPhoto($photo_id)
+	{
+		global $conn;
+
+		$sql= "SELECT rcg_imagem FROM ".TP."_r_classificado_galeria WHERE rcg_id=?";
+		if (!$qry=$conn->prepare($sql))
+			return $conn->error;
+		else {
+			$qry->bind_param('i', $photo_id);
+			$qry->bind_result($img);
+			$qry->execute();
+			$qry->fetch();
+			$qry->close();
+
+			if (!empty($img)) {
+				$paths = explode(',', $this->pathList);
+				foreach ($paths as $path) {
+					$file = $path.$img;
+					if (file_exists($file))
+						unlink($file);
+				}
+			}
+		}
+
+		$sqldrop= "DELETE FROM ".TP."_r_classificado_galeria WHERE rcg_id=?";
+		if (!$qrydrop=$conn->prepare($sqldrop))
+			return $conn->error;
+		else {
+			$qrydrop->bind_param('i', $photo_id);
+			$qrydrop->execute();
+			$qrydrop->close();
+
+			return true;
+		}
 	}
 
 }

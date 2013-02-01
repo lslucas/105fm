@@ -277,7 +277,7 @@ $(function(){
 		else
 			args = $(this).attr('alt');
 
-		showModal(args);
+		$().showModal(args);
 
 
 		// ACAO AO CLICAR EM SIM

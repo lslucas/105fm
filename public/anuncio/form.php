@@ -1,6 +1,9 @@
 <?php
-	$item = $hashids->decrypt($val['id']);
-	$item = $item[0];
+	if (isset($val['id'])) {
+		$item = $hashids->decrypt($val['id']);
+		$item = $item[0];
+	}
+	$valTipo = isset($val['tipo_id']) ? $val['tipo_id'] : $val['tipo'];
  ?>
 	<!-- <div class="row produto"> -->
 	<div class="column grid_10">
@@ -55,7 +58,7 @@
 
 								$arquivo = $imagePath.$g_imagem;
 				    	  ?>
-				    	  <div class='pull-left span2' align=center>
+				    	  <div id='boxImage<?=$g_id?>' class='pull-left span2' align=center>
 			    			 <?php
 				    			    if (file_exists('./public/'.$imagePath.$g_imagem))
 					    			     echo "<img src='".substr($imagePath, 0)."/".$g_imagem."' width=100>";
@@ -72,19 +75,18 @@
 					   ?>
 			    		 <div class='divImagem hide'>
 			    		   <input class="galeria" type='file' name='foto[]' id='galeria' alt='0'>
-				        <p class="help-block">- JPEG, PNG ou GIF; Limite de 5 fotos</p>
 			    		 </div>
 					   <?php
 
 					    	       }
+					    	       echo "<br clear='all'/>";
 					    	     }
 				    	     }
 			           ?>
-			           <br clear='all'/>
-			    		 <div class='divImagem'>
+			    		 <div class='divImagem' style='display:block; clear:all;'>
 			    		   <input class="galeria" type='file' name='foto[]' id='galeria' alt='0'>
 			    		 </div>
-			        <p class="help-block">- JPEG, PNG ou GIF; Limite de 5 fotos</p>
+			        <p class="help-block">- JPEG, PNG ou GIF; Limite de 4 fotos</p>
 			      </div>
 			    </div>
 
@@ -92,7 +94,7 @@
 					<label class="control-label required" for="tipo"><span class="color-red">*</span> Tipo</label>
 					<div class="controls">
 					<select name="tipo" id="tipo">
-						<?=convertCatList2Option(getCategoriaListArea('Tipo Classificado', null, 'Selecione', null, 'cat_titulo'), $val['tipo_id'])?>
+						<?=convertCatList2Option(getCategoriaListArea('Tipo Classificado', null, 'Selecione', null, 'cat_titulo'), $valTipo)?>
 					</select> <small><a href="javascript:void(0);" class='showOnClick' data-target='#outroTipo'>outro?</a></small>
 					</div>
 

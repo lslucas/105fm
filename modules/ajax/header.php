@@ -1,6 +1,25 @@
 <?php
 
 	/**
+	 * Remover Fotos do anuncio
+	 * @var [type]
+	 */
+	if ($querystring=='anuncio' && $queryaction=='drop-image') {
+		header("HTTP/1.0 200 OK");
+		include_once 'modules/classes/classificado.php';
+
+		$classificado = new Classificado();
+		$msg = $classificado->dropPhoto($queryvalue);
+		if ($msg===true) {
+			echo "\n\n";
+			echo "$('#msg-modal').modal('hide');\n";
+			echo "$('div#boxImage{$queryvalue}').remove();\n";
+			echo "$().showModal('Imagem removida com êxito!');";
+		} else
+			echo "$().showModal('Não foi possível remover a imagem:<br/>{$msg}');\n";
+	}
+
+	/**
 	 * ZERAR SENHA
 	 */
 	if (isset($_POST['form_name']) && $_POST['form_name']=='esqueci-senha') {

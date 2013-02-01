@@ -70,6 +70,7 @@
 	}
 	$querystring = isset($url[1]) ? $url[1] : null;
 	$queryaction = isset($url[2]) ? $url[2] : null;
+	$queryvalue = isset($url[3]) ? $url[3] : null;
 
 	$querystring_full = array_shift($url);
 	$querystring_full = implode('&', $url);

@@ -31,6 +31,7 @@
 	<script src="<?=ABSPATH?>js/jquery.autotab-1.1b.js"></script>
 	<script src="<?=ABSPATH?>js/jquery.mask.js"></script>
 	<script src="<?=ABSPATH?>js/jquery.price_format.js"></script>
+	<script src="<?=ABSPATH?>js/jquery.showModal.js"></script>
 	<?php /*<script src="<?=ABSPATH?>js/jquery-ui-1.8.18.custom.min.js"></script>*/ ?>
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
 	<script src="<?=ABSPATH?>js/application.js"></script>

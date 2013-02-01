@@ -22,14 +22,10 @@ $incjQuery .= "
 			var i = parseInt($('.galeria:last').attr('alt'));
 
 			$('.divImagem:first').clone().insertAfter('.divImagem:last').slideDown();
-			$('.divImagem:last > .legenda').attr('name','legenda'+(i+1)).attr('alt',(i+1)).val('');
-			$('.divImagem:last > .galeria').attr('name','galeria'+(i+1)).attr('alt',(i+1)).val('');
+			$('.divImagem:last > .legenda').val('');
+			$('.divImagem:last > .galeria').val('');
 		});
 	}
-
-
-
-
 
 	/* APAGA IMAGEM/ARQUIVO
 	************************************/
@@ -40,10 +36,10 @@ $incjQuery .= "
 		var args = '';
 
 		if (!$(this).attr('alt'))
-			args = \"{'title': 'Remover Imagem', 'content': 'Realmente quer apagar essa imagem?', 'buttonClose': 'Cancelar', 'button': {'id': 'yes-drop-image', 'value': 'Remover', 'color': 'btn-danger'}}\";
+			args = '{\"title\": \"Remover Imagem\", \"content\": \"Realmente quer apagar essa imagem?\", \"buttonClose\": \"Cancelar\", \"button\": {\"id\": \"yes-drop-image\", \"value\": \"Remover\", \"color\": \"btn-danger\"}}';
 		else
 			args = $(this).attr('alt');
-		showModal(args);
+		$().showModal(args);
 
 		// ACAO AO CLICAR EM SIM
 		$('#yes-drop-image').click(function(){
@@ -51,13 +47,10 @@ $incjQuery .= "
 			// {$LOADING}
 			$.ajax({
 				type: 'POST',
-				url: ABSPATH+'ajax/anuncio/drop-imagem/'+id_trash,
+				url: ABSPATH+'ajax/anuncio/drop-image/'+id_trash,
 				success: function(data){
-					$('#'+id_trash).hide();
-					$('#msg-modal').modal('hide');
+					eval(data);
 
-					args = \"{'title': 'Remover Imagem', 'content': 'Imagem removida com êxito!'}\";
-					showModal(args);
 				}
 			});
 		});
