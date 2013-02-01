@@ -4,12 +4,15 @@ class Classificado {
 
 	public function __construct()
 	{
-		$this->_args = null;
+		global $host;
 
-		$this->path_original = './public/'.substr(STATIC_PATH.'classificado/original/', 1);
-		$this->path_thumb = './public/'.substr(STATIC_PATH.'classificado/thumb/', 1);
-		$this->path_home = './public/'.substr(STATIC_PATH.'classificado/home/', 1);
-		$this->path_imagem = './public/'.substr(STATIC_PATH.'classificado/', 1);
+		$this->_args = null;
+		$rp = $host=='localhost' ? './' : '/';
+
+		$this->path_original = $rp.'public/'.substr(STATIC_PATH.'classificado/original/', 1);
+		$this->path_thumb = $rp.'public/'.substr(STATIC_PATH.'classificado/thumb/', 1);
+		$this->path_home = $rp.'public/'.substr(STATIC_PATH.'classificado/home/', 1);
+		$this->path_imagem = $rp.'public/'.substr(STATIC_PATH.'classificado/', 1);
 
 		$this->pathList = $this->path_original.','.$this->path_thumb.','.$this->path_home.','.$this->path_imagem;
 
