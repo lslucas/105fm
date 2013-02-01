@@ -736,6 +736,7 @@ class Classificado {
 
 		$numPhotos = $this->numPhotosByItem();
 		$numPhotos++;
+		var_dump($numPhotos);
 		if ($numPhotos>=3)
 			return true;
 
