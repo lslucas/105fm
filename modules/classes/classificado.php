@@ -839,6 +839,8 @@ var_dump($numPhotos);
 
 		$numItens = 0;
 		$sql_smod = "SELECT COUNT(rcg_id) num FROM ".TP."_r_classificado_galeria WHERE rcg_ucl_id=".$this->item;
+		var_dump($sql_smod);
+		var_dump($this->item);
 		if (!$qry_smod = $conn->query($sql_smod))
 			return $conn->error;
 		else {
