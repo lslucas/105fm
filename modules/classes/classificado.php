@@ -750,7 +750,7 @@ class Classificado {
 
 			foreach ($files[$this->_args['imageName']] as $int=>$file) {
 
-				if (empty($file['name']) && $numPhotos>=4)
+				if (empty($file['name']) || $numPhotos>=4)
 					continue;
 
 				$legenda = isset($_POST['legenda'][$int]) ? trim($_POST['legenda'][$int]) : null;
