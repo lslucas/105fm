@@ -735,6 +735,7 @@ class Classificado {
 		global $conn, $_FILES;
 
 		$numPhotos = $this->numPhotosByItem();
+		var_dump('numPhotos '.$numPhotos);
 		if ($numPhotos>4)
 			return true;
 
@@ -837,6 +838,7 @@ class Classificado {
 
 		$numItens = 0;
 		$sql_smod = "SELECT COUNT(rcg_id) num FROM ".TP."_r_classificado_galeria WHERE rcg_ucl_id=".$this->item;
+		var_dump($sqlsmod);
 		if (!$qry_smod = $conn->query($sql_smod))
 			return $conn->error;
 		else {
