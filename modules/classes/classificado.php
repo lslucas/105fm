@@ -736,7 +736,7 @@ class Classificado {
 
 		$numPhotos = $this->numPhotosByItem();
 		$numPhotos++;
-		if ($numPhotos>=4)
+		if ($numPhotos>=3)
 			return true;
 
 		$pos = $this->photoPos(); //pega posição da ultima foto
@@ -755,7 +755,7 @@ class Classificado {
 
 			foreach ($files[$this->_args['imageName']] as $int=>$file) {
 
-				if (empty($file['name']) || $numPhotos>=4)
+				if (empty($file['name']) || $numPhotos>=3)
 					continue;
 
 				$legenda = isset($_POST['legenda'][$int]) ? trim($_POST['legenda'][$int]) : null;
