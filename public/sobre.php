@@ -1,17 +1,5 @@
 <div class="column grid_10">
 <h2>Sobre</h2>
-<p>Agrosshop é um portal criado com o intuito de se tornar um facilitador de negócios
-entre revendedores de insumos agrícolas. Repassando as informações necessárias
-para que seus participantes encontrem os produtos de seus interesses em diversos
-lugares do Brasil, com todos os dados imprescindíveis para uma ótima negociação.
-<br/>Proporcionando ao empresário uma boa opção de tornar seus serviços mais ágeis e
-aumentar sua gama de produtos para melhor atender seus parceiros. Além de reduzir
-os custos da negociação, visto que é excluído o valor pago de comissão. Pois não
-intermediamos o negócio, apenas informamos aonde se encontra tal. Portanto, também
-não nos responsabilizamos pelas comercializações. A responsabilidade fica toda com o
-comprador e o vendedor. Cabendo a esse a responsabilidade sobre a emissão da nota,
-origem, validade, estado e condicionamento dos produtos referentes às negociações. E
-aquele o pagamento correto conforme combinado. Cabe ainda aos dois acordar a melhor
-forma de transportar as mercadorias negociadas e a responsabilidade do pagamento do
-frete.</p>
+<p>Nosso portal tem o objetivo de facilitar os negócios entre revendas e cooperativas de insumos agrícolas de todo o Brasil, auxiliando na negociação de mercadorias que podem estar sobrando em uma determinada região e faltando em outra, servindo também com uma boa opção de troca de mercadorias, já que o participante pode oferecer o que tem a venda e informar sua necessidade de compra.  Trata-se de um grupo fechado, onde para participar, a empresa deve ser uma Revenda ou Cooperativa em atividade e devidamente registrada no Ministério da Agricultura e órgãos competentes.
+Os anúncios exibidos no portal, bem como as negociações originadas através deste, são de inteira responsabilidade do vendedor e ou comprador. Não nos responsabilizamos pelos negócios, sendo que não existe pagamento de comissão.</p>
 </div>
