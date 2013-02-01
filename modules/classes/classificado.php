@@ -4,9 +4,10 @@ class Classificado {
 
 	public function __construct()
 	{
-		global $host;
+		global $host, $aes;
 
 		$this->_args = null;
+		$this->hash = $aes->encrypt(time());
 		$rp = $host=='localhost' ? './' : '';
 
 		$this->path_original = $rp.'public/'.substr(STATIC_PATH.'classificado/original/', 1);
@@ -198,15 +199,16 @@ class Classificado {
 							 `ucl_valor`,
 							 `ucl_descricao`,
 							 `ucl_observacao`,
-							 `ucl_ip`
-							 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+							 `ucl_ip`,
+							 `ucl_hash`
+							 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			if (!$qryins = $conn->prepare($sqlins))
 				echo __FUNCTION__.$conn->error;
 				// return false;
 			else {
 
 				$this->_args['valor'] = Currency2Decimal($this->_args['valor'], 1);
-				$qryins->bind_param('iisssdsss',
+				$qryins->bind_param('iisssdssss',
 				                    	$this->_args['usr_id'],
 				                    	$this->_args['tipo'],
 				                    	$this->_args['nomeTipo'],
@@ -215,7 +217,8 @@ class Classificado {
 				                    	$this->_args['valor'],
 				                    	$this->_args['descricao'],
 				                    	$this->_args['observacao'],
-				                    	$_SERVER['REMOTE_ADDR']
+				                    	$_SERVER['REMOTE_ADDR'],
+				                    	$this->hash
 				                    );
 				$qryins->execute();
 				$qryins->close();
@@ -247,7 +250,8 @@ class Classificado {
 						 `ucl_valor`=?,
 						 `ucl_descricao`=?,
 						 `ucl_observacao`=?,
-						 `ucl_ip`=?
+						 `ucl_ip`=?,
+						 `ucl_hash`=?
 						 WHERE `ucl_id`=? AND `ucl_usr_id`=?";
 		if (!$qryupd = $conn->prepare($sqlupd))
 			echo __FUNCTION__.$conn->error;
@@ -256,7 +260,7 @@ class Classificado {
 		else {
 
 			$this->_args['valor'] = Currency2Decimal($this->_args['valor'], 1);
-			$qryupd->bind_param('isssdsssii',
+			$qryupd->bind_param('isssdssssii',
 			                    	$this->_args['tipo'],
 			                    	$this->_args['nomeTipo'],
 			                    	$this->_args['titulo'],
@@ -265,6 +269,7 @@ class Classificado {
 			                    	$this->_args['descricao'],
 			                    	$this->_args['observacao'],
 			                    	$_SERVER['REMOTE_ADDR'],
+			                    	$this->hash,
 			                    	$ucl_id,
 			                    	$this->_args['usr_id']
 			                    );
@@ -649,11 +654,11 @@ class Classificado {
 		$titulo = $this->_args['titulo'];
 		$valor = $this->_args['valor'];
 
-		$sql = "SELECT ucl_id FROM `".TP."_usuario_classificado` WHERE `ucl_usr_id`=? AND `ucl_titulo`=? AND ucl_valor=?;";
+		$sql = "SELECT ucl_id FROM `".TP."_usuario_classificado` WHERE `ucl_usr_id`=? AND `ucl_hash`=?;";
 		if (!$res = $conn->prepare($sql))
 			echo __FUNCTION__.$conn->error;
 		else {
-			$res->bind_param('isd', $usr_id, $titulo, $valor);
+			$res->bind_param('is', $usr_id, $this->hash);
 			$res->bind_result($id);
 			$res->execute();
 			$res->fetch();
@@ -768,10 +773,10 @@ class Classificado {
 
 	private function uploadPhoto($file, $filename=null)
 	{
-		global $hashids;
+		global $aes;
 		include_once "vendor/class.upload_0.32/class.upload.php";
 
-		$encname = $hashids->encrypt($file['name']);
+		$encname = $aes->encrypt($file['name']);
 		$filename = !empty($filename) ? $filename.'-'.$encname : linkfySmart($file['name']).'_'.time();
 		$handle = new Upload($file);
 
