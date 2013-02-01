@@ -3,7 +3,7 @@
 		$item = $hashids->decrypt($val['id']);
 		$item = $item[0];
 	}
-	$valTipo = isset($val['tipo_id']) ? $val['tipo_id'] : $val['tipo'];
+	$valTipo = isset($val['tipo_id']) ? $val['tipo_id'] : (isset($val['tipo']) ? $val['tipo'] : null);
  ?>
 	<!-- <div class="row produto"> -->
 	<div class="column grid_10">
