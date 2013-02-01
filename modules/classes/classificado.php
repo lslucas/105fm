@@ -776,7 +776,7 @@ class Classificado {
 			$handle->file_new_name_body  = $filename;
 			$handle->Process($this->path_original);
 			#$handle->jpeg_quality        = 90;
-			if (!$handle->processed) echo 'error : ' . $handle->error;
+			if (!$handle->processed) echo 'error : ' . $handle->error.' ('.$this->path_original.')';
 
 			$handle->file_new_name_body  = $filename;
 			$handle->image_resize        = true;
@@ -786,7 +786,7 @@ class Classificado {
 			$handle->image_y             = $this->imagemHeight;
 			$handle->jpeg_quality        = 90;
 			$handle->process($this->path_imagem);
-			if (!$handle->processed) echo 'error : ' . $handle->error;
+			if (!$handle->processed) echo 'error : ' . $handle->error.' ('.$this->path_imagem.')';
 
 			$handle->file_new_name_body  = $filename;
 			$handle->image_resize        = true;
@@ -796,7 +796,7 @@ class Classificado {
 			$handle->image_y             = $this->thumbHeight;
 			$handle->jpeg_quality        = 90;
 			$handle->process($this->path_thumb);
-			if (!$handle->processed) echo 'error : ' . $handle->error;
+			if (!$handle->processed) echo 'error : ' . $handle->error.' ('.$this->path_thumb.')';
 
 			$handle->file_new_name_body  = $filename;
 			$handle->image_resize        = true;
@@ -806,7 +806,7 @@ class Classificado {
 			$handle->image_y             = $this->homeHeight;
 			$handle->jpeg_quality        = 90;
 			$handle->process($this->path_home);
-			if (!$handle->processed) echo 'error : ' . $handle->error;
+			if (!$handle->processed) echo 'error : ' . $handle->error.' ('.$this->path_home.')';
 			// if (!$handle->processed)
 				// return false;
 
