@@ -754,7 +754,7 @@ class Classificado {
 			$filename = linkfySmart($tipo.'-'.$this->_args['titulo']);
 
 			foreach ($files[$this->_args['imageName']] as $int=>$file) {
-
+var_dump($numPhotos);
 				if (empty($file['name']) || $numPhotos>=3)
 					continue;
 
@@ -762,8 +762,10 @@ class Classificado {
 				if ($imagem = $this->uploadPhoto($file, $filename.'-'.$int)) {
 					$qry->bind_param('issi', $this->item, $imagem, $legenda, $pos);
 					$qry->execute();
+
+					$numPhotos++;
+					$pos++;
 				}
-				$pos++;
 
 			}
 
