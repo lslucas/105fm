@@ -7,7 +7,7 @@ class Classificado {
 		global $host;
 
 		$this->_args = null;
-		$rp = $host=='localhost' ? './' : '/';
+		$rp = $host=='localhost' ? './' : '../../';
 
 		$this->path_original = $rp.'public/'.substr(STATIC_PATH.'classificado/original/', 1);
 		$this->path_thumb = $rp.'public/'.substr(STATIC_PATH.'classificado/thumb/', 1);
