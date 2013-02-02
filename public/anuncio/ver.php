@@ -17,7 +17,7 @@
 		<?php if (!empty($ucl['observacao'])) { ?>
 			<br/>Observação: <?=$ucl['observacao']?>
 		<?php } ?>
-		<?php if (!$ucl['valor']) { ?>
+		<?php if (!empty($ucl['valor'])) { ?>
 			<h4><?=$ucl['valor']?></h4>
 		<?php } ?>
 	</p>

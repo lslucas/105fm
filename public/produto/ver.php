@@ -32,7 +32,7 @@
 		<?php if (!empty($cpr['observacao'])) { ?>
 			<br/>Observação: <?=$cpr['observacao']?>
 		<?php } ?>
-		<?php if (!$cpr['valor']) { ?>
+		<?php if (!empty($cpr['valor'])) { ?>
 			<h4><?=$cpr['valor']?></h4>
 		<?php } ?>
 	</p>
