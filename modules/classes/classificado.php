@@ -4,7 +4,7 @@ class Classificado {
 
 	public function __construct()
 	{
-		global $host, $aes;
+		global $host;
 
 		$this->_args = null;
 		$this->item = null;
@@ -29,7 +29,7 @@ class Classificado {
 
 	private function validaParametros()
 	{
-		global $hashids;
+		global $hashids, $aes;
 
 		$args = $this->_args;
 		if (!is_array($args))
