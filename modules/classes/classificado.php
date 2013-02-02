@@ -55,7 +55,7 @@ class Classificado {
 				$this->_args['usr_id'] = $usr_id[0];
 			}
 
-			$this->hash = $aes->encrypt(time());
+			$this->hash = $hashids->encrypt(time());
 
 		}
 
