@@ -224,7 +224,9 @@ class Classificado {
 				$qryins->execute();
 				$qryins->close();
 
+				var_dump('hash '.$this->hash);
 				$this->item = $this->getLastId();
+				var_dump('item atual '.$this->item);
 				$this->addPhoto();
 				return true;
 			}
@@ -278,7 +280,6 @@ class Classificado {
 			$qryupd->close();
 
 			$this->item = $ucl_id;
-			var_dump($this->item);
 			$this->addPhoto();
 			return true;
 		}
@@ -657,6 +658,9 @@ class Classificado {
 		$valor = $this->_args['valor'];
 
 		$sql = "SELECT ucl_id FROM `".TP."_usuario_classificado` WHERE `ucl_usr_id`=? AND `ucl_hash`=?;";
+		var_dump($sql);
+		var_dump($usr_id);
+		var_dump($this->hash);
 		if (!$res = $conn->prepare($sql))
 			echo __FUNCTION__.$conn->error;
 		else {
@@ -737,7 +741,6 @@ class Classificado {
 		global $conn, $_FILES;
 
 		$numPhotos = $this->numPhotosByItem();
-		var_dump('numPhotos '.$numPhotos);
 		if ($numPhotos>4)
 			return true;
 
@@ -840,7 +843,7 @@ class Classificado {
 
 		$numItens = 0;
 		$sql_smod = "SELECT COUNT(rcg_id) num FROM ".TP."_r_classificado_galeria WHERE rcg_ucl_id=".$this->item;
-		var_dump($sql_smod);
+		var_dump('numPHotosByItem '.$this->item)
 		if (!$qry_smod = $conn->query($sql_smod))
 			return $conn->error;
 		else {
