@@ -7,6 +7,7 @@ class Classificado {
 		global $host, $aes;
 
 		$this->_args = null;
+		$this->item = null;
 		$this->hash = $aes->encrypt(time());
 		$rp = $host=='localhost' ? './' : '';
 
@@ -276,7 +277,8 @@ class Classificado {
 			$qryupd->execute();
 			$qryupd->close();
 
-			$this->item = $this->getLastId();
+			$this->item = $ucl_id;
+			var_dump($this->item);
 			$this->addPhoto();
 			return true;
 		}
