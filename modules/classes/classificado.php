@@ -8,7 +8,6 @@ class Classificado {
 
 		$this->_args = null;
 		$this->item = null;
-		$this->hash = $aes->encrypt(time());
 		$rp = $host=='localhost' ? './' : '';
 
 		$this->path_original = $rp.'public/'.substr(STATIC_PATH.'classificado/original/', 1);
@@ -55,6 +54,8 @@ class Classificado {
 				$usr_id = $hashids->decrypt($this->_args['usr_id']);
 				$this->_args['usr_id'] = $usr_id[0];
 			}
+
+			$this->hash = $aes->encrypt(time());
 
 		}
 
@@ -658,9 +659,6 @@ class Classificado {
 		$valor = $this->_args['valor'];
 
 		$sql = "SELECT ucl_id FROM `".TP."_usuario_classificado` WHERE `ucl_usr_id`=? AND `ucl_hash`=?;";
-		var_dump($sql);
-		var_dump($usr_id);
-		var_dump($this->hash);
 		if (!$res = $conn->prepare($sql))
 			echo __FUNCTION__.$conn->error;
 		else {
@@ -843,7 +841,6 @@ class Classificado {
 
 		$numItens = 0;
 		$sql_smod = "SELECT COUNT(rcg_id) num FROM ".TP."_r_classificado_galeria WHERE rcg_ucl_id=".$this->item;
-		var_dump('numPHotosByItem '.$this->item);
 		if (!$qry_smod = $conn->query($sql_smod))
 			return $conn->error;
 		else {
