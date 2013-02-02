@@ -351,7 +351,7 @@ class Classificado {
 			             'valor'=>$valor,
 			             'descricao'=>$descricao,
 			             'observacao'=>$observacao,
-			             'link'=>ABSPATH."ver-oferta/{$id_encrypted}/".linkfySmart($titulo),
+			             'link'=>ABSPATH."ver-anuncio/{$id_encrypted}/".linkfySmart($titulo),
 			             'cidade'=>$cidade,
 			             'galeria'=>$gal,
 			             'uf'=>(empty($uf) ? '--' : $uf),

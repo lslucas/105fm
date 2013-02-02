@@ -28,13 +28,13 @@
 	/**
 	 * Lista de anuncios
 	 */
-	if ($basename=='lista-ofertas')
+	if ($basename=='lista-anuncios')
 		include_once 'ver/lista.php';
 
 
 	/**
 	 * Detalhes do anuncio
 	 */
-	if ($basename=='ver-oferta')
+	if ($basename=='ver-anuncio')
 		include_once 'ver/header.php';
 

@@ -1,4 +1,4 @@
-	<?php if (!in_array($basename, array('meus-dados', 'lista', 'lista-por-interesse', 'lista-geral-de-interesses',  'fale-conosco', 'busca', 'recursos', 'lista-ofertas'))) { ?>
+	<?php if (!in_array($basename, array('meus-dados', 'lista', 'lista-por-interesse', 'lista-geral-de-interesses',  'fale-conosco', 'busca', 'recursos', 'lista-anuncios'))) { ?>
 		<?php include_once 'navbar/banners.php' ?>
 	<?php } ?>
 	</div><!-- ROW -->
