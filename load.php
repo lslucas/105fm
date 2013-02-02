@@ -110,6 +110,7 @@
 		 'interesse'=>array('basename'=>'interesse', 'path'=>'public/produto/interesse.php'),
 		 'ver'=>array('basename'=>'produto', 'path'=>'public/produto/ver.php'),
 		 'lista'=>array('basename'=>'produto', 'path'=>'public/produto/lista.php'),
+		 'lista-ofertas'=>array('basename'=>'anuncio', 'path'=>'public/anuncio/lista.php'),
 		 'lista-por-interesse'=>array('basename'=>'produto', 'path'=>'public/produto/lista-por-interesse.php'),
 		 'lista-geral-de-interesses'=>array('basename'=>'produto', 'path'=>'public/produto/lista-geral-de-interesses.php'),
 		 'login'=>array('basename'=>'usuario', 'path'=>'public/usuario/login.php'),

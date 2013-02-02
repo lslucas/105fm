@@ -1,4 +1,4 @@
-	<?php if (!in_array($basename, array('meus-dados', 'lista', 'lista-por-interesse', 'lista-geral-de-interesses',  'fale-conosco', 'busca', 'recursos'))) { ?>
+	<?php if (!in_array($basename, array('meus-dados', 'lista', 'lista-por-interesse', 'lista-geral-de-interesses',  'fale-conosco', 'busca', 'recursos', 'lista-ofertas'))) { ?>
 		<?php include_once 'navbar/banners.php' ?>
 	<?php } ?>
 	</div><!-- ROW -->
@@ -10,7 +10,7 @@
 			</div>
 
 			<div class="column grid_5">
-				<p class="fr"><a href="#" title="">Topo</a></p>
+				<p class="fr"><a href="#" title="Subir">Topo</a></p>
 			</div>
 		</div>
 	</footer>

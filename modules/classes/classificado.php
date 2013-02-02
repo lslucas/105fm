@@ -445,7 +445,7 @@ class Classificado {
 				) as `tmp`
 				WHERE 1
 					{$whr}
-				ORDER BY ucl_titulo";
+				ORDER BY titulo";
 		if (!$res = $conn->prepare($sql))
 			echo __FUNCTION__.$conn->error;
 		else {
@@ -480,7 +480,7 @@ class Classificado {
 						ucl_valor,
 						ucl_id,
 						ucl_titulo `titulo`
-					FROM `".TP."_usuario_produto`
+					FROM `".TP."_usuario_classificado`
 					INNER JOIN ".TP."_usuario
 						ON ucl_usr_id=usr_id
 						AND usr_status=1
@@ -541,7 +541,7 @@ class Classificado {
 						adb_uf,
 						ucl_valor,
 						ucl_titulo `titulo`
-					FROM `".TP."_usuario_produto`
+					FROM `".TP."_usuario_classificado`
 					INNER JOIN ".TP."_usuario
 						ON ucl_usr_id=usr_id
 						AND usr_status=1

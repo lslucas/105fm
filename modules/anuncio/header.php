@@ -28,8 +28,8 @@
 	/**
 	 * Lista de anuncios
 	 */
-	if ($basename=='lista')
-		include_once 'ver/exec.php';
+	if ($basename=='lista-ofertas')
+		include_once 'ver/lista.php';
 
 
 	/**
