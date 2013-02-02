@@ -337,6 +337,7 @@ class Classificado {
 
 			if (!empty($ucl_id)) {
 
+				$gal = $this->getGaleria($id);
 				$valor = empty($valor) || $valor=='0.00' ? 'Sob consulta' : 'R$ '.Currency2Decimal($valor);
 				$id_encrypted = $hashids->encrypt($ucl_id);
 				$cpr = array(
@@ -352,6 +353,7 @@ class Classificado {
 			             'observacao'=>$observacao,
 			             'link'=>ABSPATH."ver-oferta/{$id_encrypted}/".linkfySmart($titulo),
 			             'cidade'=>$cidade,
+			             'galeria'=>$gal,
 			             'uf'=>(empty($uf) ? '--' : $uf),
 			             'observacao'=>$observacao,
 			             'estado'=>estadoFromUF($uf),
@@ -364,6 +366,48 @@ class Classificado {
 
 			} else
 				return false;
+		}
+
+	}
+
+	private function getGaleria($id)
+	{
+		global $conn;
+
+		$gal=array();
+		$sql = "SELECT
+					rcg_imagem,
+					rcg_legenda,
+					rcg_pos
+					FROM `".TP."_r_classificado_galeria`
+					WHERE `rcg_ucl_id`=?
+					ORDER BY rcg_pos;";
+		if (!$res = $conn->prepare($sql))
+			echo __FUNCTION__.$conn->error;
+		else {
+
+			$res->bind_param('i', $id);
+			$res->bind_result($imagem, $legenda, $pos);
+			$res->execute();
+			$res->store_result();
+
+			$i=0;
+			while($res->fetch()) {
+				$gal[$i] = array(
+			             'img'=>$imagem,
+			             'imagem'=>STATIC_PATH.'classificado/'.$imagem,
+			             'thumb'=>STATIC_PATH.'classificado/thumb/'.$imagem,
+			             'original'=>STATIC_PATH.'classificado/original/'.$imagem,
+			             'home'=>STATIC_PATH.'classificado/home/'.$imagem,
+			             'legenda'=>$legenda,
+			             'position'=>$pos,
+		             );
+				$i++;
+			}
+
+			$res->close();
+
+			return $gal;
 		}
 
 	}

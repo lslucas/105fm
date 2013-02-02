@@ -35,6 +35,6 @@
 	/**
 	 * Detalhes do anuncio
 	 */
-	if ($basename=='ver')
+	if ($basename=='ver-oferta')
 		include_once 'ver/header.php';
 

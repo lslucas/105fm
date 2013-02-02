@@ -109,6 +109,7 @@
 		 'anuncio'=>array('basename'=>'anuncio', 'path'=>'public/anuncio/form.php'),
 		 'interesse'=>array('basename'=>'interesse', 'path'=>'public/produto/interesse.php'),
 		 'ver'=>array('basename'=>'produto', 'path'=>'public/produto/ver.php'),
+		 'ver-oferta'=>array('basename'=>'anuncio', 'path'=>'public/anuncio/ver.php'),
 		 'lista'=>array('basename'=>'produto', 'path'=>'public/produto/lista.php'),
 		 'lista-ofertas'=>array('basename'=>'anuncio', 'path'=>'public/anuncio/lista.php'),
 		 'lista-por-interesse'=>array('basename'=>'produto', 'path'=>'public/produto/lista-por-interesse.php'),

@@ -1,6 +1,6 @@
 <?php
-	$cpr = $pro = $vend = array();
-	$validaclassificado = $classificado->classificadoExiste($querystring);
+	$ucl = $vend = array();
+	$validaclassificado = $classificado->existe($querystring);
 	if ($validaclassificado) {
 
 		include_once 'modules/classes/produto.php';
@@ -8,10 +8,9 @@
 		$produto = new Produto();
 		$usuario = new Usuario();
 
-		$cpr = $classificado->getInfoById($querystring);
-		$classificado->plusView($cpr['id']);
-		$pro = $produto->getInfoById($cpr['pro_id']);
-		$vend = $usuario->getBasicInfoById($cpr['usr_id']);
+		$ucl = $classificado->getInfoById($querystring);
+		$classificado->plusView($ucl['id']);
+		$vend = $usuario->getBasicInfoById($ucl['usr_id']);
 
 	} else
 		$toScript = showModal(array('title'=>'Produto inválido', 'content'=>'Produto inválido ou não existe mais!'));
