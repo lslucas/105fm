@@ -23,24 +23,24 @@
 
 						<div class='column filtro'>
 							<form name="filtrar" class="form-inline" action='<?=ABSPATH?>busca' method="post">
-								<input type="hidden" name="from" value="filtrar">
+								<input type="hidden" name="from" value="filtrar-classificado">
 
 
 								<select name='filtroLocalizacao' id='filtroLocalizacao' class='filtroLocalizacao input-medium'>
 									<option value=''>Localização</option>
 									<?php if (!isset($val['filtroLocalizacao']))  $val['filtroLocalizacao'] = array(); ?>
-									<?=convertCatList2Option(getLocalizacao(), $val['filtroLocalizacao'])?>
+									<?=convertCatList2Option(getLocalizacaoFromClassificados(), $val['filtroLocalizacao'])?>
 								</select>
 
 								<select name='filtroUsuario' id='filtroUsuario' class='filtroUsuario'>
 									<option value=''>Revendedor</option>
 									<?php if (!isset($val['filtroUsuario']))  $val['filtroUsuario'] = array(); ?>
-									<?=convertCatList2Option(getUsuarios(), $val['filtroUsuario'])?>
+									<?=convertCatList2Option(getUsuariosFromClassificados(), $val['filtroUsuario'])?>
 								</select>
 
 								<select name='filtroProduto' id='filtroProduto' class='filtroProduto'>
 									<?php if (!isset($val['filtroProduto']))  $val['filtroProduto'] = array(); ?>
-									<?=convertCatList2Option(getProdutosByOptions(null, 'Produto', 'titulo', true), $val['filtroProduto'])?>
+									<?=convertCatList2Option(getClassificadosByOptions(null, 'Produto', 'titulo', true), $val['filtroProduto'])?>
 								</select>
 
 								<button type="submit" class="btn">Filtrar</button>

@@ -16,4 +16,5 @@
 	} if (isset($_POST['q']) && !empty($_POST['q']))
 		$listaUrl .= '/q-'.linkfySmart(trim($_POST['q']));
 
-	header('Location: '.ABSPATH.'lista'.$listaUrl);
+	$to = $_POST['from']=='filtrar-classificado' ? 'lista-anuncios' : 'lista';
+	header('Location: '.ABSPATH.$to.$listaUrl);

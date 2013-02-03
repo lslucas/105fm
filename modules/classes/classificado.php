@@ -618,7 +618,7 @@ class Classificado {
 				if (isset($filtro['filtroUF']) && $filtro['filtroUF']==$ufmin)
 					$listUf[$i]['link'] = "{$estado} ({$numUF})";
 				else
-					$listUf[$i]['link'] = "<a href='".ABSPATH."lista/uf-{$ufmin}'>{$estado}</a> ({$numUF})";
+					$listUf[$i]['link'] = "<a href='".ABSPATH."lista-anuncios/uf-{$ufmin}'>{$estado}</a> ({$numUF})";
 
 				$i++;
 			}

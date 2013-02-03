@@ -305,6 +305,49 @@ function getUsuarios($simple=true)
 }
 
 /*
+ *retorna lista de usuários dos classificados
+ */
+function getUsuariosFromClassificados($simple=true)
+{
+	global $conn, $hashids;
+
+	$whrFiltro = null;
+	$list = array();
+	$sql = "SELECT usr_id, usr_nome, usr_nome_fantasia
+				FROM `".TP."_usuario`
+				INNER JOIN `".TP."_usuario_classificado`
+					ON ucl_usr_id=usr_id
+					AND ucl_status=1
+				WHERE usr_status=1
+				{$whrFiltro}
+				GROUP BY usr_id
+				ORDER BY usr_nome_fantasia";
+	if (!$res = $conn->prepare($sql))
+		echo __FUNCTION__.$conn->error;
+	else {
+
+		$res->bind_result($id,  $nome, $nomeFantasia);
+		$res->execute();
+
+		$i=0;
+		while ($res->fetch()) {
+			$empresa = empty($nomeFantasia) ? $nome : $nomeFantasia;
+			if (!$simple)
+				$i = linkfySmart($empresa);
+
+			$list[$i]['id'] = $hashids->encrypt($id);
+			$list[$i]['id_numeric'] = $id;
+			$list[$i]['titulo'] = $empresa;
+
+			if ($simple)
+				$i++;
+		}
+
+		return $list;
+		$res->close();
+	}
+}
+/*
  *retorna coluna do usuario
  */
 function getUsuarioEmpresaById($id)
@@ -383,6 +426,47 @@ function getLocalizacao()
 	}
 }
 
+/*
+ *retorna lista da localidades dos classificados
+ */
+function getLocalizacaoFromClassificados()
+{
+	global $conn;
+
+	$whrFiltro = null;
+	$listUf = array();
+	$sqluf = "SELECT adb_uf, COUNT(ucl_id) `num`
+				FROM `".TP."_usuario_classificado`
+				LEFT JOIN ".TP."_address_book
+					ON adb_usr_id=ucl_usr_id
+				WHERE ucl_status=1
+				{$whrFiltro}
+				GROUP BY adb_uf
+				ORDER BY ucl_timestamp DESC";
+	if (!$resuf = $conn->prepare($sqluf))
+		echo __FUNCTION__.$conn->error;
+	else {
+
+		$resuf->bind_result($uf, $num);
+		$resuf->execute();
+
+		$i=0;
+		while ($resuf->fetch()) {
+			$ufmin = strtolower($uf);
+			$estado = estadoFromUF($uf);
+
+			$listUf[$i]['id'] = empty($ufmin) ? 'none': $ufmin;
+			$listUf[$i]['titulo'] = $estado.' ('.$num.')';
+			$listUf[$i]['num'] = $num;
+
+			$i++;
+		}
+
+		return $listUf;
+
+		$resuf->close();
+	}
+}
 /*
  *retorna lista da coluna
  */
@@ -511,6 +595,63 @@ function getProdutosByOptions($option, $startwith=null, $order='titulo', $userPr
 				) as `tmp`
 				ORDER BY `produto`;";
 
+	$lst = array();
+	if(!$qry = $conn->prepare($sql))
+		echo divAlert($conn->error, 'error');
+
+	else {
+
+		$qry->execute();
+		$qry->bind_result($id, $titulo, $valor);
+
+		if (!empty($startwith))
+			$lst[0] = array('id'=>0, 'titulo'=>$startwith);
+
+		$i=1;
+		while ($qry->fetch()) {
+			// $lst[$i]['id'] = $id;
+			$lst[$i]['id'] = mb_strtolower(urlencode($titulo), 'utf8');
+			$lst[$i]['titulo'] = mb_strtoupper($titulo, 'utf8');
+			$lst[$i]['valor'] = 'R$ '.Moeda($valor);
+			$lst[$i]['valor_decimal'] = $valor;
+			$i++;
+		}
+
+		$qry->close();
+
+		return $lst;
+	}
+
+}
+
+/*
+ *retorna lista de classificados
+ */
+function getClassificadosByOptions($option, $startwith=null, $order='titulo')
+{
+	global $conn, $hashids;
+
+	$whr = null;
+	if (is_array($option))
+		foreach ($option as $optkey=>$optval) {
+			if (!empty($optval))
+				$whr .= " AND ucl_{$optkey}=\"{$optval}\"";
+		}
+
+	$sql = "SELECT * FROM (
+				SELECT
+					ucl_id,
+					ucl_titulo `produto`,
+					ucl_valor
+					FROM ".TP."_usuario_classificado
+					INNER JOIN ".TP."_usuario
+						ON ucl_usr_id=usr_id
+						AND usr_status=1
+					WHERE ucl_status=1
+					{$whr}
+				) as `tmp`
+			GROUP BY `produto`
+			ORDER BY `produto`;";
 	$lst = array();
 	if(!$qry = $conn->prepare($sql))
 		echo divAlert($conn->error, 'error');
