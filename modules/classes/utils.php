@@ -19,7 +19,7 @@ class Utils {
 			$query = "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text=\"{$cidade}{$uf}\") and u='c'";
 			$matche = $yql->query($query);
 			$matche = isset($matche->query->results->channel) ? $matche->query->results->channel : false;
-
+var_dump($matche->item->title);
 			if (!$matche || $matche->item->title=='City not found' || !isset($matche->item->condition->text))
 				return 'Cidade ou UF nao encontrado!';
 
