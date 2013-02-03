@@ -101,6 +101,9 @@ h1#logo { padding:0px; }
 }
 small { font-size:85%; color:#666;}
 
+img.produtoImagemThumb { cursor:pointer;}
+img.produtoImagemThumb  ~ .produtoImagemThumb { margin-left: 5px; } /* todos da classe excepto o primeiro*/
+
 header nav.cat ul li{ margin: 10px 15px 0 0; }
 header nav.cat ul li a { font-weight: bold; }
 hr { border:0; border-bottom: 1px solid #9ECADA;}

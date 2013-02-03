@@ -19,4 +19,18 @@ $incjQuery .= "
 $('#myTab a').click(function (e) {
   e.preventDefault();
   $(this).tab('show');
-});";
+});
+
+
+$('.produtoImagemThumb').click(function() {
+	var image = $(this).attr('rel');
+
+	if (image!=$('#imagemGrande').attr('src')) {
+		$('#imagemGrande').hide();
+		$('#imagemGrande').fadeIn('slow');
+		$('#imagemGrande').attr('src', image);
+	}
+
+	return false;
+});
+";

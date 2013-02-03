@@ -11,7 +11,16 @@
 	<p>
 		<?php
 			if (!empty($ucl['galeria'][0]['img']))
-				echo "<img src='{$ucl['galeria'][0]['imagem']}' border=0 width=280 class='img-polaroid produtoImagem'/>";
+				echo "<img src='{$ucl['galeria'][0]['imagem']}' border=0 class='img-polaroid produtoImagem' id='imagemGrande'/>";
+
+			//thumbs
+			if (count($ucl['galeria'])>1) {
+				foreach ($ucl['galeria'] as $int=>$thumbs) {
+					if ($int==4)
+						break;
+					echo "<img src='{$thumbs['thumb']}' rel='{$thumbs['imagem']}' border=0 width=131 class='img-polaroid produtoImagemThumb'/>";
+				}
+			}
 		?>
 		<?=$ucl['descricao']?>
 		<?php if (!empty($ucl['observacao'])) { ?>
