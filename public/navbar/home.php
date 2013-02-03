@@ -40,11 +40,17 @@
 					<h4>Previsão do Tempo</h4>
 					<ul class='previsao-tempo'>
 						<li style='width:100%; height:50px; display:table; position:relative;'>
+							<?php
+								if ($clima=='City not found')
+									echo "<center><h5>Clima não disponível para sua cidade no momento</h5></center>";
+								else {
+							?>
 							<img src='<?=$clima['imagem_url']?>' width='50px' class='pull-left' title='<?=$clima['clima']?>' border=0/>
 							<div style='display: table-cell; vertical-align:middle; padding-left:10px; width:100%;  '>
 								<h5><?=$clima['cidade']?></h5>
 								<b><?=$clima['temperatura']?></b> <small class='orange'>Alta <?=$clima['maxima']?></small> <small>Baixa <?=$clima['minima']?></small>
 							</div>
+							<?php } ?>
 						</li>
 					</ul>
 				</section>
