@@ -17,7 +17,7 @@ define('OAUTH_APP_ID', 'H6odEJ30');
 define('EMAIL','neto@techtravel.com.br');
 define('EMAIL_CONTACT','neto@techtravel.com.br');
 define('EMAIL_NAME','agrosshop');
-define('BBC1_EMAIL','lslucas@gmail.com');
+define('BBC1_EMAIL','lslucas@techtravel.com.br');
 define('BBC2_EMAIL','');
 define('BBC3_EMAIL','');
 define('BBC4_EMAIL','');
