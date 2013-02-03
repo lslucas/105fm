@@ -54,7 +54,7 @@
 
 	if (empty($usr['id']) || !isset($argsClima))
 		$argsClima = array('cidade'=>'São Paulo', 'uf'=>'SP');
-
+var_dump($argsClima);
 	$clima = $utils->climaByCityState($argsClima);
 
 
