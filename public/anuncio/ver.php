@@ -16,9 +16,9 @@
 			//thumbs
 			if (count($ucl['galeria'])>1) {
 				foreach ($ucl['galeria'] as $int=>$thumbs) {
-					if ($int==4)
+					if ($int==5)
 						break;
-					echo "<img src='{$thumbs['thumb']}' rel='{$thumbs['imagem']}' border=0 width=131 class='img-polaroid produtoImagemThumb'/>";
+					echo "<img src='{$thumbs['thumb']}' rel='{$thumbs['imagem']}' border=0 width=104 class='img-polaroid produtoImagemThumb'/>";
 				}
 			}
 		?>
