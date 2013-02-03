@@ -22,6 +22,7 @@
 				}
 			}
 		?>
+		<br clear='all'/>
 		<?=$ucl['descricao']?>
 		<?php if (!empty($ucl['observacao'])) { ?>
 			<br/>Observação: <?=$ucl['observacao']?>
