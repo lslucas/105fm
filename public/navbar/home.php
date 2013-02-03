@@ -41,8 +41,7 @@
 					<ul class='previsao-tempo'>
 						<li style='width:100%; height:50px; display:table; position:relative;'>
 							<?php
-							var_dump($clima);
-								if ($clima=='City not found')
+								if ($clima=='Cidade ou UF nao encontrado!')
 									echo "<center><h5>Clima não disponível para sua cidade no momento</h5></center>";
 								else {
 							?>
