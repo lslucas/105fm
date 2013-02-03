@@ -85,9 +85,10 @@
 					echo "<li>Telefone 2: {$vend['telefone2']}</li>";
 				echo "</ul></center>";
 			?>
-				<form class="form-horizontal" name='contato-vendedor' method='post'>
-				<input type='hidden' name='form' value='contato-vendedor'>
+				<form class="form-horizontal" name='contato-anuncio-vendedor' method='post'>
+				<input type='hidden' name='form' value='contato-anuncio-vendedor'>
 				<input type='hidden' name='produto' value='<?=$ucl['titulo']?>'>
+				<input type='hidden' name='link' value='<?=full_url()?>'>
 				<input type='hidden' name='contatoVendedor' value='<?=$vend['contato']?>'>
 				<input type='hidden' name='emailVendedor' value='<?=$vend['email']?>'>
 				  <div class="control-group">

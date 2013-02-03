@@ -93,6 +93,7 @@
 				<form class="form-horizontal" name='contato-vendedor' method='post'>
 				<input type='hidden' name='form' value='contato-vendedor'>
 				<input type='hidden' name='produto' value='<?=$cpr['titulo']?>'>
+				<input type='hidden' name='link' value='<?=full_url()?>'>
 				<input type='hidden' name='contatoVendedor' value='<?=$vend['contato']?>'>
 				<input type='hidden' name='emailVendedor' value='<?=$vend['email']?>'>
 				  <div class="control-group">

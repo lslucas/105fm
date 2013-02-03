@@ -21,13 +21,14 @@
 	            'fromEmail'=>$val['email'],
 	            'toName'=>$val['contatoVendedor'],
 	            'toEmail'=>$val['emailVendedor'],
-	            'assunto'=>'Contato sobre '.$val['produto'],
+	            'assunto'=>'Contato sobre o anuncio do produto: '.$val['produto'],
 	            'produto'=>$val['produto'],
+	            'link'=>$val['link'],
 	            'mensagem'=>$val['mensagem'],
 	          );
 		$mail = new Mail();
 
-		if ($mail->contatoVendedor($args))
+		if ($mail->contatoAnuncioVendedor($args))
 			$toScript = showModal(array('title'=>null, 'content'=>'Mensagem enviada!'));
 	}
 

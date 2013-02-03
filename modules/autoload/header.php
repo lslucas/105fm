@@ -105,6 +105,8 @@
 	if (isset($_POST['form']) && $_POST['form']=='contato-vendedor')
 		include_once 'modules/produto/ver/contato-vendedor.php';
 
+	if (isset($_POST['form']) && $_POST['form']=='contato-anuncio-vendedor')
+		include_once 'modules/anuncio/ver/contato-vendedor.php';
 
 	/*
 	 *QUERY DE BANNERS

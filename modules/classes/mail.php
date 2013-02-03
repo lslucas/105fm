@@ -51,6 +51,14 @@ class Mail {
 		return $this->sendEmail($args);
 	}
 
+	public function contatoAnuncioVendedor($args)
+	{
+		$this->template	= 'public/templates/contatoAnuncioVendedor.html';
+		$this->subject = $args['assunto'];
+
+		return $this->sendEmail($args);
+	}
+
 	public function faleConosco($args)
 	{
 		$this->template	= 'public/templates/faleConosco.html';
