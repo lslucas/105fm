@@ -79,7 +79,7 @@ if ($host=='localhost') {
 	define('DB_PASS','c0d3rUNIX#');
 	define('DB_DATABASE','lucasserafim');
 
-	ini_set('display_errors','Off');
+	ini_set('display_errors','On');
 
 	//host
 	$vhost = 'http://'.$_SERVER['HTTP_HOST'].'/';
