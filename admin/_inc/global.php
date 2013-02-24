@@ -4,7 +4,7 @@
 
  //define fusohorario padrao
  date_default_timezone_set('America/Sao_Paulo');
-$host = $_SERVER['HTTP_HOST']=='localhost' || $_SERVER['HTTP_HOST']=='agrosshop' ? 'localhost' : $_SERVER['HTTP_HOST'];
+$host = $_SERVER['HTTP_HOST']=='localhost' || $_SERVER['HTTP_HOST']=='105fm' ? 'localhost' : $_SERVER['HTTP_HOST'];
 
 //APIS
 define('OAUTH_CONSUMER_KEY', 'dj0yJmk9dHkxSktldHA3OFF3JmQ9WVdrOVNEWnZaRVZLTXpBbWNHbzlNVFEyT0RjMU9USTJNZy0tJnM9Y29uc3VtZXJzZWNyZXQmeD1hNQ--');
@@ -14,10 +14,10 @@ define('OAUTH_APP_ID', 'H6odEJ30');
 # EMAILS
 ########
 
-define('EMAIL','neto@techtravel.com.br');
-define('EMAIL_CONTACT','neto@techtravel.com.br');
-define('EMAIL_NAME','agrosshop');
-define('BBC1_EMAIL','lslucas@techtravel.com.br');
+define('EMAIL','noreply@105.fm');
+define('EMAIL_CONTACT','contato@105.fm');
+define('EMAIL_NAME','105fm');
+define('BBC1_EMAIL','lslucas@gmail.com');
 define('BBC2_EMAIL','');
 define('BBC3_EMAIL','');
 define('BBC4_EMAIL','');
@@ -37,7 +37,7 @@ if ($host=='localhost') {
 	define('MAIL_SMTPAUTH', 'login');
 	define('MAIL_SMTPSECURE', 'tls');
 	define('MAIL_PORT', 587);
-	define('MAIL_USER', 'noreply@techtravel.com.br');
+	define('MAIL_USER', 'noreply@105.fm');
 	define('MAIL_PASS', 'mvdbt9TT');
 
 	/**
@@ -46,7 +46,7 @@ if ($host=='localhost') {
 	define('DB_SERVER','localhost');
 	define('DB_USER','root');
 	define('DB_PASS','mvdbt9');
-	define('DB_DATABASE','agrosshop');
+	define('DB_DATABASE','lslucas');
 
 	error_reporting(E_ALL);
 	ini_set('display_errors','On');
@@ -68,16 +68,16 @@ if ($host=='localhost') {
 	define('MAIL_SMTPAUTH', 'login');
 	define('MAIL_SMTPSECURE', 'tls');
 	define('MAIL_PORT', 587);
-	define('MAIL_USER', 'noreply@techtravel.com.br');
-	define('MAIL_PASS', 'mvdbt9TT');
+	define('MAIL_USER', 'lucas@lucasserafim.com.br');
+	define('MAIL_PASS', 'c0d3rUNIX#');
 
 	/**
 	 * CONEXAO COM O DB
 	 */
-	define('DB_SERVER','agrosshop.cpvaflkdqugq.sa-east-1.rds.amazonaws.com');
-	define('DB_USER','agrouser');
-	define('DB_PASS','mvdbt9AGRO');
-	define('DB_DATABASE','agrosshop');
+	define('DB_SERVER','lucasserafim.db.8229398.hostedresource.com');
+	define('DB_USER','lucasserafim');
+	define('DB_PASS','c0d3rUNIX#');
+	define('DB_DATABASE','lucasserafim');
 
 	ini_set('display_errors','Off');
 
@@ -91,7 +91,7 @@ if ($host=='localhost') {
 }
 
 #prefixo das tabelas
-define('TABLE_PREFIX','agr');
+define('TABLE_PREFIX','fm');
 define('TP', TABLE_PREFIX);
 
 $path = 'admin';
@@ -101,7 +101,7 @@ if (!isset($abspath))
 	$abspath = realpath(dirname('global.php')).'/';
 
 // include path para o zend
-if(in_array($host, array('localhost', 'agrosshop'))) ini_set('include_path', ".:/usr/share/php/.:/opt/local/lib/php:.{$abspath}:.{$abspath}vendor");
+if(in_array($host, array('localhost', '105fm'))) ini_set('include_path', ".:/usr/share/php/.:/opt/local/lib/php:.{$abspath}:.{$abspath}vendor");
 else ini_set('include_path', '.:/.:/usr/share/php/zend-framework/');
 
 
@@ -120,11 +120,11 @@ $rpadm = $rph.'admin/';
 /**
  * VARIAVEIS GLOBAIS
  */
-define('SITE_NAME','AGROSSHOP');
+define('SITE_NAME','105FM');
 $BUSINESS = '';
 $BUSINESS = null;
-if ($host=='localhost') define('SITE_URL','http://localhost/agroshop');
-else define('SITE_URL','http://agrosshop.com.br');
+if ($host=='localhost') define('SITE_URL','http://localhost/105fm');
+else define('SITE_URL','http://agenciapump.com.br/clientes/105fm/');
 define('PAINEL_URL', SITE_URL.'/admin');
 $SITE_URL = SITE_URL;
 define('RODAPE','<a href="'.SITE_URL.'">'.SITE_NAME.'</a>');
@@ -151,7 +151,7 @@ define('MAX_UPLOAD', $upload_mb);
 /**
  * DEBUG
  */
-define('DEBUG',0);
+define('DEBUG',1);
 define('DEBUG_LOG',$rp.'debug.log');
 
 /**
