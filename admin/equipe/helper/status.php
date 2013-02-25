@@ -5,7 +5,7 @@
   }
 
  $col = isset($_GET['status']) ? 'status' : (isset($_GET['destaque']) ? 'destaque' :  (isset($_GET['principal']) ? 'principal' :  null));
- $sql_guarda = "SELECT ${var['pre']}_nome, ${var['pre']}_{$col} FROM ".TABLE_PREFIX."_${var['path']}";
+ $sql_guarda = "SELECT ${var['pre']}_titulo, ${var['pre']}_{$col} FROM ".TABLE_PREFIX."_${var['path']}";
  $sql_guarda.= " WHERE ${var['pre']}_id=?";
  if (!$qry_guarda = $conn->prepare($sql_guarda))
 	 echo $conn->error;
@@ -15,7 +15,7 @@
 	 $qry_guarda->bind_param('i', $res['item']);
 	 $ok = $qry_guarda->execute()==true?true:false;
 	 $num = $qry_guarda->num_rows();
-	 $qry_guarda->bind_result($nome,$status);
+	 $qry_guarda->bind_result($titulo,$status);
 	 $qry_guarda->fetch();
 	 $qry_guarda->close();
 
@@ -76,7 +76,7 @@
 				 logextended($acao, $p, array('antes'=>$antes, 'depois'=>$depois, 'log_id'=>$log_id));
 
 
-				echo "<b>${nome}</b> está agora <b>${novoStatusT}</b>";
+				echo "<b>${titulo}</b> está agora <b>${novoStatusT}</b>";
 		 }
 
 	   $qry_status->close();

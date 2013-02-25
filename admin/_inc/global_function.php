@@ -2586,49 +2586,13 @@ function getFieldAndValues($params) {
 
      }
 
-
-
-
       # se DEBUG_LOG nao for vazio vai gravar no arquivo de log
       if (DEBUG_LOG<>'') {
-
-	/*
-	if(!file_exists(DEBUG_LOG)) {
-	 mkdir(DEBUG_LOG,0777,true);
-	}
-	*/
-
-	$ddf = fopen(DEBUG_LOG,'a');
-	fwrite($ddf,"".date("r").": [$numero] $texto $errfile $errline \r\n [$log[id]]$log[nome] - $log[ip], $log[useragent] \r\n\r\n");
-	fclose($ddf);
-
+		$ddf = fopen(DEBUG_LOG,'a');
+		fwrite($ddf,"".date("r").": [$numero] $texto $errfile $errline \r\n [$log[id]]$log[nome] - $log[ip], $log[useragent] \r\n\r\n");
+		fclose($ddf);
       }
 
-
-      $sql_dlog = "INSERT INTO ".TABLE_PREFIX."_debuglog
-		    (
-		     del_adm_id,
-		     del_nome,
-		     del_useragent,
-		     del_ip,
-		     del_err_number,
-		     del_err,
-		     del_err_file,
-		     del_err_line
-		    ) VALUES (
-		     ?,?,?,?,?,?,?,?
-		    )
-	      ";
-
-      if(($qr_dlog = $conn->prepare($sql_dlog))==false) {
-   	    echo 'erro '.$conn->error;
-
-      } else {
-	$qr_dlog->bind_param('isssissi',$log['id'],$log['nome'],$log['ip'],$log['useragent'],$numero,$texto,$errfile, $errline);
-	$qr_dlog->execute();
-	$qr_dlog->close();
-  unset($qr_dlog);
-      }
  }
 
 }

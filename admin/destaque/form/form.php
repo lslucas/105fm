@@ -111,7 +111,7 @@
      <div class="control-group">
       <label class="control-label" for="link">Link</label>
       <div class="controls">
-        <input type="text" class="input-xlarge url" placeholder='Link do destaque' name='link' id='link' value='<?php echo $val['link']?>'>
+        <input type="text" class="input-xlarge" placeholder='Link do destaque' name='link' id='link' value='<?php echo $val['link']?>'>
       </div>
     </div>
 

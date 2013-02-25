@@ -38,7 +38,7 @@
     while ($qry->fetch()) {
 
 $titulo = empty($titulo) ? '[semtitulo]' : $titulo;
-$delete_images = "&prefix=r_${var['table']}_galeria&pre=rng&col=imagem&folder=${var['imagem_folderlist']}";
+$delete_images = "&prefix=r_${var['table']}_galeria&pre=rdg&col=imagem&folder=${var['imagem_folderlist']}";
 
 $statusOnLabel = "<font color=#000000>Ativo</font>";
 $statusOnIcon = "<i class=icon-eye-open></i> ";

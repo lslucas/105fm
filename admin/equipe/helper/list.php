@@ -1,59 +1,55 @@
 <?php
 
-  /*
-   *busca total de itens e faz variaveis de paginação
-   */
-  $sql_letras = "SELECT UPPER(LEFT({$var['pre']}_nome, 1)) FROM ".TABLE_PREFIX."_{$var['table']} WHERE 1 GROUP BY LEFT({$var['pre']}_nome, 1) ORDER BY {$var['pre']}_nome";
+	/*
+	 *busca total de itens e faz variaveis de paginação
+	 */
+	$sql_letras = "SELECT UPPER(LEFT({$var['pre']}_titulo, 1)) FROM ".TABLE_PREFIX."_{$var['table']} WHERE 1 GROUP BY LEFT({$var['pre']}_titulo, 1) ORDER BY {$var['pre']}_titulo";
 
-  if($qry_letras = $conn->prepare($sql_letras)) {
+	if($qry_letras = $conn->prepare($sql_letras)) {
 
-    $qry_letras->execute();
-    $qry_letras->bind_result($letra);
+		$qry_letras->execute();
+		$qry_letras->bind_result($letra);
 
 	$letras = "<div class='btn-group'>";
-    if(!isset($_GET['letra']) || empty($_GET['letra'])) {
-    $letras .= '<button class="btn btn-mini">Todos</button>';
-    $countLetra = '';
+		if(!isset($_GET['letra']) || empty($_GET['letra'])) {
+		$letras .= '<button class="btn btn-mini">Todos</button>';
+		$countLetra = '';
 
-    } else {
-      $letras .= "<a class='btn btn-mini' href='?p={$var['path']}'>Todos</a>";
-      $countLetra = ' with '.$_GET['letra'];
-    }
+		} else {
+			$letras .= "<a class='btn btn-mini' href='?p={$var['path']}'>Todos</a>";
+			$countLetra = ' with '.$_GET['letra'];
+		}
 
 
-      while($qry_letras->fetch()) {
-        if(!isset($_GET['letra']) || $letra<>$_GET['letra'])
-	        $letras .= "<a class='btn btn-mini' href='?p={$var['path']}&letra=${letra}'>";
+			while($qry_letras->fetch()) {
+				if(!isset($_GET['letra']) || $letra<>$_GET['letra'])
+					$letras .= "<a class='btn btn-mini' href='?p={$var['path']}&letra=${letra}'>";
 		else
-	        $letras .= "<a class='btn btn-mini' href='javascript:void(0);'>";
+					$letras .= "<a class='btn btn-mini' href='javascript:void(0);'>";
 
-        $letras .= $letra;
-        $letras .= "</a>  ";
-      }
+				$letras .= $letra;
+				$letras .= "</a>  ";
+			}
 
-    $letras = substr($letras, 0, -2);
-    $qry_letras->close();
+		$letras = substr($letras, 0, -2);
+		$qry_letras->close();
 
-  }
-  $letras .= "</div>";
+	}
+	$letras .= "</div>";
 
 
-  $where = ' WHERE 1';
-  $join = null;
-  if( isset($_GET['letra']) && !empty($_GET['letra']) ) {
-    $where.= " AND ${var['pre']}_nome LIKE '".$_GET['letra']."%' ";
-  }
+	$where = ' WHERE 1';
+	$join = null;
+	if( isset($_GET['letra']) && !empty($_GET['letra']) ) {
+		$where.= " AND ${var['pre']}_titulo LIKE '".$_GET['letra']."%' ";
+	}
 
-  if( isset($_GET['q']) && !empty($_GET['q']) ) {
-	$where.= " AND ( ";
-	$where.= " ${var['pre']}_nome LIKE '%".$_GET['q']."%' OR ";
-      $where.= " ${var['pre']}_cpf LIKE '%".$_GET['q']."%' OR ";
-      $where.= " ${var['pre']}_contato LIKE '%".$_GET['q']."%' OR ";
-      $where.= " ${var['pre']}_nome_fantasia LIKE '%".$_GET['q']."%' OR ";
-      $where.= " ${var['pre']}_telefone1 LIKE '%".$_GET['q']."%' OR ";
-      $where.= " ${var['pre']}_telefone2 LIKE '%".$_GET['q']."%' ";
-	$where.= ")";
-  }
+	if( isset($_GET['q']) && !empty($_GET['q']) ) {
+		$where.= " AND ( ";
+		$where.= " ${var['pre']}_titulo LIKE '%".$_GET['q']."%' OR ";
+		$where.= " ${var['pre']}_texto LIKE '%".$_GET['q']."%' ";
+		$where.= ")";
+	}
 
 /*
  *busca total de itens e faz variaveis de paginação
@@ -71,36 +67,32 @@ $limit_stvid = ceil(($pg_atual-1)*$limit_end);
 $qry_tot->close();
 
 
-$orderby = !isset($_GET['orderby'])?$var['pre'].'_nome ASC':urldecode($_GET['orderby']);
+$orderby = !isset($_GET['orderby'])?$var['pre'].'_titulo ASC':urldecode($_GET['orderby']);
 
 
 $sql = "SELECT ${var['pre']}_id,
-              ${var['pre']}_nome,
-              ${var['pre']}_email,
-              ${var['pre']}_cpf,
-              ${var['pre']}_cnpj,
-              ${var['pre']}_contato,
-              ${var['pre']}_telefone1,
-              ${var['pre']}_telefone2,
-              ${var['pre']}_status,
+							${var['pre']}_titulo,
+							${var['pre']}_imagem,
+							${var['pre']}_programa,
+							${var['pre']}_status,
 		DATE_FORMAT(${var['pre']}_timestamp, '%m/%d/%y') `datacadastro`
 		FROM ".TABLE_PREFIX."_${var['table']}
 		$where
-    ORDER BY $orderby
-    LIMIT $limit_stvid,$limit_end
-    ";
+		ORDER BY $orderby
+		LIMIT $limit_stvid,$limit_end
+		";
 
  if (!$qry = $conn->prepare($sql)) {
-  echo 'Houve algum erro durante a execução da consulta<p class="code">'.$sql.'</p><hr>';
+	echo 'Houve algum erro durante a execução da consulta<p class="code">'.$sql.'</p><hr>';
 
-  } else {
+	} else {
 
-    $qry->execute();
-    $qry->bind_result($id, $nome, $email, $cpf, $cnpj, $contato, $telefone1, $telefone2, $status, $timestamp);
+		$qry->execute();
+		$qry->bind_result($id, $titulo, $imagem, $programa, $status, $timestamp);
 
 
-    if($total_itens==0) $total = 'nenhum cliente'.$countLetra;
-    elseif ($total_itens==1) $total = "1 cliente".$countLetra;
-	else $total = $total_itens.' clientes'.$countLetra;
+		if($total_itens==0) $total = 'nenhum item '.$countLetra;
+		elseif ($total_itens==1) $total = "1 item".$countLetra;
+	else $total = $total_itens.' itens '.$countLetra;
 
-  }
+	}

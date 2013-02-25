@@ -8,7 +8,7 @@ $nomeAcao = $act=='insert'?'cadastrado':'alterado';
 $msgDuplicado = <<<end
 <div class='alert alert-error'>
 	<a class="close" data-dismiss="alert">×</a>
-	Já existe um usuário com o email <b>{$res['email']}</b>!
+	Já existe um apresentador com o nome <b>{$res['titulo']}</b>!
 	<br>
 	<p class='small'>
 		<a href='javascript:history.back(-1);'>Voltar ao formulário</a>
@@ -29,7 +29,7 @@ end;
 $msgSucesso = <<<end
 <div class='alert alert-success'>
 	<a class="close" data-dismiss="alert">×</a>
-	Usuário $nomeAcao!
+	Apresentador $nomeAcao!
 	<br/><p class='small'>
 		<a href='?p={$var['path']}&insert'>Novo</a>
 	</p>

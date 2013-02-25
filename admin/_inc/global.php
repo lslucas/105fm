@@ -98,13 +98,11 @@ $path = 'admin';
 $base = $vhost.$path.'/';
 
 if (!isset($abspath))
-	$abspath = realpath(dirname('global.php')).'/';
+	$abspath = realpath('../'.dirname('load.php')).'/';
 
 // include path para o zend
-if(in_array($host, array('localhost', '105fm'))) ini_set('include_path', ".:/usr/share/php/.:/opt/local/lib/php:.{$abspath}:.{$abspath}vendor");
-else ini_set('include_path', '.:/.:/usr/share/php/zend-framework/');
-
-
+ini_set('include_path', ".:/usr/share/php/zend-framework/.:{$abspath}:.{$abspath}vendor/:.{$abspath}vendor/Zend/:.{$abspath}vendor/ZF-Mail/.:/novo/vendor/.:/.:/novo/vendor/ZF-Mail");
+// else ini_set('include_path', '.:/');
 
 #rp relative path, caminho relativo para a raiz do back-end
 if (@!file_exists('inc.header.php')) {
@@ -152,7 +150,7 @@ define('MAX_UPLOAD', $upload_mb);
  * DEBUG
  */
 define('DEBUG',1);
-define('DEBUG_LOG',$rp.'debug.log');
+define('DEBUG_LOG',$abspath.'storage/logs/debug.log');
 
 /**
  * LOADING DO AJAX

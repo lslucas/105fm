@@ -21,10 +21,10 @@
 			<span class="caret"></span>
 		  </button>
 		  <ul class="dropdown-menu">
-			<li><a href="?p=<?=$p.$pag.$letter?>&orderby=<?=$var['pre'].'_data'?> ASC"<?php if($orderby==$var['pre'].'_data ASC') echo ' selected';?>">Data Asc</a></li>
-			<li><a href="?p=<?=$p.$pag.$letter?>&orderby=<?=$var['pre'].'_data'?> DESC"<?php if($orderby==$var['pre'].'_data DESC') echo ' selected';?>">Data Dec</a></li>
-			<li><a href="?p=<?=$p.$pag.$letter?>&orderby=<?=$var['pre'].'_nome'?> ASC"<?php if($orderby==$var['pre'].'_nome ASC') echo ' selected';?>">Título Asc</a></li>
-			<li><a href="?p=<?=$p.$pag.$letter?>&orderby=<?=$var['pre'].'_nome'?> DESC"<?php if($orderby==$var['pre'].'_nome DESC') echo ' selected';?>">Título Desc</a></li>
+			<li><a href="?p=<?=$p.$pag.$letter?>&orderby=<?=$var['pre'].'_timestamp'?> ASC"<?php if($orderby==$var['pre'].'_timestamp ASC') echo ' selected';?>">Data Asc</a></li>
+			<li><a href="?p=<?=$p.$pag.$letter?>&orderby=<?=$var['pre'].'_timestamp'?> DESC"<?php if($orderby==$var['pre'].'_timestamp DESC') echo ' selected';?>">Data Dec</a></li>
+			<li><a href="?p=<?=$p.$pag.$letter?>&orderby=<?=$var['pre'].'_titulo'?> ASC"<?php if($orderby==$var['pre'].'_titulo ASC') echo ' selected';?>">Título Asc</a></li>
+			<li><a href="?p=<?=$p.$pag.$letter?>&orderby=<?=$var['pre'].'_titulo'?> DESC"<?php if($orderby==$var['pre'].'_titulo DESC') echo ' selected';?>">Título Desc</a></li>
 		  </ul>
 		</div>
 
@@ -48,8 +48,9 @@
 <table class="table table-condensed table-striped">
    <thead>
       <tr>
-        <th width="120px">Contato</th>
-        <th></th>
+        <th width="40px"></th>
+        <th>Apresentador</th>
+        <th>Programa</th>
         <th width="100px">Dt. Cadastro</th>
       </tr>
    </thead>
@@ -78,8 +79,8 @@ $row_actions = <<<end
           <a class="btn btn-mini dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);" style='line-height:15px;'><span class="caret"></span></a>
 	      <ul class="dropdown-menu">
 			<li><a href="?p=$p&update&item=$id" class='tip' title='Click to edit'><i class="icon-pencil"></i> Editar</a></li>
-			<li><a href="#rm-modal{$id}" class='tip' data-toggle='modal' title="Click to remove"><i class="icon-trash"></i> Remove</a></li>
-			<li><a href="?p=$p&status&item=$id&noVisual" class='tip status status$id'  alt='{$altStatus}' title='Click to change for block or visible' id='$id' name='$nome'>{$descStatus}</a></li>
+			<li><a href="#rm-modal{$id}" class='tip' data-toggle='modal' title="Click to remove"><i class="icon-trash"></i> Remover</a></li>
+			<li><a href="?p=$p&status&item=$id&noVisual" class='tip status status$id'  alt='{$altStatus}' title='Click to change for block or visible' id='$id' name='$titulo'>{$descStatus}</a></li>
 		</ul>
 		</div>
 end;
@@ -94,7 +95,7 @@ end;
 			<h3>Remover</h3>
 		</div>
 		<div class="modal-body">
-		<p>Deseja remover <b><?=$nome?></b>?<div class='alert alert-warning small'>O item será removido permanentemente!</div></p>
+		<p>Deseja remover <b><?=$titulo?></b>?<div class='alert alert-warning small'>O item será removido permanentemente!</div></p>
 		</div>
 		<div class="modal-footer">
 			<a href="javascript:void(0);" class="btn" data-dismiss='modal'>Cancelar</a>
@@ -103,19 +104,30 @@ end;
 	</div>
 	<tr id="tr<?=$id?>">
 		<td>
-			<?=$contato?>
+			<center>
+				<?php
+					$arquivofull = substr($var['path_original'],0).'/'.$imagem;
+					$arquivo = substr($var['path_thumb'],0).'/'.$imagem;
+				?>
+				<a id='ima<?php echo $j?>' href="$im<?php echo $j?>?width=100%" class="betterTip" target='_blank' style="cursor:pointer;">
+					<img src="images/lupa.gif">
+				</a>
+				<div id="im<?php echo $j?>" style="float:left;display:none">
+					<?php
+						if (is_file($arquivo))
+							echo "<img src='{$arquivo}'>";
+						else
+							echo 'sem foto';
+					?>
+				</div>
+			</center>
 		</td>
 		<td>
-			<h6><?=$nome?></h6>
-			<?php
-				echo "<blockquote>";
-				if (!empty($cpf)) echo 'CPF '.$cpf.'<br/>';
-				if (!empty($cnpj)) echo 'CNPJ '.$cnpj.'<br/>';
-				if (!empty($telefone1)) echo 'Telefone 1 '.$telefone1.'<br/>';
-				if (!empty($telefone2)) echo 'Telefone 2 '.$telefone2.'<br/>';
-				echo "</blockquote>";
-			?>
+			<?=$titulo?>
 			<?=$row_actions?>
+		</td>
+		<td>
+			<?=$programa?>
 		</td>
 		<td>
 			<?=$timestamp?>

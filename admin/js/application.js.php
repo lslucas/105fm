@@ -5,6 +5,16 @@
 	include_once "../_inc/global.php";
 	include_once "../_inc/global_function.php";
 ?>
+function isJson(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}
+
+
 /*
  *Modal Global de mensagens e alertas
  */

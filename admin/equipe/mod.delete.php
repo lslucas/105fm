@@ -1,61 +1,60 @@
 <?php
-  foreach($_GET as $chave=>$valor) {
-   $res[$chave] = $valor;
-  }
-
- $sql_guarda = "SELECT {$var['pre']}_nome, {$var['pre']}_id FROM ".TABLE_PREFIX."_${var['table']} WHERE ${var['pre']}_id=?";
- $qry_guarda = $conn->prepare($sql_guarda);
- $qry_guarda->bind_param('i', $res['item']);
- $ok = $qry_guarda->execute()?true:false;
- $num = $qry_guarda->num_rows();
- $qry_guarda->bind_result($nome, $id);
- $qry_guarda->fetch();
- $qry_guarda->close();
+	foreach($_GET as $chave=>$valor)
+		$res[$chave] = $valor;
 
 
+	$sql_guarda = "SELECT {$var['pre']}_titulo, {$var['pre']}_imagem FROM ".TABLE_PREFIX."_${var['path']} WHERE ${var['pre']}_id=?";
+	if (!$qry_guarda = $conn->prepare($sql_guarda))
+		echo $conn->error;
 
- if(isset($_GET['verifica']))
-	echo $num;
+	else {
+
+		$qry_guarda->bind_param('i', $res['item']);
+		$qry_guarda->execute();
+		$num = $qry_guarda->num_rows();
+		$qry_guarda->bind_result($nome, $imagem);
+		$qry_guarda->fetch();
+		$qry_guarda->close();
 
 
-  elseif ($ok) {
 
-		  //log
-		  $antes = getFieldAndValues(array('id'=>$res['item'], 'modulo'=>$var['path'], 'pre'=>$var['pre']));
+		if(isset($_GET['verifica']))
+			echo $num;
 
-	      $sql_rem = "DELETE FROM ".TABLE_PREFIX."_${var['table']} WHERE ${var['pre']}_id=?";
-	      $qry_rem = $conn->prepare($sql_rem);
-	      $qry_rem->bind_param('i', $res['item']);
+
+		else {
+
+
+			$sql_rem = "DELETE FROM ".TABLE_PREFIX."_${var['path']} WHERE ${var['pre']}_id=?";
+			$qry_rem = $conn->prepare($sql_rem);
+			$qry_rem->bind_param('i', $res['item']);
 
 			if ($qry_rem->execute()) {
-				echo "<b>${nome}</b> removido!";
+				echo "<b>${nome}</b> removido com êxito!";
 
-				//log
-				$acao = 'Removido';
-				$depois = null;
-				logextended($acao, $p, array('antes'=>$antes, 'depois'=>$depois, 'log_id'=>$log_id));
+				$var['path_original'] = PATH_IMG.'/'.$var['path'].'/original';
+				$var['path_thumb']    = PATH_IMG.'/'.$var['path'].'/thumb';
+				$var['path_imagem']   = PATH_IMG.'/'.$var['path'].'/';
 
+				$var['folder'] = $var['path_imagem'].','.$var['path_original'].','.$var['path_thumb'];
+				$res['folder'] = $var['folder'];
+
+				$folder = explode(',',$res['folder']);
+				for($j=0;$j<count($folder);$j++) {
+					$arquivo = $folder[$j].'/'.$imagem;
+					if (!empty($folder[$j]) && is_file($arquivo))
+						unlink($arquivo);
+
+				}
 			}
 
-	$qry_rem->close();
+			$qry_rem->close();
 
 
+			# CASO EXISTA REMOVE AS IMAGENS E PDFS
+			//if (file_exists($var['path'].'/helper/del.galeria.php'))
+			//include_once $var['path'].'/helper/del.galeria.php';
 
-	# CASO EXISTA REMOVE AS IMAGENS E PDFS
-	if (file_exists($var['path'].'/mod.galeria.delete.php'))
-	 include_once $var['path'].'/mod.galeria.delete.php';
+		}
 
- 	if (file_exists($var['path'].'/mod.delete_cupons.php'))
-	 include_once $var['path'].'/mod.delete_cupons.php';
-
- 	if (file_exists($var['path'].'/mod.arquivo.delete.php'))
-	 include_once $var['path'].'/mod.arquivo.delete.php';
-
- 	if (file_exists($var['path'].'/mod.administrador.delete.php'))
-	 include_once $var['path'].'/mod.administrador.delete.php';
-
- 	if (file_exists($var['path'].'/mod.r_adm_mod.delete.php'))
-	 include_once $var['path'].'/mod.r_adm_mod.delete.php';
-
- } else
-   echo "Não foi possível remover <b>${nome}</b>";
+	}
