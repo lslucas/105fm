@@ -175,12 +175,13 @@ h4.dest { background:url(../img/linha-destaques.png) no-repeat left center; heig
 /* Boxes */
 div.box { background:url(../img/box-bg.png) repeat; padding:10px; }
 #boxes { margin-bottom:10px; }
-#boxes div.box { width:296px; height:450px; min-height:575px; float:left; margin-right:10px; }
+#boxes div.box { width:296px; height:450px; float:left; margin-right:10px; }
 #boxes h2 { margin:3px 5px; }
 #boxes #pedidas { margin-right:0 !important; float:right; }
-#boxes #sociais { }
+#boxes #sociais { min-height:575px;  }
 #boxes #sociais h4.tweet { background:url(../img/icons/twitter.png) no-repeat left center; font-size:16px; padding:6px 5px 6px 35px; }
 #boxes #sociais h4.face { background:url(../img/icons/facebook.png) no-repeat left center; font-size:16px; padding:6px 5px 6px 35px; }
+#boxes .soci-vid-pedi { min-height:575px; }
 
 #boxes #videos ul li { clear:both; background:url(../img/box-hr.png) no-repeat center bottom; padding-bottom:20px; position:relative; margin-bottom:20px; }
 #boxes #videos ul li a { float:left; margin-right:10px; }

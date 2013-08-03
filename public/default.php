@@ -72,13 +72,17 @@
                         <div id="boxes" class="clearfix">
 
                             <div id="varios" class="f_right">
-                                <div id="videos" class="box" style='overflow:hidden;'>
+                                <div id="videos" class="box boxVideos" style='overflow:hidden;'>
                                     <h2 class="uppercase navy">Vídeos</h2>
                                     <ul>
                                          <?php
+                                             $i=0;
                                             foreach ($videos as $int=>$vid) {
                                                 $urlvideo = preg_replace('/watch\?v\=/', 'embed/', $vid['youtube']);
                                                 $urlvideo = $urlvideo."?autoplay=1&wmode=transparent";
+
+                                                if (!empty($pergunta) && $i==3)
+                                                    break;                                               
                                         ?>
                                         <li class="clearfix">
                                             <a class="fancybox.iframe fancybox-video" href="<?=$urlvideo?>"><img src="<?=$vid[ 'imagem']?>" alt="<?=$vid['titulo']?>" width="136" height="92" /></a>
@@ -86,14 +90,21 @@
                                             <br />
                                             <span class="data"><?=$vid['data']?></span>
                                         </li>
-                                        <?php } ?>
+                                        <?php $i++; } ?>
                                     </ul>
                                     <a class="bold uppercase navy" href="<?=ABSPATH?>galeria-videos" title="Ver todos">Ver todos</a>
                                 </div>
                                 <div id="pedidas" class="box boxPedidas" style='overflow:hidden;'>
                                     <h2 class="uppercase red">Mais Pedidas</h2>
                                     <ul class="mais">
-                                        <?php foreach ($musicas as $int=>$mus) { ?>
+                                        <?php
+                                            $i=0;
+                                            foreach ($musicas as $int=>$mus) {
+
+                                                if (!empty($pergunta) && $i==5)
+                                                    break;
+
+                                        ?>
                                         <li class="clearfix">
                                             <img src="<?=$mus['artista_imagem']?>" alt="<?=$mus['titulo']?>" width="60" height="60" />
                                             <div>
@@ -101,7 +112,7 @@
                                                 <a class="ouvir" href="<?=$mus['ouvir']?>" target='_blank' title="Ouvir Música: "><img src="img/botao-ouvir.png" alt="Ouvir" width="57" height="20" /></a>
                                             </div>
                                         </li>
-                                        <?php } ?>
+                                        <?php $i++; } ?>
                                     </ul>
                                     <a class="bold uppercase red" href="<?=ABSPATH?>mais-pedidas" title="Ver todos">Ver todos</a>
                                 </div>
@@ -230,10 +241,11 @@
                         var heightPerg = perg+pedi+15;
                         var heightEnq = (gal+enq)-27;
 
-                        if (soci>heightPerg) 
-                            $('.boxPedidas').height(soc+'px');
+                        if ($('.boxPergunta').height()==null)  {
+                            $('.boxPedidas').height(soci+'px');
+                            $('.boxVideos').height(soci+'px'); //seta altura do box sociais para ficar identico a da coluna de perguntas
                         } else
-                            $('.boxSociais').height(heightPerg+'px'); //seta altura do box sociais para ficar identico a da coluna de perguntas
+                            $('.boxSociais').height(heightPerg+'px');
 
                         $('.boxSociais').height(heightPerg+'px'); //seta altura do box sociais para ficar identico a da coluna de perguntas
                         $('.boxAgenda').height(heightEnq+'px'); //seta altura do box sociais para ficar identico a da coluna de perguntas
