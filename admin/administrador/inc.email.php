@@ -42,10 +42,10 @@ $msg .= $administrador_email_footer;
 		 *vars to send a email
 		 */
 		$htmlMensage= utf8_decode($msg);
-		$subject	= utf8_decode($email_subject);
+		$subject	= $email_subject;
 		$fromEmail	= EMAIL;
 		$fromName	= utf8_decode(SITE_NAME);
-		$toName		= utf8_decode($res['nome']);
+		$toName	= utf8_decode($res['nome']);
 		$toEmail	= $res['email'];
 
 		include_once 'inc.sendmail.header.php';

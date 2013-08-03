@@ -94,8 +94,8 @@
 							 <div id='imagThumb<?php echo $i?>' style='float:left;display:none;'>
 							 <?php
 
-								if (file_exists(substr($var['path_imagem'],0)."/".$g_imagem))
-									echo "<img src='".substr($var['path_imagem'],0)."/".$g_imagem."'>";
+								if (file_exists(substr($var['path_imagem'], 0)."/".$g_imagem))
+									echo "<img src='".substr($var['path_thumb'],0)."/".$g_imagem."'>";
 
 								   else echo "<center>imagem não existe.</center>";
 

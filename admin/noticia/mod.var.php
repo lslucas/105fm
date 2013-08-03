@@ -20,12 +20,12 @@
 	$var['insert'] = 'Cadastro';
 	$var['update'] = 'Alterar '.$vr_singular;
 
-	$var['imagemWidth'] = 590;
-	$var['imagemHeight'] = 420;
+	$var['imagemWidth'] = 500;
+	$var['imagemHeight'] = 266;
 	$var['thumbWidth'] = 248;
 	$var['thumbHeight'] = 60;
-	$var['homeWidth'] = 248;
-	$var['homeHeight'] = 60;
+	$var['homeWidth'] = 227;
+	$var['homeHeight'] = 121;
 
 	$var['imagemWidth_texto'] = ' '.$var['imagemWidth'].'px (largura)';
 	$var['imagemHeight_texto'] = ' '.$var['imagemHeight'].'px (altura)';

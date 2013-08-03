@@ -20,8 +20,10 @@
     $var['insert'] = 'Cadastro';
     $var['update'] = 'Alterar '.$vr_singular;
 
-    $var['imagemWidth'] = 540;
-    $var['imagemHeight'] = 250;
+    $var['imagemWidth'] = 968;
+    $var['imagemHeight'] = 385;
+    // $var['imagemWidth'] = 540;
+    // $var['imagemHeight'] = 250;
     $var['thumbWidth'] = 200;
     $var['thumbHeight'] = 92;
 

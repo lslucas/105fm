@@ -82,8 +82,6 @@
 	   <label><input type='checkbox' class='required' title='Selecione ao menos um módulo' name='mod_id[]' id='mod_id' value='<?=$id?>'<?=$check[$id]?>> <?=$nome?></label>
 	  <?php $i++;} $qry_mod->close(); ?>
       </div>
-
-
     </div>
 
   </fieldset>

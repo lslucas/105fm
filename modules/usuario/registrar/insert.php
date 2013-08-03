@@ -7,5 +7,5 @@
 	 */
 	if (!isset($res['error'])) {
 		if ($usuario->login($val['email'], $val['senha']))
-			header('Location: '.ABSPATH.'painel');
+			header('Location: '.ABSPATH.'participacao');
 	}

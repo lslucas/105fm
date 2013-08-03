@@ -70,8 +70,10 @@ $orderby = !isset($_GET['orderby'])?$var['pre'].'_titulo ASC':urldecode($_GET['o
 
 
 $sql = "SELECT  ${var['pre']}_id,
-		${var['pre']}_titulo,
+		${var['pre']}_cat,
+           ${var['pre']}_titulo,
 		${var['pre']}_status,
+           ${var['pre']}_destaque,
 		DATE_FORMAT(${var['pre']}_data, '%d/%m/%y'),
              DATE_FORMAT(${var['pre']}_timestamp, '%d/%m/%y'),
             (SELECT rng_imagem FROM ".TABLE_PREFIX."_r_${var['path']}_galeria WHERE rng_${var['pre']}_id=${var['pre']}_id ORDER BY rng_pos DESC LIMIT 1) imagem
@@ -89,7 +91,7 @@ $sql = "SELECT  ${var['pre']}_id,
   } else {
 
     $qry->execute();
-    $qry->bind_result($id, $titulo, $status, $data, $timestamp, $imagem);
+    $qry->bind_result($id, $cat, $titulo, $status, $principal, $data, $timestamp, $imagem);
 
     if($total_itens==0) $total = 'Nenhuma noticia'.$countLetra;
     elseif ($total_itens==1) $total = "1 notícia".$countLetra;

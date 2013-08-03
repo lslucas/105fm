@@ -26,6 +26,31 @@ $include_js = <<<end
 		imageUpload: "{$rp}js/redactor/image_upload.php",
         lang: 'pt_br'
 	});
+
+
+    /* ALTERA PRINCIPAL LISTAGEM
+    ************************************/
+    $(".principal").click(function(event) {
+     event.preventDefault();
+     var id_principal = $(this).attr('id');
+     var texto_principal = $(this).text();
+     var href_principal  = $(this).attr('href');
+     var nome_principal  = $(this).attr('name');
+
+        {$LOADING}
+        $.ajax({
+            type: "POST",
+            url: href_principal,
+            success: function(data){
+             $.unblockUI();
+             $.growlUI(data);
+                if(texto_principal=="Sim" || texto_principal==" Sim") $('.principal'+id_principal).text('Não');
+                else $('.principal'+id_principal).text('Sim');
+            }
+        });
+
+
+    });
   });
 </script>
 end;

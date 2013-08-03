@@ -1,0 +1,138 @@
+@charset "utf-8";
+
+#form1 table {
+	margin-left: 225px;
+}
+
+#nome2 {
+	height: 24px;
+	width: 304px;
+	border: 1px solid #969BAE;
+	background-image: url(../img/bg-cd.jpg);
+	margin-bottom: 5px;
+	margin-left: 10px;
+}
+#sobrenome {
+	background-image: url(../img/bg-cd.jpg);
+	height: 24px;
+	width: 304px;
+	border: 1px solid #969BAE;
+	margin-bottom: 5px;
+	margin-left: 10px;
+}
+#email {
+	background-image: url(../img/bg-cd.jpg);
+	height: 24px;
+	width: 304px;
+	margin-bottom: 5px;
+	border: 1px solid #969BAE;
+	margin-left: 10px;
+}
+#nascimento {
+	background-image: url(../img/bg-cd.jpg);
+	height: 24px;
+	width: 304px;
+	margin-bottom: 5px;
+	border: 1px solid #969BAE;
+	margin-left: 10px;
+}
+#masculino {
+	margin-right: 5px;
+	margin-left: 10px;
+	background-color: #BDC9D9;
+}
+#feminino {
+	margin-right: 5px;
+	margin-left: 5px;
+	background-color: #BDC9D9;
+}
+#cep {
+	background-image: url(../img/bg-cd.jpg);
+	height: 24px;
+	width: 304px;
+	margin-bottom: 5px;
+	border: 1px solid #969BAE;
+	margin-left: 10px;
+}
+#endereco {
+	background-image: url(../img/bg-cd.jpg);
+	height: 24px;
+	width: 304px;
+	margin-bottom: 5px;
+	margin-left: 10px;
+	border: 1px solid #969BAE;
+}
+#numero {
+	background-image: url(../img/bg-cd.jpg);
+	height: 24px;
+	width: 50px;
+	margin-bottom: 5px;
+	margin-left: 10px;
+	border: 1px solid #969BAE;
+}
+
+#complemento {
+	background-image: url(../img/bg-cd.jpg);
+	height: 24px;
+	width: 135px;
+	border: 1px solid #969BAE;
+	margin-bottom: 5px;
+}
+#bairro {
+	background-image: url(../img/bg-cd.jpg);
+	height: 24px;
+	width: 304px;
+	margin-bottom: 5px;
+	margin-left: 10px;
+	border: 1px solid #969BAE;
+}
+#cidade {
+	background-image: url(../img/bg-cd.jpg);
+	height: 24px;
+	width: 304px;
+	margin-bottom: 5px;
+	margin-left: 10px;
+	border: 1px solid #969BAE;
+}
+#estado {
+	background-image: url(../img/bg-cd.jpg);
+	height: 24px;
+	width: 68px;
+	margin-bottom: 5px;
+	margin-left: 10px;
+	border: 1px solid #969BAE;
+}
+#ddd {
+	background-image: url(../img/bg-cd.jpg);
+	height: 24px;
+	width: 30px;
+	margin-bottom: 5px;
+	border: 1px solid #969BAE;
+}
+#telefone {
+	background-image: url(../img/bg-cd.jpg);
+	height: 24px;
+	width: 109px;
+	margin-bottom: 5px;
+	margin-left: 5px;
+	border: 1px solid #969BAE;
+}
+#senha {
+	background-image: url(../img/bg-cd.jpg);
+	height: 24px;
+	width: 304px;
+	margin-bottom: 5px;
+	margin-left: 10px;
+	border: 1px solid #969BAE;
+}
+#confirma {
+	background-image: url(../img/bg-cd.jpg);
+	height: 24px;
+	width: 304px;
+	margin-bottom: 5px;
+	margin-left: 10px;
+	border: 1px solid #969BAE;
+}
+#form1 table tr td img {
+	float: right;
+}

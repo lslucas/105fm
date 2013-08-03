@@ -22,9 +22,9 @@
 
 
     $var['imagemWidth'] = 640;
-    $var['imagemHeight'] = 500;
-    $var['thumbWidth'] = 133;
-    $var['thumbHeight'] = 133;
+    $var['imagemHeight'] = 415;
+    $var['thumbWidth'] = 137;
+    $var['thumbHeight'] = 89;
     //$var['homeWidth'] = 227;
     //$var['homeHeight'] = 187;
 

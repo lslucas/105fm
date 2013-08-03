@@ -31,6 +31,20 @@
   <fieldset>
 
     <div class="control-group">
+      <label class="control-label" for="cat">* Categoria</label>
+      <div class="controls">
+      <select name='cat' id='cat' class='required'>
+      <option>Selecione</option>
+      <option value='agenda' <?php if($val['cat']=='agenda') echo ' selected';?>>Agenda</option>
+      <option value='futebol' <?php if($val['cat']=='futebol') echo ' selected';?>>Futebol</option>
+      <option value='noticia' <?php if($val['cat']=='noticia') echo ' selected';?>>Notícia</option>
+      <option value='promocao' <?php if($val['cat']=='promocao') echo ' selected';?>>Promoção</option>
+      <option value='show' <?php if($val['cat']=='show') echo ' selected';?>>Show</option>
+      </select>
+      </div>
+    </div>
+
+    <div class="control-group">
       <label class="control-label" for="foto">
         Fotos<!--<br/>
         <span class='small'>
@@ -121,14 +135,14 @@
       </div>
     </div>
 
-<!--
+
     <div class="control-group">
       <label class="control-label" for="resumo">* Resumo</label>
       <div class="controls">
-        <textarea placeholder='Resumo para a listagem' name='resumo' id='resumo' rows=3 cols=100 class='required' style='width:680px'><?=stripslashes($val['resumo'])?></textarea>
+        <textarea placeholder='Resumo para a listagem' name='resumo' id='resumo' rows=3 cols=100 class='required' style='width:380px'><?=stripslashes($val['resumo'])?></textarea>
       </div>
     </div>
-  -->
+
 
     <div class="control-group">
       <label class="control-label" for="texto">* Texto</label>

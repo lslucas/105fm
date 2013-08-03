@@ -9,6 +9,17 @@ if (isset($_FILES)) {
 	if (isset($_FILES['mp3']['name']) && is_file($_FILES['mp3']['tmp_name']) ) {
 
 		if (isset($res['item'])) {
+
+			/*
+			 *REMOVE ANTIGAS
+			 */
+			$sql_imod = "SELECT rmm_media FROM ".TABLE_PREFIX."_{$var['path']}_media WHERE rmm_mus_id=?";
+			$qry_imod = $conn->prepare($sql_imod);
+			$qry_imod->bind_param('i', $res['item']);
+			$qry_imod->bind_result($imgold);
+			$qry_imod->execute();
+			$qry_imod->close();
+
 			/*
 			 *REMOVE ANTIGAS
 			 */

@@ -29,27 +29,28 @@
 	$usr = isset($_SESSION[TP]['usr']) ? $_SESSION[TP]['usr'] : null;
 	$uri  = substr($_SERVER['REQUEST_URI'], 1);
 	$breadcrumb = null;
-
+	$res = array('error'=> array('texto'=> null, 'text'=>null));
 
 	$backslash_pos = strpos($uri, '/');
 
 	$incjQuery = null;
 	$incJS = null;
+	$toJS = null;
+	$toScript = null;
 	$incCSS = null;
 	$incMsg = null;
 	$return = null;
 
-	/*
-	*verifica se está em localhost
+
+	// *verifica se está em localhost
 	if( $host=='localhost' ) {
 		define('ABSPATH', '/'.substr($uri, 0, $backslash_pos+1));
 		$uri = substr($uri, $backslash_pos+1);
 	} else {
-		define('ABSPATH', '/');
+		define('ABSPATH', '/clientes/105fm/');
 		// define('ABSPATH', '/'); #.substr($uri, 0, $backslash_pos)
 	}
-	*/
-	define('ABSPATH', '/');
+	// define('ABSPATH', '/');
 
 	$ABSPATH = ABSPATH;
 	$LOADING = "<img src='".ABSPATH."admin/images/loading.gif' border=0/>";
@@ -59,8 +60,10 @@
 	*separa tudo que tiver /
 	*/
 	$url = explode('/', $uri);
-	// if ($_SERVER['HTTP_HOST']<>'localhost')
-		// array_shift($url); //remote apenas
+	if ($_SERVER['HTTP_HOST']<>'localhost') {
+		array_shift($url); //remote apenas
+		array_shift($url); //remote apenas
+	}
 
 	//nome do arquivo = $basename.php
 	$basename = isset($url[0]) ? $url[0] : null;
@@ -68,6 +71,7 @@
 		$basename = explode('?', $basename);
 		$basename = $basename[0];
 	}
+
 	$querystring = isset($url[1]) ? $url[1] : null;
 	$queryaction = isset($url[2]) ? $url[2] : null;
 	$queryvalue = isset($url[3]) ? $url[3] : null;
@@ -101,22 +105,10 @@
 	 * QUERY STRING ALIAS
 	 */
 	$queryAlias = array(
-		 'registrar'=>array('basename'=>'usuario', 'path'=>'public/usuario/registrar.php'),
-		 'meus-dados'=>array('basename'=>'usuario', 'path'=>'public/usuario/meus-dados.php'),
-		 'novo-produto'=>array('basename'=>'produto', 'path'=>'public/produto/novo-produto.php'),
-		 'editar-produto'=>array('basename'=>'produto', 'path'=>'public/produto/editar-produto.php'),
-		 'remover-produto'=>array('basename'=>'produto', 'path'=>'public/produto/remover-produto.php'),
-		 'anuncio'=>array('basename'=>'anuncio', 'path'=>'public/anuncio/form.php'),
-		 'interesse'=>array('basename'=>'interesse', 'path'=>'public/produto/interesse.php'),
-		 'ver'=>array('basename'=>'produto', 'path'=>'public/produto/ver.php'),
-		 'ver-anuncio'=>array('basename'=>'anuncio', 'path'=>'public/anuncio/ver.php'),
-		 'lista'=>array('basename'=>'produto', 'path'=>'public/produto/lista.php'),
-		 'lista-anuncios'=>array('basename'=>'anuncio', 'path'=>'public/anuncio/lista.php'),
-		 'lista-por-interesse'=>array('basename'=>'produto', 'path'=>'public/produto/lista-por-interesse.php'),
-		 'lista-geral-de-interesses'=>array('basename'=>'produto', 'path'=>'public/produto/lista-geral-de-interesses.php'),
+		 'cadastro'=>array('basename'=>'usuario', 'path'=>'public/usuario/registrar.php'),
 		 'login'=>array('basename'=>'usuario', 'path'=>'public/usuario/login.php'),
+		 'respondePergunta'=>array('basename'=>'perguntaDia', 'path'=>'public/perguntaDia.php'),
 		 'logout'=>array('basename'=>'usuario', 'path'=>'public/usuario/logout.php'),
 		 'esqueci-senha'=>array('basename'=>'usuario', 'path'=>'public/usuario/esqueci-senha.php'),
 		 'sair'=>array('basename'=>'usuario', 'path'=>'public/usuario/logout.php'),
-		 'painel'=>array('basename'=>'painel', 'path'=>'public/usuario/painel.php'),
 	);

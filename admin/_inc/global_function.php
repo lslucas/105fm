@@ -1,13 +1,110 @@
 <?php
+function fileUpload($name, array $var, $filename='')
+{
+    global $_FILES;
+
+    if (isset($_FILES[$name])) {
+        include_once "admin/_inc/class.upload.php";
+
+        $handle = new Upload($_FILES[$name]);
+        $filename = empty($filename) ? linkfy($_FILES[$name]['name'].'_'.time()) : $filename;
+
+        if ($handle->uploaded) {
+            $handle->file_new_name_body  = $filename;
+            $handle->Process($var['path']);
+            if (!$handle->processed) echo 'error : ' . $handle->error;
+
+            return $imagem = $handle->file_dst_name;
+        }
+    }
+
+}
+
+function nomeCategoria($cat)
+{
+    switch ($cat) {
+        case 'agenda': return 'Agenda';
+        break;
+        case 'noticia': return 'Notícia';
+        break;
+        case 'promocao': return 'Promoção';
+        break;
+        case 'show': return 'Show';
+        default: return '[undefined]';
+    }
+}
+
+
+function nomeCategoriaContato($cat)
+{
+    switch ($cat) {
+        case 'promocoes': return 'Promoções';
+        break;
+        case 'programacao': return 'Programação';
+        break;
+        case 'site': return 'Site';
+        break;
+        case 'suporte': return 'Suporte';
+         break;
+        case 'comercial': return 'Comercial';
+         break;
+        case 'arquivo-samba': return 'Arquivo Samba';
+         break;
+        case 'balanco-rap': return 'Balanço Rap';
+         break;
+        case 'black-105': return 'Black 105';
+         break;
+        case 'bom-dia-com-fe': return 'Bom dia com Fé';
+         break;
+        case 'charmin-love': return 'Chamin Love';
+         break;
+        case 'conexao-105-com-sandra-groth': return 'Conexão 105 com Sandra Groth';
+         break;
+        case 'encontro-das-tribos': return 'Encontro das Tribos';
+         break;
+        case 'espaco-rap': return 'Espaço Rap';
+         break;
+        case 'festa-da-105': return 'Festa da 105';
+         break;
+        case 'festa-dj-hum': return 'Festa DJ Hum';
+         break;
+        case 'portal-105fm': return 'Portal 105FM';
+         break;
+        case 'rap-du-bom': return 'Rap du Bom';
+         break;
+        case 'rede-nacional-do-samba': return 'Rede Nacional do Samba';
+         break;
+        case 'selecao-ouvinte-com-fabiano-olivato': return 'Seleção do Ouvinte com Fabiano Olivato';
+         break;
+        case 'selecao-ouvinte-com-mauricio-oliveira': return 'Seleção do Ouvinte com Maurício Oliveira';
+         break;
+        case 'selecao-ouvinte-com-sandra-groth': return 'Seleção do Ouvinte com Sandra Groth';
+         break;
+        case 'toque-direto': return 'Toque Direto';
+         break;
+        case 'ofereca-uma-musica': return '"Ofereça uma música" no Toque Direto - Oferecimento Musical';
+          break;
+        case 'aniversario': return '"Coloque a data de seu aniversário" no Toque Direto - Aniversário do Dia';
+          break;
+        case 'caracteristicas': return '"Coloque suas características" no Toque Direto - Ponto de Encontro';
+          break;
+        case 'recados-imediatos': return 'Recados Imediatos';
+           break;
+        case 'festa-conexao': return 'Festa Conexão';
+        break;
+        default: return '[undefined]';
+
+    }
+}
 
 function httpStatusCode($url) {
-	$handle = curl_init($url);
-	curl_setopt($handle,  CURLOPT_RETURNTRANSFER, TRUE);
-	$response = curl_exec($handle);
-	$httpCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
-	curl_close($handle);
+    $handle = curl_init($url);
+    curl_setopt($handle,  CURLOPT_RETURNTRANSFER, TRUE);
+    $response = curl_exec($handle);
+    $httpCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
+    curl_close($handle);
 
-	return $httpCode;
+    return $httpCode;
 }
 
 function getNormalizedFILES()
@@ -23,105 +120,105 @@ function getNormalizedFILES()
 /* format the result */
 function format_result($input)
 {
-	return str_replace(array(' ', '(', ')'), array('-', '-', ''), $input);
+    return str_replace(array(' ', '(', ')'), array('-', '-', ''), $input);
 }
 
 /* helper:  does regex */
 function get_match($regex,$content)
 {
-	preg_match($regex,$content,$matches);
-	return (isset($matches[1]) ? $matches[1] : false);
+    preg_match($regex,$content,$matches);
+    return (isset($matches[1]) ? $matches[1] : false);
 }
 
 function estadoFromUF($uf) {
-	switch($uf) {
-		case 'AC': $estado = 'Acre';
-	break;
-		case 'AL': $estado = 'Alagoas';
-	break;
-		case 'AM': $estado = 'Amazonas';
-	break;
-		case 'AP': $estado = 'Amapá';
-	break;
-		case 'BA': $estado = 'Bahia';
-	break;
-		case 'CE': $estado = 'Ceará';
-	break;
-		case 'DF': $estado = 'Distrito Federal';
-	break;
-		case 'ES': $estado = 'Espirito Santo';
-	break;
-		case 'GO': $estado = 'Goiais';
-	break;
-		case 'MA': $estado = 'Maranhão';
-	break;
-		case 'MG': $estado = 'Minas Gerais';
-	break;
-		case 'MS': $estado = 'Mato Grosso do Sul';
-	break;
-		case 'MT': $estado = 'Mato Grosso';
-	break;
-		case 'PA': $estado = 'Pará';
-	break;
-		case 'PB': $estado = 'Paraíba';
-	break;
-		case 'PE': $estado = 'Pernambuco';
-	break;
-		case 'PI': $estado = 'Piauí';
-	break;
-		case 'PR': $estado = 'Paraná';
-	break;
-		case 'RJ': $estado = 'Rio de Janeiro';
-	break;
-		case 'RN': $estado = 'Rio Grande do Norte';
-	break;
-		case 'RO': $estado = 'Rondônia';
-	break;
-		case 'RR': $estado = 'Roraima';
-	break;
-		case 'RS': $estado = 'Rio Grande do Sul';
-	break;
-		case 'SC': $estado = 'Santa Catarina';
-	break;
-		case 'SE': $estado = 'Sergipe';
-	break;
-		case 'SP': $estado = 'São Paulo';
-	break;
-		case 'TO': $estado = 'Tocantins';
-	break;
-		default: $estado = 'Indefinido';
-	break;
-	}
+    switch($uf) {
+        case 'AC': $estado = 'Acre';
+    break;
+        case 'AL': $estado = 'Alagoas';
+    break;
+        case 'AM': $estado = 'Amazonas';
+    break;
+        case 'AP': $estado = 'Amapá';
+    break;
+        case 'BA': $estado = 'Bahia';
+    break;
+        case 'CE': $estado = 'Ceará';
+    break;
+        case 'DF': $estado = 'Distrito Federal';
+    break;
+        case 'ES': $estado = 'Espirito Santo';
+    break;
+        case 'GO': $estado = 'Goiais';
+    break;
+        case 'MA': $estado = 'Maranhão';
+    break;
+        case 'MG': $estado = 'Minas Gerais';
+    break;
+        case 'MS': $estado = 'Mato Grosso do Sul';
+    break;
+        case 'MT': $estado = 'Mato Grosso';
+    break;
+        case 'PA': $estado = 'Pará';
+    break;
+        case 'PB': $estado = 'Paraíba';
+    break;
+        case 'PE': $estado = 'Pernambuco';
+    break;
+        case 'PI': $estado = 'Piauí';
+    break;
+        case 'PR': $estado = 'Paraná';
+    break;
+        case 'RJ': $estado = 'Rio de Janeiro';
+    break;
+        case 'RN': $estado = 'Rio Grande do Norte';
+    break;
+        case 'RO': $estado = 'Rondônia';
+    break;
+        case 'RR': $estado = 'Roraima';
+    break;
+        case 'RS': $estado = 'Rio Grande do Sul';
+    break;
+        case 'SC': $estado = 'Santa Catarina';
+    break;
+        case 'SE': $estado = 'Sergipe';
+    break;
+        case 'SP': $estado = 'São Paulo';
+    break;
+        case 'TO': $estado = 'Tocantins';
+    break;
+        default: $estado = 'Indefinido';
+    break;
+    }
 
-	return $estado;
+    return $estado;
 }
 
 function cotacao($moeda='USD')
 {
-	$cotacao = google_finance_convert($moeda, 'BRL', 1);
-	return number_format($cotacao, 4,',','.');
+    $cotacao = google_finance_convert($moeda, 'BRL', 1);
+    return number_format($cotacao, 4,',','.');
 }
 
 function google_finance_convert($from_Currency, $to_Currency, $amount) {
-	$amount = urlencode($amount);
-	$from_Currency = urlencode($from_Currency);
-	$to_Currency = urlencode($to_Currency);
+    $amount = urlencode($amount);
+    $from_Currency = urlencode($from_Currency);
+    $to_Currency = urlencode($to_Currency);
 
-	$url = "http://www.google.com/ig/calculator?q=$amount$from_Currency=?$to_Currency";
-	$ch = curl_init();
-	$timeout = 0;
-	curl_setopt ($ch, CURLOPT_URL, $url);
-	curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt ($ch, CURLOPT_USERAGENT , "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1)");
-	curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-	$rawdata = curl_exec($ch);
-	curl_close($ch);
+    $url = "http://www.google.com/ig/calculator?q=$amount$from_Currency=?$to_Currency";
+    $ch = curl_init();
+    $timeout = 0;
+    curl_setopt ($ch, CURLOPT_URL, $url);
+    curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt ($ch, CURLOPT_USERAGENT , "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1)");
+    curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+    $rawdata = curl_exec($ch);
+    curl_close($ch);
 
-	$data = explode('"', $rawdata);
-	$data = explode(' ', $data[3]);
-	$converted = $data[0];
+    $data = explode('"', $rawdata);
+    $data = explode(' ', $data[3]);
+    $converted = $data[0];
 
-	return $converted;
+    return $converted;
 }
 
 function full_url()
@@ -134,99 +231,99 @@ function full_url()
 }
 
 function bannerLaterial($banners, $i) {
-	if (isset($banners['Lateral '.$i]) && is_array($banners['Lateral '.$i]) && count($banners['Lateral '.$i])>0) {
-		$numBanners = (count($banners['Lateral '.$i])-1);
-		$rand = rand(0, $numBanners);
+    if (isset($banners['Lateral '.$i]) && is_array($banners['Lateral '.$i]) && count($banners['Lateral '.$i])>0) {
+        $numBanners = (count($banners['Lateral '.$i])-1);
+        $rand = rand(0, $numBanners);
 
-		$banner = $banners['Lateral '.$i][$rand];
-		plusBannerViews($banner['id']);
+        $banner = $banners['Lateral '.$i][$rand];
+        plusBannerViews($banner['id']);
 
-		if ($banner['type']<>'swf') {
+        if ($banner['type']<>'swf') {
 
-			if (!empty($banner['link']))
-				echo "<a href='{$banner['link']}' title='{$banner['titulo']}' target='_blank'>";
+            if (!empty($banner['link']))
+                echo "<a href='{$banner['link']}' title='{$banner['titulo']}' target='_blank'>";
 
-			echo "<img src='{$banner['imagem']}' border=0 alt='{$banner['titulo']}'/>";
+            echo "<img src='{$banner['imagem']}' border=0 alt='{$banner['titulo']}'/>";
 
-			if (!empty($banner['link']))
-				echo "</a>";
+            if (!empty($banner['link']))
+                echo "</a>";
 
-		} else {
-			$incJS .= "
-					/*
-					 *Vars Globais
-					 */
-					var flashvarsGlob = {
-					'autostart':          'true'
-					};
+        } else {
+            $incJS .= "
+                    /*
+                     *Vars Globais
+                     */
+                    var flashvarsGlob = {
+                    'autostart':          'true'
+                    };
 
-					var paramsGlob = {
-					'wmode':              'transparent',
-					'allowfullscreen':    'false',
-					'allowscriptaccess':  'always',
-					'bgcolor':            '#ffffff'
-					};
+                    var paramsGlob = {
+                    'wmode':              'transparent',
+                    'allowfullscreen':    'false',
+                    'allowscriptaccess':  'always',
+                    'bgcolor':            '#ffffff'
+                    };
 
-					var attributesGlob = {
-					'id':       'BannerLateral{$i}',
-					'name': 'BannerLateral{$i}'
-					};
+                    var attributesGlob = {
+                    'id':       'BannerLateral{$i}',
+                    'name': 'BannerLateral{$i}'
+                    };
 
-					swfobject.embedSWF('{$banner['imagem']}', 'bannerLateral 1', '115', '290', '9', 'false', flashvarsGlob, paramsGlob, attributesGlob);
-			";
-			echo "\n\t\t<div id='bannerLateral {$i}'></div>";
+                    swfobject.embedSWF('{$banner['imagem']}', 'bannerLateral 1', '115', '290', '9', 'false', flashvarsGlob, paramsGlob, attributesGlob);
+            ";
+            echo "\n\t\t<div id='bannerLateral {$i}'></div>";
 
-		}
+        }
 
-	}
+    }
 }
 
 function bannerHome($banners, $i) {
-	if (isset($banners['Home Final '.$i]) && is_array($banners['Home Final '.$i]) && count($banners['Home Final '.$i])>0) {
-		$numBanners = (count($banners['Home Final '.$i])-1);
-		$rand = rand(0, $numBanners);
+    if (isset($banners['Home Final '.$i]) && is_array($banners['Home Final '.$i]) && count($banners['Home Final '.$i])>0) {
+        $numBanners = (count($banners['Home Final '.$i])-1);
+        $rand = rand(0, $numBanners);
 
-		$banner = $banners['Home Final '.$i][$rand];
-		plusBannerViews($banner['id']);
+        $banner = $banners['Home Final '.$i][$rand];
+        plusBannerViews($banner['id']);
 
-		if ($banner['type']<>'swf') {
+        if ($banner['type']<>'swf') {
 
-			if (!empty($banner['link']))
-				echo "<a href='{$banner['link']}' title='{$banner['titulo']}' target='_blank'>";
+            if (!empty($banner['link']))
+                echo "<a href='{$banner['link']}' title='{$banner['titulo']}' target='_blank'>";
 
-			echo "<img src='{$banner['imagem']}' border=0 alt='{$banner['titulo']}'/>";
+            echo "<img src='{$banner['imagem']}' border=0 alt='{$banner['titulo']}'/>";
 
-			if (!empty($banner['link']))
-				echo "</a>";
+            if (!empty($banner['link']))
+                echo "</a>";
 
-		} else {
-			$incJS .= "
-					/*
-					 *Vars Globais
-					 */
-					var flashvarsGlob = {
-					'autostart':          'true'
-					};
+        } else {
+            $incJS .= "
+                    /*
+                     *Vars Globais
+                     */
+                    var flashvarsGlob = {
+                    'autostart':          'true'
+                    };
 
-					var paramsGlob = {
-					'wmode':              'transparent',
-					'allowfullscreen':    'false',
-					'allowscriptaccess':  'always',
-					'bgcolor':            '#ffffff'
-					};
+                    var paramsGlob = {
+                    'wmode':              'transparent',
+                    'allowfullscreen':    'false',
+                    'allowscriptaccess':  'always',
+                    'bgcolor':            '#ffffff'
+                    };
 
-					var attributesGlob = {
-					'id':       'BannerHomeFinal{$i}',
-					'name': 'BannerHomeFinal{$i}'
-					};
+                    var attributesGlob = {
+                    'id':       'BannerHomeFinal{$i}',
+                    'name': 'BannerHomeFinal{$i}'
+                    };
 
-					swfobject.embedSWF('{$banner['imagem']}', 'bannerHomeFinal {$i}', '115', '290', '9', 'false', flashvarsGlob, paramsGlob, attributesGlob);
-			";
-			echo "\n\t\t<div id='bannerHomeFinal {$i}'></div>";
+                    swfobject.embedSWF('{$banner['imagem']}', 'bannerHomeFinal {$i}', '115', '290', '9', 'false', flashvarsGlob, paramsGlob, attributesGlob);
+            ";
+            echo "\n\t\t<div id='bannerHomeFinal {$i}'></div>";
 
-		}
+        }
 
-	}
+    }
 }
 
 /*
@@ -235,27 +332,27 @@ function bannerHome($banners, $i) {
 /*
 function produtosByUF($order='titulo')
 {
-	global $conn;
-	$lst = array();
-	$sql = "SELECT , cat_titulo FROM ".TP."_categoria WHERE cat_status=1 ORDER BY cat_{$order};";
-	if(!$qry = $conn->prepare($sql))
-		echo divAlert($conn->error, 'error');
+    global $conn;
+    $lst = array();
+    $sql = "SELECT , cat_titulo FROM ".TP."_categoria WHERE cat_status=1 ORDER BY cat_{$order};";
+    if(!$qry = $conn->prepare($sql))
+        echo divAlert($conn->error, 'error');
 
-	else {
+    else {
 
-		// $qry->bind_param('s', $area);
-		$qry->execute();
-		$qry->bind_result($id, $titulo);
+        // $qry->bind_param('s', $area);
+        $qry->execute();
+        $qry->bind_result($id, $titulo);
 
-		while ($qry->fetch()) {
-			if ($min===true)
-				$titulo = linkfySmart($titulo);
-			$lst[$titulo] = $id;
-		}
+        while ($qry->fetch()) {
+            if ($min===true)
+                $titulo = linkfySmart($titulo);
+            $lst[$titulo] = $id;
+        }
 
-		$qry->close();
-	}
-	return $lst;
+        $qry->close();
+    }
+    return $lst;
 
 }
 */
@@ -265,43 +362,43 @@ function produtosByUF($order='titulo')
  */
 function getUsuarios($simple=true)
 {
-	global $conn, $hashids;
+    global $conn, $hashids;
 
-	$whrFiltro = null;
-	$list = array();
-	$sql = "SELECT usr_id, usr_nome, usr_nome_fantasia
-				FROM `".TP."_usuario`
-				LEFT JOIN `".TP."_usuario_produto`
-					ON upr_usr_id=usr_id
-					AND upr_status=1
-				WHERE usr_status=1
-				{$whrFiltro}
-				GROUP BY usr_id
-				ORDER BY usr_nome_fantasia";
-	if (!$res = $conn->prepare($sql))
-		echo __FUNCTION__.$conn->error;
-	else {
+    $whrFiltro = null;
+    $list = array();
+    $sql = "SELECT usr_id, usr_nome, usr_nome_fantasia
+                FROM `".TP."_usuario`
+                LEFT JOIN `".TP."_usuario_produto`
+                    ON upr_usr_id=usr_id
+                    AND upr_status=1
+                WHERE usr_status=1
+                {$whrFiltro}
+                GROUP BY usr_id
+                ORDER BY usr_nome_fantasia";
+    if (!$res = $conn->prepare($sql))
+        echo __FUNCTION__.$conn->error;
+    else {
 
-		$res->bind_result($id,  $nome, $nomeFantasia);
-		$res->execute();
+        $res->bind_result($id,  $nome, $nomeFantasia);
+        $res->execute();
 
-		$i=0;
-		while ($res->fetch()) {
-			$empresa = empty($nomeFantasia) ? $nome : $nomeFantasia;
-			if (!$simple)
-				$i = linkfySmart($empresa);
+        $i=0;
+        while ($res->fetch()) {
+            $empresa = empty($nomeFantasia) ? $nome : $nomeFantasia;
+            if (!$simple)
+                $i = linkfySmart($empresa);
 
-			$list[$i]['id'] = $hashids->encrypt($id);
-			$list[$i]['id_numeric'] = $id;
-			$list[$i]['titulo'] = $empresa;
+            $list[$i]['id'] = $hashids->encrypt($id);
+            $list[$i]['id_numeric'] = $id;
+            $list[$i]['titulo'] = $empresa;
 
-			if ($simple)
-				$i++;
-		}
+            if ($simple)
+                $i++;
+        }
 
-		return $list;
-		$res->close();
-	}
+        return $list;
+        $res->close();
+    }
 }
 
 /*
@@ -309,77 +406,77 @@ function getUsuarios($simple=true)
  */
 function getUsuariosFromClassificados($simple=true)
 {
-	global $conn, $hashids;
+    global $conn, $hashids;
 
-	$whrFiltro = null;
-	$list = array();
-	$sql = "SELECT usr_id, usr_nome, usr_nome_fantasia
-				FROM `".TP."_usuario`
-				INNER JOIN `".TP."_usuario_classificado`
-					ON ucl_usr_id=usr_id
-					AND ucl_status=1
-				WHERE usr_status=1
-				{$whrFiltro}
-				GROUP BY usr_id
-				ORDER BY usr_nome_fantasia";
-	if (!$res = $conn->prepare($sql))
-		echo __FUNCTION__.$conn->error;
-	else {
+    $whrFiltro = null;
+    $list = array();
+    $sql = "SELECT usr_id, usr_nome, usr_nome_fantasia
+                FROM `".TP."_usuario`
+                INNER JOIN `".TP."_usuario_classificado`
+                    ON ucl_usr_id=usr_id
+                    AND ucl_status=1
+                WHERE usr_status=1
+                {$whrFiltro}
+                GROUP BY usr_id
+                ORDER BY usr_nome_fantasia";
+    if (!$res = $conn->prepare($sql))
+        echo __FUNCTION__.$conn->error;
+    else {
 
-		$res->bind_result($id,  $nome, $nomeFantasia);
-		$res->execute();
+        $res->bind_result($id,  $nome, $nomeFantasia);
+        $res->execute();
 
-		$i=0;
-		while ($res->fetch()) {
-			$empresa = empty($nomeFantasia) ? $nome : $nomeFantasia;
-			if (!$simple)
-				$i = linkfySmart($empresa);
+        $i=0;
+        while ($res->fetch()) {
+            $empresa = empty($nomeFantasia) ? $nome : $nomeFantasia;
+            if (!$simple)
+                $i = linkfySmart($empresa);
 
-			$list[$i]['id'] = $hashids->encrypt($id);
-			$list[$i]['id_numeric'] = $id;
-			$list[$i]['titulo'] = $empresa;
+            $list[$i]['id'] = $hashids->encrypt($id);
+            $list[$i]['id_numeric'] = $id;
+            $list[$i]['titulo'] = $empresa;
 
-			if ($simple)
-				$i++;
-		}
+            if ($simple)
+                $i++;
+        }
 
-		return $list;
-		$res->close();
-	}
+        return $list;
+        $res->close();
+    }
 }
 /*
  *retorna coluna do usuario
  */
 function getUsuarioEmpresaById($id)
 {
-	global $conn, $hashids;
+    global $conn, $hashids;
 
-	$id = $hashids->decrypt($id);
-	$id = isset($id[0]) ? $id[0] : null;
+    $id = $hashids->decrypt($id);
+    $id = isset($id[0]) ? $id[0] : null;
 
-	if (empty($id))
-		return 'ID inválido';
+    if (empty($id))
+        return 'ID inválido';
 
-	$sql = "SELECT usr_nome, usr_nome_fantasia
-				FROM `".TP."_usuario`
-				LEFT JOIN `".TP."_usuario_produto`
-					ON upr_usr_id=usr_id
-					AND upr_status=1
-				WHERE usr_status=1
-				AND usr_id=?
-				GROUP BY usr_id";
-	if (!$res = $conn->prepare($sql))
-		echo __FUNCTION__.$conn->error;
-	else {
+    $sql = "SELECT usr_nome, usr_nome_fantasia
+                FROM `".TP."_usuario`
+                LEFT JOIN `".TP."_usuario_produto`
+                    ON upr_usr_id=usr_id
+                    AND upr_status=1
+                WHERE usr_status=1
+                AND usr_id=?
+                GROUP BY usr_id";
+    if (!$res = $conn->prepare($sql))
+        echo __FUNCTION__.$conn->error;
+    else {
 
-		$res->bind_param('i', $id);
-		$res->bind_result($nome, $nomeFantasia);
-		$res->execute();
-		$res->fetch();
-		$res->close();
+        $res->bind_param('i', $id);
+        $res->bind_result($nome, $nomeFantasia);
+        $res->execute();
+        $res->fetch();
+        $res->close();
 
-		return (empty($nomeFantasia) ? $nome : $nomeFantasia);
-	}
+        return (empty($nomeFantasia) ? $nome : $nomeFantasia);
+    }
 }
 
 /*
@@ -387,43 +484,43 @@ function getUsuarioEmpresaById($id)
  */
 function getLocalizacao()
 {
-	global $conn;
+    global $conn;
 
-	$whrFiltro = null;
-	$listUf = array();
-	$sqluf = "SELECT adb_uf, COUNT(upr_id) `num`
-				FROM `".TP."_usuario_produto`
-				LEFT JOIN ".TP."_address_book
-					ON adb_usr_id=upr_usr_id
-				INNER JOIN ".TP."_produto
-					ON pro_id=upr_pro_id
-				WHERE upr_status=1
-				{$whrFiltro}
-				GROUP BY adb_uf
-				ORDER BY upr_timestamp DESC";
-	if (!$resuf = $conn->prepare($sqluf))
-		echo __FUNCTION__.$conn->error;
-	else {
+    $whrFiltro = null;
+    $listUf = array();
+    $sqluf = "SELECT adb_uf, COUNT(upr_id) `num`
+                FROM `".TP."_usuario_produto`
+                LEFT JOIN ".TP."_address_book
+                    ON adb_usr_id=upr_usr_id
+                INNER JOIN ".TP."_produto
+                    ON pro_id=upr_pro_id
+                WHERE upr_status=1
+                {$whrFiltro}
+                GROUP BY adb_uf
+                ORDER BY upr_timestamp DESC";
+    if (!$resuf = $conn->prepare($sqluf))
+        echo __FUNCTION__.$conn->error;
+    else {
 
-		$resuf->bind_result($uf, $num);
-		$resuf->execute();
+        $resuf->bind_result($uf, $num);
+        $resuf->execute();
 
-		$i=0;
-		while ($resuf->fetch()) {
-			$ufmin = strtolower($uf);
-			$estado = estadoFromUF($uf);
+        $i=0;
+        while ($resuf->fetch()) {
+            $ufmin = strtolower($uf);
+            $estado = estadoFromUF($uf);
 
-			$listUf[$i]['id'] = empty($ufmin) ? 'none': $ufmin;
-			$listUf[$i]['titulo'] = $estado.' ('.$num.')';
-			$listUf[$i]['num'] = $num;
+            $listUf[$i]['id'] = empty($ufmin) ? 'none': $ufmin;
+            $listUf[$i]['titulo'] = $estado.' ('.$num.')';
+            $listUf[$i]['num'] = $num;
 
-			$i++;
-		}
+            $i++;
+        }
 
-		return $listUf;
+        return $listUf;
 
-		$resuf->close();
-	}
+        $resuf->close();
+    }
 }
 
 /*
@@ -431,71 +528,71 @@ function getLocalizacao()
  */
 function getLocalizacaoFromClassificados()
 {
-	global $conn;
+    global $conn;
 
-	$whrFiltro = null;
-	$listUf = array();
-	$sqluf = "SELECT adb_uf, COUNT(ucl_id) `num`
-				FROM `".TP."_usuario_classificado`
-				LEFT JOIN ".TP."_address_book
-					ON adb_usr_id=ucl_usr_id
-				WHERE ucl_status=1
-				{$whrFiltro}
-				GROUP BY adb_uf
-				ORDER BY ucl_timestamp DESC";
-	if (!$resuf = $conn->prepare($sqluf))
-		echo __FUNCTION__.$conn->error;
-	else {
+    $whrFiltro = null;
+    $listUf = array();
+    $sqluf = "SELECT adb_uf, COUNT(ucl_id) `num`
+                FROM `".TP."_usuario_classificado`
+                LEFT JOIN ".TP."_address_book
+                    ON adb_usr_id=ucl_usr_id
+                WHERE ucl_status=1
+                {$whrFiltro}
+                GROUP BY adb_uf
+                ORDER BY ucl_timestamp DESC";
+    if (!$resuf = $conn->prepare($sqluf))
+        echo __FUNCTION__.$conn->error;
+    else {
 
-		$resuf->bind_result($uf, $num);
-		$resuf->execute();
+        $resuf->bind_result($uf, $num);
+        $resuf->execute();
 
-		$i=0;
-		while ($resuf->fetch()) {
-			$ufmin = strtolower($uf);
-			$estado = estadoFromUF($uf);
+        $i=0;
+        while ($resuf->fetch()) {
+            $ufmin = strtolower($uf);
+            $estado = estadoFromUF($uf);
 
-			$listUf[$i]['id'] = empty($ufmin) ? 'none': $ufmin;
-			$listUf[$i]['titulo'] = $estado.' ('.$num.')';
-			$listUf[$i]['num'] = $num;
+            $listUf[$i]['id'] = empty($ufmin) ? 'none': $ufmin;
+            $listUf[$i]['titulo'] = $estado.' ('.$num.')';
+            $listUf[$i]['num'] = $num;
 
-			$i++;
-		}
+            $i++;
+        }
 
-		return $listUf;
+        return $listUf;
 
-		$resuf->close();
-	}
+        $resuf->close();
+    }
 }
 /*
  *retorna lista da coluna
  */
 function getCategoriaIdByTitulo($min=false, $order='titulo')
 {
-	global $conn;
-	/*
-	 *query da disciplina
-	 */
-	$lst = array();
-	$sql = "SELECT cat_id, cat_titulo FROM ".TP."_categoria WHERE cat_status=1 /*AND cat_area=?*/ ORDER BY cat_{$order};";
-	if(!$qry = $conn->prepare($sql))
-		echo divAlert($conn->error, 'error');
+    global $conn;
+    /*
+     *query da disciplina
+     */
+    $lst = array();
+    $sql = "SELECT cat_id, cat_titulo FROM ".TP."_categoria WHERE cat_status=1 /*AND cat_area=?*/ ORDER BY cat_{$order};";
+    if(!$qry = $conn->prepare($sql))
+        echo divAlert($conn->error, 'error');
 
-	else {
+    else {
 
-		// $qry->bind_param('s', $area);
-		$qry->execute();
-		$qry->bind_result($id, $titulo);
+        // $qry->bind_param('s', $area);
+        $qry->execute();
+        $qry->bind_result($id, $titulo);
 
-		while ($qry->fetch()) {
-			if ($min===true)
-				$titulo = linkfySmart($titulo);
-			$lst[$titulo] = $id;
-		}
+        while ($qry->fetch()) {
+            if ($min===true)
+                $titulo = linkfySmart($titulo);
+            $lst[$titulo] = $id;
+        }
 
-		$qry->close();
-	}
-	return $lst;
+        $qry->close();
+    }
+    return $lst;
 
 }
 
@@ -504,49 +601,49 @@ function getCategoriaIdByTitulo($min=false, $order='titulo')
  */
 function getTodosProdutos($order='titulo ASC', $startwith=null, $simple=true)
 {
-	global $conn;
+    global $conn;
 
-	$order = !empty($order) ? $order : 'titulo ASC';
-	$whr = null;
-	$sql = "SELECT
-				pro_id,
-				pro_titulo,
-				pro_tipo,
-				pro_valor
-				FROM ".TP."_produto
-				WHERE pro_status=1
-				ORDER BY pro_{$order};";
-	$lst = array();
-	if(!$qry = $conn->prepare($sql))
-		echo divAlert($conn->error, 'error');
+    $order = !empty($order) ? $order : 'titulo ASC';
+    $whr = null;
+    $sql = "SELECT
+                pro_id,
+                pro_titulo,
+                pro_tipo,
+                pro_valor
+                FROM ".TP."_produto
+                WHERE pro_status=1
+                ORDER BY pro_{$order};";
+    $lst = array();
+    if(!$qry = $conn->prepare($sql))
+        echo divAlert($conn->error, 'error');
 
-	else {
+    else {
 
-		$qry->execute();
-		$qry->bind_result($id, $titulo, $tipo, $valor);
+        $qry->execute();
+        $qry->bind_result($id, $titulo, $tipo, $valor);
 
-		if (!empty($startwith))
-			$lst[0] = array('id'=>0, 'titulo'=>$startwith);
+        if (!empty($startwith))
+            $lst[0] = array('id'=>0, 'titulo'=>$startwith);
 
-		$i=1;
-		while ($qry->fetch()) {
-			if (!$simple)
-				$i = linkfySmart($titulo);
+        $i=1;
+        while ($qry->fetch()) {
+            if (!$simple)
+                $i = linkfySmart($titulo);
 
-			$lst[$i]['id'] = $id;
-			$lst[$i]['titulo'] = mb_strtoupper($titulo, 'utf8');
-			$lst[$i]['tipo'] = $tipo;
-			$lst[$i]['valor'] = 'R$ '.Moeda($valor);
-			$lst[$i]['valor_decimal'] = $valor;
+            $lst[$i]['id'] = $id;
+            $lst[$i]['titulo'] = mb_strtoupper($titulo, 'utf8');
+            $lst[$i]['tipo'] = $tipo;
+            $lst[$i]['valor'] = 'R$ '.Moeda($valor);
+            $lst[$i]['valor_decimal'] = $valor;
 
-			if ($simple)
-				$i++;
-		}
+            if ($simple)
+                $i++;
+        }
 
-		$qry->close();
+        $qry->close();
 
-		return $lst;
-	}
+        return $lst;
+    }
 
 }
 
@@ -555,72 +652,72 @@ function getTodosProdutos($order='titulo ASC', $startwith=null, $simple=true)
  */
 function getProdutosByOptions($option, $startwith=null, $order='titulo', $userProducts=false)
 {
-	global $conn, $hashids;
+    global $conn, $hashids;
 
-	$whr = null;
-	if (is_array($option))
-		foreach ($option as $optkey=>$optval) {
-			if (!empty($optval))
-				$whr .= " AND pro_{$optkey}=\"{$optval}\"";
-		}
+    $whr = null;
+    if (is_array($option))
+        foreach ($option as $optkey=>$optval) {
+            if (!empty($optval))
+                $whr .= " AND pro_{$optkey}=\"{$optval}\"";
+        }
 
-	if ($userProducts===true)
-		$sql = "SELECT * FROM (
-					SELECT
-						upr_id,
-						COALESCE(NULLIF(pro_titulo,''), upr_nomeProduto) `produto`,
-						upr_valor
-						FROM ".TP."_usuario_produto
-						INNER JOIN ".TP."_usuario
-							ON upr_usr_id=usr_id
-							AND usr_status=1
-						LEFT JOIN ".TP."_produto
-							ON pro_id=upr_pro_id
-							AND pro_status=1
-						WHERE upr_status=1
-						{$whr}
-					) as `tmp`
-				GROUP BY `produto`
-				ORDER BY `produto`;";
-	else
-		$sql = "SELECT * FROM (
-					SELECT
-						pro_id,
-						COALESCE(NULLIF(pro_titulo,''), upr_nomeProduto) `produto`,
-						pro_valor
-						FROM ".TP."_produto
-						WHERE pro_status=1
-						{$whr}
-						GROUP BY pro_id
-				) as `tmp`
-				ORDER BY `produto`;";
+    if ($userProducts===true)
+        $sql = "SELECT * FROM (
+                    SELECT
+                        upr_id,
+                        COALESCE(NULLIF(pro_titulo,''), upr_nomeProduto) `produto`,
+                        upr_valor
+                        FROM ".TP."_usuario_produto
+                        INNER JOIN ".TP."_usuario
+                            ON upr_usr_id=usr_id
+                            AND usr_status=1
+                        LEFT JOIN ".TP."_produto
+                            ON pro_id=upr_pro_id
+                            AND pro_status=1
+                        WHERE upr_status=1
+                        {$whr}
+                    ) as `tmp`
+                GROUP BY `produto`
+                ORDER BY `produto`;";
+    else
+        $sql = "SELECT * FROM (
+                    SELECT
+                        pro_id,
+                        COALESCE(NULLIF(pro_titulo,''), upr_nomeProduto) `produto`,
+                        pro_valor
+                        FROM ".TP."_produto
+                        WHERE pro_status=1
+                        {$whr}
+                        GROUP BY pro_id
+                ) as `tmp`
+                ORDER BY `produto`;";
 
-	$lst = array();
-	if(!$qry = $conn->prepare($sql))
-		echo divAlert($conn->error, 'error');
+    $lst = array();
+    if(!$qry = $conn->prepare($sql))
+        echo divAlert($conn->error, 'error');
 
-	else {
+    else {
 
-		$qry->execute();
-		$qry->bind_result($id, $titulo, $valor);
+        $qry->execute();
+        $qry->bind_result($id, $titulo, $valor);
 
-		if (!empty($startwith))
-			$lst[0] = array('id'=>0, 'titulo'=>$startwith);
+        if (!empty($startwith))
+            $lst[0] = array('id'=>0, 'titulo'=>$startwith);
 
-		$i=1;
-		while ($qry->fetch()) {
-			// $lst[$i]['id'] = $id;
-			$lst[$i]['id'] = mb_strtolower(urlencode($titulo), 'utf8');
-			$lst[$i]['titulo'] = mb_strtoupper($titulo, 'utf8');
-			$lst[$i]['valor'] = 'R$ '.Moeda($valor);
-			$lst[$i]['valor_decimal'] = $valor;
-			$i++;
-		}
+        $i=1;
+        while ($qry->fetch()) {
+            // $lst[$i]['id'] = $id;
+            $lst[$i]['id'] = mb_strtolower(urlencode($titulo), 'utf8');
+            $lst[$i]['titulo'] = mb_strtoupper($titulo, 'utf8');
+            $lst[$i]['valor'] = 'R$ '.Moeda($valor);
+            $lst[$i]['valor_decimal'] = $valor;
+            $i++;
+        }
 
-		$qry->close();
+        $qry->close();
 
-		return $lst;
-	}
+        return $lst;
+    }
 
 }
 
@@ -629,55 +726,55 @@ function getProdutosByOptions($option, $startwith=null, $order='titulo', $userPr
  */
 function getClassificadosByOptions($option, $startwith=null, $order='titulo')
 {
-	global $conn, $hashids;
+    global $conn, $hashids;
 
-	$whr = null;
-	if (is_array($option))
-		foreach ($option as $optkey=>$optval) {
-			if (!empty($optval))
-				$whr .= " AND ucl_{$optkey}=\"{$optval}\"";
-		}
+    $whr = null;
+    if (is_array($option))
+        foreach ($option as $optkey=>$optval) {
+            if (!empty($optval))
+                $whr .= " AND ucl_{$optkey}=\"{$optval}\"";
+        }
 
-	$sql = "SELECT * FROM (
-				SELECT
-					ucl_id,
-					ucl_titulo `produto`,
-					ucl_valor
-					FROM ".TP."_usuario_classificado
-					INNER JOIN ".TP."_usuario
-						ON ucl_usr_id=usr_id
-						AND usr_status=1
-					WHERE ucl_status=1
-					{$whr}
-				) as `tmp`
-			GROUP BY `produto`
-			ORDER BY `produto`;";
-	$lst = array();
-	if(!$qry = $conn->prepare($sql))
-		echo divAlert($conn->error, 'error');
+    $sql = "SELECT * FROM (
+                SELECT
+                    ucl_id,
+                    ucl_titulo `produto`,
+                    ucl_valor
+                    FROM ".TP."_usuario_classificado
+                    INNER JOIN ".TP."_usuario
+                        ON ucl_usr_id=usr_id
+                        AND usr_status=1
+                    WHERE ucl_status=1
+                    {$whr}
+                ) as `tmp`
+            GROUP BY `produto`
+            ORDER BY `produto`;";
+    $lst = array();
+    if(!$qry = $conn->prepare($sql))
+        echo divAlert($conn->error, 'error');
 
-	else {
+    else {
 
-		$qry->execute();
-		$qry->bind_result($id, $titulo, $valor);
+        $qry->execute();
+        $qry->bind_result($id, $titulo, $valor);
 
-		if (!empty($startwith))
-			$lst[0] = array('id'=>0, 'titulo'=>$startwith);
+        if (!empty($startwith))
+            $lst[0] = array('id'=>0, 'titulo'=>$startwith);
 
-		$i=1;
-		while ($qry->fetch()) {
-			// $lst[$i]['id'] = $id;
-			$lst[$i]['id'] = mb_strtolower(urlencode($titulo), 'utf8');
-			$lst[$i]['titulo'] = mb_strtoupper($titulo, 'utf8');
-			$lst[$i]['valor'] = 'R$ '.Moeda($valor);
-			$lst[$i]['valor_decimal'] = $valor;
-			$i++;
-		}
+        $i=1;
+        while ($qry->fetch()) {
+            // $lst[$i]['id'] = $id;
+            $lst[$i]['id'] = mb_strtolower(urlencode($titulo), 'utf8');
+            $lst[$i]['titulo'] = mb_strtoupper($titulo, 'utf8');
+            $lst[$i]['valor'] = 'R$ '.Moeda($valor);
+            $lst[$i]['valor_decimal'] = $valor;
+            $i++;
+        }
 
-		$qry->close();
+        $qry->close();
 
-		return $lst;
-	}
+        return $lst;
+    }
 
 }
 
@@ -686,46 +783,46 @@ function getClassificadosByOptions($option, $startwith=null, $order='titulo')
  */
 function getCategoriaListArea($area, $rel=null, $startwith=null, $limit=null,  $groupby=null,  $order='titulo')
 {
-	global $conn;
+    global $conn;
 
-	$_groupby = null;
-	if (!empty($groupby))
-		$_groupby = "GROUP BY ".$groupby;
+    $_groupby = null;
+    if (!empty($groupby))
+        $_groupby = "GROUP BY ".$groupby;
 
-	/*
-	 *query da disciplina
-	 */
-	$areaQry = !empty($area) ? ' AND cat_area=? ' : null;
-	$relQry = !empty($rel) ? ' AND cat_idrel=? ' : null;
-	$limitQry = !empty($limit) ? ' LIMIT 0, '.$limit : null;
-	$sql = "SELECT cat_id, cat_titulo FROM ".TP."_categoria WHERE cat_status=1 {$areaQry} {$relQry} {$_groupby} ORDER BY cat_{$order} {$limitQry};";
-	$lst = array();
-	if(!$qry = $conn->prepare($sql))
-		echo divAlert($conn->error, 'error');
+    /*
+     *query da disciplina
+     */
+    $areaQry = !empty($area) ? ' AND cat_area=? ' : null;
+    $relQry = !empty($rel) ? ' AND cat_idrel=? ' : null;
+    $limitQry = !empty($limit) ? ' LIMIT 0, '.$limit : null;
+    $sql = "SELECT cat_id, cat_titulo FROM ".TP."_categoria WHERE cat_status=1 {$areaQry} {$relQry} {$_groupby} ORDER BY cat_{$order} {$limitQry};";
+    $lst = array();
+    if(!$qry = $conn->prepare($sql))
+        echo divAlert($conn->error, 'error');
 
-	else {
+    else {
 
-		if (empty($relQry) && !empty($area))
-			$qry->bind_param('s', $area);
-		elseif (isset($rel) && !empty($area))
-			$qry->bind_param('si', $area, $rel);
-		$qry->execute();
-		$qry->bind_result($id, $titulo);
+        if (empty($relQry) && !empty($area))
+            $qry->bind_param('s', $area);
+        elseif (isset($rel) && !empty($area))
+            $qry->bind_param('si', $area, $rel);
+        $qry->execute();
+        $qry->bind_result($id, $titulo);
 
-		if (!empty($startwith))
-			$lst[0] = array('id'=>0, 'titulo'=>$startwith);
+        if (!empty($startwith))
+            $lst[0] = array('id'=>0, 'titulo'=>$startwith);
 
-		$i=1;
-		while ($qry->fetch()) {
-			$lst[$i]['id'] = $id;
-			$lst[$i]['titulo'] = $titulo;
-			$i++;
-		}
+        $i=1;
+        while ($qry->fetch()) {
+            $lst[$i]['id'] = $id;
+            $lst[$i]['titulo'] = $titulo;
+            $i++;
+        }
 
-		$qry->close();
+        $qry->close();
 
-		return $lst;
-	}
+        return $lst;
+    }
 
 }
 
@@ -734,45 +831,45 @@ function getCategoriaListArea($area, $rel=null, $startwith=null, $limit=null,  $
  */
 function convertCatList2Option($var, $selected=null)
 {
-	$opt = null;
-	foreach ($var as $int=>$val) {
-		if (isset($val['id']) && isset($val['titulo'])) {
-			$opt .= "<option value='{$val['id']}'";
-			if(isset($selected) && $selected==$val['id'])
-				$opt .= ' selected=selected';
-			$opt .=">{$val['titulo']}</option>";
-		}
-	}
+    $opt = null;
+    foreach ($var as $int=>$val) {
+        if (isset($val['id']) && isset($val['titulo'])) {
+            $opt .= "<option value='{$val['id']}'";
+            if(isset($selected) && $selected==$val['id'])
+                $opt .= ' selected=selected';
+            $opt .=">{$val['titulo']}</option>";
+        }
+    }
 
-	return $opt;
+    return $opt;
 }
 
 function aesEncrypt($val)
 {
-	include_once "vendor/phpAES/AES.class.php";
-	$z = "abcdefghijuklmno0123456789012345";
-	$aes = new AES($z);
-	return base64_encode($aes->encrypt($val));
+    include_once "vendor/phpAES/AES.class.php";
+    $z = "abcdefghijuklmno0123456789012345";
+    $aes = new AES($z);
+    return base64_encode($aes->encrypt($val));
 }
 
 function replaceQueryStringVar($url, $key, $replaceVal) {
 
-	if (isset($_GET[$key])) {
-		$url = str_replace("{$key}={$_GET[$key]}", "{$key}={$replaceVal}", $url);
-	} else {
-		if (strpos($url, '?')!==false)
-			$url .= "&{$key}=".$replaceVal;
-		else
-			$url .= "?{$key}=".$replaceVal;
-	}
+    if (isset($_GET[$key])) {
+        $url = str_replace("{$key}={$_GET[$key]}", "{$key}={$replaceVal}", $url);
+    } else {
+        if (strpos($url, '?')!==false)
+            $url .= "&{$key}=".$replaceVal;
+        else
+            $url .= "?{$key}=".$replaceVal;
+    }
 
-	return $url;
+    return $url;
 }
 
 function removeQueryStringVar($url, $key) {
-	$url = preg_replace('/(.*)(?|&)' . $key . '=[^&]+?(&)(.*)/i', '$1$2$4', $url . '&');
-	$url = substr($url, 0, -1);
-	return $url;
+    $url = preg_replace('/(.*)(?|&)' . $key . '=[^&]+?(&)(.*)/i', '$1$2$4', $url . '&');
+    $url = substr($url, 0, -1);
+    return $url;
 }
 
 /**
@@ -807,16 +904,16 @@ function searchInArray($array, $key=null, $value=null)
  * @source http://gravatar.com/site/implement/images/php/
  */
 function get_gravatar( $email, $s = 80, $d = 'mm', $r = 'g', $img = false, $atts = array() ) {
-	$url = 'http://www.gravatar.com/avatar/';
-	$url .= md5( strtolower( trim( $email ) ) );
-	$url .= "?s=$s&d=$d&r=$r";
-	if ( $img ) {
-		$url = '<img src="' . $url . '"';
-		foreach ( $atts as $key => $val )
-			$url .= ' ' . $key . '="' . $val . '"';
-		$url .= ' />';
-	}
-	return $url;
+    $url = 'http://www.gravatar.com/avatar/';
+    $url .= md5( strtolower( trim( $email ) ) );
+    $url .= "?s=$s&d=$d&r=$r";
+    if ( $img ) {
+        $url = '<img src="' . $url . '"';
+        foreach ( $atts as $key => $val )
+            $url .= ' ' . $key . '="' . $val . '"';
+        $url .= ' />';
+    }
+    return $url;
 }
 
 /*
@@ -824,27 +921,27 @@ function get_gravatar( $email, $s = 80, $d = 'mm', $r = 'g', $img = false, $atts
  */
 function getEventName($item)
 {
-	global $conn;
+    global $conn;
 
-	$item = apenasNumeros($item);
-	if (empty($item))
-		exit(__FUNCTION__.' Informe um id!');
+    $item = apenasNumeros($item);
+    if (empty($item))
+        exit(__FUNCTION__.' Informe um id!');
 
 
-	$sql= "SELECT eve_titulo FROM ".TP."_evento WHERE eve_id=?";
-	if (!$qry=$conn->prepare($sql))
-	 return divAlert($conn->error);
+    $sql= "SELECT eve_titulo FROM ".TP."_evento WHERE eve_id=?";
+    if (!$qry=$conn->prepare($sql))
+     return divAlert($conn->error);
 
-	else {
+    else {
 
-		$qry->bind_param('i', $item);
-		$qry->bind_result($titulo);
-		$qry->execute();
-		$qry->fetch();
-		$qry->close();
+        $qry->bind_param('i', $item);
+        $qry->bind_result($titulo);
+        $qry->execute();
+        $qry->fetch();
+        $qry->close();
 
-		return $titulo;
-	}
+        return $titulo;
+    }
 
 }
 
@@ -852,8 +949,8 @@ function getEventName($item)
  * VALIDA URL
  */
 function validaURL($url) {
-	return preg_match('|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i', $url);
-	// return var_dump(filter_var($url, FILTER_VALIDATE_URL));
+    return preg_match('|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i', $url);
+    // return var_dump(filter_var($url, FILTER_VALIDATE_URL));
 }
 /*
  * parse url text to html link
@@ -861,8 +958,8 @@ function validaURL($url) {
 /*
 function parseUrlText2Link($text, $class)
 {
-	$regex = "\^(https?|ftp|telnet):\/\/((?:[a-z0-9@:.-]|%[0-9A-F]{2}){3,})(?::(\d+))?((?:\/(?:[a-z0-9-._~!$&'()*+,;=:@]|%[0-9A-F]{2})*)*)(?:\?((?:[a-z0-9-._~!$&'()*+,;=:\/?@]|%[0-9A-F]{2})*))?(?:#((?:[a-z0-9-._~!$&'()*+,;=:\/?@]|%[0-9A-F]{2})*))?$/i";
-	return preg_replace($regex, '<a href="$1" class="'.$class.'" target="_blank">$1</a>', $text);
+    $regex = "\^(https?|ftp|telnet):\/\/((?:[a-z0-9@:.-]|%[0-9A-F]{2}){3,})(?::(\d+))?((?:\/(?:[a-z0-9-._~!$&'()*+,;=:@]|%[0-9A-F]{2})*)*)(?:\?((?:[a-z0-9-._~!$&'()*+,;=:\/?@]|%[0-9A-F]{2})*))?(?:#((?:[a-z0-9-._~!$&'()*+,;=:\/?@]|%[0-9A-F]{2})*))?$/i";
+    return preg_replace($regex, '<a href="$1" class="'.$class.'" target="_blank">$1</a>', $text);
 }
 */
 /*
@@ -870,13 +967,13 @@ function parseUrlText2Link($text, $class)
  */
 function convertTwitterUserText2Link($text, $hashtags=false, $class=null)
 {
-	if ($hashtags)
-		$text = convertTwitterHashtag2Link($text, $class);
+    if ($hashtags)
+        $text = convertTwitterHashtag2Link($text, $class);
 
-	// $text = parseUrlText2Link($text, $class);
+    // $text = parseUrlText2Link($text, $class);
 
-	$regex = "/(?<=^|(?<=[^a-zA-Z0-9-_\.]))@([A-Za-z]+[A-Za-z0-9]+)/i";
-	return preg_replace($regex, '<a href="https://twitter.com/$1" class="'.$class.'" target="_blank">@$1</a>', $text);
+    $regex = "/(?<=^|(?<=[^a-zA-Z0-9-_\.]))@([A-Za-z]+[A-Za-z0-9]+)/i";
+    return preg_replace($regex, '<a href="https://twitter.com/$1" class="'.$class.'" target="_blank">@$1</a>', $text);
 }
 
 /*
@@ -884,8 +981,8 @@ function convertTwitterUserText2Link($text, $hashtags=false, $class=null)
  */
 function convertTwitterHashtag2Link($text, $class=null)
 {
-	$regex = "/(?<=^|(?<=[^a-zA-Z0-9-_\.]))#([A-Za-z]+[A-Za-z0-9]+)/i";
-	return preg_replace($regex, '<a href="https://twitter.com/search/%23$1" class="'.$class.'" target="_blank">#$1</a>', $text);
+    $regex = "/(?<=^|(?<=[^a-zA-Z0-9-_\.]))#([A-Za-z]+[A-Za-z0-9]+)/i";
+    return preg_replace($regex, '<a href="https://twitter.com/search/%23$1" class="'.$class.'" target="_blank">#$1</a>', $text);
 }
 
 /*
@@ -899,12 +996,12 @@ function getLastTweets($username, $limit=5) {
 
     $tweetout = array();
     foreach($feed->channel->item as $tweet) {
-    	$tweetout[] = $tweet;
+        $tweetout[] = $tweet;
     }
 
     $tweetout = json_encode($tweetout);
     $tweetout = json_decode($tweetout, true);
-	return $tweetout;
+    return $tweetout;
 }
 
 /*
@@ -912,20 +1009,20 @@ function getLastTweets($username, $limit=5) {
  */
 function getYoutubeVideoId($url) {
 
-	if (strpos($url, 'http://www.youtube.com/watch?v=') === 0) {
+    if (strpos($url, 'http://www.youtube.com/watch?v=') === 0) {
 
-		//ini_set("allow_url_fopen", 1); //função habilitada
-		//ini_set("allow_url_include", 1); //função habilitada
+        //ini_set("allow_url_fopen", 1); //função habilitada
+        //ini_set("allow_url_include", 1); //função habilitada
 
-		$urlArray = explode("=", $url);
-		$urlArray = explode("&", $urlArray[1]);
-		$videoid = trim($urlArray[0]);
+        $urlArray = explode("=", $url);
+        $urlArray = explode("&", $urlArray[1]);
+        $videoid = trim($urlArray[0]);
 
-		//$videourl="http://www.youtube.com/api2_rest?method=youtube.videos.get_video_token&video_id=$videoid";
-		//$t = trim(strip_tags(@file_get_contents($videourl)));
-		return $videoid;
-	} else
-		exit("Wrong URL / Parameters");
+        //$videourl="http://www.youtube.com/api2_rest?method=youtube.videos.get_video_token&video_id=$videoid";
+        //$t = trim(strip_tags(@file_get_contents($videourl)));
+        return $videoid;
+    } else
+        exit("Wrong URL / Parameters");
 
 }
 
@@ -934,32 +1031,32 @@ function getYoutubeVideoId($url) {
  */
 function saveTableCode($var, $item, $salt=null)
 {
-	global $conn;
+    global $conn;
 
-	if (empty($item))
-		exit(__FUNCTION__.' Informe um id!');
+    if (empty($item))
+        exit(__FUNCTION__.' Informe um id!');
 
-	if (!is_array($var))
-		exit(__FUNCTION__.' Argumento válido!');
+    if (!is_array($var))
+        exit(__FUNCTION__.' Argumento válido!');
 
-	/**
-	 *SAVE CODE
-	 */
-	$sql= "UPDATE ".TP."_${var['path']} SET ${var['pre']}_code=? WHERE ${var['pre']}_id=?";
-	if (!$qry=$conn->prepare($sql))
-	 return divAlert($conn->error);
+    /**
+     *SAVE CODE
+     */
+    $sql= "UPDATE ".TP."_${var['path']} SET ${var['pre']}_code=? WHERE ${var['pre']}_id=?";
+    if (!$qry=$conn->prepare($sql))
+     return divAlert($conn->error);
 
-	else {
+    else {
 
-		$code = newCode($salt);
+        $code = newCode($salt);
 
-		$qry->bind_param('si', $code, $item);
-		$qry->execute();
-		$qry->close();
+        $qry->bind_param('si', $code, $item);
+        $qry->execute();
+        $qry->close();
 
-		if (saveCode($code))
-			return $code;
-	}
+        if (saveCode($code))
+            return $code;
+    }
 
 }
 /*
@@ -967,22 +1064,22 @@ function saveTableCode($var, $item, $salt=null)
  */
 function saveCode($code)
 {
-	global $conn;
+    global $conn;
 
-	if (empty($code))
-		exit(__FUNCTION__.' Informe um código!');
+    if (empty($code))
+        exit(__FUNCTION__.' Informe um código!');
 
-	$sql = "INSERT INTO `".TP."_generated_codes` (`code`) VALUES (?)";
-	if (!$res = $conn->prepare($sql))
-		return $conn->error;
+    $sql = "INSERT INTO `".TP."_generated_codes` (`code`) VALUES (?)";
+    if (!$res = $conn->prepare($sql))
+        return $conn->error;
 
-	else {
-		$res->bind_param('s', $code);
-		$res->execute();
-		$res->close();
+    else {
+        $res->bind_param('s', $code);
+        $res->execute();
+        $res->close();
 
-		return true;
-	}
+        return true;
+    }
 
 }
 
@@ -991,29 +1088,29 @@ function saveCode($code)
  */
 function newCode($var=null, $maxchar=6)
 {
-	global $conn;
+    global $conn;
 
-	//gera o código e verifica se ele já existe antes de continuar
-	do {
+    //gera o código e verifica se ele já existe antes de continuar
+    do {
 
-		$_code = generateHash($var);
-		$_code = justAlphanumeric($_code);
-		$code = substr($_code, 0, $maxchar);
+        $_code = generateHash($var);
+        $_code = justAlphanumeric($_code);
+        $code = substr($_code, 0, $maxchar);
 
-		if (strlen($code)!=$maxchar)
-			$num=1;
-		else {
+        if (strlen($code)!=$maxchar)
+            $num=1;
+        else {
 
-			$sql = "SELECT NULL FROM `".TP."_generated_codes` WHERE `code`=\"$code\"";
-			$res = $conn->query($sql);
-			$num = $res->num_rows;
+            $sql = "SELECT NULL FROM `".TP."_generated_codes` WHERE `code`=\"$code\"";
+            $res = $conn->query($sql);
+            $num = $res->num_rows;
 
-		}
+        }
 
-	} while ($num>0);
+    } while ($num>0);
 
 
-	return $code;
+    return $code;
 }
 
 
@@ -1023,17 +1120,17 @@ function newCode($var=null, $maxchar=6)
 function generateHash($key, $crypt=false)
 {
 
-	$salt = pseudoRandomKey(256);
-	$hash = null;
-	for ($i=0; $i<100; $i++) {
-		 $hash = hash('sha512', $hash.$salt.$key);
-	}
+    $salt = pseudoRandomKey(256);
+    $hash = null;
+    for ($i=0; $i<100; $i++) {
+         $hash = hash('sha512', $hash.$salt.$key);
+    }
 
-	//return $hash;
-	if ($crypt)
-		return encrypt($hash, $key);
-	else
-		return $hash;
+    //return $hash;
+    if ($crypt)
+        return encrypt($hash, $key);
+    else
+        return $hash;
 }
 
 /*
@@ -1042,21 +1139,21 @@ function generateHash($key, $crypt=false)
 function pseudoRandomKey($size, $strong=true)
 {
 
-	if (function_exists('openssl_random_pseudo_bytes')) {
-		$random = openssl_random_pseudo_bytes($size, $strong);
-		openssl_random_pseudo_bytes($size, $strong);
-	}
+    if (function_exists('openssl_random_pseudo_bytes')) {
+        $random = openssl_random_pseudo_bytes($size, $strong);
+        openssl_random_pseudo_bytes($size, $strong);
+    }
 
-	$sha='';
-	$rnd='';
+    $sha='';
+    $rnd='';
 
-	for ($i=0;$i<$size;$i++) {
-		$sha = hash('sha256', $random . mt_rand());
-		$char= mt_rand(0, 62);
-		$rnd.= chr(hexdec($sha[$char] . $sha[$char+1]));
-	}
+    for ($i=0;$i<$size;$i++) {
+        $sha = hash('sha256', $random . mt_rand());
+        $char= mt_rand(0, 62);
+        $rnd.= chr(hexdec($sha[$char] . $sha[$char+1]));
+    }
 
-	return $rnd;
+    return $rnd;
 
 }
 
@@ -1081,24 +1178,24 @@ function justNumbers($var)
  */
 function getUrlNoticia($not_id)
 {
-	global $conn;
-	/*
-	 *query da disciplina
-	 */
-	$sql = "SELECT not_titulo ".TABLE_PREFIX."_noticia SET auto_views=auto_views+1 WHERE not_id=?";
-	if(!$qry = $conn->prepare($sql))
-		return false;
+    global $conn;
+    /*
+     *query da disciplina
+     */
+    $sql = "SELECT not_titulo ".TABLE_PREFIX."_noticia SET auto_views=auto_views+1 WHERE not_id=?";
+    if(!$qry = $conn->prepare($sql))
+        return false;
 
-	else {
+    else {
 
-		$qry->bind_param('i', $not_id);
-		$qry->bind_result($titulo);
-		$qry->execute();
-		$qry->fetch();
-		$qry->close();
+        $qry->bind_param('i', $not_id);
+        $qry->bind_result($titulo);
+        $qry->execute();
+        $qry->fetch();
+        $qry->close();
 
-		return ABSPATH."noticias/{$id}/".linkfy($titulo);
-	}
+        return ABSPATH."noticias/{$id}/".linkfy($titulo);
+    }
 
 }
 
@@ -1112,29 +1209,29 @@ function encrypt($_input, $_key='your salt', $_type='mcrypt')
    */
   if (function_exists('mcrypt') && $_type=='mcrypt') {
 
-	  $td = mcrypt_module_open(MCRYPT_TWOFISH256, '', 'ofb', '');
-	  $iv = mcrypt_create_iv(mcrypt_enc_get_iv_size($td), MCRYPT_BLOWFISH);
+      $td = mcrypt_module_open(MCRYPT_TWOFISH256, '', 'ofb', '');
+      $iv = mcrypt_create_iv(mcrypt_enc_get_iv_size($td), MCRYPT_BLOWFISH);
 
-	  mcrypt_generic_init($td, $_key, $iv);
-	  $encryptedData = mcrypt_generic($td, $_input);
-	  mcrypt_generic_deinit($td);
-	  mcrypt_module_close($td);
+      mcrypt_generic_init($td, $_key, $iv);
+      $encryptedData = mcrypt_generic($td, $_input);
+      mcrypt_generic_deinit($td);
+      mcrypt_module_close($td);
 
   //else use md5
   } else {
 
-	if(version_compare(PHP_VERSION, '5.0.0', '>='))
-	  $bool = true;
-	else $bool = false;
+    if(version_compare(PHP_VERSION, '5.0.0', '>='))
+      $bool = true;
+    else $bool = false;
 
-	  $encryptedKey  = md5($_key, $bool) . md5($_input, $bool);
-	  $encryptedData = md5($encryptedKey, $bool);
+      $encryptedKey  = md5($_key, $bool) . md5($_input, $bool);
+      $encryptedData = md5($encryptedKey, $bool);
 
   }
 
-	// return generated password
-	// enjoy
-	return utf8_encode($encryptedData);
+    // return generated password
+    // enjoy
+    return utf8_encode($encryptedData);
 
 }
 
@@ -1143,25 +1240,25 @@ function encrypt($_input, $_key='your salt', $_type='mcrypt')
  */
 function plusBannerViews($ban_id)
 {
-	global $conn;
+    global $conn;
 
-	$ip = $_SERVER['REMOTE_ADDR'];
-	if (!isset($_SESSION[TP]['banner_views'][$ip][$ban_id]) || $_SESSION[TP]['banner_views'][$ip][$ban_id]!=date('Y-m-d')) {
+    $ip = $_SERVER['REMOTE_ADDR'];
+    if (!isset($_SESSION[TP]['banner_views'][$ip][$ban_id]) || $_SESSION[TP]['banner_views'][$ip][$ban_id]!=date('Y-m-d')) {
 
-		$sql = "UPDATE ".TABLE_PREFIX."_banner SET ban_views=ban_views+1 WHERE ban_id=?";
-		if(!$qry = $conn->prepare($sql))
-			return false;
+        $sql = "UPDATE ".TABLE_PREFIX."_banner SET ban_views=ban_views+1 WHERE ban_id=?";
+        if(!$qry = $conn->prepare($sql))
+            return false;
 
-		else {
+        else {
 
-			$qry->bind_param('i', $ban_id);
-			$qry->execute();
-			$qry->close();
+            $qry->bind_param('i', $ban_id);
+            $qry->execute();
+            $qry->close();
 
-			$_SESSION[TP]['banner_views'][$ip][$ban_id] = date('Y-m-d');
-			return true;
-		}
-	}
+            $_SESSION[TP]['banner_views'][$ip][$ban_id] = date('Y-m-d');
+            return true;
+        }
+    }
 
 }
 
@@ -1170,25 +1267,25 @@ function plusBannerViews($ban_id)
  */
 function plusBannerClicks($ban_id)
 {
-	global $conn;
+    global $conn;
 
-	$ip = $_SERVER['REMOTE_ADDR'];
-	if (!isset($_SESSION[TP]['banner_clicks'][$ip][$ban_id]) || $_SESSION[TP]['banner_clicks'][$ip][$ban_id]!=date('Y-m-d')) {
+    $ip = $_SERVER['REMOTE_ADDR'];
+    if (!isset($_SESSION[TP]['banner_clicks'][$ip][$ban_id]) || $_SESSION[TP]['banner_clicks'][$ip][$ban_id]!=date('Y-m-d')) {
 
-		$sql = "UPDATE ".TABLE_PREFIX."_banner SET ban_clicks=ban_clicks+1 WHERE ban_id=?";
-		if(!$qry = $conn->prepare($sql))
-			return false;
+        $sql = "UPDATE ".TABLE_PREFIX."_banner SET ban_clicks=ban_clicks+1 WHERE ban_id=?";
+        if(!$qry = $conn->prepare($sql))
+            return false;
 
-		else {
+        else {
 
-			$qry->bind_param('i', $ban_id);
-			$qry->execute();
-			$qry->close();
+            $qry->bind_param('i', $ban_id);
+            $qry->execute();
+            $qry->close();
 
-			$_SESSION[TP]['banner_clicks'][$ip][$ban_id] = date('Y-m-d');
-			return true;
-		}
-	}
+            $_SESSION[TP]['banner_clicks'][$ip][$ban_id] = date('Y-m-d');
+            return true;
+        }
+    }
 
 }
 
@@ -1197,28 +1294,28 @@ function plusBannerClicks($ban_id)
  */
 function getProdutoCol($col, $ref, $rel)
 {
-	global $conn;
-	/*
-	 *query da disciplina
-	 */
-	$sql = "SELECT pro_{$col} FROM ".TABLE_PREFIX."_produto WHERE pro_{$ref}=?";
-	if(!$qry = $conn->prepare($sql))
-		echo divAlert($conn->error, 'error');
+    global $conn;
+    /*
+     *query da disciplina
+     */
+    $sql = "SELECT pro_{$col} FROM ".TABLE_PREFIX."_produto WHERE pro_{$ref}=?";
+    if(!$qry = $conn->prepare($sql))
+        echo divAlert($conn->error, 'error');
 
-	else {
+    else {
 
-		if (!apenasNumeros($rel))
-			$qry->bind_param('s', $rel);
-		else
-			$qry->bind_param('i', $rel);
+        if (!apenasNumeros($rel))
+            $qry->bind_param('s', $rel);
+        else
+            $qry->bind_param('i', $rel);
 
-		$qry->execute();
-		$qry->bind_result($$col);
-		$qry->fetch();
-		$qry->close();
+        $qry->execute();
+        $qry->bind_result($$col);
+        $qry->fetch();
+        $qry->close();
 
-		return $$col;
-	}
+        return $$col;
+    }
 
 }
 
@@ -1227,24 +1324,24 @@ function getProdutoCol($col, $ref, $rel)
  */
 function getCategoriaCol($col, $ref, $rel)
 {
-	global $conn;
-	/*
-	 *query da disciplina
-	 */
-	$sql = "SELECT cat_{$col} FROM ".TABLE_PREFIX."_categoria WHERE cat_{$ref}=?";
-	if(!$qry = $conn->prepare($sql))
-		echo divAlert($conn->error, 'error');
+    global $conn;
+    /*
+     *query da disciplina
+     */
+    $sql = "SELECT cat_{$col} FROM ".TABLE_PREFIX."_categoria WHERE cat_{$ref}=?";
+    if(!$qry = $conn->prepare($sql))
+        echo divAlert($conn->error, 'error');
 
-	else {
+    else {
 
-		$qry->bind_param('s', $rel);
-		$qry->execute();
-		$qry->bind_result($$col);
-		$qry->fetch();
-		$qry->close();
+        $qry->bind_param('s', $rel);
+        $qry->execute();
+        $qry->bind_result($$col);
+        $qry->fetch();
+        $qry->close();
 
-		return $$col;
-	}
+        return $$col;
+    }
 
 }
 
@@ -1254,74 +1351,74 @@ function getCategoriaCol($col, $ref, $rel)
 function mesExtenso($mes, $type='min')
 {
 
-	if (!empty($mes)) {
+    if (!empty($mes)) {
 
-		switch ($mes) {
-			case 1:
-			case 01:
-				$mesMin = 'Jan';
-				$mesFull = 'Janeiro';
-		break;
-			case 2:
-			case 02:
-				$mesMin = 'Fev';
-				$mesFull = 'Fevereiro';
-		break;
-			case 3:
-			case 03:
-				$mesMin = 'Mar';
-				$mesFull = 'Março';
-		break;
-			case 4:
-			case 04:
-				$mesMin = 'Abr';
-				$mesFull = 'Abril';
-		break;
-			case 5:
-			case 05:
-				$mesMin = 'Mai';
-				$mesFull = 'Maio';
-		break;
-			case 6:
-			case 06:
-				$mesMin = 'Jun';
-				$mesFull = 'Junho';
-		break;
-			case 7:
-			case 07:
-				$mesMin = 'Jul';
-				$mesFull = 'Julho';
-		break;
-			case 8:
-			case 08:
-				$mesMin = 'Ago';
-				$mesFull = 'Agosto';
-		break;
-			case 9:
-			case 09:
-				$mesMin = 'Set';
-				$mesFull = 'Setembro';
-		break;
-			case 10:
-				$mesMin = 'Out';
-				$mesFull = 'Outubro';
-		break;
-			case 11:
-				$mesMin = 'Nov';
-				$mesFull = 'Novembro';
-		break;
-			case 12:
-				$mesMin = 'Dez';
-				$mesFull = 'Dezembro';
-		break;
-		}
+        switch ($mes) {
+            case 1:
+            case 01:
+                $mesMin = 'Jan';
+                $mesFull = 'Janeiro';
+        break;
+            case 2:
+            case 02:
+                $mesMin = 'Fev';
+                $mesFull = 'Fevereiro';
+        break;
+            case 3:
+            case 03:
+                $mesMin = 'Mar';
+                $mesFull = 'Março';
+        break;
+            case 4:
+            case 04:
+                $mesMin = 'Abr';
+                $mesFull = 'Abril';
+        break;
+            case 5:
+            case 05:
+                $mesMin = 'Mai';
+                $mesFull = 'Maio';
+        break;
+            case 6:
+            case 06:
+                $mesMin = 'Jun';
+                $mesFull = 'Junho';
+        break;
+            case 7:
+            case 07:
+                $mesMin = 'Jul';
+                $mesFull = 'Julho';
+        break;
+            case 8:
+            case 08:
+                $mesMin = 'Ago';
+                $mesFull = 'Agosto';
+        break;
+            case 9:
+            case 09:
+                $mesMin = 'Set';
+                $mesFull = 'Setembro';
+        break;
+            case 10:
+                $mesMin = 'Out';
+                $mesFull = 'Outubro';
+        break;
+            case 11:
+                $mesMin = 'Nov';
+                $mesFull = 'Novembro';
+        break;
+            case 12:
+                $mesMin = 'Dez';
+                $mesFull = 'Dezembro';
+        break;
+        }
 
-	if ($type=='min')
-		return $mesMin;
-	else
-		return $mesFull;
+    if ($type=='min')
+        return $mesMin;
+    else
+        return $mesFull;
 
-	}
+    }
 
 }
 
@@ -1330,45 +1427,45 @@ function mesExtenso($mes, $type='min')
  */
 function getListAgencias($age=false)
 {
-	global $conn;
+    global $conn;
 
-	/*
-	 *query da disciplina
-	 */
-	$sqla = "SELECT
-				adm_id,
-				adm_nome,
-				adm_status,
-				(SELECT age_id FROM ".TP."_agencia WHERE age_adm_id=adm_id) age_id,
-				adm_email
+    /*
+     *query da disciplina
+     */
+    $sqla = "SELECT
+                adm_id,
+                adm_nome,
+                adm_status,
+                (SELECT age_id FROM ".TP."_agencia WHERE age_adm_id=adm_id) age_id,
+                adm_email
 
-			FROM ".TABLE_PREFIX."_administrador
-			WHERE adm_tipo='Agência'
-			ORDER BY adm_nome";
+            FROM ".TABLE_PREFIX."_administrador
+            WHERE adm_tipo='Agência'
+            ORDER BY adm_nome";
 
-	$agencia = $agenciaage = array();
-	if(!$qrya = $conn->prepare($sqla))
-		return false;
+    $agencia = $agenciaage = array();
+    if(!$qrya = $conn->prepare($sqla))
+        return false;
 
-	else {
+    else {
 
-		$qrya->execute();
-		$qrya->bind_result($id, $nome, $status, $age_id, $email);
+        $qrya->execute();
+        $qrya->bind_result($id, $nome, $status, $age_id, $email);
 
-		while ($qrya->fetch()) {
-			$agencia[$id] = array('id'=>$id, 'age_id'=>$age_id, 'nome'=>$nome, 'email'=>$email, 'status'=>$status);
-			$agenciaage[$age_id] = array('id'=>$id, 'age_id'=>$age_id, 'nome'=>$nome, 'email'=>$email, 'status'=>$status);
-		}
+        while ($qrya->fetch()) {
+            $agencia[$id] = array('id'=>$id, 'age_id'=>$age_id, 'nome'=>$nome, 'email'=>$email, 'status'=>$status);
+            $agenciaage[$age_id] = array('id'=>$id, 'age_id'=>$age_id, 'nome'=>$nome, 'email'=>$email, 'status'=>$status);
+        }
 
-		if (!$age)
-			return $agencia;
-		else
-			return $agenciaage;
+        if (!$age)
+            return $agencia;
+        else
+            return $agenciaage;
 
-		$qrya->close();
+        $qrya->close();
 
 
-	}
+    }
 
 }
 
@@ -1377,108 +1474,108 @@ function getListAgencias($age=false)
  */
 function getListMarca()
 {
-	global $conn;
-	/*
-	 *query da disciplina
-	 */
-	$sqld = "SELECT
-				cat_id,
-				cat_titulo
+    global $conn;
+    /*
+     *query da disciplina
+     */
+    $sqld = "SELECT
+                cat_id,
+                cat_titulo
 
-			FROM ".TABLE_PREFIX."_categoria
-			WHERE cat_status=1 AND cat_area='Marca'
-			ORDER BY cat_titulo";
+            FROM ".TABLE_PREFIX."_categoria
+            WHERE cat_status=1 AND cat_area='Marca'
+            ORDER BY cat_titulo";
 
-	$disciplina = array();
-	if(!$qryd = $conn->prepare($sqld))
-		echo divAlert($conn->error, 'error');
+    $disciplina = array();
+    if(!$qryd = $conn->prepare($sqld))
+        echo divAlert($conn->error, 'error');
 
-	else {
+    else {
 
-		$qryd->execute();
-		$qryd->bind_result($id, $titulo);
+        $qryd->execute();
+        $qryd->bind_result($id, $titulo);
 
-		while ($qryd->fetch())
-			$disciplina[$id] = $titulo;
+        while ($qryd->fetch())
+            $disciplina[$id] = $titulo;
 
-		$qryd->close();
+        $qryd->close();
 
 
-	}
+    }
 
-	return $disciplina;
+    return $disciplina;
 }
 /*
  *retorna array com todas as disciplinas
  */
 function getListModelo()
 {
-	global $conn;
-	/*
-	 *query da disciplina
-	 */
-	$sqld = "SELECT
-				cat_id,
-				cat_titulo
+    global $conn;
+    /*
+     *query da disciplina
+     */
+    $sqld = "SELECT
+                cat_id,
+                cat_titulo
 
-			FROM ".TABLE_PREFIX."_categoria
-			WHERE cat_status=1 AND cat_area='Modelo'
-			ORDER BY cat_titulo";
+            FROM ".TABLE_PREFIX."_categoria
+            WHERE cat_status=1 AND cat_area='Modelo'
+            ORDER BY cat_titulo";
 
-	$disciplina = array();
-	if(!$qryd = $conn->prepare($sqld))
-		echo divAlert($conn->error, 'error');
+    $disciplina = array();
+    if(!$qryd = $conn->prepare($sqld))
+        echo divAlert($conn->error, 'error');
 
-	else {
+    else {
 
-		$qryd->execute();
-		$qryd->bind_result($id, $titulo);
+        $qryd->execute();
+        $qryd->bind_result($id, $titulo);
 
-		while ($qryd->fetch())
-			$disciplina[$id] = $titulo;
+        while ($qryd->fetch())
+            $disciplina[$id] = $titulo;
 
-		$qryd->close();
+        $qryd->close();
 
 
-	}
+    }
 
-	return $disciplina;
+    return $disciplina;
 }
 /*
  *retorna array com todas as disciplinas
  */
 function getListOpcional()
 {
-	global $conn;
-	/*
-	 *query da disciplina
-	 */
-	$sqld = "SELECT
-				cat_id,
-				cat_titulo
+    global $conn;
+    /*
+     *query da disciplina
+     */
+    $sqld = "SELECT
+                cat_id,
+                cat_titulo
 
-			FROM ".TABLE_PREFIX."_categoria
-			WHERE cat_status=1 AND cat_area='Disciplinas'
-			ORDER BY cat_titulo";
+            FROM ".TABLE_PREFIX."_categoria
+            WHERE cat_status=1 AND cat_area='Disciplinas'
+            ORDER BY cat_titulo";
 
-	$opc = array();
-	if(!$qryd = $conn->prepare($sqld))
-		echo divAlert($conn->error, 'error');
+    $opc = array();
+    if(!$qryd = $conn->prepare($sqld))
+        echo divAlert($conn->error, 'error');
 
-	else {
+    else {
 
-		$qryd->execute();
-		$qryd->bind_result($id, $titulo);
+        $qryd->execute();
+        $qryd->bind_result($id, $titulo);
 
-		while ($qryd->fetch())
-			$opc[$id] = $titulo;
+        while ($qryd->fetch())
+            $opc[$id] = $titulo;
 
-		$qryd->close();
+        $qryd->close();
 
 
-	}
+    }
 
-	return $opc;
+    return $opc;
 }
 
 /*
@@ -1487,12 +1584,12 @@ function getListOpcional()
 function divAlert($msg, $type='error')
 {
 
-	$alert = "<div class='alert alert-{$type}'>";
-	$alert.= "<a class='close' data-dismiss='alert'>×</a>";
-	$alert.= $msg;
-	$alert.= "</div>";
+    $alert = "<div class='alert alert-{$type}'>";
+    $alert.= "<a class='close' data-dismiss='alert'>×</a>";
+    $alert.= $msg;
+    $alert.= "</div>";
 
-	return $alert;
+    return $alert;
 }
 
 
@@ -1544,16 +1641,16 @@ function validaCNPJ($cnpj)
  *valida CPF
  */
 function validaCPF($cpf)
-{	// Verifiva se o número digitado contém todos os digitos
+{   // Verifiva se o número digitado contém todos os digitos
     $cpf = str_pad(preg_replace('/[^0-9]/', '', $cpf), 11, '0', STR_PAD_LEFT);
 
-	// Verifica se nenhuma das sequências abaixo foi digitada, caso seja, retorna falso
+    // Verifica se nenhuma das sequências abaixo foi digitada, caso seja, retorna falso
     if (strlen($cpf) != 11 || $cpf == '00000000000' || $cpf == '11111111111' || $cpf == '22222222222' || $cpf == '33333333333' || $cpf == '44444444444' || $cpf == '55555555555' || $cpf == '66666666666' || $cpf == '77777777777' || $cpf == '88888888888' || $cpf == '99999999999')
-	{
-	return false;
+    {
+    return false;
     }
-	else
-	{   // Calcula os números para verificar se o CPF é verdadeiro
+    else
+    {   // Calcula os números para verificar se o CPF é verdadeiro
         for ($t = 9; $t < 11; $t++) {
             for ($d = 0, $c = 0; $c < $t; $c++) {
                 $d += $cpf{$c} * (($t + 1) - $c);
@@ -1576,7 +1673,7 @@ function validaCPF($cpf)
  */
 function validaData ($ano, $mes, $dia)
 {
-	return checkdate($mes, $dia, $ano);
+    return checkdate($mes, $dia, $ano);
 }
 /*
  *valida data nascimento
@@ -1584,10 +1681,10 @@ function validaData ($ano, $mes, $dia)
 function validaNascimento($ano, $mes, $dia)
 {
 
-	$dataCheck = $ano.'-'.$mes.'-'.$dia;
-	if (checkdate($mes, $dia, $ano) && $dataCheck<=date('Y-m-d'))
-		return true;
-	else return false;
+    $dataCheck = $ano.'-'.$mes.'-'.$dia;
+    if (checkdate($mes, $dia, $ano) && $dataCheck<=date('Y-m-d'))
+        return true;
+    else return false;
 }
 
 /*
@@ -1595,59 +1692,57 @@ function validaNascimento($ano, $mes, $dia)
  */
 function showModal($args)
 {
-	global $res;
+    global $res;
 
-	$modalHeader = $closeButton = null;
-	if (!is_array($args))
-		exit('Parametro inválido');
+    $modalHeader = $closeButton = null;
+    if (!is_array($args))
+        exit('Parametro inválido');
 
-	if (is_array($args) && count($args)==1 && !isset($args['content']))
-		$args['content'] = $args[0];
+    if (is_array($args) && count($args)==1 && !isset($args['content']))
+        $args['content'] = $args[0];
 
-	if (!isset($args['button']['param']))
-		$args['button']['param'] = null;
-	if (!isset($args['button']['link']))
-		$args['button']['link'] = null;
-	if (!isset($args['button']['value']))
-		$args['button']['value'] = null;
-	if (!isset($args['button']['class']))
-		$args['button']['class'] = null;
+    if (!isset($args['button']['param']))
+        $args['button']['param'] = null;
+    if (!isset($args['button']['link']))
+        $args['button']['link'] = null;
+    if (!isset($args['button']['value']))
+        $args['button']['value'] = null;
+    if (!isset($args['button']['class']))
+        $args['button']['class'] = null;
 
-	$closeButton = 'Fechar';
-	//$closeButton = !empty($args['button']['value']) ? 'Cancelar' : 'Fechar';
-
-
-	$modalHeaderOutside = $modalHeaderInside = null;
-	if (isset($args['title']))
-		$modalHeaderOutside = "<div class='modal-header'> <a class='close' data-dismiss='modal'>×</a> <h3>{$args['title']}</h3> </div>";
-	else
-		$modalHeaderInside = "<a class='close' data-dismiss='modal'>×</a>";
+    $closeButton = 'Fechar';
+    //$closeButton = !empty($args['button']['value']) ? 'Cancelar' : 'Fechar';
 
 
-	$js = null;
-	$js .= "\n\t\tvar template = \"<div class='fixedVersion'><div class='modal fade hide' id='msg-modal'>\";
-		template += \"{$modalHeaderOutside}\";
-		template += \"<div class='modal-body'>\";
-		template += \"{$modalHeaderInside}\";
-		template += \"<p>{$args['content']}</p>\";
-		template += \"</div>\";
-		template += \"<div class='modal-footer'>\";";
+    if (isset($args['title']))
+        $modalHeader = "<div class='modal-header'> <a class='close' data-dismiss='modal'>×</a> <h3>{$args['title']}</h3> </div>";
+    else
+        $modalHeader = "<div class='modal-header'> <a class='close' data-dismiss='modal'>×</a> </div>";
 
-	if (!isset($args['button']['close']) || $args['button']['close']==true)
-		$js .= "\n\t\ttemplate += \"	<a href='javascript:void(0);' class='btn' data-dismiss='modal'>{$closeButton}</a>\";";
 
-	if (!empty($args['button']['value']))
-		$js .= "\n\t\ttemplate += \"<a href='{$args['button']['link']}' id='{$args['button']['param']}' class='btn-rm btn {$args['button']['class']} btn-primary'>{$args['button']['value']}</a>\";";
+    $js = null;
+    $js .= "\n\t\tvar template = \"<div class='fixedVersion'><div class='modal fade hide' id='msg-modal'>\";
+        template += \"{$modalHeader}\";
+        template += \"<div class='modal-body'>\";
+        template += \"<p>{$args['content']}</p>\";
+        template += \"</div>\";
+        template += \"<div class='modal-footer'>\";";
 
-	$js .= "\n\n\t\ttemplate += \"</div></div></div>\";";
-	// $js .= "\n\t\tif ($('#html-msg'))";
-	// $js .= "\n\t\t\t$('#html-msg').html(template);";
-	// $js .= "\n\t\telse";
-	$js .= "\n\t\t\t$(template).appendTo('body');";
-	$js .= "\n\t\tif ($('#lightbox')) $('#lightbox').hide();";
-	$js .= "\n\t\tif ($('.hide')) $('.hide').hide();";
-	$js .= "\n\t\t$('.fixedVersion .modal').modal().on('shown', function(){ $('.modal-backdrop').insertAfter($(this)); } );\n\n";
-	return $js;
+    if (!isset($args['button']['close']) || $args['button']['close']==true)
+        $js .= "\n\t\ttemplate += \"    <a href='javascript:void(0);' class='btn' data-dismiss='modal'>{$closeButton}</a>\";";
+
+    if (!empty($args['button']['value']))
+        $js .= "\n\t\ttemplate += \"<a href='{$args['button']['link']}' id='{$args['button']['param']}' class='btn-rm btn {$args['button']['class']} btn-primary'>{$args['button']['value']}</a>\";";
+
+    $js .= "\n\n\t\ttemplate += \"</div></div></div>\";";
+    // $js .= "\n\t\tif ($('#html-msg'))";
+    // $js .= "\n\t\t\t$('#html-msg').html(template);";
+    // $js .= "\n\t\telse";
+    $js .= "\n\t\t\t$(template).appendTo('body');";
+    $js .= "\n\t\tif ($('#lightbox')) $('#lightbox').hide();";
+    $js .= "\n\t\tif ($('.hide')) $('.hide').hide();";
+    $js .= "\n\t\t$('.fixedVersion .modal').modal().on('shown', function(){ $('.modal-backdrop').insertAfter($(this)); } );\n\n";
+    return $js;
 
 }
 
@@ -1655,8 +1750,8 @@ function showModal($args)
  *o mesmo que linffy só que converte toda / na string em -
  */
 function linkfySmart($var, $spacer='-') {
-	$url = preg_replace('|[/]|', $spacer, $var);
-	return linkfy($url);
+    $url = preg_replace('|[/]|', $spacer, $var);
+    return linkfy($url);
 
 }
 
@@ -1666,64 +1761,64 @@ function linkfySmart($var, $spacer='-') {
  */
 function shortUrl($url, $service='google', $action='short') {
 
-	if($action=='short') {
+    if($action=='short') {
 
-		if($service=='google') {
+        if($service=='google') {
 
-			$urlapi = "https://www.googleapis.com/urlshortener/v1/url";
-			$postData = array('longUrl'=>$url, 'key'=>'AIzaSyAcJa1PtXCCRXVUEYiv4iu4MnT4vBM2r-o');
+            $urlapi = "https://www.googleapis.com/urlshortener/v1/url";
+            $postData = array('longUrl'=>$url, 'key'=>'AIzaSyAcJa1PtXCCRXVUEYiv4iu4MnT4vBM2r-o');
 
-		} else {
+        } else {
 
-			$postData = array('login'=>'lslucas', 'longUrl'=>$url, 'apiKey'=>'R_9413f87bc6b34d74c50254d31a8a55c8', 'format'=>'json');
-			$querystring = http_build_query($postData);
-			$postData = null;
+            $postData = array('login'=>'lslucas', 'longUrl'=>$url, 'apiKey'=>'R_9413f87bc6b34d74c50254d31a8a55c8', 'format'=>'json');
+            $querystring = http_build_query($postData);
+            $postData = null;
 
-			$urlapi = "http://api.bitly.com/v3/shorten?".$querystring;
+            $urlapi = "http://api.bitly.com/v3/shorten?".$querystring;
 
-		}
-
-
+        }
 
 
-		$post = !is_null($postData) ? json_encode($postData) : null;
-		$json = curl_post($urlapi, $post, array('Content-Type: application/json'));
-
-		if($service=='google') return $json->id;
-		else {
-			if($json->status_code!=500) return $json->data->url;
-		}
 
 
-	}
+        $post = !is_null($postData) ? json_encode($postData) : null;
+        $json = curl_post($urlapi, $post, array('Content-Type: application/json'));
+
+        if($service=='google') return $json->id;
+        else {
+            if($json->status_code!=500) return $json->data->url;
+        }
+
+
+    }
 
 }
 /*
  *CURL POST
  */
 function curl_post($url, $post, $header) {
-	$curlObj = curl_init();
+    $curlObj = curl_init();
 
-	curl_setopt($curlObj, CURLOPT_URL, $url);
-	curl_setopt($curlObj, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($curlObj, CURLOPT_URL, $url);
+    curl_setopt($curlObj, CURLOPT_RETURNTRANSFER, 1);
 
-	// se é um post
-	if(!empty($post)) {
+    // se é um post
+    if(!empty($post)) {
 
-		curl_setopt($curlObj, CURLOPT_SSL_VERIFYPEER, 0);
-		curl_setopt($curlObj, CURLOPT_HEADER, 0);
-		if(is_array($header)) curl_setopt($curlObj, CURLOPT_HTTPHEADER, $header);
-		curl_setopt($curlObj, CURLOPT_POST, 1);
-		curl_setopt($curlObj, CURLOPT_POSTFIELDS, $post);
+        curl_setopt($curlObj, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($curlObj, CURLOPT_HEADER, 0);
+        if(is_array($header)) curl_setopt($curlObj, CURLOPT_HTTPHEADER, $header);
+        curl_setopt($curlObj, CURLOPT_POST, 1);
+        curl_setopt($curlObj, CURLOPT_POSTFIELDS, $post);
 
-	}
+    }
 
-	$response = curl_exec($curlObj);
-	curl_close($curlObj);
+    $response = curl_exec($curlObj);
+    curl_close($curlObj);
 
-	//change the response json string to object
-	$json = json_decode($response);
-	return $json;
+    //change the response json string to object
+    $json = json_decode($response);
+    return $json;
 
 }
 
@@ -1731,9 +1826,9 @@ function curl_post($url, $post, $header) {
  *Converte decimal em moeda
  */
 function Moeda($val) {
-	//setlocale(LC_MONETARY, 'pt_BR', 'ptb');
-	//return money_format('%4n', $val);
-	return number_format($val, 2,',','.');
+    //setlocale(LC_MONETARY, 'pt_BR', 'ptb');
+    //return money_format('%4n', $val);
+    return number_format($val, 2,',','.');
 }
 
 /*
@@ -1761,22 +1856,22 @@ function Currency2Decimal($number, $reverse=0) {
 function super_substr($texto, $limit) {
 
 
-	$acentosUpper = "ĄĆĘŁŃÓŚŹŻABCDEFGHIJKLMNOPRSTUWYZQXVЁЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮÂÀÁÄÃÊÈÉËÎÍÌÏÔÕÒÓÖÛÙÚÜÇ";
-	$acentosLower = "ąćęłńóśźżabcdefghijklmnoprstuwyzqxvёйцукенгшщзхъфывапролджэячсмитьбюâàáäãêèéëîíìïôõòóöûùúüç";
+    $acentosUpper = "ĄĆĘŁŃÓŚŹŻABCDEFGHIJKLMNOPRSTUWYZQXVЁЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮÂÀÁÄÃÊÈÉËÎÍÌÏÔÕÒÓÖÛÙÚÜÇ";
+    $acentosLower = "ąćęłńóśźżabcdefghijklmnoprstuwyzqxvёйцукенгшщзхъфывапролджэячсмитьбюâàáäãêèéëîíìïôõòóöûùúüç";
 
-	if (strlen($texto)>$limit) {
-		$texto = strip_tags($texto);
-		$_t = substr($texto, 0, $limit);
-		$_p = strrpos($_t, ' ');
-		$_t = substr($_t, 0, $_p);
-		$_final = preg_replace("/[^A-Za-z{$acentosUpper}{$acentosLower}]/", '', substr($_t, -1,1));
+    if (strlen($texto)>$limit) {
+        $texto = strip_tags($texto);
+        $_t = substr($texto, 0, $limit);
+        $_p = strrpos($_t, ' ');
+        $_t = substr($_t, 0, $_p);
+        $_final = preg_replace("/[^A-Za-z{$acentosUpper}{$acentosLower}]/", '', substr($_t, -1,1));
 
-		$res = substr($_t, 0, -1).$_final;
+        $res = substr($_t, 0, -1).$_final;
 
-	} else
-		$res = $texto;
+    } else
+        $res = $texto;
 
-	return $res;
+    return $res;
 }
 
 
@@ -1784,8 +1879,8 @@ function super_substr($texto, $limit) {
  *remove acentos
  */
 function file_extension($filename) {
-	$vars = explode(".", $filename);
-	return end($vars);
+    $vars = explode(".", $filename);
+    return end($vars);
 }
 
 
@@ -2085,7 +2180,7 @@ function validaEmail($email) {
     return true;
 
  } else
-	 return false;
+     return false;
 }
 
 
@@ -2098,40 +2193,40 @@ function validaEmail($email) {
  * @autor Thiago Belem <contato@thiagobelem.net>
  */
 function removeAcentos($string, $slug = false) {
-	$string = strtolower($string);
+    $string = strtolower($string);
 
-	// Código ASCII das vogais
-	$ascii['a'] = range(224, 230);
-	$ascii['e'] = range(232, 235);
-	$ascii['i'] = range(236, 239);
-	$ascii['o'] = array_merge(range(242, 246), array(240, 248));
-	$ascii['u'] = range(249, 252);
+    // Código ASCII das vogais
+    $ascii['a'] = range(224, 230);
+    $ascii['e'] = range(232, 235);
+    $ascii['i'] = range(236, 239);
+    $ascii['o'] = array_merge(range(242, 246), array(240, 248));
+    $ascii['u'] = range(249, 252);
 
-	// Código ASCII dos outros caracteres
-	$ascii['b'] = array(223);
-	$ascii['c'] = array(231);
-	$ascii['d'] = array(208);
-	$ascii['n'] = array(241);
-	$ascii['y'] = array(253, 255);
+    // Código ASCII dos outros caracteres
+    $ascii['b'] = array(223);
+    $ascii['c'] = array(231);
+    $ascii['d'] = array(208);
+    $ascii['n'] = array(241);
+    $ascii['y'] = array(253, 255);
 
-	foreach ($ascii as $key=>$item) {
-		$acentos = '';
-		foreach ($item AS $codigo) $acentos .= chr($codigo);
-		$troca[$key] = '/['.$acentos.']/i';
-	}
+    foreach ($ascii as $key=>$item) {
+        $acentos = '';
+        foreach ($item AS $codigo) $acentos .= chr($codigo);
+        $troca[$key] = '/['.$acentos.']/i';
+    }
 
-	$string = preg_replace(array_values($troca), array_keys($troca), $string);
+    $string = preg_replace(array_values($troca), array_keys($troca), $string);
 
-	// Slug?
-	if ($slug) {
-		// Troca tudo que não for letra ou número por um caractere ($slug)
-		$string = preg_replace('/[^a-z0-9]/i', $slug, $string);
-		// Tira os caracteres ($slug) repetidos
-		$string = preg_replace('/' . $slug . '{2,}/i', $slug, $string);
-		$string = trim($string, $slug);
-	}
+    // Slug?
+    if ($slug) {
+        // Troca tudo que não for letra ou número por um caractere ($slug)
+        $string = preg_replace('/[^a-z0-9]/i', $slug, $string);
+        // Tira os caracteres ($slug) repetidos
+        $string = preg_replace('/' . $slug . '{2,}/i', $slug, $string);
+        $string = trim($string, $slug);
+    }
 
-	return $string;
+    return $string;
 }
 
 
@@ -2171,7 +2266,7 @@ function removeAcentos($string, $slug = false) {
  */
 function apenasNumeros($var)
 {
-	return preg_replace('/[^0-9]/','',$var);
+    return preg_replace('/[^0-9]/','',$var);
 }
 
 /*
@@ -2188,6 +2283,25 @@ function apenasNumeros($var)
 
  }
 
+function traduzWeek($dayofweek)
+{
+    switch($dayofweek) {
+        case 1: return 'Segunda';
+    break;
+        case 2: return 'Terça';
+    break;
+         case 3: return 'Quarta';
+    break;
+         case 4: return 'Quinta';
+    break;
+         case 5: return 'Sexta';
+    break;
+         case 6: return 'Sábado';
+    break;
+         case 7: return 'Domingo';
+    break;
+    }
+}
 
 
 /*
@@ -2203,19 +2317,19 @@ function apenasNumeros($var)
    $wday = $wday['wday']; #usa apenas o dia da semana em números de 0 a 6
 
      switch($wday) {
-	 case 0: $s_min = 'dom'; $s_nor = 'domingo';
+     case 0: $s_min = 'dom'; $s_nor = 'domingo';
        break;
-	 case 1: $s_min = 'seg'; $s_nor = 'segunda';
+     case 1: $s_min = 'seg'; $s_nor = 'segunda';
        break;
-	 case 2: $s_min = 'ter'; $s_nor = 'terça';
+     case 2: $s_min = 'ter'; $s_nor = 'terça';
        break;
-	 case 3: $s_min = 'qua'; $s_nor = 'quarta';
+     case 3: $s_min = 'qua'; $s_nor = 'quarta';
        break;
-	 case 4: $s_min = 'qui'; $s_nor = 'quinta';
+     case 4: $s_min = 'qui'; $s_nor = 'quinta';
        break;
-	 case 5: $s_min = 'sex'; $s_nor = 'sexta';
+     case 5: $s_min = 'sex'; $s_nor = 'sexta';
        break;
-	 case 6: $s_min = 'sab'; $s_nor = 'sábado';
+     case 6: $s_min = 'sab'; $s_nor = 'sábado';
        break;
      }
 
@@ -2253,7 +2367,7 @@ function txt_bbcode($var) {
 }
 
 function parseBBcode ($var) {
-	return html_entity_decode($var);
+    return html_entity_decode($var);
 }
 /*
  *converte br to nl
@@ -2303,17 +2417,17 @@ function datept2en($sep,$date,$nsep='-') {
 ##########################################
 function unixtimestamp($date, $rule='dd/mm/YYYY') {
 
-	$_date = null;
-	$_date = preg_split('/[\/\-]/', $date);
-	if ($rule=='dd/mm/YYYY' || $rule=='dd/mm/yy')
-		$_date = $_date[2].'-'.$_date[1].'-'.$_date[0];
-	if ($rule=='mm/dd/YYYY' || $rule=='mm/dd/yy')
-		$_date = $_date[2].'-'.$_date[0].'-'.$_date[1];
-	if ($rule=='YYYY/mm/dd' || $rule=='yy/mm/dd')
-		$_date = $date;
+    $_date = null;
+    $_date = preg_split('/[\/\-]/', $date);
+    if ($rule=='dd/mm/YYYY' || $rule=='dd/mm/yy')
+        $_date = $_date[2].'-'.$_date[1].'-'.$_date[0];
+    if ($rule=='mm/dd/YYYY' || $rule=='mm/dd/yy')
+        $_date = $_date[2].'-'.$_date[0].'-'.$_date[1];
+    if ($rule=='YYYY/mm/dd' || $rule=='yy/mm/dd')
+        $_date = $date;
 
-	$unix = strtotime($_date);
-	return $unix;
+    $unix = strtotime($_date);
+    return $unix;
 }
 
 # CONVERTE A DATA DO INGLES PARA PORTUGUES
@@ -2336,7 +2450,7 @@ function dateen2pt($sep,$date,$nsep='-') {
 
 ## debug do session
 function debug($var) {
-	echo '<pre>'. print_r($var, 1) .'</pre>';
+    echo '<pre>'. print_r($var, 1) .'</pre>';
 }
 
 /*
@@ -2344,82 +2458,82 @@ function debug($var) {
  */
 function getUserAgentName($agent)
 {
-	$browserArray = array(
-		'Windows Mobile' => 'IEMobile',
-		'Android Mobile' => 'Android',
-		'iPhone Mobile' => 'iPhone',
-		'Firefox' => 'Firefox',
-		'Google Chrome' => 'Chrome',
-		'Internet Explorer' => 'MSIE',
-		'Opera' => 'Opera',
-		'Safari' => 'Safari'
-	);
+    $browserArray = array(
+        'Windows Mobile' => 'IEMobile',
+        'Android Mobile' => 'Android',
+        'iPhone Mobile' => 'iPhone',
+        'Firefox' => 'Firefox',
+        'Google Chrome' => 'Chrome',
+        'Internet Explorer' => 'MSIE',
+        'Opera' => 'Opera',
+        'Safari' => 'Safari'
+    );
 
-	foreach ($browserArray as $k => $v) {
+    foreach ($browserArray as $k => $v) {
 
-		if (preg_match("/$v/", $agent))
-			break;
-		else
-			$k = "Browser Unknown";
+        if (preg_match("/$v/", $agent))
+            break;
+        else
+            $k = "Browser Unknown";
 
-	}
+    }
 
-	$browser = $k;
+    $browser = $k;
 
 
-	$osArray = array(
-		'Windows 98' => '(Win98)|(Windows 98)',
-		'Windows 2000' => '(Windows 2000)|(Windows NT 5.0)',
-		'Windows ME' => 'Windows ME',
-		'Windows XP' => '(Windows XP)|(Windows NT 5.1)',
-		'Windows Vista' => 'Windows NT 6.0',
-		'Windows 7' => '(Windows NT 6.1)|(Windows NT 7.0)',
-		'Windows NT 4.0' => '(WinNT)|(Windows NT 4.0)|(WinNT4.0)|(Windows NT)',
-		'Linux' => '(X11)|(Linux)',
-		'Mac OS' => '(Mac_PowerPC)|(Macintosh)|(Mac OS)'
-	);
+    $osArray = array(
+        'Windows 98' => '(Win98)|(Windows 98)',
+        'Windows 2000' => '(Windows 2000)|(Windows NT 5.0)',
+        'Windows ME' => 'Windows ME',
+        'Windows XP' => '(Windows XP)|(Windows NT 5.1)',
+        'Windows Vista' => 'Windows NT 6.0',
+        'Windows 7' => '(Windows NT 6.1)|(Windows NT 7.0)',
+        'Windows NT 4.0' => '(WinNT)|(Windows NT 4.0)|(WinNT4.0)|(Windows NT)',
+        'Linux' => '(X11)|(Linux)',
+        'Mac OS' => '(Mac_PowerPC)|(Macintosh)|(Mac OS)'
+    );
 
-	foreach ($osArray as $k => $v) {
+    foreach ($osArray as $k => $v) {
 
-		if (preg_match("/$v/", $agent))
-			break;
-		else
-			$k = "Unknown OS";
-	}
+        if (preg_match("/$v/", $agent))
+            break;
+        else
+            $k = "Unknown OS";
+    }
 
-	$os = $k;
+    $os = $k;
 
-	return $browser.' - '.$os;
+    return $browser.' - '.$os;
 
 }
 
 function logextended($acao, $modulo, $params) {
-	global $conn;
+    global $conn;
 
-	if (!is_array($params))
-		exit('Parâmetro inválido!');
+    if (!is_array($params))
+        exit('Parâmetro inválido!');
 
-	if (empty($acao) || empty($params['log_id']))
-		exit('Dados inválidos');
+    if (empty($acao) || empty($params['log_id']))
+        exit('Dados inválidos');
 
 
-	$sql_loge = "INSERT INTO ".TABLE_PREFIX."_log_extended
-		(
-		 lex_log_id,
-		 lex_acao,
-		 lex_modulo,
-		 lex_antes,
-		 lex_depois
-		) VALUES (?, ?, ?, ?, ?)
-	  ";
-	if(!$qr_loge = $conn->prepare($sql_loge))
-		echo $conn->error();
+    $sql_loge = "INSERT INTO ".TABLE_PREFIX."_log_extended
+        (
+         lex_log_id,
+         lex_acao,
+         lex_modulo,
+         lex_antes,
+         lex_depois
+        ) VALUES (?, ?, ?, ?, ?)
+      ";
+    if(!$qr_loge = $conn->prepare($sql_loge))
+        echo $conn->error();
 
-	else {
-		$qr_loge->bind_param('issss', $params['log_id'], $acao, $modulo, $params['antes'], $params['depois']);
-		$qr_loge->execute();
-		$qr_loge->close();
-	}
+    else {
+        $qr_loge->bind_param('issss', $params['log_id'], $acao, $modulo, $params['antes'], $params['depois']);
+        $qr_loge->execute();
+        $qr_loge->close();
+    }
 
 }
 
@@ -2470,23 +2584,23 @@ function logquery() {
 
 
   $sql_log = "INSERT INTO ".TABLE_PREFIX."_log
-  		(
-  		 log_adm_id,
-		 log_nome,
-		 log_email,
-		 log_senha,
-		 log_php_self,
-		 log_query_string,
-		 log_request_uri,
-		 log_request_time,
-		 log_http_referer,
-		 log_ip,
-		 log_host,
-		 log_useragent
-		) VALUES (
-		 ?,?,?,?,?,?,?,?,?,?,?,?
-		)
-	  ";
+        (
+         log_adm_id,
+         log_nome,
+         log_email,
+         log_senha,
+         log_php_self,
+         log_query_string,
+         log_request_uri,
+         log_request_time,
+         log_http_referer,
+         log_ip,
+         log_host,
+         log_useragent
+        ) VALUES (
+         ?,?,?,?,?,?,?,?,?,?,?,?
+        )
+      ";
   if(($qr_log = $conn->prepare($sql_log))==false) {
    echo $conn->error();
    $qr_log->close();
@@ -2495,7 +2609,7 @@ function logquery() {
    else {
     $qr_log->bind_param('isssssssssss', $log['id'], $log['nome'], $log['email'], $log['senha'], $slog['php_self'], $slog['query_string'], $slog['request_uri'], $slog['request_time'], $slog['http_referer'], $log['ip'], $log['host'],$log['useragent']);
     $qr_log->execute();
-	return $log_id = $conn->insert_id;
+    return $log_id = $conn->insert_id;
     $qr_log->close();
   }
 
@@ -2506,54 +2620,54 @@ function logquery() {
 ## Retorna lista de campos e valores
 ###############################
 function getFieldAndValues($params) {
-	global $conn;
+    global $conn;
 
-	if (!is_array($params))
-		exit('Parâmetro inválido!');
+    if (!is_array($params))
+        exit('Parâmetro inválido!');
 
-	$id = $params['id'];
-	$mod = $params['modulo'];
-	$pre = $params['pre'];
-	$ref = isset($params['ref']) ? $params['ref'] : 'id';
+    $id = $params['id'];
+    $mod = $params['modulo'];
+    $pre = $params['pre'];
+    $ref = isset($params['ref']) ? $params['ref'] : 'id';
 
-	if (empty($id) || empty($mod) || empty($pre))
-		exit('Dados inválidos');
-
-
-	/*
-	 *pega lista de colunas
-	 */
-	$sql= "SELECT * FROM ".TABLE_PREFIX."_{$mod} WHERE {$pre}_{$ref}=\"{$id}\"";
-	$fields = array();
-	if(!$qry = $conn->query($sql))
-		echo $conn->error();
-
-	else {
-
-		while($fld = $qry->fetch_field())
-			array_push($fields, str_replace($pre.'_', null, $fld->name));
-
-		$qry->close();
-	}
-
-	/*
-	 *pega valores dessas colunas
-	 */
-	$sqlv= "SELECT * FROM ".TABLE_PREFIX."_{$mod} WHERE {$pre}_{$ref}=\"{$id}\"";
-	if(!$qryv = $conn->query($sqlv))
-		echo $conn->error();
-
-	else {
-		$valores = $qryv->fetch_array(MYSQLI_ASSOC);
-		$qryv->close();
-	}
-
-	$res = null;
-	foreach ($fields as $i=>$col)
-		$res .= "{$col} = ".$valores[$pre.'_'.$col].";\n";
+    if (empty($id) || empty($mod) || empty($pre))
+        exit('Dados inválidos');
 
 
-	return $res."\n";
+    /*
+     *pega lista de colunas
+     */
+    $sql= "SELECT * FROM ".TABLE_PREFIX."_{$mod} WHERE {$pre}_{$ref}=\"{$id}\"";
+    $fields = array();
+    if(!$qry = $conn->query($sql))
+        echo $conn->error();
+
+    else {
+
+        while($fld = $qry->fetch_field())
+            array_push($fields, str_replace($pre.'_', null, $fld->name));
+
+        $qry->close();
+    }
+
+    /*
+     *pega valores dessas colunas
+     */
+    $sqlv= "SELECT * FROM ".TABLE_PREFIX."_{$mod} WHERE {$pre}_{$ref}=\"{$id}\"";
+    if(!$qryv = $conn->query($sqlv))
+        echo $conn->error();
+
+    else {
+        $valores = $qryv->fetch_array(MYSQLI_ASSOC);
+        $qryv->close();
+    }
+
+    $res = null;
+    foreach ($fields as $i=>$col)
+        $res .= "{$col} = ".$valores[$pre.'_'.$col].";\n";
+
+
+    return $res."\n";
 }
 
 ## DEBUG
@@ -2567,30 +2681,30 @@ function getFieldAndValues($params) {
 
     ## VARIAVEIS DE CONFIG
      if (!isset($_SESSION['user'])) {
-	 $userdata = array(
-	  'id' => '',
-	  'nome' => '',
-	  'ip' => $_SERVER['REMOTE_ADDR'],
-	  'useragent' => $_SERVER['HTTP_USER_AGENT']
-	 );
+     $userdata = array(
+      'id' => '',
+      'nome' => '',
+      'ip' => $_SERVER['REMOTE_ADDR'],
+      'useragent' => $_SERVER['HTTP_USER_AGENT']
+     );
 
-	 foreach($userdata as $k=>$v) {
-	  $log[$k]=$v;
-	 }
+     foreach($userdata as $k=>$v) {
+      $log[$k]=$v;
+     }
 
      } else {
 
-	 foreach($_SESSION['user'] as $k=>$v) {
-	  $log[$k]=$v;
-	 }
+     foreach($_SESSION['user'] as $k=>$v) {
+      $log[$k]=$v;
+     }
 
      }
 
       # se DEBUG_LOG nao for vazio vai gravar no arquivo de log
       if (DEBUG_LOG<>'') {
-		$ddf = fopen(DEBUG_LOG,'a');
-		fwrite($ddf,"".date("r").": [$numero] $texto $errfile $errline \r\n [$log[id]]$log[nome] - $log[ip], $log[useragent] \r\n\r\n");
-		fclose($ddf);
+        $ddf = fopen(DEBUG_LOG,'a');
+        fwrite($ddf,"".date("r").": [$numero] $texto $errfile $errline \r\n [$log[id]]$log[nome] - $log[ip], $log[useragent] \r\n\r\n");
+        fclose($ddf);
       }
 
  }

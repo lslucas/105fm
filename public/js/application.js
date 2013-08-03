@@ -98,6 +98,8 @@ function placeHolder() {
 
 $(function() {
 
+
+
 	// if (!$.browser.mobile) {
 	    $('body').on('click', 'a[href^="tel:"]', function() {
 	            $(this).attr('href',

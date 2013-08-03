@@ -22,12 +22,13 @@ if ($_FILES['file']['type'] == 'image/png'
     // copying
     copy($_FILES['file']['tmp_name'], $file);
 
-    $file = substr($file, 6);
+    // $file = substr($file, 6);
     // displaying file
-	$array = array(
-		'filelink' => $file
-	);
+    $fileshow = 'http://184.72.221.135/images/uploads/'.str_replace($dir, '', $file);
+    $array = array(
+    	'filelink' => $fileshow
+    );
 
-	echo stripslashes(json_encode($array));
+    echo stripslashes(json_encode($array));
 
 }

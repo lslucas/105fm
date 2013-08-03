@@ -1,5 +1,31 @@
 <?php
 
+    $sql_team= "SELECT not_id FROM ".TABLE_PREFIX."_noticia WHERE not_status=1 ORDER BY not_titulo ASC";
+    $qry_team = $conn->prepare($sql_team);
+    $qry_team->bind_result($eq_id);
+    $qry_team->execute();
+
+    $i=0;
+    while($qry_team->fetch()) {
+      $hash = $aes->encrypt($eq_id);
+      $listaInt[$hash] = $i;
+      $i++;
+    }
+
+
+
+    	/**
+    	 * Resgata ID da última noticia cadastrada para caso não seja informado um  id de noticia
+    	 * @var string
+    	 */
+            $sql_not = "SELECT not_id FROM ".TABLE_PREFIX."_noticia WHERE not_status=1 ORDER BY not_data DESC LIMIT 1";
+            if ($qry_not = $conn->prepare($sql_not)) {
+	            $qry_not->bind_result($item);
+	            $qry_not->execute();
+	            $qry_not->fetch();
+	            $qry_not->close();
+	}
+
 	$list  = array();
 
 	/*
@@ -20,8 +46,11 @@
 
 	 else {
 
-	 	$item = $hashids->decrypt($querystring);
-	 	$item = isset($item[0]) ? $item[0] : null;
+	 	if (!empty($querystring)) {
+		 	$item = $hashids->decrypt($querystring);
+		 	$item = isset($item[0]) ? $item[0] : null;
+		}
+
 		$qrypos->bind_param('i', $item);
 		$qrypos->bind_result($id, $titulo, $texto, $data, $imagem);
 		$qrypos->execute();
@@ -30,5 +59,7 @@
 		$total = $qrypos->num_rows;
 		$qrypos->close();
 
+		$texto = stripslashes($texto);
 		$imagem = !empty($imagem) ? ABSPATH.'images/noticia/'.$imagem : null;
 	}
+

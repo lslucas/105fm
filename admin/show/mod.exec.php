@@ -36,7 +36,8 @@ $res['data']  = datept2en('/', $res['data']);
   		  ${var['pre']}_hora_fim=?,
   		  ${var['pre']}_local=?,
   		  ${var['pre']}_url=?,
-  		  ${var['pre']}_artista=?
+  		  ${var['pre']}_artista=?,
+                        ${var['pre']}_descricao=?
 	";
      $sql.=" WHERE ${var['pre']}_id=?";
 	 if (!$qry=$conn->prepare($sql))
@@ -44,7 +45,7 @@ $res['data']  = datept2en('/', $res['data']);
 
 	 else {
 
-		$qry->bind_param('sssssssi',
+		$qry->bind_param('ssssssssi',
 			$res['titulo'],
 			$res['data'],
 			$res['hora_inicio'],
@@ -52,6 +53,7 @@ $res['data']  = datept2en('/', $res['data']);
 			$res['local'],
 			$res['url'],
 			$res['artista'],
+                                 $res['descricao'],
 			$res['item']
 		);
 		$qry->execute();
@@ -62,7 +64,8 @@ $res['data']  = datept2en('/', $res['data']);
 			$code = $res['code'];
 		else
 			$code = saveTableCode($var, $res['item'], $res['titulo']);
-		echo $msgSucesso;
+                        include_once 'helper/exec.galeria.php';
+                        echo $msgSucesso;
 
 		//listagem
 		include_once 'list.php';

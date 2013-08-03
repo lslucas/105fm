@@ -29,8 +29,10 @@ $qry_valida->close();
      include_once $rp.'inc.autoinsert.php';
 
      $sql= "UPDATE ".TABLE_PREFIX."_${var['table']} SET
-  		  ${var['pre']}_titulo=?,
+  		  ${var['pre']}_cat=?,
+                        ${var['pre']}_titulo=?,
   		  ${var['pre']}_data=?,
+                        ${var['pre']}_resumo=?,
   		  ${var['pre']}_texto=?
 	";
      $sql.=" WHERE ${var['pre']}_id=?";
@@ -40,10 +42,12 @@ $qry_valida->close();
 	 else {
 
 	 	// $res['texto'] = txt_bbcode($res['texto']);
-		$qry->bind_param('sssi',
-			$res['titulo'],
+		$qry->bind_param('sssssi',
+			$res['cat'],
+                                 $res['titulo'],
 			$res['data'],
-			$res['texto'],
+			$res['resumo'],
+                                 $res['texto'],
 			$res['item']
 		);
 		$qry->execute();

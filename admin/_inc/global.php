@@ -14,8 +14,8 @@ define('OAUTH_APP_ID', 'H6odEJ30');
 # EMAILS
 ########
 
-define('EMAIL','noreply@105.fm');
-define('EMAIL_CONTACT','contato@105.fm');
+define('EMAIL','noreply@radio105fm.com.br');
+define('EMAIL_CONTACT','contato@radio105fm.com.br');
 define('EMAIL_NAME','105fm');
 define('BBC1_EMAIL','lslucas@gmail.com');
 define('BBC2_EMAIL','');
@@ -37,8 +37,8 @@ if ($host=='localhost') {
 	define('MAIL_SMTPAUTH', 'login');
 	define('MAIL_SMTPSECURE', 'tls');
 	define('MAIL_PORT', 587);
-	define('MAIL_USER', 'noreply@105.fm');
-	define('MAIL_PASS', 'mvdbt9TT');
+	define('MAIL_USER', 'lucas@lucasserafim.com.br');
+	define('MAIL_PASS', 'c0d3rUNIX#');
 
 	/**
 	 * CONEXÃO COM O DB
@@ -56,7 +56,7 @@ if ($host=='localhost') {
 
 
 	if (!isset($rph))
-		$rph = dirname($_SERVER['PHP_SELF']);
+		$rph = dirname($_SERVER['PHP_SELF']).'/';
 	define('STATIC_PATH', $rph.'images/');
 
 } else {
@@ -68,16 +68,16 @@ if ($host=='localhost') {
 	define('MAIL_SMTPAUTH', 'login');
 	define('MAIL_SMTPSECURE', 'tls');
 	define('MAIL_PORT', 587);
-	define('MAIL_USER', 'lucas@lucasserafim.com.br');
-	define('MAIL_PASS', 'c0d3rUNIX#');
+	define('MAIL_USER', 'dev@radio105fm.com.br');
+	define('MAIL_PASS', 'mvdbt9Radio');
 
 	/**
 	 * CONEXAO COM O DB
 	 */
-	define('DB_SERVER','lucasserafim.db.8229398.hostedresource.com');
-	define('DB_USER','lucasserafim');
-	define('DB_PASS','c0d3rUNIX#');
-	define('DB_DATABASE','lucasserafim');
+	define('DB_SERVER','radio105fm.ckgv5ldq4lfu.us-east-1.rds.amazonaws.com');
+	define('DB_USER','radio');
+	define('DB_PASS','mvdbt9Radio');
+	define('DB_DATABASE','radio105fm');
 
 	ini_set('display_errors','On');
 
@@ -98,10 +98,10 @@ $path = 'admin';
 $base = $vhost.$path.'/';
 
 if (!isset($abspath))
-	$abspath = realpath('../'.dirname('load.php')).'/';
+	$abspath = realpath('../'.dirname('load.php'));
 
 // include path para o zend
-ini_set('include_path', ".:/usr/share/php/zend-framework/.:{$abspath}:.{$abspath}vendor/:.{$abspath}vendor/Zend/:.{$abspath}vendor/ZF-Mail/.:/novo/vendor/.:/.:/novo/vendor/ZF-Mail");
+ini_set('include_path', ".:/usr/share/php/.:/usr/share/php/zend-framework/.:/usr/share/php/Zend/.:{$abspath}:.{$abspath}vendor/:.{$abspath}105fm/vendor/ZF-Mail/.:/home/agenciapum/public_html/clientes/105fm/vendor.:/.:/home/agenciapum/public_html/clientes/105fm/vendor/ZF-Mail");
 // else ini_set('include_path', '.:/');
 
 #rp relative path, caminho relativo para a raiz do back-end
@@ -122,7 +122,7 @@ define('SITE_NAME','105FM');
 $BUSINESS = '';
 $BUSINESS = null;
 if ($host=='localhost') define('SITE_URL','http://localhost/105fm');
-else define('SITE_URL','http://agenciapump.com.br/clientes/105fm/');
+else define('SITE_URL','http://radio105fm.com.br/');
 define('PAINEL_URL', SITE_URL.'/admin');
 $SITE_URL = SITE_URL;
 define('RODAPE','<a href="'.SITE_URL.'">'.SITE_NAME.'</a>');
@@ -131,7 +131,7 @@ define('SITE_ADM_IMGPATH','images');
 define('FILE_LOGO','logo.jpg');
 define('SITE_ADMLOGO','<img src="'.SITE_ADM_IMGPATH.'/'.FILE_LOGO.'" border="0">');
 define('URL_ADMLOGO','<img src="'.SITE_URL.SITE_ADM_IMGPATH.'/'.FILE_LOGO.'" border="0">');
-define('PATH_ADMLOGO',$rp.'images/admin_logo.png');
+define('PATH_ADMLOGO',$rp.'images/admin_logo.jpg');
 
 define('PATH_FILE',$rp.'../public/upload');
 define('PATH_IMG',$rp.'../public/images');
@@ -149,7 +149,7 @@ define('MAX_UPLOAD', $upload_mb);
 /**
  * DEBUG
  */
-define('DEBUG',1);
+define('DEBUG',0);
 define('DEBUG_LOG',$abspath.'storage/logs/debug.log');
 
 /**

@@ -1,0 +1,57 @@
+@charset "utf-8";
+.p {
+	margin-left: 20px;
+}
+#promocao {
+	background-image: url(../../cadastro/img/bg-cd.jpg);
+	background-repeat: repeat;
+	height: 24px;
+	width: 304px;
+	border: 1px solid #969BAE;
+	margin-left: 10px;
+}
+#barra {
+	width: 968px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: -20px;
+	/*height: 109px;*/
+	position: relative;
+	background-image: url(../img/barra.jpg);
+	background-repeat: repeat-x;
+}
+#form2 table {
+	margin-left: 225px;
+}
+#arquivo {
+	background-image: url(../img/bg-cd.jpg);
+	background-color: #BBCDDB;
+	height: 17px;
+	width: 111px;
+	font-size: 11px;
+	margin-bottom: 5px;
+	margin-left: 10px;
+}
+#form2 table tr td a img {
+	margin-left: 10px;
+	margin-bottom: 5px;
+}
+#frase {
+	background-image: url(../img/bg-cd.jpg);
+	background-repeat: repeat;
+	border: 1px solid #969BAE;
+	width: 304px;
+	margin-left: 10px;
+}
+.img {
+	margin-right: 40px;
+	margin-top: 30px;
+}
+
+/****************************** PARTICIPACAO */
+form.participacao input[type='text'] {
+    padding:5px 3px 3px 5px;
+    width: 200px;
+    border: 1px solid #CECECE;
+}

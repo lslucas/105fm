@@ -1,5 +1,5 @@
 <?php
- if (isset($_FILES)) {
+ if (isset($_FILES) && isset($_FILES['midia']['name']) && is_file($_FILES['midia']['tmp_name'])) {
 
   include_once "_inc/class.upload.php";
    $sqlImagem = '';
@@ -23,7 +23,7 @@
 
 			$type = @file_extension($_FILES['midia']['name']);
 			$filename = linkfySmart(str_replace($type, '', $_FILES['midia']['name']));
-			$filename = $code.'-'.$filename.'_'.rand();
+			$filename = $res['item'].'-'.$filename.'_'.rand();
 			$handle = new Upload($_FILES['midia']);
 
 			if ($handle->uploaded) {

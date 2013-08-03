@@ -55,8 +55,10 @@
 <table class="table table-condensed table-striped">
    <thead>
       <tr>
+        <th width="100px">Categoria</th>
         <th>Título</th>
         <th width="60px"><center>Publicação</center></th>
+        <th width='60px'>Destaque</th>
       </tr>
    </thead>
    <tbody>
@@ -109,6 +111,9 @@ end;
 		</div>
 	</div>
 	<tr id="tr<?=$id?>">
+                    <td>
+                        <?=nomeCategoria($cat)?>
+                    </td>
 		<td>
 			<?=$titulo?>
 			<?=$row_actions?>
@@ -116,6 +121,9 @@ end;
 		<td>
 			<?=$data?>
 		</td>
+                    <td align=center>
+                        <a href="?p=<?=$p?>&principal&item=<?=$id?>&noVisual" class='tip principal principal<?=$id?>' title='Clique definir noticia como destaque' id='<?=$id?>' name='<?=$titulo?>'><?=$principal==1?'Sim':'Não'?></a>
+                    </td>       
 	</tr>
 <?php
      $j++;

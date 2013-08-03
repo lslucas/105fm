@@ -1,0 +1,25 @@
+div.slider .jcarousel-container {width:590px; height: 200px; margin: 0 auto; overflow: hidden; cursor: move; display:block; margin-bottom:0.6em;}
+div.jcarousel-clip {width:570px !important;margin:0 auto;overflow:hidden;position:relative;}
+
+div.slider ul {height:160px !important; padding:10px 0; overflow:hidden !important;}
+div.slider ul li {	
+	float: left;
+	background:none;
+	margin: 0 10px 0 0;
+	padding: 0;
+	height:160px !important;
+	width: 139px !important;
+	overflow:hidden;
+	position:relative;
+}
+div.slider ul li:hover { }
+div.slider ul li span.data{ color:#555; font-size:12px; font-weight:bold; padding-left:12px; background:url(../img/icons/seta-lilas.png) no-repeat left center; display:block; margin-bottom:5px; }
+div.slider ul li p.desc { font-size:10px !important; font-weight:bold; text-align:center; }
+div.slider ul li a img {width:137px;height:89px;display:block;margin:0; clear:both;}
+div.jcarousel-prev {width:28px;height:28px;background:url(../img/icons/arrow-left.png) no-repeat top; overflow:hidden;position:absolute;left:15px;top:110px;cursor:pointer;}
+div.jcarousel-next {width:28px;height:28px;background:url(../img/icons/arrow-right.png) no-repeat top; overflow:hidden;position:absolute;right:15px;top:110px;cursor:pointer;}
+
+div.jcarousel-prev:hover, div.jcarousel-next:hover {background-position: bottom;}
+
+div.jcarousel-prev-disabled {opacity:0.6;}
+div.jcarousel-next-disabled {opacity:0.6;}

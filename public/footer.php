@@ -1,77 +1,95 @@
-	<?php if (!in_array($basename, array('meus-dados', 'lista', 'lista-por-interesse', 'lista-geral-de-interesses',  'fale-conosco', 'busca', 'recursos', 'lista-anuncios'))) { ?>
-		<?php include_once 'navbar/banners.php' ?>
-	<?php } ?>
-	</div><!-- ROW -->
+                </div>
+                <!--End Page-->
+                <div class="clear"></div>
 
-	<footer>
-		<div class="row">
-			<div class="column grid_7">
-				<p>© AGROSSHOP 2012 · <a href="<?=ABSPATH?>politica-privacidade" title="">Política de Privacidade</a> · <a href="<?=ABSPATH?>termos-uso" title="">Termos de Uso</a> · <a href='<?=ABSPATH?>como-funciona'>Como Funciona</a></p>
-			</div>
+                <!--Barra Rodapé-->
+                <div id="footer_wrapper" class="clearfix">
+                    <div id="footer" align="center">
+                        <div class="fone uppercase navy bold" align="center">Fone de Ouvintes: (11) 3171.0075</div>
+                        <ul id="menu-inferior" class="clearfix" style='width:297px;'>
+                            <li class="item"><a class="uppercase" href="<?=ABSPATH?>" title="Home">Home</a></li>
+<!--                             <li class="item"><a class="uppercase" href="<?=ABSPATH?>quem-somos" title="Quem Somos">A Rádio</a></li>
+                            <li class="item"><a class="uppercase" href="<?=ABSPATH?>equipe" title="Nossa Equipe">Equipe</a></li> -->
+                            <li class="item"><a class="uppercase" href="<?=ABSPATH?>programacao" title="Nossos Programas">Programação</a></li>
+<!--                             <li class="item"><a class="uppercase" href="<?=ABSPATH?>agenda" title="Agenda">Agenda</a></li>
+                            <li class="item"><a class="uppercase" href="<?=ABSPATH?>promocoes" title="Promoções">Promoções</a></li>
+                            <li class="item"><a class="uppercase" href="<?=ABSPATH?>noticias" title="Notícias">Notícias</a></li>
+                            <li class="item"><a class="uppercase" href="<?=ABSPATH?>galeria" title="Galeria">Galeria</a></li> -->
+                            <li class="item" style='border-right:0px'><a href="<?=ABSPATH?>comercial" title="Comercial">Comercial</a></li>
+                        </ul>
+                        <div class="clear"></div>
 
-			<div class="column grid_5">
-				<p class="fr"><a href="#" title="Subir">Topo</a></p>
-			</div>
-		</div>
-	</footer>
-	<div id='html-msg'></div>
-	<div id='msg-modal'></div>
-	<?php if ($basename=='classificado') { ?>
-	<script src="<?=ABSPATH?>js/load-image.min.js"></script>
-	<?php } ?>
-	<?php if ($host!='localhost' && !empty($usr['id'])) { ?>
-	<script src="http://54.232.122.95:6789/socket.io/socket.io.js"></script>
-	<?php } ?>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-	<!--<script src="//code.jquery.com/ui/1.9.2/jquery-ui.js"></script>-->
-	<script src="<?=ABSPATH?>bootstrap/js/bootstrap.min.js"></script>
-	<script src="<?=ABSPATH?>js/jquery.doesExist.js"></script>
-	<script src="<?=ABSPATH?>js/slider.js"></script>
-	<script src="<?=ABSPATH?>js/script.js"></script>
-	<script src="<?=ABSPATH?>js/jquery.autotab-1.1b.js"></script>
-	<script src="<?=ABSPATH?>js/jquery.mask.js"></script>
-	<script src="<?=ABSPATH?>js/jquery.price_format.js"></script>
-	<script src="<?=ABSPATH?>js/jquery.showModal.js"></script>
-	<?php /*<script src="<?=ABSPATH?>js/jquery-ui-1.8.18.custom.min.js"></script>*/ ?>
-	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
-	<script src="<?=ABSPATH?>js/application.js"></script>
-	<?php if ($host!='localhost' && !empty($usr['id'])) { ?>
-	<script src="<?=ABSPATH?>js/chatbox.js"></script>
-	<?php } ?>
-	<?php
-		/**
-		 *  Exibe mensagens de erro
-		 */
-		if (isset($res['error']))
-			$toScript = showModal(array('title'=>(isset($res['error']['title']) ? $res['error']['title'] : null), 'content'=>$res['error']['text']));
-	 ?>
-	<script type='text/javascript'>
+                        <div id="contato-footer" align="center">
+                            <p class="uppercase radio yellow bold">RÁDIO 105 FM - 105,1 - SÃO PAULO</p>
+                            <p>Avenida Carlos Salles Block, 658 - 4º andar - Anhangabaú</p>
+                            <p>Jundiaí - SP. CEP: 13208-100</p>
+                            <p>+55 11 3171.0075 - <a class="mail" href="mailto:contato@radio105fm.com.br">contato@radio105fm.com.br</a></p>
+                            </p>
+                        </div>
+                        <div class="clear"></div>
 
-		<?=isset($toJS) ? $toJS : null?>
-		<?=isset($incJS) ? $incJS : null?>
+                        <div id="bottom" align="center">
+                            <a class="pump f_right" href="http://www.agenciapump.com.br" title="Ag&ecirc;ncia Pump" target="_blank"><img src="<?=ABSPATH?>img/logo-pump.png" alt="Ag&ecirc;ncia Pump" /></a>
+                            <!--<p align="center" class="copyright">Rádio 105 FM Copyright 2013 © - Todos os direitos reservados</p>-->
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div id='html-msg'></div>
+    <div id='msg-modal'></div>
+    <script src="<?=ABSPATH?>bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?=ABSPATH?>js/jquery.doesExist.js"></script>
+    <!--<script src="//code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    <script src="<?=ABSPATH?>js/application.js"></script>
 
-		$(function() {
-			$('#myCarousel').carousel();
-			$(':input').autotab_magic();
+    <script src="<?=ABSPATH?>js/jquery.showModal.js"></script>
+-->
+     <?php
+        /**
+         *  Exibe mensagens de erro
+         */
+        if (isset($res['error']))
+            $toScript = showModal(array('title'=>(isset($res['error']['title']) ? $res['error']['title'] : null), 'content'=>$res['error']['text']));
+     ?>
+     <script type='text/javascript'>
+        delete window.alert;
+        <?=isset($toJS) ? $toJS : null?>
+        <?=isset($incJS) ? $incJS : null?>
 
-			<?=isset($incjQuery) ? $incjQuery : null?>
-			<?=isset($toScript) ? $toScript : null?>
+        $(function() {
+            if ($('#myCarousel') && typeof $.carousel == 'function' )
+                $('#myCarousel').carousel();
+            if ($(':input') && typeof $.autotab_magic == 'function' )
+                $(':input').autotab_magic();
 
-		});
-	</script>
-	<script type="text/javascript">
+            <?=isset($incjQuery) ? $incjQuery : null?>
+            <?=isset($toScript) ? $toScript : null?>
 
-	  var _gaq = _gaq || [];
-	  _gaq.push(['_setAccount', 'UA-38200913-1']);
-	  _gaq.push(['_setDomainName', 'agrosshop.com.br']);
-	  _gaq.push(['_trackPageview']);
+        });
 
-	  (function() {
-	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	  })();
+        $(document).ready(function() {
+            <?=isset($incReady) ? $incReady : null?>
+        });        
+    </script>
+    <script type="text/javascript">
+        window.___gcfg = {lang: 'en'};
+        (function()
+        {var po = document.createElement("script");
+        po.type = "text/javascript"; po.async = true;po.src = "https://apis.google.com/js/plusone.js";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(po, s);
+        })();
+    </script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-	</script>
-</body>
+      ga('create', 'UA-42853077-1', 'radio105fm.com.br');
+      ga('send', 'pageview');
+    </script>    
+    </body>
 </html>

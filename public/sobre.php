@@ -1,5 +1,0 @@
-<div class="column grid_10">
-<h2>Sobre</h2>
-<p>Nosso portal tem o objetivo de facilitar os negócios entre revendas e cooperativas de insumos agrícolas de todo o Brasil, auxiliando na negociação de mercadorias que podem estar sobrando em uma determinada região e faltando em outra, servindo também com uma boa opção de troca de mercadorias, já que o participante pode oferecer o que tem a venda e informar sua necessidade de compra.  Trata-se de um grupo fechado, onde para participar, a empresa deve ser uma Revenda ou Cooperativa em atividade e devidamente registrada no Ministério da Agricultura e órgãos competentes.
-Os anúncios exibidos no portal, bem como as negociações originadas através deste, são de inteira responsabilidade do vendedor e ou comprador. Não nos responsabilizamos pelos negócios, sendo que não existe pagamento de comissão.</p>
-</div>
