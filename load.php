@@ -47,7 +47,7 @@
 		define('ABSPATH', '/'.substr($uri, 0, $backslash_pos+1));
 		$uri = substr($uri, $backslash_pos+1);
 	} else {
-		define('ABSPATH', '/clientes/105fm/');
+		define('ABSPATH', '/');
 		// define('ABSPATH', '/'); #.substr($uri, 0, $backslash_pos)
 	}
 	// define('ABSPATH', '/');
@@ -60,10 +60,12 @@
 	*separa tudo que tiver /
 	*/
 	$url = explode('/', $uri);
+	/*
 	if ($_SERVER['HTTP_HOST']<>'localhost') {
 		array_shift($url); //remote apenas
 		array_shift($url); //remote apenas
 	}
+	 */
 
 	//nome do arquivo = $basename.php
 	$basename = isset($url[0]) ? $url[0] : null;
