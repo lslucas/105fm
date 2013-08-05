@@ -250,10 +250,12 @@
                         $('.boxSociais').height(heightPerg+'px'); //seta altura do box sociais para ficar identico a da coluna de perguntas
                         $('.boxAgenda').height(heightEnq+'px'); //seta altura do box sociais para ficar identico a da coluna de perguntas
 
-
                         $('form[name="pool"]').submit(function(e) {
                             e.preventDefault();
                             var that = $(this);
+                            var btnVotar = $('form[name=pool] input[type=submit]');
+
+                            btnVotar.attr('value', 'Enviando...').attr('disabled', 'disabled');
 
                             $.ajax({
                                 url: $(that).attr('action'),
@@ -261,6 +263,7 @@
                                 data: $(that).serialize(),
                                 success: function(data) {
                                     $('div#pool-container').html(data);
+                                    btnVotar.attr('value', 'Enviando...').removeAttr('disabled');
                                 }
                             });
                         });
