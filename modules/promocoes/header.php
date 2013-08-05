@@ -22,7 +22,8 @@
 
             FROM ".TP."_promocao
                 WHERE pro_titulo IS NOT NULL
-                    AND (pro_data_termino IS NULL OR pro_data_termino>=DATE(NOW()))
+                    AND pro_status=1
+                    #AND (pro_data_termino IS NULL OR pro_data_termino>=DATE(NOW()))
             ORDER BY pro_data_inicio DESC
             ";
 
