@@ -62,7 +62,7 @@
 		$qry_form = $conn->query($sql_form);
 		$row = $qry_form->fetch_array();
 
-		$qry_form->free_result();
+		// $qry_form->free_result();
 		$qry_form->close();
 	}
 
