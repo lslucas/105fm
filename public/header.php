@@ -89,7 +89,21 @@
         <script type="text/javascript" language="javascript" src="<?=ABSPATH?>js/carousel.js"></script>
         <script type="text/javascript">
         $(document).ready(function() {
-            $(".fancy").fancybox();
+            $(".fancy").fancybox({
+                fitToView   : false,
+                autosize    : false,
+                helpers : {
+                    title   : {
+                        type: 'inside'
+                    },
+                    overlay : {
+                        opacity : 0.8,
+                        css : {
+                            'background-color' : '#000'
+                        }
+                    }
+                }               
+            });
 
             $(".inlinemodal").fancybox({
                 'modal' : true

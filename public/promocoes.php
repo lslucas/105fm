@@ -42,8 +42,8 @@
                                 ?>
                                 <li class="agend">
                                     <div class="f_left clearfix">
-                                        <a href="<?=$promo['imagem']?>" class="fancy" rel="evento" title="<?=$promo['legenda']?>"><img src="<?=$promo['thumb']?>" alt="<?=$promo['legenda']?>" /></a>
-                                        <p><a href="<?=$promo['imagem']?>" class="fancy" rel="evento" title="<?=$promo['legenda']?>">Clique para ampliar o flyer</a>
+                                        <a href="<?=$promo['imagem']?>" class="fancy" rel="evento"  title="<?=$promo['legenda']?><br/><a href='<?=SITE_URL.'/'.$promo['imagem']?>' target='blank'>Ver imagem maior</a>"><img src="<?=$promo['thumb']?>" alt="<?=$promo['legenda']?>" /></a>
+                                        <p><a href="<?=$promo['imagem']?>" class="fancy" rel="evento" title="<?=$promo['legenda']?><br/><a href='<?=SITE_URL.'/'.$promo['imagem']?>' target='blank'>Ver imagem maior</a>">Clique para ampliar o flyer</a>
                                     </div>
                                     <div class="dados-promo">
                                         <span class="item uppercase red"><?=$promo['titulo']?></span>
