@@ -71,9 +71,9 @@
                                     }
                                 ?>
                            	</ul>
-<!--                             <div id="pager" class="paginationstyle" style="width: 300px; margin:15px auto;">
+                            <div id="pager" class="paginationstyle" style="width: 300px; margin:15px auto;">
                                 <a class="prev" href="#" rel="previous">Anterior</a> <span class="flatview"></span> <a class="next" href="#" rel="next">Pr&oacute;ximo</a>
-                            </div> -->
+                            </div>
 
                             <div class="clear"></div>
                         </div>

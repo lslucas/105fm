@@ -26,7 +26,6 @@
                     #AND (pro_data_termino IS NULL OR pro_data_termino>=DATE(NOW()))
             ORDER BY pro_data_inicio DESC
             ";
-
      if (!$qry=$conn->prepare($sql))
          $incMsg .= "<div class='alert alert-error'>".$conn->error."</div>";
 
