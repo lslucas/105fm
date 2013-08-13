@@ -43,10 +43,10 @@ if ($host=='localhost') {
 	/**
 	 * CONEXÃO COM O DB
 	 */
-	define('DB_SERVER','localhost');
+	define('DB_SERVER','177.71.246.255');
 	define('DB_USER','root');
 	define('DB_PASS','mvdbt9');
-	define('DB_DATABASE','lslucas');
+	define('DB_DATABASE','105fm');
 
 	error_reporting(E_ALL);
 	ini_set('display_errors','On');
