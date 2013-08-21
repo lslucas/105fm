@@ -49,8 +49,8 @@ if (isset($_FILES)) {
 
 				$handle->file_new_name_body  = $filename;
 				$handle->image_resize        = true;
-				#$handle->image_ratio_x        = true;
-				$handle->image_ratio_crop    = true;
+				$handle->image_ratio_x        = true;
+				// $handle->image_ratio_crop    = true;
 				$handle->image_x             = $var['imagemWidth'];
 				$handle->image_y             = $var['imagemHeight'];
 				$handle->jpeg_quality        = 90;
@@ -59,8 +59,8 @@ if (isset($_FILES)) {
 
 				$handle->file_new_name_body  = $filename;
 				$handle->image_resize        = true;
-				#$handle->image_ratio_x        = true;
-				$handle->image_ratio_crop    = true;
+				$handle->image_ratio_x        = true;
+				// $handle->image_ratio_crop    = true;
 				$handle->image_x             = $var['thumbWidth'];
 				$handle->image_y             = $var['thumbHeight'];
 				$handle->jpeg_quality        = 70;
