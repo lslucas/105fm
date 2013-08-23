@@ -17,12 +17,12 @@
         $('#contentGroup').show();
         $('#linhafina'+selected).fadeIn();
         $('#form'+selected).fadeIn().find('input, textarea').removeAttr('disabled');
-        
+
          if (selected=='Aiy9iq') {
-          $('.fieldsTime').show().find('input, textarea').removeAttr('disabled');       
+          $('.fieldsTime').show().find('input, textarea').removeAttr('disabled');
           console.log('test');
          } else {
-          $('.fieldsTime').hide().find('input, textarea').attr('disabled');              
+          $('.fieldsTime').hide().find('input, textarea').attr('disabled');
           console.log(' not test');
         }
     }
@@ -39,9 +39,9 @@
         $('#form'+val).fadeIn().find('input, textarea').removeAttr('disabled');
 
         if (val=='Aiy9iq')
-          $('.fieldsTime').show().find('input, textarea').removeAttr('disabled');       
+          $('.fieldsTime').show().find('input, textarea').removeAttr('disabled');
         else
-          $('.fieldsTime').hide().find('input, textarea').attr('disabled');       
+          $('.fieldsTime').hide().find('input, textarea').attr('disabled');
       } else
         $('#contentGroup').hide();
     });
@@ -85,13 +85,13 @@
                         <div class="clear"></div>
 
                       <div id="promos" class="box">
-                       	  <h1 class="uppercase navy" style="margin-left:10px;"><img src="<?=ABSPATH?>img/participacao.png" width="335" height="43" alt="Participe das promoções!" /></h1>
+                          <h1 class="uppercase navy" style="margin-left:10px;"><img src="<?=ABSPATH?>img/participacao.png" width="335" height="43" alt="Participe das promoções!" /></h1>
                           <!--End -->
                         <div class="clear"></div>
-                       	  <p>&nbsp;</p>
-                       	  <p class="p">Olá <strong><?=!empty($usr['nome']) ? $usr['nome'] : 'Ouvinte'?></strong>, seja BEM VINDO! </p>
-                       	  <p class="p">Para participar, preencha o formulário ao lado e boa sorte!</p>
-                       	  <p class="p">&nbsp;</p>
+                          <p>&nbsp;</p>
+                          <p class="p">Olá <strong><?=!empty($usr['nome']) ? $usr['nome'] : 'Ouvinte'?></strong>, seja BEM VINDO! </p>
+                          <p class="p">Para participar, preencha o formulário ao lado e boa sorte!</p>
+                          <p class="p">&nbsp;</p>
                            <!--End -->
                         <div class="clear"></div>
                           <?php
@@ -101,23 +101,23 @@
                         <form id="form1" name="form1" action="" class='participacao' method="post" enctype='multipart/form-data'>
                             <input type='hidden' name='submited' value='<?=md5(time())?>'/>
                             <input type='hidden' name='from' value='participacao'/>
-                       	    <table width="550" border="0">
-                       	      <tr>
-                       	        <td class="align_right">ESCOLHA A PROMOÇÃO:</td>
-                       	        <td><label for="promocao"></label>
-                       	          <select name="promocao" id="promocao">
+                            <table width="550" border="0">
+                              <tr>
+                                <td class="align_right">ESCOLHA A PROMOÇÃO:</td>
+                                <td><label for="promocao"></label>
+                                  <select name="promocao" id="promocao">
                                     <option value=''>Selecione</option>
                                     <?php foreach ($promocoes as $int=>$pro) { ?>
                                     <option value='<?=$pro['id']?>'<?=!empty($promo_id) && $promo_id==$pro['id'] ? ' selected' : null?>><?=$pro['titulo']?></option>
                                     <?php } ?>
-               	                </select></td>
-                   	          </tr>
-                   	        </table>
+                                </select></td>
+                              </tr>
+                            </table>
                           <div id='contentGroup'>
                           <p class="p">&nbsp;</p>
-                       	  <div class="align_center" id="barra">
-                       	    <p>&nbsp;</p>
-                       	    <p><span class="pump">
+                          <div class="align_center" id="barra">
+                            <p>&nbsp;</p>
+                            <p><span class="pump">
                               <?php foreach ($promocoes as $int=>$pro) { ?>
                               <div id='linhafina<?=$pro['id']?>' class='groupLinhaFina'>
                                 <?=$pro['linhafina']?>
@@ -153,7 +153,7 @@
                                       </select>
                                     -->
                                     </td>
-                                    </tr>                                   
+                                    </tr>
                                     <?php } ?>
                                     <?php if ($pro['enviar_texto']==1) { ?>
                                     <tr>
@@ -166,10 +166,23 @@
                                     </td>
                                     </tr>
                                     <?php } ?>
-
+                                    <?php if (!empty($pro['regulamento'])) { ?>
+                                     <tr>
+                                      <td width='170' class="align_right"><p>Regulamento:</p>
+                                      <p>&nbsp;</p>
+                                      <p>&nbsp;</p>
+                                      <p>&nbsp;</p></td>
+                                      <td>
+                                      <div class='regulamento'><?=$pro['regulamento']?></textarea>
+                                    </td>
+                                    </tr>
+                                    <?php } ?>
                                     <tr>
                                       <td class="align_right">&nbsp;</td>
-                                      <td align="right"><input type='image' src="<?=ABSPATH?>img/enviar.png" alt="Enviar" width="92" height="33" class="img" /></td>
+                                      <td align="right" style='padding-top:40px'>
+                                        <b>Atenção</b> Ao enviar sua participação você estará concordando com os termos do regulamento da promoção!
+                                        <br/><br/><input type='image' src="<?=ABSPATH?>img/enviar.png" alt="Enviar" width="92" height="33" />
+                                    </td>
                                     </tr>
                                   </table>
                                 <?php } ?>
@@ -177,7 +190,7 @@
                         </div>
                       </form>
                       </div>
-		                <div class="clear"></div>
+                        <div class="clear"></div>
 
                     </div>
                     <!--End Centro-->

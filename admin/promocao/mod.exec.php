@@ -38,6 +38,7 @@ $res['data_termino']  = datept2en('/', $res['data_termino']);
                             ${var['pre']}_ganhadores=?,
                             ${var['pre']}_enviar_texto=?,
                             ${var['pre']}_enviar_arquivo=?,
+                            ${var['pre']}_regulamento=?,
                             ${var['pre']}_descricao=?";
      $sql.=" WHERE ${var['pre']}_id=?";
 	 if (!$qry=$conn->prepare($sql))
@@ -45,7 +46,7 @@ $res['data_termino']  = datept2en('/', $res['data_termino']);
 
 	 else {
 
-		$qry->bind_param('sssssiisi',
+		$qry->bind_param('sssssiissi',
 			$res['titulo'],
 			$res['linhafina'],
 			$res['data_inicio'],
@@ -53,6 +54,7 @@ $res['data_termino']  = datept2en('/', $res['data_termino']);
 			$res['ganhadores'],
                                     $res['enviar_texto'],
                                     $res['enviar_arquivo'],
+                                    $res['regulamento'],
                                     $res['descricao'],
 			$res['item']
 		);

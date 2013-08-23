@@ -453,6 +453,14 @@ div#social a:hover { opacity:0.8; }
 	z-index:999;
 }
 
+.regulamento {
+	width: 810px;
+	height: 300px;
+	border:1px solid #888;
+	overflow: auto;
+	padding:25px;
+}
+
 /* Contato */
 body#contato div.form { width:400px; margin:0; display:inline-block; background:none; padding:0 60px 10px 30px; position:relative; font-family: "Trebuchet MS", "Myriad Pro", Helvetica, sans-serif; }
 body#contato form p.text { margin-bottom:5px; }

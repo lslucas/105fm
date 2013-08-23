@@ -26,6 +26,7 @@
             pro_titulo,
             pro_enviar_arquivo,
             pro_enviar_texto,
+            pro_regulamento,
             pro_linhafina,
             DATE_FORMAT(pro_data_inicio, '%d/%m/%Y'),
             DATE_FORMAT(pro_data_termino, '%d/%m/%Y')
@@ -47,6 +48,7 @@
          $titulo,
          $enviar_arquivo,
          $enviar_texto,
+         $regulamento,
          $linhafina,
          $data_inicio,
          $data_termino
@@ -61,6 +63,7 @@
             $promocoes[$i]['enviar_arquivo'] = $enviar_arquivo;
             $promocoes[$i]['enviar_texto'] = $enviar_texto;
             $promocoes[$i]['linhafina'] = $linhafina. ' ';
+            $promocoes[$i]['regulamento'] = stripslashes($regulamento);
             $promocoes[$i]['data_inicio'] = $data_inicio;
             $promocoes[$i]['data_termino'] = $data_termino;
             $i++;
