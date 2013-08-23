@@ -56,8 +56,20 @@
                                         <label for="email">E-Mail:</label>
                                         <input name="email" type="email" id="email" value="" />
                                     </p>
+                                      <p class="text email">
+                                        <label for="cpf">CPF:</label>
+                                        <input name="cpf" type="cpf" id="email" value="" />
+                                    </p>
+                                    <p class="text email">
+                                        <label for="rg">RG:</label>
+                                        <input name="rg" type="rg" id="email" value="" />
+                                    </p>
+                                     <p class="text email">
+                                        <label for="bairro">Bairro:</label>
+                                        <input name="bairro" type="bairro" id="email" value="" />
+                                    </p>
                                     <p class="text cidade">
-                                    	<span>
+                                	<span>
                                             <label for="cidade">Cidade:</label>
                                             <input name="cidade" type="text" id="cidade" value="" />
                                         </span>
