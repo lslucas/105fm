@@ -67,6 +67,16 @@
                                 <input type="text" class='data' name="nascimento" id="nascimento" value='<?=isset($_POST['nascimento']) ? $_POST['nascimento'] : null?>'/></td>
                               </tr>
                               <tr>
+                                <td class="align_right">RG:</td>
+                                <td><label for="rg"></label>
+                                <input type="text" name="rg" id="rg" value='<?=isset($_POST['rg']) ? $_POST['rg'] : null?>'/></td>
+                              </tr>
+                              <tr>
+                                <td class="align_right">CPF:</td>
+                                <td><label for="cpf"></label>
+                                <input type="text" name="cpf" id="cpf" value='<?=isset($_POST['cpf']) ? $_POST['cpf'] : null?>'/></td>
+                              </tr>
+                              <tr>
                                 <td class="align_right">SEXO:</td>
                                 <td><input type="radio" name="sexo" id="sexo" value="masculino"<?=isset($_POST['sexo']) && $_POST['sexo']=='masculino' ? ' checked' : null?>/>
                                   <span class="alinha">masculino</span>

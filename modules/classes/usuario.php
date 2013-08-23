@@ -51,8 +51,10 @@ class Usuario extends Mail {
             $return .= '<li>Informe o UF (estado) de sua residência</li>';
         if (!isset($args['telefone']) || empty($args['telefone']))
             $return .= '<li>Informe ao menos um telefone para contato</li>';
-        // if (empty($args['cpf']) || !validaCPF($args['cpf']))
-            // $return .= '<li>Entre com um CPF válido</li>';
+         if (!isset($args['rg']) || empty($args['rg']))
+            $return .= '<li>Entre com seu RG</li>';
+        if (empty($args['cpf']) || !validaCPF($args['cpf']))
+            $return .= '<li>Entre com um CPF válido</li>';
         if ($action!='atualiza' && (empty($args['senha']) || strlen($args['senha'])<6))
             $return .= '<li>Entre com uma senha válida com 6 caracteres ou mais! Sua senha possui '.strlen($args['senha']).' caracteres</li>';
         if (!empty($args['senha']) && $args['senha']<>$args['confirmaSenha'])
@@ -234,6 +236,8 @@ class Usuario extends Mail {
                              `usr_email`,
                              `usr_senha`,
                              `usr_nascimento`,
+                             `usr_cpf`,
+                             `usr_rg`,
                              `usr_sexo`,
                              `usr_cep`,
                              `usr_endereco`,
@@ -244,17 +248,19 @@ class Usuario extends Mail {
                              `usr_uf`,
                              `usr_telefone`,
                              `usr_ip`
-                             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             if (!$qryins = $conn->prepare($sqlins))
                 return false;
 
             else {
                 $senhaEncrypted = $aes->encrypt($this->_args['senha']);
-                $qryins->bind_param('ssssssssssssss',
+                $qryins->bind_param('ssssssssssssssss',
                                         $this->_args['nome'],
                                         $this->_args['email'],
                                         $senhaEncrypted,
                                         $this->_args['nascimento'],
+                                        $this->_args['cpf'],
+                                        $this->_args['rg'],
                                         $this->_args['sexo'],
                                         $this->_args['cep'],
                                         $this->_args['endereco'],

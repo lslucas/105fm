@@ -18,6 +18,14 @@
                     </li>
 
                     <li>
+                        <strong id="titulo_cpf">RG:</strong>
+                        <div id="btn_cpf">Por que?</div>
+                        <div id="cpf_balloon">Nós precisamos dessas informações para poder identificar o vencedor da promoção. E fique tranquilo! Seus dados serão armazenados com toda a segurança.</div>
+                        <input type="text" class="required" name='rg' id='rg' value='<?=$val['rg']?>'>
+                        <div class="erro invisible errorRg">Campo obrigatório</div>
+                    </li>
+
+                    <li>
                         <strong id="titulo_cpf">CPF:</strong>
                         <div id="btn_cpf">Por que?</div>
                         <div id="cpf_balloon">Nós precisamos dessas informações para poder identificar o vencedor da promoção. E fique tranquilo! Seus dados serão armazenados com toda a segurança.</div>
@@ -61,6 +69,12 @@
 
             <div id="dados_pessoais_dir">
                 <ul>
+                     <li>
+                        <strong id="titulo_endereco">Bairro:</strong>
+                        <input type="text" class="required" name='bairro' id='bairro' value='<?=$val['bairro']?>'>
+                        <div class="erro invisible errorBairro">Campo obrigatório</div>
+                    </li>
+
                     <li>
                         <strong id="titulo_endereco">Endereço:</strong>
                         <input type="text" class="endereco required" name='endereco' id='endereco' value='<?=$val['endereco']?>'>

@@ -20,7 +20,7 @@
 	margin-bottom: 5px;
 	margin-left: 10px;
 }
-#email {
+#email, #cpf, #rg {
 	background-image: url(../img/bg-cd.jpg);
 	height: 24px;
 	width: 304px;
