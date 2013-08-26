@@ -1,4 +1,4 @@
-                    <a id="popup" class='hide fancybox' href="<?=ABSPATH?>img/popup/comunicado2.jpg">Pop-Up</a>
+                    <!-- <a id="popup" class='hide fancybox' href="<?=ABSPATH?>img/popup/comunicado2.jpg">Pop-Up</a> -->
                     <!--Colunas-->
                     <div id="centro" class="clearfix">
                         <div id="banner-wrapper">
@@ -82,7 +82,7 @@
                                                 $urlvideo = $urlvideo."?autoplay=1&wmode=transparent";
 
                                                 if (!empty($pergunta) && $i==3)
-                                                    break;                                               
+                                                    break;
                                         ?>
                                         <li class="clearfix">
                                             <a class="fancybox.iframe fancybox-video" href="<?=$urlvideo?>"><img src="<?=$vid[ 'imagem']?>" alt="<?=$vid['titulo']?>" width="136" height="92" /></a>
