@@ -79,6 +79,7 @@ $row_actions = <<<end
           <a class="btn btn-mini" href="javascript:void(0);"><i class="icon-cog"></i></a>
           <a class="btn btn-mini dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);" style='line-height:15px;'><span class="caret"></span></a>
           <ul class="dropdown-menu">
+            <li><a href="{$rp}promocao/helper/exec.xls.php?item=$id" class='tip' title='Clique para exportar participantes'><i class="icon-file"></i> Exportar Participantes</a></li>
             <li><a href="?p=$p&update&item=$id" class='tip' title='Clique para editar o ítem selecionado'><i class="icon-pencil"></i> Editar</a></li>
             <li><a href="#rm-modal{$id}" class='tip' data-toggle='modal' title="Clique para remover o ítem selecionado"><i class="icon-trash"></i> Deletar</a></li>
 			<li><a href="?p=$p&status&item=$id&noVisual" class='tip status status$id'  alt='{$altStatus}' title='Clique para alterar o status do ítem selecionado' id='$id' name='$titulo'>{$descStatus}</a></li>
