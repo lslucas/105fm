@@ -29,7 +29,7 @@
         /**
          * Após validado insere voto e mostra estatistica de resostas
          */
-        $sql= "INSERT INTO ".TP."_contato (con_assunto, con_nome, con_email, con_cpf, con_rg, con_bairro, con_cidade, con_estado, con_telefone, con_mensagem, con_ip) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql= "INSERT INTO ".TP."_contato (con_assunto, con_nome, con_email, con_cpf, con_rg, con_bairro, con_cidade, con_estado, con_telefone, con_mensagem, con_ip) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         if (!$qry= $conn->prepare($sql))
             echo $conn->error();
 
