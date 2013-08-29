@@ -32,6 +32,9 @@
     <input type='hidden' name='assunto' value='<?=$val['assunto']?>'/>
     <input type='hidden' name='nome' value='<?=$val['nome']?>'/>
     <input type='hidden' name='email' value='<?=$val['email']?>'/>
+    <input type='hidden' name='cpf' value='<?=$val['cpf']?>'/>
+    <input type='hidden' name='rg' value='<?=$val['rg']?>'/>
+    <input type='hidden' name='bairro' value='<?=$val['bairro']?>'/>
     <input type='hidden' name='cidade' value='<?=$val['cidade']?>'/>
     <input type='hidden' name='estado' value='<?=$val['estado']?>'/>
     <input type='hidden' name='telefone' value='<?=$val['telefone']?>'/>
@@ -41,6 +44,8 @@
     <b>Assunto:</b> <?=$val['assunto']?><br/>
     <b>Nome:</b> <?=$val['nome']?><br/>
     <b>Email:</b> <?=$val['email']?><br/>
+    <b>CPF:</b> <?=$val['cpf']?><br/>
+    <b>RG:</b> <?=$val['rg']?><br/>
     <b>Bairro:</b> <?=$val['bairro']?><br/>
     <b>Cidade/UF:</b> <?=$val['cidade']?>/<?=$val['estado']?><br/>
     <b>Telefone:</b> <?=$val['telefone']?><br/>
