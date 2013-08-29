@@ -70,34 +70,33 @@
                               );
         $num = $qry_cad->num_rows;
 
+            $position = 0;
             while($qry_cad->fetch()) {
-                $row[$id]['id'] = $id;
-                $row[$id]['promocao'] = $promo;
-                $row[$id]['resposta'] = $resposta;
-                $row[$id]['campo1'] = $campo1;
-                $row[$id]['campo2'] = $campo2;
-                $row[$id]['cadastro'] = $cad_promo;
-                $row[$id]['nome'] = $nome;
-                $row[$id]['email'] = $email;
-                $row[$id]['sexo'] = $sexo;
-                $row[$id]['rg'] = $rg;
-                $row[$id]['cpf'] = $cpf;
-                $row[$id]['cep'] = $cep;
-                $row[$id]['endereco'] = $endereco;
-                $row[$id]['numero'] = $numero;
-                $row[$id]['complemento'] = $complemento;
-                $row[$id]['bairro'] = $bairro;
-                $row[$id]['cidade'] = $cidade;
-                $row[$id]['uf'] = $uf;
-                $row[$id]['telefone'] = $telefone;
+                $row[$position]['id'] = $id;
+                $row[$position]['promocao'] = $promo;
+                $row[$position]['resposta'] = $resposta;
+                $row[$position]['campo1'] = $campo1;
+                $row[$position]['campo2'] = $campo2;
+                $row[$position]['cadastro'] = $cad_promo;
+                $row[$position]['nome'] = $nome;
+                $row[$position]['email'] = $email;
+                $row[$position]['sexo'] = $sexo;
+                $row[$position]['rg'] = $rg;
+                $row[$position]['cpf'] = $cpf;
+                $row[$position]['cep'] = $cep;
+                $row[$position]['endereco'] = $endereco;
+                $row[$position]['numero'] = $numero;
+                $row[$position]['complemento'] = $complemento;
+                $row[$position]['bairro'] = $bairro;
+                $row[$position]['cidade'] = $cidade;
+                $row[$position]['uf'] = $uf;
+                $row[$position]['telefone'] = $telefone;
+                $position++;
             }
 
         $qry_cad->close();
 
     } else echo $qry_cad->error;
-
-
-
 
    if($num==0)
      die('Nenhum email na lista!');
