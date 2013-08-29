@@ -34,7 +34,7 @@
             echo $conn->error();
 
         else {
-            $qry->bind_param('ssssssss',
+            $qry->bind_param('sssssssssss',
                                                     $assunto,
                                                     $nome,
                                                     $email,
