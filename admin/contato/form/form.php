@@ -41,6 +41,7 @@
     <b>Assunto:</b> <?=$val['assunto']?><br/>
     <b>Nome:</b> <?=$val['nome']?><br/>
     <b>Email:</b> <?=$val['email']?><br/>
+    <b>Bairro:</b> <?=$val['bairro']?><br/>
     <b>Cidade/UF:</b> <?=$val['cidade']?>/<?=$val['estado']?><br/>
     <b>Telefone:</b> <?=$val['telefone']?><br/>
     <b>Mensagem:</b> <?=$val['mensagem']?><br/>
