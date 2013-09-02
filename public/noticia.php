@@ -47,7 +47,7 @@
     // calling the API ...
     var obj = {
       method: 'feed',
-      // redirect_uri: '<?=SITE_URL?>',
+      redirect_uri: '<?=SITE_URL?>',
       link: '<?=$url?>',
       picture: '<?=$imagemUrl?>',
       name: '<?=$titulo?>',
@@ -56,7 +56,8 @@
     };
 
     function callback(response) {
-      document.getElementById('msg').innerHTML = "Post ID: " + response['post_id'];
+      // document.getElementById('msg').innerHTML = "Post ID: " + response['post_id'];
+      return true;
     }
 
     FB.ui(obj, callback);
