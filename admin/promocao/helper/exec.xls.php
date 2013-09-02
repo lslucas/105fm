@@ -108,64 +108,82 @@
         $str = preg_replace("/\t/", "\\t", $str);
         $str = preg_replace("/\r?\n/", "\\n", $str);
         if(strstr($str, '"')) $str = '"' . str_replace('"', '""', $str) . '"';
-        return html_entity_decode($str);
+        // return utf8_decode(html_entity_decode($str));
+        return '<td>'.html_entity_decode($str).'</td>';
       }
 
       # file name for download
       $filename = "105fm_".slugify($row[$id]['promocao'])."_".date('d-m-Y').".xls";
 
       header("Content-Disposition: attachment; filename=\"$filename\"");
-      header("Content-Type: application/vnd.ms-excel; charset=utf-8");
+      echo '<head> <meta http-equiv=Content-Type content="text/html; charset=utf-8"> </head>';
+      header("Content-Type: application/vnd.ms-excel;");
+      // header("Content-Type: application/vnd.ms-excel; charset=utf-8");
 
 
+      echo "<table>";
       if(count($row)>0) {
 
             # display field/column names as first row
-            echo "105FM ".$row[$id]['promocao']."\n";
-            echo "Gerado em ".date('d/m/Y H:i')."\n\n";
+            echo "<tr>";
+            echo "<th colspan=12><h1>".$row[$id]['promocao']."</h1></th>";
+            echo "</tr>";
+            echo "<tr>";
+            echo "<td><i>Gerado em ".date('d/m/Y H:i')."</i></td>";
+            echo "</tr>";
+            echo "<tr>";
+            echo "<td colspan=12>&nbsp;</td>";
+            echo "</tr>";
 
-            echo "Nome\t";
-            echo "Email\t";
-            echo "CPF\t";
-            echo "RG\t";
-            echo "CEP\t";
-            echo "Endereço\t";
-            echo "Número\t";
-            echo "Complemento\t";
-            echo "Bairro\t";
-            echo "Cidade/UF\t";
-            echo "Telefone\t";
-            echo "Resposta\t";
-            echo "Campo 1\t";
-            echo "Campo 2\t";
-            echo "Data/Hora Cadastro\t";
-            echo "\n";
+            echo "<tr style='border:1px solid #EEE;'>";
+            echo "<th>Nome</th>";
+            echo "<th>Email</th>";
+            echo "<th>CPF</th>";
+            echo "<th>RG</th>";
+            echo "<th>CEP</th>";
+            echo "<th>Endereço</th>";
+            echo "<th>Número</th>";
+            echo "<th>Complemento</th>";
+            echo "<th>Bairro</th>";
+            echo "<th>Cidade/UF</th>";
+            echo "<th>Telefone</th>";
+            echo "<th>Resposta</th>";
+            echo "<th>Campo 1</th>";
+            echo "<th>Campo 2</th>";
+            echo "<th>Data/Hora Cadastro</th>";
+            echo "</tr>";
+            echo "<tr>";
+            echo "<td colspan=12></td>";
+            echo "</tr>";
            // }
             $i=$totalValor=0;
             foreach ($row as $id=>$arr) {
+              echo "<tr style='border:1px solid #EEE;'>";
 
-                echo cleanData($arr['nome'])."\t";
-                echo cleanData($arr['email'])."\t";
-                echo cleanData($arr['cpf'])."\t";
-                echo cleanData($arr['rg'])."\t";
-                echo cleanData($arr['cep'])."\t";
-                echo cleanData($arr['endereco'])."\t";
-                echo cleanData($arr['numero'])."\t";
-                echo cleanData($arr['complemento'])."\t";
-                echo cleanData($arr['bairro'])."\t";
-                echo cleanData($arr['cidade'].'/'.$arr['uf'])."\t";
-                echo cleanData($arr['telefone'])."\t";
-                echo cleanData($arr['resposta'])."\t";
-                echo cleanData($arr['campo1'])."\t";
-                echo cleanData($arr['campo2'])."\t";
-                echo "\n";
+                echo cleanData($arr['nome']);
+                echo cleanData($arr['email']);
+                echo cleanData($arr['cpf']);
+                echo cleanData($arr['rg']);
+                echo cleanData($arr['cep']);
+                echo cleanData($arr['endereco']);
+                echo cleanData($arr['numero']);
+                echo cleanData($arr['complemento']);
+                echo cleanData($arr['bairro']);
+                echo cleanData($arr['cidade'].'/'.$arr['uf']);
+                echo cleanData($arr['telefone']);
+                echo cleanData($arr['resposta']);
+                echo cleanData($arr['campo1']);
+                echo cleanData($arr['campo2']);
+                echo cleanData($arr['cadastro']);
                 $totalValor++;
 
+              echo "</tr>";
             }
 
-            echo "\n";
-            echo "\n";
-            echo cleanData("Total de Cadastros até agora: {$totalValor}")."\t";
+            echo "<tr><td colspan=12></td></tr>";
+            echo "<tr><td colspan=12></td></tr>";
+            echo "<tr>".cleanData("Total de Cadastros até agora: {$totalValor}")."</tr>";
+            echo "</table>";
 
       }
 
