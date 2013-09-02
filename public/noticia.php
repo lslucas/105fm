@@ -48,7 +48,7 @@
     var obj = {
       method: 'feed',
       // redirect_uri: '<?=SITE_URL?>',
-      link: '<?=preg_replace("/\'/g", '', $url)?>',
+      link: '<?=preg_replace("/\'/", '', $url)?>',
       picture: '<?=$imagemUrl?>',
       name: '<?=addslashes($titulo)?>',
       caption: '',
