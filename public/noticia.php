@@ -52,7 +52,7 @@
       picture: '<?=$imagemUrl?>',
       name: '<?=$titulo?>',
       caption: '',
-      description: '<?=nl2br($resumo)?>'
+      description: '<?=preg_replace("/\r\n|\r|\n/m",'', nl2br($resumo))?>'
     };
 
     function callback(response) {
