@@ -12,9 +12,9 @@
      elseif ($basename=='comercial')
         $bodyId =  'contato';
      elseif ($basename=='agenda')
-        $bodyId = 'agendas';   
+        $bodyId = 'agendas';
      elseif ($basename=='promocoes')
-        $bodyId = 'promocoes';   
+        $bodyId = 'promocoes';
     else
         $bodyId = $basename;
 
@@ -48,8 +48,8 @@
     <head>
         <!--Meta Dados-->
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="description" content="Rádio 105 FM - P&aacute;ina Inicial" />
-        <meta name="keywords" content="Rádio 105 FM" />
+        <meta name="description" content="Rádio 105 FM - Entre as rádios mais ouvidas do Estado de São Paulo, a programação musical da emissora é diferente das outras rádios populares. A 105 FM direciona para o Samba de raiz, Rap, Reggae e Black Music." />
+        <meta name="keywords" content="Rádio 105 FM, radio, samba de raiz, rap, reggae, black music, black, musica online, são paulo, radio, brazillian music, brazilian music, music, brasileira" />
         <meta name="generator" content="" />
 
         <!--Título-->
@@ -102,7 +102,7 @@
                             'background-color' : '#000'
                         }
                     }
-                }               
+                }
             });
 
             $(".inlinemodal").fancybox({
