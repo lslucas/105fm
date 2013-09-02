@@ -61,8 +61,8 @@
         $qrypos->close();
 
         $texto = stripslashes($texto);
-        $imagem = !empty($imagem) ? ABSPATH.'images/noticia/'.$imagem : null;
         $imagemUrl = !empty($imagem) ? SITE_URL.'images/noticia/'.$imagem : null;
+        $imagem = !empty($imagem) ? ABSPATH.'images/noticia/'.$imagem : null;
         $url = SITE_URL.'noticia/' . $hashids->encrypt($id) . '/' .linkfySmart($titulo);
     }
 

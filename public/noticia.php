@@ -47,7 +47,7 @@
     // calling the API ...
     var obj = {
       method: 'feed',
-      redirect_uri: '<?=SITE_URL?>',
+      // redirect_uri: '<?=SITE_URL?>',
       link: '<?=$url?>',
       picture: '<?=$imagemUrl?>',
       name: '<?=$titulo?>',
