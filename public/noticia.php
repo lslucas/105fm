@@ -48,11 +48,11 @@
     var obj = {
       method: 'feed',
       // redirect_uri: '<?=SITE_URL?>',
-      link: '<?=$url?>',
+      link: '<?=preg_replace("/\'/g", '', $url)?>',
       picture: '<?=$imagemUrl?>',
-      name: '<?=$titulo?>',
+      name: '<?=addslashes($titulo)?>',
       caption: '',
-      description: '<?=preg_replace("/\r\n|\r|\n/m",'', nl2br($resumo))?>'
+      description: '<?=preg_replace("/\r\n|\r|\n/m",'', nl2br(addslashes($resumo)))?>'
     };
 
     function callback(response) {
