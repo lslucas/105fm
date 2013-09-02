@@ -41,7 +41,7 @@
                     </div>
                     <!--End Centro-->
  <script src='http://connect.facebook.net/en_US/all.js'></script>
-<script>
+<script type='text/javascript'>
   FB.init({appId: "496705820402963", status: true, cookie: true});
   function postToFeed() {
     // calling the API ...
@@ -52,7 +52,7 @@
       picture: '<?=$imagemUrl?>',
       name: '<?=$titulo?>',
       caption: '',
-      description: '<?=$resumo?>'
+      description: '<?=nl2br($resumo)?>'
     };
 
     function callback(response) {
