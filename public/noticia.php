@@ -49,7 +49,7 @@
       method: 'feed',
       redirect_uri: '<?=$url?>',
       link: '<?=SITE_URL?>',
-      picture: '<?=SITE_URL.$imagem?>',
+      picture: '<?=$imagemUrl?>',
       name: '<?=$titulo?>',
       caption: '',
       description: '<?=$resumo?>'
