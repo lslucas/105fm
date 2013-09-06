@@ -17,7 +17,7 @@
                                 <ul class="util">
                                     <li class="print"><a href="javascript:document.print();" title="Imprima esta notícia" onclick="window.print();">Imprimir</a></li>
                                     <!-- <li class="send"><a href="enviar.html" title="Envie para um amigo" class="fancy">Enviar para um amigo</a></li> -->
-                                    <li class="share"><a href="javascript:postToFeed(); return false;">Compartilhe</a></li>
+                                    <li class="share"><a href="javascript:postToFeed();">Compartilhe</a></li>
                                     <?php /* ?>
                                     <li class="prev"><a href="<?=$prev['link']?>" title="Notícia Anterior">Anterior</a></li>
                                     <li class="next"><a href="<?=$next['link']?>" title="Próxima Notícia">Próxima</a></li>
