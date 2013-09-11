@@ -130,7 +130,7 @@
     <div class="control-group">
       <label class="control-label" for="data">* Data</label>
       <div class="controls">
-        <input type="text" class="input-small required data" placeholder='dd/mm/YYYY' name='data' id='data' value='<?=dateen2pt('-', $val['data'], '/')?>'>
+        <input type="text" class="input-small required data" placeholder='dd/mm/YYYY' name='data' id='data' value='<?=($act=='insert' ? date('d/m/Y') : dateen2pt('-', $val['data'], '/'))?>'>
         <p class='help-block'>Data de publicação<br/><b>Dica:</b> Informe uma data no futuro para que a notícia somente seja exibido nessa data</p>
       </div>
     </div>
