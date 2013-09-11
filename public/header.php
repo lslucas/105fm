@@ -56,8 +56,8 @@
         <title><?=SITE_NAME?></title>
 
         <!--Favicon-->
-        <link rel="icon" type="image/vnd.microsoft.icon" href="<?=ABSPATH?>favicon.ico" />
-        <link rel="shortcut icon" type="image/x-icon" href="<?=ABSPATH?>favicon.ico" />
+        <link rel="icon" type="image/vnd.microsoft.icon" href="<?=ABSPATH?>img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="<?=ABSPATH?>img/favicon.ico" />
 
         <!--CSS-->
         <link href="<?=ABSPATH?>css/main.css" rel="stylesheet" type="text/css" media="all" />
