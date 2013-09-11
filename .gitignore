@@ -10,6 +10,9 @@
 *~
 *.sass-cache
 
+#never ignore
+!*.ico
+
 # OS or Editor folders
 .DS_Store
 Thumbs.db
@@ -35,6 +38,8 @@ dwsync.xml
 intermediate
 publish
 .idea
+storage/
+public/images*
 public/images/destaque
 public/images/banner
 public/images/classificado
