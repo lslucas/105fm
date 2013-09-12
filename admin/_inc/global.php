@@ -1,9 +1,10 @@
 <?php
  #define o charset padrão do php
- ini_set('default_charset','utf-8');
+ini_set('default_charset','utf-8');
+set_time_limit(0);
 
  //define fusohorario padrao
- date_default_timezone_set('America/Sao_Paulo');
+date_default_timezone_set('America/Sao_Paulo');
 $host = $_SERVER['HTTP_HOST']=='localhost' || $_SERVER['HTTP_HOST']=='105fm' ? 'localhost' : $_SERVER['HTTP_HOST'];
 
 //APIS
