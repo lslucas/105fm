@@ -328,7 +328,7 @@ div#social a:hover { opacity:0.8; }
 #agendas #eventos li div.f_left p { text-align:center; }
 #agendas #eventos li div.dados-evento {
 	margin-right:0 !important;
-	width: 700px;
+	max-width: 700px;
 	max-height: 200px;
 	overflow: auto;
 	border-bottom: 1px solid #B4B4B4;
