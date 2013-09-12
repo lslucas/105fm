@@ -326,7 +326,14 @@ div#social a:hover { opacity:0.8; }
 #agendas #eventos li div { float:left; margin-right:20px; }
 #agendas #eventos li div a img { }
 #agendas #eventos li div.f_left p { text-align:center; }
-#agendas #eventos li div.dados-evento { margin-right:0 !important; max-width:700px; }
+#agendas #eventos li div.dados-evento {
+	margin-right:0 !important;
+	width: 700px;
+	max-height: 200px;
+	overflow: auto;
+	border-bottom: 1px solid #B4B4B4;
+	padding: 10px;
+}
 #agendas #eventos li div.dados-evento span.data, span.data_especial { background:url(../img/icons/seta-azul.png) no-repeat left 3px; height:24px; padding-left:20px; font-size:14px; font-weight:bold; }
 #agendas #eventos li div.dados-evento h5 { padding-left:20px; font-size:16px; font-weight:bold; margin-top:5px; }
 #agendas #eventos li div.dados-evento p.black { font-weight:bold; }
