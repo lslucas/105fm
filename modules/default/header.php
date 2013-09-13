@@ -64,6 +64,7 @@
                 (SELECT rng_imagem FROM ".TP."_r_noticia_galeria WHERE rng_not_id=not_id ORDER BY rng_pos LIMIT 1)
                 FROM ".TP."_noticia
                 WHERE not_status=1
+                AND not_data<=DATE(NOW())
                 AND not_destaque=1
                 ORDER BY not_data DESC
                 LIMIT 4

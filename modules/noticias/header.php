@@ -9,6 +9,7 @@
 					DATE_FORMAT(not_data, '%d/%m/%Y') `data`
 				FROM ".TP."_noticia
 				WHERE not_status=1
+                AND not_data<=DATE(NOW())
                                             ORDER BY not_data DESC
 			";
 	 if (!$qry=$conn->prepare($sql))
