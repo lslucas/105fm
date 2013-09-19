@@ -396,7 +396,7 @@ div#social a:hover { opacity:0.8; }
 #galeria-fotos ul.pic { padding:10px 20px; }
 #galeria-fotos ul.pic li { width:210px; margin-right:22px; float:left }
 #galeria-fotos ul.pic li img { margin-bottom:5px; }
-#galeria-fotos ul.pic li.last { margin-right:0; }
+#galeria-fotos ul.pic li.last, #galeria-fotos ul.pic li:last-child { margin-right:0; }
 #galeria-fotos ul.pic li p.data { background:url(../img/icons/seta-lilas.png) no-repeat left center; line-height:20px; padding-left:20px; font-weight:bold; margin-bottom:5px; }
 
 /* Galeria de vídeos  */

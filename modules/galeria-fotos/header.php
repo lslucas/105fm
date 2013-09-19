@@ -45,7 +45,7 @@
         while ($qry->fetch()) {
             array_push($lstCapas, $capa);
             array_push($lstGalerias, $id);
-            if ($j==3) {
+            if ($j==4) {
                 $j=0;
                 $i=0;
                 $page++;
