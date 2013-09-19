@@ -46,7 +46,7 @@
                                     <?php
                                         foreach ($gal as $int=>$foto) {
                                     ?>
-                                    <li>
+                                    <li <?php if ($int==3) echo "class='last'"; ?>>
                                             <p class="data"><?=$foto['data']?></p>
                                             <center>
                                     	<a id='galeria<?=$foto['foto_id']?>' href="javascript:;">
