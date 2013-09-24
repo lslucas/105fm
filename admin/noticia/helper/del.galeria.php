@@ -31,7 +31,7 @@
  $num = $qry_guarda->num_rows();
 
    $row_id=$row_field='';
-   while($qry_guarda->fetch()) { 
+   while($qry_guarda->fetch()) {
     $row_id   .= $id.',';
     $row_field.= $field.',';
    }
@@ -63,12 +63,14 @@
   } elseif ($ok) {
 
      $sql_rem = "DELETE FROM ".TABLE_PREFIX."_${res['prefix']} WHERE ${res['pre']}_id=?";
+     var_dump($sql_rem);
+     var_dump($id);
      $qry_rem = $conn->prepare($sql_rem);
 
 	 #variaveis de contagem de arquivos apagados ou nao
 	 $apagado = $nao_apagado = $erro_apagar = 0;
 
-	 for($i=0;$i<count($row['id']);$i++) { 
+	 for($i=0;$i<count($row['id']);$i++) {
 	  if (!empty($row['id'][$i])) {
 
 
@@ -105,7 +107,7 @@
 
 
 	}
-      } #fecha for 
+      } #fecha for
 
       if($apagado==1)
        echo "foto apagada!<br>";
