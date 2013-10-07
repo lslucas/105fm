@@ -21,11 +21,11 @@
 	$var['update'] = 'Alterar '.$vr_singular;
 
 	$var['imagemWidth'] = 500;
-	$var['imagemHeight'] = 266;
+	$var['imagemHeight'] = 500;
 	$var['thumbWidth'] = 248;
-	$var['thumbHeight'] = 60;
+	$var['thumbHeight'] = 248;
 	$var['homeWidth'] = 227;
-	$var['homeHeight'] = 121;
+	$var['homeHeight'] = 227;
 
 	$var['imagemWidth_texto'] = ' '.$var['imagemWidth'].'px (largura)';
 	$var['imagemHeight_texto'] = ' '.$var['imagemHeight'].'px (altura)';

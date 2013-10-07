@@ -63,8 +63,6 @@
   } elseif ($ok) {
 
      $sql_rem = "DELETE FROM ".TABLE_PREFIX."_${res['prefix']} WHERE ${res['pre']}_id=?";
-     var_dump($sql_rem);
-     var_dump($id);
      $qry_rem = $conn->prepare($sql_rem);
 
 	 #variaveis de contagem de arquivos apagados ou nao
