@@ -73,7 +73,7 @@
 		$handle->image_resize        = true;
 		// $handle->image_ratio = true;
 		// $handle->image_ratio_crop    = true;
-                      // $handle->image_ratio_fill    = '#BBC4D9';
+                      // $handle->image_ratio_fill    = '#BACEDB';
                       // $handle->image_ratio_no_zoom_in = true;
 		$handle->image_x             = $var['homeWidth'];
 		$handle->image_y             = $var['homeHeight'];
