@@ -59,7 +59,7 @@
                                         <div style='background: #fff url(<?=$not['imagem']?>) top left; width:227px; height:121px; overflow:hidden)' alt="<?=$not['titulo']?>"></div>
                                         <!-- <img src="<?=$not['imagem']?>" alt="<?=$not['titulo']?>" width="227" height="121" /> -->
                                     </a>
-                                    <h5><a class="uppercase navy" href="<?=$not['link']?>" title="<?=$not['titulo']?>"><?=$not['titulo']?></a> <span class="data"><?=$not['data']?></span></h5>
+                                    <h5><a class="uppercase navy" href="<?=$not['link']?>" title="<?=$not['titulo']?>"><?=$not['titulo']?></a> <!--<span class="data"><?=$not['data']?></span>--></h5>
                                     <p><a class="uppercase" href="<?=$not['link']?>" title="<?=$not['titulo']?>"><?=$not['resumo']?></a></p>
                                 </li>
                                 <?php

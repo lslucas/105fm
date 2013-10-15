@@ -6,7 +6,7 @@
                         <div class="clear"></div>
 
                         <div id="noticia-teste" class="box noticia">
-                            <h1 class="uppercase green" style="margin-left:10px;"><?=$titulo?> <span class="data"><?=$data?></span></h1>
+                            <h1 class="uppercase green" style="margin-left:10px;"><?=$titulo?> <!--<span class="data"><?=$data?></span>--></h1>
                             <div class="conteudo-noticia">
                                 <p><?=$texto?></p>
                             </div>

@@ -22,7 +22,8 @@
 		$qry->store_result();
 
 		while ($qry->fetch()) {
-                        $list[$id]['titulo'] = '<span class="data_especial">'.$data.'</span>&nbsp;&nbsp;&nbsp;&nbsp;'.$titulo;
+                        // $list[$id]['titulo'] = '<span class="data_especial">'.$data.'</span>&nbsp;&nbsp;&nbsp;&nbsp;'.$titulo;
+                        $list[$id]['titulo'] = '<span class="data_especial">&nbsp;</span> '.trim($titulo);
                         $list[$id]['data'] = $data;
                         $list[$id]['link'] = ABSPATH.'noticia/' . $hashids->encrypt($id) . '/' .linkfySmart($titulo);
                       }
