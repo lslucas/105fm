@@ -74,6 +74,8 @@ function nomeCategoriaContato($cat)
          break;
         case 'rede-nacional-do-samba': return 'Rede Nacional do Samba';
          break;
+        case 'selecao-ouvinte-com-giuliano-faccio': return 'Seleção do Ouvinte com Giuliano Faccio';
+         break;
         case 'selecao-ouvinte-com-fabiano-olivato': return 'Seleção do Ouvinte com Fabiano Olivato';
          break;
         case 'selecao-ouvinte-com-mauricio-oliveira': return 'Seleção do Ouvinte com Maurício Oliveira';
