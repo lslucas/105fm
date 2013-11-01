@@ -104,6 +104,7 @@
                                                 <option value="portal-105fm">Portal da 105 FM</option>
                                                 <option value="rap-du-bom">Rap du Bom</option>
                                                 <option value="rede-nacional-do-samba">Rede Nacional do Samba</option>
+                                                <option value="selecao-ouvinte-com-giuliano-faccio">Seleção do Ouvinte com Giuliano Faccio</option>
                                                 <option value="selecao-ouvinte-com-fabiano-olivato">Seleção do Ouvinte com Fabiano Olivato</option>
                                                 <option value="selecao-ouvinte-com-mauricio-oliveira">Seleção do Ouvinte com Maurício Oliveira</option>
                                                 <option value="selecao-ouvinte-com-sandra-groth">Seleção do Ouvinte com Sandra Groth</option>
