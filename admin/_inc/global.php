@@ -69,7 +69,7 @@ if ($host=='localhost') {
 	define('MAIL_SMTPAUTH', 'login');
 	define('MAIL_SMTPSECURE', 'tls');
 	define('MAIL_PORT', 587);
-	define('MAIL_USER', 'dev@radio105fm.com.br');
+	define('MAIL_USER', 'noreply@radio105fm.com.br');
 	define('MAIL_PASS', 'mvdbt9Radio');
 
 	/**
