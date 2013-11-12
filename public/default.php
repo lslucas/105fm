@@ -1,4 +1,4 @@
-                    <!-- <a id="popup" class='hide fancybox' href="<?=ABSPATH?>img/popup/comunicado2.jpg">Pop-Up</a> -->
+                    <a id="popup" class='hide fancybox' href="<?=ABSPATH?>img/popup/comunicado-feriados.jpg">Pop-Up</a>
                     <!--Colunas-->
                     <div id="centro" class="clearfix">
                         <div id="banner-wrapper">
