@@ -1,6 +1,6 @@
-                    <?php $curdate = date('Y-m-d'); if ($curdate<'2013-11-15') { ?>
+                    <?php $curdate = date('Y-m-d'); if ($curdate<='2013-11-15') { ?>
                     <a id="popup" class='hide fancybox' href="<?=ABSPATH?>img/popup/comunicado-feriados.jpg">Pop-Up</a>
-                    <?php } elseif ($curdate>'2013-11-17' && $curdate<'2013-11-20') { ?>
+                    <?php } elseif ($curdate>'2013-11-17' && $curdate<='2013-11-20') { ?>
                     <a id="popup" class='hide fancybox' href="<?=ABSPATH?>img/popup/comunicado-feriado-20.jpg">Pop-Up</a>
                     <?php } ?>
                     <!--Colunas-->
