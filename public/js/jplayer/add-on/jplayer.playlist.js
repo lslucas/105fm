@@ -399,7 +399,7 @@
 			var headerMusic = '';
 
 			headerMusic += "<img src='"+listVar.thumb+"' width=80 height=80>";
-			headerMusic += "<span>Teste "+listVar.title+"</a><br>";
+			headerMusic += "<span>"+listVar.title+"</a><br>";
 			headerMusic += "<q class='txtRadioArtista linksOrange'>"+listVar.artist+"</q>";
 
 			$('<img/>').attr('src', listVar.thumb).load(function(){

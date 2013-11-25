@@ -34,9 +34,11 @@
         $qrymusic->execute();
 
         $ip = apenasNumeros($_SERVER['REMOTE_ADDR']);
-        $i=0;
+        $i=1;
+        $listMusicas = array();
         while ($qrymusic->fetch()) {
             $url = parse_url($mp3);
+            $listMusicas[$code] = $i;
             $musicas[$i]['code'] = $code;
             $musicas[$i]['titulo'] = $titulo;
             $musicas[$i]['data'] = $data;
@@ -49,5 +51,12 @@
         }
 
         $qrymusic->close();
+        if (isset($_GET['code']) && isset($listMusicas[$_GET['code']])) {
+            $firstInt = $listMusicas[$_GET['code']];
+            $first = $musicas[$firstInt];
+            unset($musicas[$firstInt]);
+            $musicas[0] = $first;
+        }
+        ksort($musicas);
 
      }

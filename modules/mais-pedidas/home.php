@@ -5,6 +5,7 @@
      */
     $sqlmusic =  "
         SELECT
+            mus_code,
             mus_titulo,
             DATE_FORMAT(mus_data, '%d/%m/%Y'),
             (SELECT art_titulo FROM ".TP."_artista WHERE art_code=mus_art_code),
@@ -26,6 +27,7 @@
      else {
 
         $qrymusic->bind_result(
+         $code,
          $titulo,
          $data,
          $artista,
@@ -46,7 +48,7 @@
             $musicas[$i]['artista_imagem'] = ABSPATH.'images/artista/thumb/'.$imagem;
             $musicas[$i]['mp3'] = $mp3;
             $musicas[$i]['download'] = ABSPATH."createlink/{$code}-{$ip}";
-            $musicas[$i]['ouvir'] = ABSPATH."images/musica/".$mp3;
+            $musicas[$i]['ouvir'] = ABSPATH."ouvir?code=".$code;
             $i++;
         }
 

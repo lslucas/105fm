@@ -10,14 +10,12 @@
     <!-- end css -->
     </head>
 <body>
-    <!--
     <div id="radioTopo">
-        <img src="<?=STATIC_PATH?>radio/headerRadio.jpg" width="172" height="45">
+        <a href='<?=SITE_URL?>' target='_blank'><img src="<?=STATIC_PATH?>logo.png" height="50" style='margin:10px;'></a>
     </div>
-    -->
 <?php
 $incJS .= "
-    var t = setTimeout(\"resizeTo(990, 601);\", 5000);
+    // var t = setTimeout(\"resizeTo(990, 601);\", 5000);
 ";
 echo "<script type='text/javascript'>\n";
 echo 'var jsonMusicas = [';
@@ -31,19 +29,10 @@ foreach ($musicas as $int=>$musica) {
     echo "\n\t\tartist: \"{$musica['artista']}\",";
     echo "\n\t\tthumb: \"{$musica['thumb']}\"";
     echo "\n\t}";
-    if (($int+1)<count($musicas))
+    // if (($int+1)<count($musicas))
         echo ",";
 }
-// echo json_encode($jsonMusic);
-/*
-        {
-            i: 11,
-            title:"Thin Ice",
-            mp3:"http://www.jplayer.org/audio/mp3/Miaow-10-Thin-ice.mp3",
-            oga:"http://www.jplayer.org/audio/ogg/Miaow-10-Thin-ice.ogg",
-            artist:"Emicida",
-            thumb:"http://localhost/funkdacapital/public/images/radio/capaDisco.jpg"
-        }*/
+
 echo '];';
 echo "\njsonMusicas = JSON.stringify(jsonMusicas);";
 echo "</script>";
@@ -104,13 +93,11 @@ echo "</script>";
 <!-- end js -->
 <script type="text/javascript" src="js/modules/radio/header.js"></script>
 <script type='text/javascript'>
-/*
     <?=isset($incJS) ? $incJS : null?>
 
     $(function() {
         <?=isset($incjQuery) ? $incjQuery : null?>
     });
-*/
-</script>
+    </script>
 </body>
 </html>
