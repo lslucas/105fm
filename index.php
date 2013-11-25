@@ -15,7 +15,7 @@
 	/*
 	 *HEADERS PARA TODAS AS PAGINAS
 	*/
-	if ($basename<>'ajax')
+	if (!in_array($basename, array('ajax', 'ouvir')))
 		include_once 'modules/autoload/header.php';
 
 
@@ -64,7 +64,7 @@
 	/**
 	 *HTML HEADERS
 	 */
-	if ($basename<>'ajax')
+	if (!in_array($basename, array('ajax', 'ouvir')))
 		include_once 'public/header.php';
 
 
@@ -103,5 +103,5 @@
 	/**
 	 *HTML FOOTER
 	*/
-	if ($basename<>'ajax')
+	if (!in_array($basename, array('ajax', 'ouvir')))
 		include_once 'public/footer.php';

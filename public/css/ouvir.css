@@ -1,0 +1,665 @@
+@charset "UTF-8";
+/* CSS Document */
+*{margin:0;padding:0;}
+@font-face {font-family: 'YanoneKaffeesatzRegularRg';src: url('fonts/yanonekaffeesatz-regular-webfont.eot');src: url('fonts/yanonekaffeesatz-regular-webfont.eot?#iefix') format('embedded-opentype'),url('fonts/yanonekaffeesatz-regular-webfont.woff') format('woff'),url('fonts/yanonekaffeesatz-regular-webfont.ttf') format('truetype');font-weight: normal;font-style: normal;
+}
+body {background-color:#000;font-family: Arial, Helvetica, sans-serif;font-size:13px; color:#FFF; }
+body, html {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	overflow: hidden;
+}
+ul, li{list-style-type: none;}
+a{text-decoration:none;color:#FFF;}
+p{margin-bottom:15px;margin-top:17px;}
+img{border:0px;}
+
+/*Ajusta cor do placeholder no chrome e firefox*/
+input::-webkit-input-placeholder {}
+input:-moz-placeholder {}
+input::-webkit-input-placeholder {color: #424141;}
+input:-moz-placeholder {color: #424141;}
+
+/***************************************************
+		Div's globais que montam o layout
+***************************************************/
+#geral{
+	width:960px;
+	margin:10px auto;
+}
+#topo{
+	width:100%;
+	height:84px;
+}
+#radioPublica{
+	width:960px;
+	height:88px;
+	margin-top:19px;
+}
+#conteudo{
+	width:960px;
+	margin:20px auto;
+	height:auto;
+}
+#esquerda{
+	float:left;
+	width:595px;
+}
+#esquerda ul{
+	float:left;
+	width:595px;
+	margin-bottom:40px;/*espacamento de cada tema*/
+}
+#direita{
+	float:left;
+	width:365px;
+}
+#direita ul{
+	float:left;
+	width:365px;
+	margin-bottom:40px;/*espacamento de cada tema*/
+}
+#base{
+	float:left;
+	width:100%;
+}
+#logoBase{
+	position:relative;
+	left:48%;
+	width:62px;
+	height:20px;
+	margin:8px 0;
+}
+
+/***************************************************
+					Div's Topo
+***************************************************/
+#logo{
+	width:175px;
+	height:57px;
+	float:left;
+	margin:10px 10px 0px 20px;
+}
+/* Monta div Escute as radios oficiais e btns Redes Sociais */
+#oucaRedes{
+	position:absolute;
+	height:19px;
+	left:45%;
+	font-size:11px;
+	margin-top:10px;
+}
+#oucaRedes ul{
+	float:left;
+	margin-top:-5px;
+	margin-left:224px;
+}
+#oucaRedes li{
+	float:left;
+	padding-right:4px;
+}
+#oucaradio{
+	float:left;
+}
+
+
+/***************************************************
+						Menu
+***************************************************/
+#menuDropdown{
+	width:755px;
+	height:35px;
+	float:left;
+	margin-top:45px;
+}
+#menuDropdown li{
+	float:left;
+	text-align:center;
+	padding:5px 18px; /*espacamento do menu*/
+}
+#menuDropdown li:hover{
+	color:#FFF;
+	background-color:#333;
+}
+.menuDropdown_selected{
+	color:#000;
+	background-color:#f8941d;
+}
+#linhaHorizontal{
+	float:left;
+	width:960px;
+	height:3px;
+	background-color:#f8941d;
+}
+
+/***************************************************
+	Div's ouça a radio e alinha banner propaganda
+***************************************************/
+#radioPublica li{
+	float:left;
+}
+#oucaRadio{
+	float:left;
+}
+#oucaRadioTXT{
+	float:left;
+	width:131px;
+	margin-top:7px;
+}
+#oucaRadioTXT li{
+	text-align:left;
+	padding-left:10px;
+}
+li.bannerG {
+	margin-left:15px;
+}
+
+/***************************************************
+		Div's que montam o lado esquerdo do site
+***************************************************/
+#telaBusca{
+	float:left;
+	margin-bottom:17px;
+}
+#telaBusca li{
+	float:left;
+}
+#btnPosta{
+	float:left;
+	padding:6px 12px 6px 12px;
+}
+#btnPosta:hover{
+	background-color:#333;
+}
+#btnRespostaBusca{
+	padding:4px 8px;
+}
+#btnRespostaBusca:hover{
+	background-color:#333;
+}
+.lupa{
+	padding:6px 9px 0px 9px;
+}
+.campoTexto{
+	padding:6px 0px 6px 0px;
+	width:256px;
+}
+.fieldBusca{
+	width:100%;
+	border:0px;
+	height:21px;
+	font-family: 'YanoneKaffeesatzRegularRg', Helvetica, Arial, sans-serif;
+	color: #424141;
+	font-size:21px;
+}
+
+#bgTwitter{
+	float:left;
+	background-color:#92278f;
+	width:365px;
+}
+#bgTwitter ul{
+	margin:0px 20px 0px 20px;
+}
+#bgTwitter ul li{
+	float:left;
+	width:325px;
+}
+.twitterValor{
+	text-align:left;
+	margin-top:20px;
+	margin-bottom:20px;
+}
+/* Monta box de título de cada tema, acompanha .tit'Color' para escolher a cor */
+.tituloDiv{
+	float:left;
+	padding:7px 16px 7px 16px;
+	margin-bottom:15px;
+	font-family: 'YanoneKaffeesatzRegularRg', Helvetica, Arial, sans-serif;
+	color: #FFF;
+	font-size:21px;
+	text-align:center;
+}
+/* Monta box de título de cada tema, acompanha .tit'Color' para escolher a cor */
+.tituloDivGeral{
+	width: 544px;/*tamanho da lista de imagens #listaVideo*/
+	float:left;
+	padding:7px 16px 7px 16px;
+	margin-bottom:15px;
+	font-family: 'YanoneKaffeesatzRegularRg', Helvetica, Arial, sans-serif;
+	color: #FFF;
+	font-size:21px;
+	text-align:left;
+}
+.tituloDivGeralDireita{
+	width: 332px;/*tamanho da lista de imagens #listaVideo*/
+	float:left;
+	padding:7px 16px 7px 16px;
+	margin-bottom:15px;
+	font-family: 'YanoneKaffeesatzRegularRg', Helvetica, Arial, sans-serif;
+	color: #FFF;
+	font-size:21px;
+	text-align:left;
+}
+/* Monta box de título artistas, acompanha .tit'Color' para escolher a cor, não possui float*/
+#tituloArtistas{
+	padding:7px 16px 7px 16px;
+	margin-bottom:15px;
+	font-family: 'YanoneKaffeesatzRegularRg', Helvetica, Arial, sans-serif;
+	color: #FFF;
+	text-align:center;
+}
+#listaVideos li{
+	float:left;
+	text-align:center;
+	width:133px;
+	margin-right: 15px;
+	margin-bottom: 3px;
+}
+#listaFotos li{
+	float:left;
+	text-align:center;
+	width:133px;
+	margin-right: 15px;
+	margin-bottom: 3px;
+}
+.imgBorda{
+	border:5px solid #333;
+}
+
+/***************************************************
+						Classes
+***************************************************/
+/* Cores para titulos */
+.titOrange{
+	background-color:#f8941d;
+}
+.titFucsia{
+	background-color:#605ca9;
+}
+.titGray{
+	background-color:#333;
+}.titGrayBusca{
+	background-color:#1c1c1c;
+}
+.titBlue{
+	background-color:#0054a6;
+}.titRed{
+	background-color:#ee1c24;
+}.titCian{
+	background-color:#00bff3;
+}
+
+/* Classes edição texto */
+.linksOrange{
+	color:#f8941d;
+}
+a.linksOrange:hover{
+	color:#FFF;
+}
+.txtChamada{
+	font-family: 'YanoneKaffeesatzRegularRg', Helvetica, Arial, sans-serif;
+	color: #FFF;
+	font-size:18px;
+}
+.txtTitulo{
+	font-family: 'YanoneKaffeesatzRegularRg', Helvetica, Arial, sans-serif;
+	color: #FFF;
+	font-size:21px;
+}
+.txtTituloGrande{
+	font-family: 'YanoneKaffeesatzRegularRg', Helvetica, Arial, sans-serif;
+	/*color: #FFF;*/
+	font-size:27px;
+	line-height:26px;
+}
+.txtRadioArtista{
+	font-family: 'YanoneKaffeesatzRegularRg', Helvetica, Arial, sans-serif;
+	font-size:16px;
+	line-height:26px;
+}
+.boxTexto{
+	width: 575px;
+	height: 100px;
+}
+#boxData{
+	width: 49px;
+	height: 55px;
+	background: #ddd;
+	float: left;
+	margin-right: 10px;
+}
+#boxDataMes{
+	height: 13px;
+	background: #f7941c;
+	padding: 1px 0;
+	color: #FFF;
+	font-size:11px;
+	text-align: center;
+}
+#boxDataDia{
+	padding: 4px 0;
+	color: #000;
+	font-size:32px;
+	text-align: center;
+}
+#boxTextoShows{
+	width: 516px;
+	float: left;
+}
+#parceiros{
+	width:200px ;
+	padding-left: 2px;
+}
+#parceiros li{
+	float: left;
+	padding: 0 10px;
+}
+.txtCenter{
+	text-align:center;
+}
+.txtGray{
+	color: #CCC;
+	font-size: 11px;
+}
+
+/***************************************************
+				Transições destaques
+***************************************************/
+#slider ul, #slider li {
+	margin:0px;
+	padding:0px;
+}
+#slider li {
+	width:365px;
+	height:350px;
+	overflow:hidden;
+}
+#slider1next, #slider1prev {
+	display:block;
+	z-index:1000;
+}
+
+/* numeric controls */
+	ol#controls{
+		float:right;
+		margin-top:12px;
+	}
+	ol#controls li{
+		float:left;
+		margin-left:5px;
+	}
+	ol#controls li a{
+		font-family: 'YanoneKaffeesatzRegularRg', Helvetica, Arial, sans-serif;
+		color: #FFF;
+		font-size:18px;
+		float:left;
+		background-color:#00bff3;
+		padding:2px 8px 2px 8px;
+		text-decoration:none;
+	}
+	ol#controls li a:hover{
+		background-color:#1e98b9;
+	}
+	ol#controls li.current a{
+		background-color:#FFF;
+		color:#000;
+	}
+	ol#controls li a:focus, #prevBtn a:focus, #nextBtn a:focus{outline:none;}
+
+
+/***************************************************
+					Lightbox
+***************************************************/
+.fancybox-custom .fancybox-skin {box-shadow: 0 0 50px #222;}
+
+/*Titulo videos*/
+h3#title, h4#subtitle {
+	padding:0;
+	margin:0;
+}
+div#boxhtml {
+	display:table-cell;
+	padding:20px;
+	vertical-align:middle;
+	font-family: 'YanoneKaffeesatzRegularRg', Helvetica, Arial, sans-serif;
+	color: #FFF;
+	font-size:18px;
+}
+div.overlay {
+	display:table;
+	position:relative;
+	z-index:-50;
+}
+a.lightbox {
+	z-index:100;
+	display:block;
+}
+
+/***************************************************
+	Monta as paginas internas, exibidas em lightbox
+***************************************************/
+#conteudoInterna{
+	width:575px;
+	padding:15px;
+}
+#conteudoInterna ul{
+	float:left;
+	margin-bottom:4px;
+}
+/***************************************************
+				Div's página artista
+***************************************************/
+#fotoArtista{
+	float:left;
+	width:200px;
+	margin-bottom:15px;
+}
+#idArtista{
+	float:left;
+	width:355px;
+	text-align:left;
+	padding-left:20px;
+}
+#idArtista li{
+	margin-bottom:20px;
+}
+
+/***************************************************
+			Div's página contato
+***************************************************/
+.contatoField{
+	font-family: 'YanoneKaffeesatzRegularRg', Helvetica, Arial, sans-serif;
+	color: #333;
+	font-size:21px;
+	width:100%;
+	border:0px;
+}
+#contato ul{
+	font-family: 'YanoneKaffeesatzRegularRg', Helvetica, Arial, sans-serif;
+	color: #FFF;
+	font-size:21px;
+	width:400px;
+	margin-bottom:15px;
+}
+#contato ul li{
+	float:left;
+	width:48%;
+	padding-left:8px;
+	padding-bottom:5px;
+	text-align:right;
+}
+
+/***************************************************
+			Btn's com rollover de imagem
+***************************************************/
+#btnFacebook {
+	width: 19px;
+	height: 19px;
+	background:url(../images/icons/facebook.jpg) top left no-repeat;
+	overflow: hidden;
+	display: block;
+	text-indent: 20000px;
+}
+#btnFacebook:hover {
+	background-position: bottom left;
+}
+#btnYoutube {
+	width: 19px;
+	height: 19px;
+	background:url(../images/icons/youtube.jpg) top left no-repeat;
+	overflow: hidden;
+	display: block;
+	text-indent: 20000px;
+}
+#btnYoutube:hover {
+	background-position: bottom left;
+}
+#btnTwitter{
+	width: 19px;
+	height: 19px;
+	background:url(../images/icons/twitter.jpg) top left no-repeat;
+	overflow: hidden;
+	display: block;
+	text-indent: 20000px;
+}
+#btnTwitter:hover {
+	background-position: bottom left;
+}
+
+#paginacao{
+	height: 40px;
+	padding-top:20px;
+}
+#paginacao li{
+	margin: 0 3px;
+	float: left;
+	padding: 4px 8px;
+	background: #f8941d;
+	border-radius: 3px;
+}
+#paginacao li:hover{
+	background: #333;
+}
+
+/***************************************************
+			Classes radio online
+***************************************************/
+#radioTopo{
+	width: 970px;
+	height: 38px;
+	background: url(../images/radio/radioTop.jpg) repeat-x top #000;
+}
+#radioPlayer{
+	margin: 10px 10px;
+	width: 960px;
+}
+#radioBotoes{
+	width: 100%;
+	height: 180px;
+	border-radius:5px 5px 0px 0px;
+	background: url(../images/radio/topBg.jpg) repeat-x top #000;
+}
+#radioPlayer ul li{
+	height: 60px;
+	padding: 7px 10px;
+}
+#thumbMusica{
+	float: left;
+	margin-right: 20px;
+}
+#topBotoes{
+	padding:8px 10px;
+	height: 80px;
+	width: 940px;
+	margin-bottom:10px;
+}
+#topBotoes img{
+	float:left;
+	margin-right: 15px;
+}
+#navBotoes{
+	width: 920px;
+	height: 27px;
+	padding: 10px 20px;
+}
+#navBotoes img{
+	float:left;
+	margin-right: 15px;
+}
+.musica{
+	background: #1e1e1e;
+}
+.musica1{
+	background: #2a2a2a;
+}
+.jp-play {
+	width: 28px;
+	height: 27px;
+	background: transparent url(../images/radio/radioPlay.png) no-repeat top;
+	cursor:pointer;
+}
+.jp-pause {
+	width: 28px;
+	height: 27px;
+	background: transparent url(../images/radio/radioPause.png) no-repeat top;
+	cursor:pointer;
+}
+.jp-pause:hover, .jp-play:hover {
+	background-position: left bottom;
+}
+.jp-next:hover {
+	background-position: left top;
+}
+.jp-mute, .jp-next {
+	cursor:pointer;
+}
+.jp-next {
+	width: 20px;
+	height: 20px;
+	display:inline-block;
+	margin-bottom:5px;
+	background: transparent url(../images/radio/radioNext.png) no-repeat bottom;
+}
+.jp-unmute {
+	width: 22px;
+	height: 27px;
+	background: transparent url(../images/radio/volume-mute.jpg) no-repeat top left;
+	cursor:pointer;
+}
+.play-pause_controls, .volume-controls, .controls {
+	display:inline-block;
+}
+.jp-progress {
+	margin-left:10px;
+	margin-right:15px;
+	display:inline-block;
+	width: 790px;
+}
+.jp-seek-bar {
+	background: transparent url(../images/radio/track.jpg) no-repeat top left;
+	width:0px;
+	height:17px;
+	cursor:pointer;
+	padding-top:10px;
+}
+.jp-play-bar {
+	background: transparent url(../images/radio/corrido.png) no-repeat top left;
+	width:0px;
+	height:100%;
+	cursor:pointer;
+}
+.jp-playlist {
+	height:300px;
+	overflow:auto;
+}
+.volume-controls {
+	width:22px;
+}
+.controls {
+	margin-left:10px;
+}
+.hide {
+	display: none;
+}
