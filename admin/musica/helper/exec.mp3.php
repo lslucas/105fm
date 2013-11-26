@@ -1,5 +1,4 @@
 <?php
-
 if (isset($_FILES)) {
 
     include_once "_inc/class.upload.php";
@@ -7,10 +6,9 @@ if (isset($_FILES)) {
     $sqlImagem = '';
     $w=$pos=0;
 
-    if (isset($_FILES['mp3']['name']) && is_file($_FILES['mp3']['tmp_name']) ) {
+    if (isset($_FILES['mp3']['name']) ) {
 
         if (isset($res['item'])) {
-
             /*
              *REMOVE ANTIGAS
              */
@@ -48,6 +46,7 @@ if (isset($_FILES)) {
                 VALUES
                 (?,
                  ?)";
+
         $qry=$conn->prepare($sql);
         $qry->store_result();
 
@@ -63,7 +62,6 @@ if (isset($_FILES)) {
             $qry->execute();
             $qry->close();
         }
-
             /*
         $handle = new Upload($_FILES['mp3']);
             if ($handle->uploaded) {
