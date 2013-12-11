@@ -18,7 +18,7 @@
         foreach ($_POST as $key=>$value)
             $val[$key] = trim($value);
 
-        $val['toEmail'] = $val['assunto'].'@105fm.com.br';
+        $val['toEmail'] = $val['assunto'].'@radio105fm.com.br';
 
         if (empty($val['nome']))
             $error .= "<li>Preencha seu nome</li>";

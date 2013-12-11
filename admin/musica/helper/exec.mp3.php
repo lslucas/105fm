@@ -54,7 +54,7 @@ if (isset($_FILES)) {
 
         $storage = new S3Storage();
         $bucket = 'radio105fm';
-        $r = $storage->bucket($bucket)->put($_FILES['mp3'], null, array('path' => 'static/music'));
+        $r = $storage->bucket($bucket)->put($_FILES['mp3'], null, array('path' => 'static/music/'));
 
         if ($r) {
             $urlFile = $r['ObjectURL'];
