@@ -67,7 +67,7 @@ $limit_start = ceil(($pg_atual-1)*$limit_end);
 $qry_tot->close();
 
 
-$orderby = !isset($_GET['orderby'])?$var['pre'].'_titulo ASC':urldecode($_GET['orderby']);
+$orderby = !isset($_GET['orderby'])?$var['pre'].'_data_exibir DESC, '.$var['pre'].'_data DESC':urldecode($_GET['orderby']);
 
 
 $sql = "SELECT  ${var['pre']}_id,

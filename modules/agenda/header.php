@@ -26,6 +26,7 @@
             FROM ".TP."_show
                 WHERE sho_titulo IS NOT NULL
                     AND sho_data>=DATE(NOW())
+                    AND sho_data_exibir<=DATE(NOW())
             ORDER BY sho_data ASC, sho_hora_inicio ASC
             ";
 

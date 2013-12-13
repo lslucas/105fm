@@ -2404,12 +2404,21 @@ function gera_senha($numL) {
 
 # CONVERTE A DATA DO PORTUGUES PARA INGLES
 ##########################################
-function datept2en($sep,$date,$nsep='-') {
+function datept2en($sep,$data,$nsep='-') {
 
- if (!empty($date)) {
+ if (!empty($data)) {
 
-   $date = explode($sep,$date);
-   return $date[2].$nsep.$date[1].$nsep.$date[0];
+   $date = explode($sep,$data);
+   $hora = null;
+   if (strpos($data, ' ')!==false) {
+    $time = explode(' ', $date[2]);
+    $date[2] = substr($date[2], 0, 2);
+    $hora = ' '.$time[1];
+   }
+   $date = $date[2].$nsep.$date[1].$nsep.$date[0].$hora;
+   // var_dump($date);
+   // exit;
+   return $date;
 
  }
 

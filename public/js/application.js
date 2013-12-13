@@ -113,6 +113,7 @@ $(function() {
 	$('#cep').mask('99999-999');
 	$('.phone').mask('(99) 9999-9999');
 	$('.date, .data').mask('99/99/9999');
+	$('.datetime, .datahora').mask('99/99/9999 99:99');
 	//$('.daymonth').mask('99');
 	$('.year, .4digit').mask('9999');
 	$('.2digit').mask('99');

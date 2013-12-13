@@ -7,6 +7,7 @@
 
 # include de mensagens do arquivo atual
 include_once 'inc.exec.msg.php';
+$res['data_exibir']  = datept2en('/', $res['data_exibir']);
 $res['data']  = datept2en('/', $res['data']);
 
 
@@ -30,13 +31,14 @@ $res['data']  = datept2en('/', $res['data']);
      include_once $rp.'inc.autoinsert.php';
 
      $sql= "UPDATE ".TABLE_PREFIX."_${var['table']} SET
-  		  ${var['pre']}_titulo=?,
-  		  ${var['pre']}_data=?,
-  		  ${var['pre']}_hora_inicio=?,
-  		  ${var['pre']}_hora_fim=?,
-  		  ${var['pre']}_local=?,
-  		  ${var['pre']}_url=?,
-  		  ${var['pre']}_artista=?,
+		  ${var['pre']}_titulo=?,
+		  ${var['pre']}_data=?,
+		  ${var['pre']}_hora_inicio=?,
+		  ${var['pre']}_hora_fim=?,
+             ${var['pre']}_data_exibir=?,
+		  ${var['pre']}_local=?,
+		  ${var['pre']}_url=?,
+		  ${var['pre']}_artista=?,
                         ${var['pre']}_descricao=?
 	";
      $sql.=" WHERE ${var['pre']}_id=?";
@@ -45,15 +47,16 @@ $res['data']  = datept2en('/', $res['data']);
 
 	 else {
 
-		$qry->bind_param('ssssssssi',
+		$qry->bind_param('sssssssssi',
 			$res['titulo'],
 			$res['data'],
 			$res['hora_inicio'],
 			$res['hora_fim'],
+                $res['data_exibir'],
 			$res['local'],
 			$res['url'],
 			$res['artista'],
-                                 $res['descricao'],
+                $res['descricao'],
 			$res['item']
 		);
 		$qry->execute();

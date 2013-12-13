@@ -107,6 +107,14 @@
     </div>
 
     <div class="control-group">
+      <label class="control-label" for="data_exibir">* Data de Exibição</label>
+      <div class="controls">
+        <input type="text" class="input-xlarge required date" placeholder='Data de Exibição' name='data_exibir' id='data' value='<?=dateen2pt('-', $val['data_exibir'], '/')?>'>
+        <p class="help-block">Informe a data/hora para exibir esse item no site</p>
+      </div>
+    </div>
+
+    <div class="control-group">
       <label class="control-label" for="data">* Data do Show</label>
       <div class="controls">
         <input type="text" class="input-xlarge required data" placeholder='Data/Hora do Show' name='data' id='data' value='<?=dateen2pt('-', $val['data'], '/')?>'>
