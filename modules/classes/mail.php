@@ -25,6 +25,7 @@ class Mail {
 		$fromEmail = !isset($args['fromEmail']) ? EMAIL : $args['fromEmail'];
 		$fromName = !isset($args['fromName']) ? utf8_decode(SITE_NAME) : utf8_decode($args['fromName']);
 		$toEmail = !isset($args['email']) ? EMAIL_CONTACT : $args['email'];
+		$bccEmail = !isset($args['bccEmail']) ? '' : $args['bccEmail'];
 		$toName = !isset($args['nome']) ? utf8_decode(SITE_NAME) : utf8_decode($args['nome']);
 		if (isset($this->sender))
 			$senderEmail = $this->sender;

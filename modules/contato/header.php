@@ -19,6 +19,9 @@
             $val[$key] = trim($value);
 
         $val['toEmail'] = $val['assunto'].'@radio105fm.com.br';
+        if ($val['assunto']=='promocoes') {
+            $val['bccEmail'] = 'lslucas@gmail.com';
+        }
 
         if (empty($val['nome']))
             $error .= "<li>Preencha seu nome</li>";
