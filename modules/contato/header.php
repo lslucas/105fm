@@ -19,7 +19,7 @@
             $val[$key] = trim($value);
 
         $val['toEmail'] = $val['assunto'].'@radio105fm.com.br';
-        if ($val['assunto']=='promocoes') {
+        if ($val['assunto']=='programacao') {
             $val['bccEmail'] = 'lslucas@gmail.com';
         }
 
