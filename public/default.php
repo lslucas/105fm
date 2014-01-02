@@ -2,7 +2,7 @@
                     <a id="popup" class='hide fancybox' href="<?=ABSPATH?>img/popup/comunicado-17dez.jpg">Pop-Up</a>
                     <?php } elseif ($curdate>='2013-12-22' && $curdate<='2013-12-25') { ?>
                     <a id="popup" class='hide fancybox' href="<?=ABSPATH?>img/popup/comunicado-24dez.jpg">Pop-Up</a>
-                    <?php } elseif ($curdate>='2013-12-26' && $curdate<='2014-01-02') { ?>
+                    <?php } elseif ($curdate>='2013-12-26' && $curdate<='2014-01-01') { ?>
                     <a id="popup" class='hide fancybox' href="<?=ABSPATH?>img/popup/comunicado-31dez.jpg">Pop-Up</a>
                     <?php } ?>
                     <!--Colunas-->
