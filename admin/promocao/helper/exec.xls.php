@@ -14,6 +14,7 @@
                         pa.ppa_texto `resposta`,
                         pa.ppa_campo1 `time`,
                         pa.ppa_campo2 `tamanho`,
+                        pa.ppa_arquivo `tamanho`,
                         DATE_FORMAT(pa.ppa_timestamp, '%d/%m/%Y %H:%i:%s') `data cadastro promoção`,
 
                         usr.usr_nome nome,
@@ -53,6 +54,7 @@
                               $resposta,
                               $campo1,
                               $campo2,
+                              $arquivo,
                               $cad_promo,
                               $nome,
                               $email,
@@ -77,6 +79,7 @@
                 $row[$position]['resposta'] = $resposta;
                 $row[$position]['campo1'] = $campo1;
                 $row[$position]['campo2'] = $campo2;
+                $row[$position]['arquivo'] = $arquivo;
                 $row[$position]['cadastro'] = $cad_promo;
                 $row[$position]['nome'] = $nome;
                 $row[$position]['email'] = $email;
@@ -150,6 +153,7 @@
             echo "<th>Resposta</th>";
             echo "<th>Campo 1</th>";
             echo "<th>Campo 2</th>";
+            echo "<th>Arquivo</th>";
             echo "<th>Data/Hora Cadastro</th>";
             echo "</tr>";
             echo "<tr>";
@@ -158,7 +162,8 @@
            // }
             $i=$totalValor=0;
             foreach ($row as $id=>$arr) {
-              echo "<tr style='border:1px solid #EEE;'>";
+                echo "<tr style='border:1px solid #EEE;'>";
+                $arquivo = empty($arr['arquivo']) ? 'sem arquivo' : "<a href='http://radio105fm.com.br/storage/promocao/".$arr['arquivo']."'' target='_blank'>".$arr['arquivo']."</a>";
 
                 echo cleanData($arr['nome']);
                 echo cleanData($arr['email']);
@@ -174,6 +179,7 @@
                 echo cleanData($arr['resposta']);
                 echo cleanData($arr['campo1']);
                 echo cleanData($arr['campo2']);
+                echo cleanData($arquivo);
                 echo cleanData($arr['cadastro']);
                 $totalValor++;
 
