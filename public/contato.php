@@ -81,11 +81,11 @@
 
                                     <p class="text assunto">
                                         <label for="assunto">Assunto:</label>
+                                                <!-- <option value="programacao">Programação musical</option> -->
                                         <select name="assunto" id="assunto" style='width:290px; margin-bottom:10px'>
                                             <option value="">Escolha um assunto</option>
                                             <optgroup label="Fale com a rádio">
                                                 <option value="promocoes">Promoções</option>
-                                                <option value="programacao">Programação musical</option>
                                                 <option value="site">Site da rádio</option>
                                                 <option value="suporte">Suporte</option>
                                                 <option value="comercial">Comercial</option>
