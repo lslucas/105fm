@@ -118,9 +118,9 @@
       # file name for download
       $filename = "105fm_".slugify($row[$id]['promocao'])."_".date('d-m-Y').".xls";
 
-      // header("Content-Disposition: attachment; filename=\"$filename\"");
+      header("Content-Disposition: attachment; filename=\"$filename\"");
       echo '<head> <meta http-equiv=Content-Type content="text/html; charset=utf-8"> </head>';
-      // header("Content-Type: application/vnd.ms-excel;");
+      header("Content-Type: application/vnd.ms-excel;");
       // header("Content-Type: application/vnd.ms-excel; charset=utf-8");
 
 
