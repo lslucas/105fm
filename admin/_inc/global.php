@@ -102,7 +102,7 @@ if (!isset($abspath))
 	$abspath = realpath('../'.dirname('load.php'));
 
 // include path para o zend
-ini_set('include_path', ".:/opt/bitnami/apache2/htdocs/105fm/vendor/ZF-Mail/.:/usr/share/php/.:/usr/share/php/zend-framework/.:/usr/share/php/Zend/.:{$abspath}:.{$abspath}/vendor/:.{$abspath}/vendor/ZF-Mail/");
+ini_set('include_path', ".:/var/www/105fm/vendor/ZF-Mail/.:/usr/share/php/.:/usr/share/php/zend-framework/.:/usr/share/php/Zend/.:{$abspath}:.{$abspath}/vendor/:.{$abspath}/vendor/ZF-Mail/");
 // else ini_set('include_path', '.:/');
 
 #rp relative path, caminho relativo para a raiz do back-end
