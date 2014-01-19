@@ -41,7 +41,6 @@
                       AND pa.ppa_pro_id=?
                       GROUP BY usr.usr_id
                       order by pa.ppa_id DESC, pa.ppa_id DESC";
-exit($sql_cad);
     if ($qry_cad = $conn->prepare($sql_cad)){
 
         $item = trim($_GET['item']);

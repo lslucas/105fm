@@ -75,10 +75,10 @@ if ($host=='localhost') {
 	/**
 	 * CONEXAO COM O DB
 	 */
-	define('DB_SERVER','radio105fm.ckgv5ldq4lfu.us-east-1.rds.amazonaws.com');
+	define('DB_SERVER','127.0.0.1');
 	define('DB_USER','radio');
 	define('DB_PASS','mvdbt9Radio');
-	define('DB_DATABASE','radio105fm');
+	define('DB_DATABASE','105fm');
 
 	ini_set('display_errors','On');
 
