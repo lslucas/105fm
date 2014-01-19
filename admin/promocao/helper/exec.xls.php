@@ -163,7 +163,7 @@
             $i=$totalValor=0;
             foreach ($row as $id=>$arr) {
                 echo "<tr style='border:1px solid #EEE;'>";
-                $arquivo = empty($arr['arquivo']) ? 'sem arquivo' : "<a href='http://radio105fm.com.br/storage/promocao/{$arr['arquivo']}'>{$arr['arquivo']}</a>";
+                $arquivo = empty($arr['arquivo']) || file_exists('storage/promocao/'.$arr['arquivo']) ? 'sem arquivo' : "<a href='http://radio105fm.com.br/storage/promocao/{$arr['arquivo']}'>{$arr['arquivo']}</a>";
 
                 echo cleanData($arr['nome']);
                 echo cleanData($arr['email']);
