@@ -147,17 +147,17 @@
 
                             </div>
                             <div id="infos">
-                            	<p class="loguinho"><img src="img/logo-mini.png" alt="Rádio 105 FM" /></p>
+	<p class="loguinho"><img src="img/logo-mini.png" alt="Rádio 105 FM" /></p>
 								<h5 class="uppercase">RÁDIO 105FM - 105.1<br /><span>SÃO PAULO</span></h5>
-                                <h5 class="fone uppercase">(11) 3171-0075</h5>
+                                <h5 class="fone uppercase"> (11) 3819-3541</h5>
                                 <p>
-                                	Av. Carlos Salles Block, 658.<br />
+	Av. Carlos Salles Block, 658.<br />
                                     4º andar - Anhangabaú.<br />
                                     Jundiaí - SP<br />
                                     CEP: 13208-100<br />
                                 </p>
                                 <p>
-                                    <a href="mailto:contato@radio105fm.com.br" title="Contato">contato@radio105fm.com.br</a>
+                                    Comercial: <a href="mailto:comercial@radio105fm.com.br" title="Contato">comercial@radio105fm.com.br</a>
                                     <br /><br />
                                 </p>
                             </div>

@@ -10,6 +10,7 @@
                                     enq_res5
                                 FROM ".TABLE_PREFIX."_enquete
                                 WHERE enq_status=1
+                                AND enq_data<=DATE(NOW())
                                 ORDER BY enq_data DESC, enq_id DESC";
     if (!$qry_enq = $conn->prepare($sql_enq))
         echo $conn->error();

@@ -5,6 +5,7 @@
                                     pdi_titulo
                                 FROM ".TABLE_PREFIX."_perguntaDia
                                 WHERE pdi_status=1
+                                AND pdi_data<=DATE(NOW())
                                 ORDER BY pdi_data DESC";
     if (!$qry_enq = $conn->prepare($sql_enq))
         echo $conn->error();

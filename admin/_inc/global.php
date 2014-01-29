@@ -16,7 +16,7 @@ define('OAUTH_APP_ID', 'H6odEJ30');
 ########
 
 define('EMAIL','noreply@radio105fm.com.br');
-define('EMAIL_CONTACT','contato@radio105fm.com.br');
+define('EMAIL_CONTACT','comercial@radio105fm.com.br');
 define('EMAIL_NAME','105fm');
 define('BBC1_EMAIL','');
 define('BBC2_EMAIL','');
@@ -44,7 +44,7 @@ if ($host=='localhost') {
 	/**
 	 * CONEXÃO COM O DB
 	 */
-	define('DB_SERVER','177.71.246.255');
+	define('DB_SERVER','127.0.0.1');
 	define('DB_USER','root');
 	define('DB_PASS','mvdbt9');
 	define('DB_DATABASE','105fm');

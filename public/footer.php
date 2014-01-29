@@ -22,8 +22,8 @@
                         <div id="contato-footer" align="center">
                             <p class="uppercase radio yellow bold">RÁDIO 105 FM - 105,1 - SÃO PAULO</p>
                             <p>Avenida Carlos Salles Block, 658 - 4º andar - Anhangabaú</p>
-                            <p>Jundiaí - SP. CEP: 13208-100</p>
-                            <p>+55 11 3171.0075 - <a class="mail" href="mailto:contato@radio105fm.com.br">contato@radio105fm.com.br</a></p>
+                            <p>Jundiaí - SP. CEP: 13208-100. Telefone: +55 (11) 3819-3541</p>
+                            <p>Comercial <a class="mail" href="mailto:comercial@radio105fm.com.br">comercial@radio105fm.com.br</a> &nbsp; Fale Conosco <a class="mail" href="mailto:faleconosco@radio105fm.com.br">105fm@radio105fm.com.br</a></p>
                             </p>
                         </div>
                         <div class="clear"></div>
@@ -71,7 +71,7 @@
 
         $(document).ready(function() {
             <?=isset($incReady) ? $incReady : null?>
-        });        
+        });
     </script>
     <script type="text/javascript">
         window.___gcfg = {lang: 'en'};
@@ -90,6 +90,6 @@
 
       ga('create', 'UA-42853077-1', 'radio105fm.com.br');
       ga('send', 'pageview');
-    </script>    
+    </script>
     </body>
 </html>
