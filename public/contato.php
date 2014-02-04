@@ -111,7 +111,7 @@
                                                 <option value="toque-direto">Toque Direto</option>
                                                 <option value="ofereca-uma-musica">"Ofereça uma música" no Toque Direto - Oferecimento Musical</option>
                                                 <option value="aniversario">"Coloque a data de seu aniversário" no Toque Direto - Aniversário do Dia</option>
-                                                <option value="caracteristicas">"Coloque suas características" no Toque Direto - Ponto de Encontro</option>
+                                                <!-- <option value="caracteristicas">"Coloque suas características" no Toque Direto - Ponto de Encontro</option> -->
                                                 <option value="recados-imediatos">Recados Imediatos</option>
                                                 <option value="festa-conexao">Festa Conexão</option>
                                             </optgroup>
