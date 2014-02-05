@@ -119,8 +119,8 @@
 
       header("Content-Disposition: attachment; filename=\"$filename\"");
       echo '<head> <meta http-equiv=Content-Type content="text/html; charset=utf-8"> </head>';
-      // header("Content-Type: application/vnd.ms-excel;");
-      header("Content-Type: application/vnd.ms-excel; charset=utf-8");
+      header("Content-Type: application/vnd.ms-excel;");
+      // header("Content-Type: application/vnd.ms-excel; charset=utf-8");
 
 
       echo "<table>";
