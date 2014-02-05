@@ -48,10 +48,8 @@
 	$where.= " AND ( ";
 	$where.= " ${var['pre']}_nome LIKE '%".$_GET['q']."%' OR ";
       $where.= " ${var['pre']}_cpf LIKE '%".$_GET['q']."%' OR ";
-      $where.= " ${var['pre']}_contato LIKE '%".$_GET['q']."%' OR ";
-      $where.= " ${var['pre']}_nome_fantasia LIKE '%".$_GET['q']."%' OR ";
-      $where.= " ${var['pre']}_telefone1 LIKE '%".$_GET['q']."%' OR ";
-      $where.= " ${var['pre']}_telefone2 LIKE '%".$_GET['q']."%' ";
+      $where.= " ${var['pre']}_email LIKE '%".$_GET['q']."%' OR ";
+      $where.= " ${var['pre']}_telefone LIKE '%".$_GET['q']."%' ";
 	$where.= ")";
   }
 
@@ -78,10 +76,9 @@ $sql = "SELECT ${var['pre']}_id,
               ${var['pre']}_nome,
               ${var['pre']}_email,
               ${var['pre']}_cpf,
-              ${var['pre']}_cnpj,
-              ${var['pre']}_contato,
-              ${var['pre']}_telefone1,
-              ${var['pre']}_telefone2,
+              ${var['pre']}_rg,
+              ${var['pre']}_cidade,
+              ${var['pre']}_telefone,
               ${var['pre']}_status,
 		DATE_FORMAT(${var['pre']}_timestamp, '%m/%d/%y') `datacadastro`
 		FROM ".TABLE_PREFIX."_${var['table']}
@@ -96,11 +93,11 @@ $sql = "SELECT ${var['pre']}_id,
   } else {
 
     $qry->execute();
-    $qry->bind_result($id, $nome, $email, $cpf, $cnpj, $contato, $telefone1, $telefone2, $status, $timestamp);
+    $qry->bind_result($id, $nome, $email, $cpf, $rg, $cidade, $telefone, $status, $timestamp);
 
 
-    if($total_itens==0) $total = 'nenhum cliente'.$countLetra;
-    elseif ($total_itens==1) $total = "1 cliente".$countLetra;
-	else $total = $total_itens.' clientes'.$countLetra;
+    if($total_itens==0) $total = 'nenhum usuário'.$countLetra;
+    elseif ($total_itens==1) $total = "1 usuário".$countLetra;
+	else $total = $total_itens.' usuários'.$countLetra;
 
   }

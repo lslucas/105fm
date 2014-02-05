@@ -35,7 +35,7 @@
 <div align=left>
 		<form name='search' action='<?=$_SERVER['PHP_SELF']?>' method='get' class='form form-horizontal'>
 			<input type='hidden' name='p' value='<?=$p?>'/>
-			<input type='text' name='q' class='input-large' placeholder='Título ou Descrição' value='<?=isset($_GET['q']) ? $_GET['q'] : null?>'>
+			<input type='text' name='q' class='input-large' placeholder='Nome, email ou cpf' value='<?=isset($_GET['q']) ? $_GET['q'] : null?>'>
 			<input type='submit' value='search' class='btn btn-primary'>
 			<!--
 			<div style='float:right;'>
@@ -48,7 +48,6 @@
 <table class="table table-condensed table-striped">
    <thead>
       <tr>
-        <th width="120px">Contato</th>
         <th></th>
         <th width="100px">Dt. Cadastro</th>
       </tr>
@@ -72,12 +71,12 @@ if ($status==1)
 else
 	$descStatus = $statusOffIcon.$statusOffLabel;
 
+			// <li><a href="?p=$p&update&item=$id" class='tip' title='Click to edit'><i class="icon-pencil"></i> Editar</a></li>
 $row_actions = <<<end
 		<div class="btn-group">
           <a class="btn btn-mini" href="javascript:void(0);"><i class="icon-cog"></i></a>
           <a class="btn btn-mini dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);" style='line-height:15px;'><span class="caret"></span></a>
 	      <ul class="dropdown-menu">
-			<li><a href="?p=$p&update&item=$id" class='tip' title='Click to edit'><i class="icon-pencil"></i> Editar</a></li>
 			<li><a href="#rm-modal{$id}" class='tip' data-toggle='modal' title="Click to remove"><i class="icon-trash"></i> Remove</a></li>
 			<li><a href="?p=$p&status&item=$id&noVisual" class='tip status status$id'  alt='{$altStatus}' title='Click to change for block or visible' id='$id' name='$nome'>{$descStatus}</a></li>
 		</ul>
@@ -103,16 +102,13 @@ end;
 	</div>
 	<tr id="tr<?=$id?>">
 		<td>
-			<?=$contato?>
-		</td>
-		<td>
 			<h6><?=$nome?></h6>
 			<?php
 				echo "<blockquote>";
 				if (!empty($cpf)) echo 'CPF '.$cpf.'<br/>';
-				if (!empty($cnpj)) echo 'CNPJ '.$cnpj.'<br/>';
-				if (!empty($telefone1)) echo 'Telefone 1 '.$telefone1.'<br/>';
-				if (!empty($telefone2)) echo 'Telefone 2 '.$telefone2.'<br/>';
+				if (!empty($rg)) echo 'RG '.$rg.'<br/>';
+				if (!empty($telefone)) echo 'Telefone '.$telefone.'<br/>';
+				if (!empty($cidade)) echo 'Cidade '.$cidade;
 				echo "</blockquote>";
 			?>
 			<?=$row_actions?>
