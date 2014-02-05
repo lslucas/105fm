@@ -40,7 +40,7 @@
                       where pa.ppa_pro_id IS NOT NULL
                       AND pa.ppa_pro_id=?
                       GROUP BY usr.usr_id
-                      order by pa.ppa_id DESC, pa.ppa_id DESC";
+                      order by pa.ppa_timestamp ASC";
     if ($qry_cad = $conn->prepare($sql_cad)){
 
         $item = trim($_GET['item']);
