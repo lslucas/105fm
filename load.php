@@ -107,6 +107,7 @@
 	 * QUERY STRING ALIAS
 	 */
 	$queryAlias = array(
+		 'carnaval2014'=>array('basename'=>'usuario', 'path'=>'public/usuario/carnaval2014.php'),
 		 'cadastro'=>array('basename'=>'usuario', 'path'=>'public/usuario/registrar.php'),
 		 'login'=>array('basename'=>'usuario', 'path'=>'public/usuario/login.php'),
 		 'respondePergunta'=>array('basename'=>'perguntaDia', 'path'=>'public/perguntaDia.php'),

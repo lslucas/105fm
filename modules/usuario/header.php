@@ -21,7 +21,7 @@
     /**
      * Cadastra usuário
      */
-    if ($basename=='cadastro') {
+    if ($basename=='cadastro' || $basename=='carnaval2014') {
         if(isset($val['from']) && $val['from']=='cadastro')
             include_once 'registrar/insert.php';
     }

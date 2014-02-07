@@ -103,7 +103,8 @@ class Usuario extends Mail {
 
     public function novoCadastro($args)
     {
-
+        $args['campo1_value'] = isset($args['campo1_value']) ? $args['campo1_value'] : null;
+        $args['campo1_label'] = isset($args['campo1_label']) ? $args['campo1_label'] : null;
         $this->_args = $args;
         $res = $this->validaParametros('insere');
         if ($res === true) {
@@ -125,7 +126,8 @@ class Usuario extends Mail {
 
     public function atualizaCadastro($args)
     {
-
+        $args['campo1_value'] = isset($args['campo1_value']) ? $args['campo1_value'] : null;
+        $args['campo1_label'] = isset($args['campo1_label']) ? $args['campo1_label'] : null;
         $this->_args = $args;
         $res = $this->validaParametros('atualiza');
         if ($res === true) {
@@ -247,14 +249,16 @@ class Usuario extends Mail {
                              `usr_cidade`,
                              `usr_uf`,
                              `usr_telefone`,
+                             `usr_campo1_value`,
+                             `usr_campo1_label`,
                              `usr_ip`
-                             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             if (!$qryins = $conn->prepare($sqlins))
                 return false;
 
             else {
                 $senhaEncrypted = $aes->encrypt($this->_args['senha']);
-                $qryins->bind_param('ssssssssssssssss',
+                $qryins->bind_param('ssssssssssssssssss',
                                         $this->_args['nome'],
                                         $this->_args['email'],
                                         $senhaEncrypted,
@@ -270,6 +274,8 @@ class Usuario extends Mail {
                                         $this->_args['cidade'],
                                         $this->_args['estado'],
                                         $this->_args['telefone'],
+                                        $this->_args['campo1_value'],
+                                        $this->_args['campo1_label'],
                                         $_SERVER['REMOTE_ADDR']
                                     );
                 $qryins->execute();
@@ -310,6 +316,8 @@ class Usuario extends Mail {
                              `usr_cidade`=?,
                              `usr_uf`=?,
                              `usr_telefone`=?,
+                             `usr_campo1_value`=?,
+                             `usr_campo1_label`=?,
                              `usr_ip`=?
                          WHERE `usr_id`=?";
         if (!$qryupd = $conn->prepare($sqlupd))
@@ -317,7 +325,7 @@ class Usuario extends Mail {
 
         else {
 
-            $qryupd->bind_param('sssssssssssss',
+            $qryupd->bind_param('sssssssssssssss',
                                     $this->_args['nome'],
                                     $this->_args['nascimento'],
                                     $this->_args['sexo'],
@@ -329,6 +337,8 @@ class Usuario extends Mail {
                                     $this->_args['cidade'],
                                     $this->_args['uf'],
                                     $this->_args['telefone'],
+                                    $this->_args['campo1_value'],
+                                    $this->_args['campo1_label'],
                                     $_SERVER['REMOTE_ADDR'],
                                     $id
                                 );

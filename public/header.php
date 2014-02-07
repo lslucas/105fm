@@ -68,7 +68,7 @@
         <?php if ($basename=='participacao') { ?>
         <link rel="stylesheet" href="<?=ABSPATH?>css/participacao.css" type="text/css" />
         <?php } ?>
-        <?php if (in_array($basename, array('cadastro', 'login'))) { ?>
+        <?php if (in_array($basename, array('cadastro', 'login', 'carnaval2014'))) { ?>
         <link rel="stylesheet" href="<?=ABSPATH?>css/cadastro.css" type="text/css" />
         <?php } ?>
         <!--[if lte IE 7]>
