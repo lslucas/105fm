@@ -234,6 +234,12 @@
                         </div>
                         <div class="clear"></div>
                     </div>
+
+                     <div id="public-h" class="clearfix" style='margin-top:10px'>
+                     <a href="http://www.facebook.com/LoteriasCAIXAOficial/app_539849046042562" target="_blank">
+                        <img src="<?=ABSPATH?>img/bolao-caixa-728x90.jpg" width='968'/>
+                    </div>
+                    <div class="clear"></div>
                     <!--End Centro-->
                     <script type='text/javascript'>
                     $(function() {
