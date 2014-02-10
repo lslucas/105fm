@@ -60,10 +60,16 @@
 <!--                             <div id="banner-h" class="clearfix" align="center">
                                 <a href="link.html" title="Publicidade Horizontal" target="_blank"><img src="<?=ABSPATH?>img/banner-horizontal.jpg" width="680" height="80" /></a>
                             </div> -->
-                            <br />
-			                <div class="clear"></div>
-
+                             <?php if ($equipe['titulo']=='105 FM Futebol Club') { ?>
+                            <div id="banner-h" class="clearfix" align="center">
+                                <a href="http://www.facebook.com/LoteriasCAIXAOficial/app_539849046042562" target="_blank">
+                                    <img src="<?=ABSPATH?>img/bolao-caixa-728x90.jpg" style='width:680px;'/>
+                                </a>
+                            </div>
+                            <?php } ?>
+                            <div class="clear"></div>
                         </div>
+
 
                         <div id="right-col">
                             <div id="programa" class="box">
