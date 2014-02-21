@@ -150,7 +150,8 @@
                             <div id="infos">
 	<p class="loguinho"><img src="img/logo-mini.png" alt="Rádio 105 FM" /></p>
 								<h5 class="uppercase">RÁDIO 105FM - 105.1<br /><span>SÃO PAULO</span></h5>
-                                <h5 class="fone uppercase"> (11) 3819-3541</h5>
+                                <h5 class="fone "> Telefone do Ouvinte: (11) 3171-0075<br/>
+                                Telefone Comercial: (11) 3819-3541</h5>
                                 <p>
 	Av. Carlos Salles Block, 658.<br />
                                     4º andar - Anhangabaú.<br />
