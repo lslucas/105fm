@@ -5,8 +5,8 @@
                 <!--Barra Rodapé-->
                 <div id="footer_wrapper" class="clearfix">
                     <div id="footer" align="center">
-                        <div class="fone uppercase navy bold" align="center">Fone de Ouvintes: (11) 3171.0075</div>
-                        <ul id="menu-inferior" class="clearfix" style='width:297px;'>
+                        <div class="fone uppercase navy bold" style='font-size:17pt; color: red;' align="center">Fone de Ouvintes: (11) 3171.0075</div>
+                        <ul id="menu-inferior" class="clearfix" style='width:327px;'>
                             <li class="item"><a class="uppercase" href="<?=ABSPATH?>" title="Home">Home</a></li>
 <!--                             <li class="item"><a class="uppercase" href="<?=ABSPATH?>quem-somos" title="Quem Somos">A Rádio</a></li>
                             <li class="item"><a class="uppercase" href="<?=ABSPATH?>equipe" title="Nossa Equipe">Equipe</a></li> -->
