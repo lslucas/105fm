@@ -1,4 +1,4 @@
-                    <?php $curdate = date('Y-m-d');  if ($curdate>='2014-03-06') { ?>
+                    <?php $curdate = date('Y-m-d');  if ($curdate<='2014-03-06') { ?>
                     <a id="popup" class='hide fancybox' href="<?=ABSPATH?>img/popup/comunicado-carnaval.jpg">Pop-Up</a>
                     <?php } ?>
                     <?php /*$curdate = date('Y-m-d');  if ($curdate>='2013-12-17' && $curdate<='2013-12-21') { ?>
