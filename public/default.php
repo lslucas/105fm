@@ -1,10 +1,13 @@
-                    <?php $curdate = date('Y-m-d');  if ($curdate>='2013-12-17' && $curdate<='2013-12-21') { ?>
+                    <?php $curdate = date('Y-m-d');  if ($curdate>='2014-03-06') { ?>
+                    <a id="popup" class='hide fancybox' href="<?=ABSPATH?>img/popup/comunicado-carnaval.jpg">Pop-Up</a>
+                    <?php } ?>
+                    <?php /*$curdate = date('Y-m-d');  if ($curdate>='2013-12-17' && $curdate<='2013-12-21') { ?>
                     <a id="popup" class='hide fancybox' href="<?=ABSPATH?>img/popup/comunicado-17dez.jpg">Pop-Up</a>
                     <?php } elseif ($curdate>='2013-12-22' && $curdate<='2013-12-25') { ?>
                     <a id="popup" class='hide fancybox' href="<?=ABSPATH?>img/popup/comunicado-24dez.jpg">Pop-Up</a>
                     <?php } elseif ($curdate>='2013-12-26' && $curdate<='2014-01-01') { ?>
                     <a id="popup" class='hide fancybox' href="<?=ABSPATH?>img/popup/comunicado-31dez.jpg">Pop-Up</a>
-                    <?php } ?>
+                    <?php }*/ ?>
                     <!--Colunas-->
                     <div id="centro" class="clearfix">
                         <div id="banner-wrapper">
