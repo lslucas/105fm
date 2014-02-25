@@ -1,6 +1,7 @@
-                    <?php $curdate = date('Y-m-d');  if ($curdate<='2014-03-06') { ?>
+                    <a id="popup" class='hide fancybox' href="<?=ABSPATH?>img/popup/nota-falecimento.jpg">Pop-Up</a>
+                    <?php /*$curdate = date('Y-m-d');  if ($curdate<='2014-03-06') { ?>
                     <a id="popup" class='hide fancybox' href="<?=ABSPATH?>img/popup/comunicado-carnaval.jpg">Pop-Up</a>
-                    <?php } ?>
+                    <?php }*/ ?>
                     <?php /*$curdate = date('Y-m-d');  if ($curdate>='2013-12-17' && $curdate<='2013-12-21') { ?>
                     <a id="popup" class='hide fancybox' href="<?=ABSPATH?>img/popup/comunicado-17dez.jpg">Pop-Up</a>
                     <?php } elseif ($curdate>='2013-12-22' && $curdate<='2013-12-25') { ?>
