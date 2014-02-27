@@ -239,8 +239,21 @@
                     </div>
 
                      <div id="public-h" class="clearfix" style='margin-top:10px'>
-                     <a href="http://www.facebook.com/LoteriasCAIXAOficial/app_539849046042562" target="_blank">
-                        <img src="<?=ABSPATH?>img/bolao-caixa-728x90.jpg" width='968'/>
+                        <center>
+                        <object id="banner-caixa" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="775" height="96">
+                            <param name="movie" value="<?=ABSPATH?>img/banners/publicidade/caixa-775x96.swf" />
+                            <!--[if !IE]>-->
+                            <object type="application/x-shockwave-flash" data="<?=ABSPATH?>img/banners/publicidade/caixa-775x96.swf" width="775" height="96">
+                            <!--<![endif]-->
+                            <div>
+                                <h1>Alternative content</h1>
+                                <p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a></p>
+                            </div>
+                            <!--[if !IE]>-->
+                            </object>
+                            <!--<![endif]-->
+                        </object>
+                        </center>
                     </div>
                     <div class="clear"></div>
                     <!--End Centro-->

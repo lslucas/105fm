@@ -41,6 +41,14 @@
     <div id='msg-modal'></div>
     <script src="<?=ABSPATH?>bootstrap/js/bootstrap.min.js"></script>
     <script src="<?=ABSPATH?>js/jquery.doesExist.js"></script>
+    <script src="<?=ABSPATH?>js/swfobject.js"></script>
+    <script type="text/javascript">
+    <?php if (empty($basename)) {?>
+        swfobject.registerObject("banner-caixa", "9.0.0", "<?=ABSPATH?>img/banners/publicidade/caixa-775x96.swf");
+    <?php } elseif ($basename=='equipe') {?>
+        swfobject.registerObject("banner-caixa", "9.0.0", "<?=ABSPATH?>img/banners/publicidade/caixa-730x90.swf");
+    <?php } ?>
+    </script>
     <!--<script src="//code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
     <script src="<?=ABSPATH?>js/application.js"></script>
 

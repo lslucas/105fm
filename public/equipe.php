@@ -62,9 +62,21 @@
                             </div> -->
                              <?php if ($equipe['titulo']=='105 FM Futebol Club') { ?>
                             <div id="banner-h" class="clearfix" align="center">
-                                <a href="http://www.facebook.com/LoteriasCAIXAOficial/app_539849046042562" target="_blank">
-                                    <img src="<?=ABSPATH?>img/bolao-caixa-728x90.jpg" style='width:680px;'/>
-                                </a>
+                            <center>
+                            <object id="banner-caixa" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="730" height="90">
+                                <param name="movie" value="<?=ABSPATH?>img/banners/publicidade/caixa-730x90.swf" />
+                                <!--[if !IE]>-->
+                                <object type="application/x-shockwave-flash" data="<?=ABSPATH?>img/banners/publicidade/caixa-730x90.swf" width="685" height="85">
+                                <!--<![endif]-->
+                                <div>
+                                    <h1>Alternative content</h1>
+                                    <p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a></p>
+                                </div>
+                                <!--[if !IE]>-->
+                                </object>
+                                <!--<![endif]-->
+                            </object>
+                            </center>
                             </div>
                             <?php } ?>
                             <div class="clear"></div>
